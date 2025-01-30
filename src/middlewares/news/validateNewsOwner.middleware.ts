@@ -1,7 +1,7 @@
 import { News } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "@/errors";
-import { IuserTokenInfos } from "@/modules/security/interfaces/users.interfaces";
+import { IuserTokenInfos } from "@/interfaces/users.interfaces";
 import { prisma } from "@/server";
 
 export const validateNewsOwnerdMiddleware = async (
@@ -35,7 +35,7 @@ export const validateNewsOwnerdMiddleware = async (
   }
 
   if (
-    findNews.authorId !== Number(userInfosToken.id) &&
+    findNews.authorId !== String(userInfosToken.id) &&
     !userInfosToken.admin
   ) {
     throw new AppError("Insufficient permission", 403);

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "@/errors";
-import { IuserTokenInfos } from "@/modules/security/interfaces/users.interfaces";
+import { IuserTokenInfos } from "@/interfaces/users.interfaces";
 
 export const validatePermissionUserAdminMiddleware = async (
   req: Request,

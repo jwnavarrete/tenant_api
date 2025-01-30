@@ -15,7 +15,7 @@ export const validateUserIdMiddleware = async (
 
   const findUser: User | null = await prisma.user.findUnique({
     where: {
-      id: Number(userIdParams),
+      id: String(userIdParams),
     },
   });
 

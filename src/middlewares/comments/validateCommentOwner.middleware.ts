@@ -1,7 +1,7 @@
 import { NewsComments } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "@/errors";
-import { IuserTokenInfos } from "@/modules/security/interfaces/users.interfaces";
+import { IuserTokenInfos } from "@/interfaces/users.interfaces";
 import { prisma } from "@/server";
 
 export const validateCommentOwnerdMiddleware = async (
@@ -29,7 +29,7 @@ export const validateCommentOwnerdMiddleware = async (
   }
 
   if (
-    findComment.userId !== Number(userInfosToken.id) &&
+    findComment.userId !== String(userInfosToken.id) &&
     !userInfosToken.admin
   ) {
     throw new AppError("Insufficient permission", 403);
