@@ -1,0 +1,49 @@
+{
+  "name": "newsapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "_moduleAliases": {
+    "@": "src"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --require module-alias/register --cls --rs src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioSantosBJPE/newsApi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonioSantosBJPE/newsApi/issues"
+  },
+  "homepage": "https://github.com/AntonioSantosBJPE/newsApi#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "zod": "^3.21.4",
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "@prisma/client": "^4.13.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.15.11",
+    "@types/swagger-ui-express": "^4.1.3",
+    "prisma": "^4.13.0",
+    "swagger-ui-express": "^4.6.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.2"
+  }
+}

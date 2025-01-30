@@ -1,0 +1,2421 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "News-API",
+    "description": "News-API é uma API RESTful desenvolvida utilizando Node.js, Express, Prisma e um banco de dados Postgres. A API permite o cadastro de usuários, do tipo administrador ou padrão, a criação de notícias, com tags personalizadas e a criação de comentários nas notícias.",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "netoifpe@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Ambiente de Teste"
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Cadastro de novo usuário",
+        "description": "Esta rota é responsável por criar um novo usuário. As chaves \"email\", \"name\" e \"password\" são obrigatórias e chaves extras enviadas são desconsideradas. A chave \"isAdmin\" é opcional, e define se o usuário criado será um administrador do sistema (\"isAdmin\" = true) ou um usuário padrão (\"isAdmin\" = false, valor default). Não é possível criar um usuário com um email já existente. A senha precisa conter no mínimo 8 caracteres, sendo ao menos uma letra minúscula, uma letra maiúscula, um número, e um caracter especial.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users_create"
+              },
+              "example": {
+                "name": "Gabriel1",
+                "email": "rf.gabriel1@gmail.com",
+                "password": "123456",
+                "admin": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK - Criação de usuário realizado com sucesso",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "name": "Gabriel1",
+                  "email": "rf.gabriel12@gmail.com",
+                  "isAdmin": false,
+                  "createdAt": "2023-04-20T14:21:56.987Z",
+                  "updatedAt": "2023-04-20T14:21:56.987Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "email": ["required"],
+                        "name": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_email": {
+                    "value": {
+                      "message": {
+                        "email": ["Invalid email"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_password": {
+                    "value": {
+                      "message": {
+                        "password": ["Expected string", "received number"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_password_2": {
+                    "value": {
+                      "message": {
+                        "password": [
+                          "One uppercase character",
+                          "One lowercase character",
+                          "One number",
+                          "One special character",
+                          "String must contain at least 8 character(s)"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - Tentativa de criar um usuário com um email já cadastrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Email already exists"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login/": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login de usuário cadastrado",
+        "description": "Esta rota é responsável por fazer o login de um usuário cadastrado. As chaves \"email\" e \"password\" são obrigatórias e chaves extras enviadas são desconsideradas. Ao realizar o login será retornado dois token, o token de acesso \"accessToken\", que será enviado nas rotas que necessitam de autorização, e um token de refresh (\"refreshToken\"), que pode ser enviado na rota \"/users/login/refresh-token\", afim de gerar um novo token de acesso.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users_login"
+              },
+              "example": {
+                "email": "rf.gabriel1@gmail.com",
+                "password": "12345678"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldG9pZnBlMkBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY4MjA5MjY4MywiZXhwIjoxNjgyMDk0NDgzLCJzdWIiOiIyIn0.y4xXMb7pFSZ77_Q3jv9IPS_njk-i3XcoYPZwumfjGrU",
+                  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldG9pZnBlMkBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE2ODIwOTI2ODMsImV4cCI6MTY4MjY5NzQ4Mywic3ViIjoiMiJ9.MPzuBhQxVAcO7hantyTgqRqI-oAnYMrbgROXLrXtou0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": {
+                    "email": ["required"],
+                    "password": ["required"]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - O email ou o password estão errados",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Invalid credentials"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login/refresh-token/": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login de usuário cadastrado",
+        "description": "Esta rota é responsável por gerar um novo token de acesso, sem a necessiade de realizar o login novamente. A chave \"token\" é  obrigatória e chaves extras enviadas são desconsideradas. O token a ser enviado é o token de refresh (\"refreshToken)\". Ao realizar a solicitação será retornado o token de acesso, porém denomidado no retorno como \"token\".",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_refresh-token"
+              },
+              "example": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldG9pZnBlMkBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTY4MjA5MjY4MywiZXhwIjoxNjgyMDk0NDgzLCJzdWIiOiIyIn0.y4xXMb7pFSZ77_Q3jv9IPS_njk-i3XcoYPZwumfjGrU"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldG9pZnBlMkBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE2ODIwOTI2ODMsImV4cCI6MTY4MjY5NzQ4Mywic3ViIjoiMiJ9.MPzuBhQxVAcO7hantyTgqRqI-oAnYMrbgROXLrXtou0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": {
+                    "token": ["required"]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Deletar um usuário cadastrado",
+        "description": "Esta rota será responsável por realizar um soft delete de um usuário cadastrado. É necessaário enviar o ID do usuário através de parâmetro e enviar um token de autorização. Um usuário administrador pode deletar qualquer usuário, porém um usuário não administrador, só pode apagar sua própria conta.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK -"
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Usuário não foi encontrado a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Altera dados de um usuário cadastrado",
+        "description": "Esta rota será responsável por realizar uma atualização nos dados de um usuário cadastrado. É necessaário enviar o ID do usuário através de parâmetro e enviar um token de autorização. Um usuário administrador pode atualizar qualquer usuário, porém um usuário não administrador, só pode atualizar sua própria conta. É possível atualizar as chaves \"name\" e \"password\", e chaves extras enviadas serão desconsideradas.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users_update"
+              },
+              "example": {
+                "name": "Gabriel atualizado",
+                "password": "123456"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "name": "Gabriel atualizado",
+                  "email": "rf.gabriel12@gmail.com",
+                  "isAdmin": false,
+                  "createdAt": "2023-04-20T14:21:56.987Z",
+                  "updatedAt": "2023-04-04T22:23:44.577Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": {
+                    "password": [
+                      "One uppercase character",
+                      "One lowercase character",
+                      "One number",
+                      "One special character",
+                      "String must contain at least 8 character(s)"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Usuário não foi encontrado a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/profile/{userId}/": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Buscar os dados de um usuário cadastrado",
+        "description": "Esta rota será responsável por buscar os dados de um usuário cadastrado pelo id informado. É necessaário enviar o ID do usuário através do parâmetro e enviar um token de autorização. Um usuário administrador pode buscar os dados de qualquer usuário, porém um usuário não administrador, só pode buscar seus próprios dados.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 9,
+                  "name": "Gabriel atualizado",
+                  "email": "rf.gabriel12@gmail.com",
+                  "isAdmin": false,
+                  "createdAt": "2023-04-20T14:21:56.987Z",
+                  "updatedAt": "2023-04-04T22:23:44.577Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Usuário não foi encontrado a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/news/": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Buscar uma lista de notícias",
+        "description": "Esta rota é responsável por buscar os dados de uma lista de notícia. A rota não precisa de envio de token de autorização.",
+        "parameters": [
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Define a ordenação das notícias pela data de criação. Caso um valor inválido seja enviado ou nenhum valor seja informado, a query assumirá o valor default \"desc\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"]
+            }
+          },
+          {
+            "name": "typeNews",
+            "in": "query",
+            "description": "Define o filtro, baseado no type da notícia, a ser executado na busca pela lista de notícias. Caso um valor inválido seja enviado ou  nenhum valor seja informado, nenhum filtro será executado na busca.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Outros",
+                "Política",
+                "Economia",
+                "Cultura",
+                "Segurança",
+                "Saúde",
+                "Educação",
+                "Esportes",
+                "Tecnologia"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Define a página a ser exibida, da lista de notícias. Os valores válidos para a query, são números inteiros maiores que 0, caso um valor inválido seja enviado ou nenhum valor seja informado, a query assumirá o valor default 1.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Define a quantidade de notícias a ser exibida em cada página. Os valores válidos para a query, são números inteiros maiores que 0, caso um valor inválido seja enviado ou nenhum valor seja informado, a query assumirá o valor default 5.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "nextPage": "http://localhost:3000/news/?orderBy=desc&page=2&perPage=1&typeNews=Educação",
+                  "count": 2,
+                  "news": [
+                    {
+                      "id": 1,
+                      "title": "teste news 1",
+                      "subTitle": "teste sub title",
+                      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                      "type": "Educação",
+                      "published": true,
+                      "createdAt": "2023-04-18T22:24:47.455Z",
+                      "updatedAt": "2023-04-18T22:24:47.455Z",
+                      "authot": {
+                        "id": 1,
+                        "name": "Gabriel1",
+                        "email": "rf.gabriel12@gmail.com"
+                      },
+                      "tagsList": [
+                        {
+                          "id": 1,
+                          "tag": {
+                            "id": 1,
+                            "name": "ENSINO"
+                          }
+                        },
+                        {
+                          "id": 2,
+                          "tag": {
+                            "id": 2,
+                            "name": "PESQUISA"
+                          }
+                        }
+                      ],
+                      "commentsList": [
+                        {
+                          "id": 1,
+                          "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                          "createdAt": "2023-04-18T12:11:13.697Z",
+                          "newsId": "1,",
+                          "user": {
+                            "id": 2,
+                            "name": "Antonio Santos",
+                            "email": "antonio@gmail.com"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["News"],
+        "summary": "Criar uma nova notícia",
+        "description": "Está rota é responsável por criar uma nova notícia. As chaves \"title\", \"subTitle\", \"content\", \"tags\" são obrigatórias e chaves extras enviadas são desconsideradas. É necessário enviar um token de autenticação, sendo permitido a criação de notícias, por usuários administradores e padrão. A chave \"tags\" precisa ser um array de string, contendo os nomes das tags que serão adicionadas a notícia, caso o nome da tag já exista no banco de dados, a tag não será recriada, apenas adicionada a notícia. As tags são sempre criadas no sistema em formato upperCase. As informações do author da notícia são puxadas do token de autentificação enviada na requisição.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/News_create"
+              },
+              "example": {
+                "title": "teste news 1",
+                "subTitle": "teste sub title",
+                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                "type": "Educação",
+                "tags": ["Ensino", "Pesquisa"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "title": "teste news 1",
+                  "subTitle": "teste sub title",
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                  "type": "Educação",
+                  "published": true,
+                  "createdAt": "2023-04-18T22:24:47.455Z",
+                  "updatedAt": "2023-04-18T22:24:47.455Z",
+                  "authot": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  },
+                  "tagsList": [
+                    {
+                      "id": 1,
+                      "tag": {
+                        "id": 1,
+                        "name": "ENSINO"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "tag": {
+                        "id": 2,
+                        "name": "PESQUISA"
+                      }
+                    }
+                  ],
+                  "commentsList": [null]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "title": ["required"],
+                        "subTitle": ["required"],
+                        "content": ["required"],
+                        "type": ["required"],
+                        "tags": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_title": {
+                    "value": {
+                      "message": {
+                        "title": ["String must contain at most 80 character(s)"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_subTitle": {
+                    "value": {
+                      "message": {
+                        "subTitle": [
+                          "String must contain at most 200 character(s)"
+                        ]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_type": {
+                    "value": {
+                      "message": {
+                        "type": [
+                          "Invalid enum value. Expected 'Outros' | 'Política' | 'Economia' | 'Cultura' | 'Segurança' | 'Saúde' | 'Educação' | 'Esportes' | 'Tecnologia', received 'Economia2'"
+                        ]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_tags_1": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected string, received number"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_tags_2": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected array, received object"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/news/{newsId}/": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Buscar os dados de uma notícia cadastrada",
+        "description": "Esta rota será responsável por buscar os dados de uma notícia cadastrado pelo id informado. É necessaário enviar o ID da notícia através do parâmetro. A rota não precisa de envio de token de autorização.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "title": "teste news 1",
+                  "subTitle": "teste sub title",
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                  "type": "Educação",
+                  "published": true,
+                  "createdAt": "2023-04-18T22:24:47.455Z",
+                  "updatedAt": "2023-04-18T22:24:47.455Z",
+                  "authot": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  },
+                  "tagsList": [
+                    {
+                      "id": 1,
+                      "tag": {
+                        "id": 1,
+                        "name": "ENSINO"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "tag": {
+                        "id": 2,
+                        "name": "PESQUISA"
+                      }
+                    }
+                  ],
+                  "commentsList": [
+                    {
+                      "id": 1,
+                      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                      "createdAt": "2023-04-18T12:11:13.697Z",
+                      "newsId": "1,",
+                      "user": {
+                        "id": 2,
+                        "name": "Antonio Santos",
+                        "email": "antonio@gmail.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["News"],
+        "summary": "Deletar uma notícia cadastrada",
+        "description": "Esta rota é responsável por realizar um delete de uma notícia cadastrada. É necessaário enviar o ID da notícia através do parâmetro e enviar um token de autorização. Um usuário administrador pode deletar qualquer notícia, porém um usuário não administrador, só pode apagar uma notícia criada por ele.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK -"
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["News"],
+        "summary": "Altera dados de uma notícia cadastrada",
+        "description": "Esta rota é responsável por realizar uma atualização nos dados de uma notícia cadastrada. É necessaário enviar o ID da notícia através do parâmetro e enviar um token de autorização. Um usuário administrador pode atualizar todas as notícias, porém um usuário não administrador, só pode atualizar uma notícia que seja o autor. É possível atualizar as chaves \"title\", \"subTitle\", \"content\" e \"type\", onde chaves extras enviadas serão desconsideradas.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/News_update"
+              },
+              "example": {
+                "title": "teste news update",
+                "subTitle": "teste sub title update",
+                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+                "type": "Economia"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "title": "teste news update",
+                  "subTitle": "teste sub title update",
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+                  "type": "Economia",
+                  "published": true,
+                  "createdAt": "2023-04-18T22:24:47.455Z",
+                  "updatedAt": "2023-04-21T15:39:33.096Z",
+                  "authot": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  },
+                  "tagsList": [
+                    {
+                      "id": 1,
+                      "tag": {
+                        "id": 1,
+                        "name": "ENSINO"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "tag": {
+                        "id": 2,
+                        "name": "PESQUISA"
+                      }
+                    }
+                  ],
+                  "commentsList": [
+                    {
+                      "id": 1,
+                      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                      "createdAt": "2023-04-18T12:11:13.697Z",
+                      "newsId": "1,",
+                      "user": {
+                        "id": 2,
+                        "name": "Antonio Santos",
+                        "email": "antonio@gmail.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_invalid_title": {
+                    "value": {
+                      "message": {
+                        "title": ["String must contain at most 80 character(s)"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_subTitle": {
+                    "value": {
+                      "message": {
+                        "subTitle": [
+                          "String must contain at most 200 character(s)"
+                        ]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_type": {
+                    "value": {
+                      "message": {
+                        "type": [
+                          "Invalid enum value. Expected 'Outros' | 'Política' | 'Economia' | 'Cultura' | 'Segurança' | 'Saúde' | 'Educação' | 'Esportes' | 'Tecnologia', received 'Economia2'"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/news/users/": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Buscar todas as notícias criadas pelo usuário logado",
+        "description": "Esta rota será responsável por buscar todas as notícias criadas pelo usuário logado. É necessaário enviar um token de autorização. A rota fará uso das informações do usuário, contidas no token.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "title": "teste news 1",
+                    "subTitle": "teste sub title",
+                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    "type": "Educação",
+                    "published": true,
+                    "createdAt": "2023-04-18T22:24:47.455Z",
+                    "updatedAt": "2023-04-18T22:24:47.455Z",
+                    "authot": {
+                      "id": 1,
+                      "name": "Gabriel1",
+                      "email": "rf.gabriel12@gmail.com"
+                    },
+                    "tagsList": [
+                      {
+                        "id": 1,
+                        "tag": {
+                          "id": 1,
+                          "name": "ENSINO"
+                        }
+                      },
+                      {
+                        "id": 2,
+                        "tag": {
+                          "id": 2,
+                          "name": "PESQUISA"
+                        }
+                      }
+                    ],
+                    "commentsList": [
+                      {
+                        "id": 1,
+                        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                        "createdAt": "2023-04-18T12:11:13.697Z",
+                        "newsId": "1,",
+                        "user": {
+                          "id": 2,
+                          "name": "Antonio Santos",
+                          "email": "antonio@gmail.com"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/": {
+      "get": {
+        "tags": ["Tags"],
+        "summary": "Buscar a lista de tags cadastradas",
+        "description": "Esta rota será responsável por buscar a lista de tags cadastradas. A rota não precisa de envio de token de autorização.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "ENSINO"
+                  },
+                  {
+                    "id": 2,
+                    "name": "PESQUISA"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tags"],
+        "summary": "Criar uma nova lista de tags",
+        "description": "Está rota é responsável por criar uma nova tag de notícia. A chave \"tags\" é obrigatória e chaves extras enviadas são desconsideradas. É necessário enviar um token de autenticação, sendo permitido a criação de tag, por usuários administradores e padrão. A chave \"tags\" precisa ser um array de string, contendo os nomes das tags que serão criadas, caso o nome da tag já exista no banco de dados, a tag não será recriada. As tags são sempre criadas no sistema em formato upperCase.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tags_create"
+              },
+              "example": {
+                "tags": ["Ensino", "Pesquisa"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "ENSINO"
+                  },
+                  {
+                    "id": 2,
+                    "name": "PESQUISA"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "tags": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_tags_exist": {
+                    "value": {
+                      "message": "The tags /Ensino,Pesquisa/ sent already exist"
+                    }
+                  },
+                  "bad_request_invalid_tags_1": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected string, received number"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_tags_2": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected array, received object"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/{tagId}/": {
+      "delete": {
+        "tags": ["Tags"],
+        "summary": "Deletar uma tag cadastrada",
+        "description": "Esta rota é responsável por realizar um delete de uma tag cadastrada. É necessaário enviar o ID da tag através do parâmetro e enviar um token de autorização. Apenas um usuário administrador pode realizar deleções.",
+        "parameters": [
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "ID da tag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK -"
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A tag não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Tag not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/news/{newsId}/": {
+      "post": {
+        "tags": ["Tags"],
+        "summary": "Adicionar uma lista de tags a uma notícia",
+        "description": "Está rota é responsável por adicionar uma lista de tags a uma notícia. A chave \"tags\" é obrigatória e chaves extras enviadas são desconsideradas. É necessaário enviar o ID da notícia através do parâmetro e enviar um token de autorização. Um usuário administrador pode adicionar tag em  todas as notícias, porém um usuário não administrador, só pode adicionar tags a uma notícia que seja o autor. A chave \"tags\" precisa ser um array de string, contendo os nomes das tags que serão criadas, caso o nome da tag já exista no banco de dados, a tag não será recriada, apenas adicionada na notícia. As tags são sempre criadas no sistema em formato upperCase.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Add_tags_in_news"
+              },
+              "example": {
+                "tags": ["Ensino", "Pesquisa"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "title": "teste news 1",
+                  "subTitle": "teste sub title",
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                  "type": "Educação",
+                  "published": true,
+                  "createdAt": "2023-04-18T22:24:47.455Z",
+                  "updatedAt": "2023-04-18T22:24:47.455Z",
+                  "authot": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  },
+                  "tagsList": [
+                    {
+                      "id": 1,
+                      "tag": {
+                        "id": 1,
+                        "name": "ENSINO"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "tag": {
+                        "id": 2,
+                        "name": "PESQUISA"
+                      }
+                    }
+                  ],
+                  "commentsList": [
+                    {
+                      "id": 1,
+                      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                      "createdAt": "2023-04-18T12:11:13.697Z",
+                      "newsId": "1,",
+                      "user": {
+                        "id": 2,
+                        "name": "Antonio Santos",
+                        "email": "antonio@gmail.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "tags": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_tags_exist": {
+                    "value": {
+                      "message": "The tags /Ensino,Pesquisa/ sent already exist"
+                    }
+                  },
+                  "bad_request_invalid_tags_1": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected string, received number"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_tags_2": {
+                    "value": {
+                      "message": {
+                        "tags": ["Expected array, received object"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A Notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tags/{tagId}/news/{newsId}/": {
+      "delete": {
+        "tags": ["Tags"],
+        "summary": "Remover uma tag cadastrada de uma notícia",
+        "description": "Esta rota é responsável por remover uma tag cadastrada de uma notícia. É necessaário enviar o ID da tag e o ID da notícia através do parâmetros e enviar um token de autorização. Um usuário administrador pode remover tags em  todas as notícias, porém um usuário não administrador, só pode remover tags de uma notícia que seja o autor.",
+        "parameters": [
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "ID da tag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK -"
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found -",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "not_found_tag": {
+                    "value": {
+                      "message": "Tag not found"
+                    }
+                  },
+                  "not_found_news": {
+                    "value": {
+                      "message": "News not found"
+                    }
+                  },
+                  "not_found_tag_in_news": {
+                    "value": {
+                      "message": "Tag not found in News"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/comments/news/{newsId}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Buscar todos os comentários existentes em uma notícia cadastrada",
+        "description": "Esta rota será responsável por buscar todos os comentários existentes em uma notícia cadastrada, através do id informado. É necessaário enviar o ID da notícia através do parâmetro. A rota não precisa de envio de token de autorização.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "message": "Teste 142aa Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt": "2023-04-18T15:13:52.375Z",
+                    "newsId": 1,
+                    "user": {
+                      "id": 1,
+                      "name": "Gabriel1",
+                      "email": "rf.gabriel12@gmail.com"
+                    }
+                  },
+                  {
+                    "id": 2,
+                    "message": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt": "2023-04-18T18:13:52.375Z",
+                    "newsId": 1,
+                    "user": {
+                      "id": 1,
+                      "name": "Gabriel1",
+                      "email": "rf.gabriel12@gmail.com"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Criar um novo comentário em uma notícia",
+        "description": "Está rota é responsável por criar um novo comentário em uma notícia. A chave \"message\" é obrigatória e chaves extras enviadas são desconsideradas. É necessário enviar um token de autenticação, sendo permitido a criação de comentários, por usuários administradores e padrão.",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID da notícia",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment_create"
+              },
+              "example": {
+                "message": "Teste 142aa Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "message": "Teste 142aa Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                  "createdAt": "2023-04-18T15:13:52.375Z",
+                  "newsId": 1,
+                  "user": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "message": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_message": {
+                    "value": {
+                      "message": {
+                        "message": ["Expected string, received number"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - A Notícia não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "News not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/comments/": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Buscar todos os comentários existentes",
+        "description": "Esta rota será responsável por buscar todos os comentários existentes no banco de dados. A rota não precisa de envio de token de autorização.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "message": "Teste 142aa Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt": "2023-04-18T15:13:52.375Z",
+                    "newsId": 1,
+                    "user": {
+                      "id": 1,
+                      "name": "Gabriel1",
+                      "email": "rf.gabriel12@gmail.com"
+                    }
+                  },
+                  {
+                    "id": 2,
+                    "message": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt": "2023-04-18T18:13:52.375Z",
+                    "newsId": 1,
+                    "user": {
+                      "id": 1,
+                      "name": "Gabriel1",
+                      "email": "rf.gabriel12@gmail.com"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments/{commentId}/": {
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Deletar um comentário cadastrado",
+        "description": "Esta rota é responsável por realizar um delete de um comentário cadastrado. É necessaário enviar o ID da tag através do parâmetro e enviar um token de autorização. Um usuário administrador pode deletar qualquer comentário, porém um usuário não administrador, só pode apagar uma comentário criado por ele.",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "description": "ID da comentário",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK -"
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - O token enviado não contém a autorização necessária para realizar a requisição.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - O comentário não foi encontrada a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Comment not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Comments"],
+        "summary": "Altera dados de um comentário",
+        "description": "Está rota é responsável por realizar uma atualização no dados de um comentário. A chave \"message\" é a única que pode ser alterada, o que a torna obrigatória de ser enviada, e chaves extras enviadas são desconsideradas. É necessário enviar um token de autenticação, onde um usuário administrador pode atualizar qualquer comentário, porém um usuário não administrador, só pode atualizar uma comentário criado por ele.",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "description": "ID do comentário",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment_update"
+              },
+              "example": {
+                "message": "update consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "message": "update consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                  "createdAt": "2023-04-18T15:13:52.375Z",
+                  "newsId": 1,
+                  "user": {
+                    "id": 1,
+                    "name": "Gabriel1",
+                    "email": "rf.gabriel12@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Alguma chave obrigatória não foi enviada ou está em um formato inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "bad_request_keys_required": {
+                    "value": {
+                      "message": {
+                        "message": ["required"]
+                      }
+                    }
+                  },
+                  "bad_request_invalid_message": {
+                    "value": {
+                      "message": {
+                        "message": ["Expected string, received number"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Não foi enviado um token de autorização, o token enviado expirou ou o token é inválido.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missing_bearer_token": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "jwt_expired": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  },
+                  "invalid_token": {
+                    "value": {
+                      "message": "JWT Invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - O comentário não foi encontrado a partir do id enviado.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Comment not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal Server Error."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users_create": {
+        "required": ["email", "name", "password"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Users_update": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Users_login": {
+        "required": ["email", "password"],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Login_refresh-token": {
+        "required": ["token"],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "News_create": {
+        "required": ["content", "subTitle", "tags", "title", "type"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subTitle": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Outros",
+              "Política",
+              "Economia",
+              "Cultura",
+              "Segurança",
+              "Saúde",
+              "Educação",
+              "Esportes",
+              "Tecnologia"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "News_update": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subTitle": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Outros",
+              "Política",
+              "Economia",
+              "Cultura",
+              "Segurança",
+              "Saúde",
+              "Educação",
+              "Esportes",
+              "Tecnologia"
+            ]
+          }
+        }
+      },
+      "Tags_create": {
+        "required": ["tags"],
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Add_tags_in_news": {
+        "required": ["tags"],
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Comment_create": {
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Comment_update": {
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

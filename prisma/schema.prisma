@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique @db.VarChar(80)
+  name     String @db.VarChar(80)
+  password String @db.VarChar(120)
+  isAdmin Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  news         News[]
+  commentsList NewsComments[]
+  @@map("users")
+}
+
+model News {
+  id       Int    @id @default(autoincrement())
+  title    String @db.VarChar(80)
+  subTitle String @db.VarChar(200)
+  content  String
+  type     String @default("Outros") @db.VarChar(30)
+  published Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId Int
+  author   User @relation(fields: [authorId], references: [id])
+  tagsList     TagsNews[]
+  commentsList NewsComments[]
+  @@map("news")
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(30)
+  news TagsNews[]
+  @@map("tags")
+}
+
+model TagsNews {
+  id Int @id @default(autoincrement())
+  news   News @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  newsId Int
+  tag   Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId Int
+  @@map("tags_news")
+}
+
+model NewsComments {
+  id      Int    @id @default(autoincrement())
+  message String @db.VarChar(200)
+  createdAt DateTime @default(now())
+  news   News @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  newsId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  @@map("news_comments")
+}
