@@ -13,6 +13,14 @@ export type iUserReturnList = z.infer<typeof usersSchemas.UserReturnListSchema>;
 
 export type iUserLogin = z.infer<typeof usersSchemas.UserLoginSchema>;
 
+
+export interface IUserToken {
+    email: string;
+    tenantId: string;
+    subdomain: string;
+    id: string;
+}
+
 export interface IuserTokenInfos {
   email: string;
   id: string;

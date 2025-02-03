@@ -1,15 +1,14 @@
 import { Response } from "express";
-import { User } from "@prisma/client";
 import { prisma } from "@/server";
 import { compare } from "bcryptjs";
 import { AppError } from "@/errors";
 import * as usersInterfaces from "@/interfaces/users.interfaces";
-import { sign } from "jsonwebtoken";
+import {generateAccessToken, generateRefreshToken} from "@/utils/general";
+import { IUserToken } from "@/interfaces/users.interfaces";
+
 import * as logics from "./logics";
 import "dotenv/config";
 
-const secretKey = String(process.env.SECRET_KEY);
-  
 export const loginUsersService = async (
   payload: usersInterfaces.iUserLogin,
   res: Response
@@ -41,34 +40,16 @@ export const loginUsersService = async (
     throw new AppError("Invalid credentials", 401);
   }
 
-  const accessToken: string = sign(
-    {
-      email: findUser!.email,
-      tenantId: findUser!.tenantId,
-      subdomain: findUser!.tenant.subdomain,
-      type: "access",
-    },
-    secretKey,
-    {
-      expiresIn: "1h",
-      subject: String(findUser!.id),
-    }
-  );
+  const paramToken: IUserToken = {
+    id: findUser!.id,
+    email: findUser!.email,
+    tenantId: findUser!.tenantId,
+    subdomain: findUser!.tenant.subdomain,
+  };
 
-  
-  const refreshToken: string = sign(
-    {
-      email: findUser!.email,
-      tenantId: findUser!.tenantId,
-      subdomain: findUser!.tenant.subdomain,
-      type: "refresh",
-    },
-    secretKey, // Ensure this is a string
-    {
-      expiresIn: "7d", // Ensure this is a string
-      subject: String(findUser!.id), // Ensure this is a string
-    }
-  );
+  const accessToken = generateAccessToken(paramToken);
+
+  const refreshToken = generateRefreshToken(paramToken);
 
   return { accessToken, refreshToken };
 };

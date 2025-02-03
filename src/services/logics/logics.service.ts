@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { AppError } from "@/errors";
+import { sign } from "jsonwebtoken";
 
 export const validateFindUser = (
   findUser: User | null,
@@ -14,3 +15,6 @@ export const validateFindUser = (
     throw new AppError(message, statusCode);
   }
 };
+
+
+

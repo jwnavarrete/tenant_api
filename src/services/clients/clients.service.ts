@@ -3,8 +3,9 @@ import { hash } from "bcryptjs";
 import { AppError } from "@/errors";
 import { prisma } from "@/server";
 import * as clientsInterfaces from "@/interfaces/clients.interfaces";
-import { IuserTokenInfos } from "@/interfaces/users.interfaces";
+import { generateAccessToken, generateRefreshToken } from "@/utils/general";
 import { ClientReturnCreatedSchema, ClientCreateSchema } from "@/schemas/clients.schemas";
+import { IuserTokenInfos, IUserToken } from "@/interfaces/users.interfaces";
 
 const generateUniqueSubdomain = async (companyName: string): Promise<string> => {
   let subdomain = companyName.toLowerCase().replace(/\s+/g, '-');
@@ -81,6 +82,17 @@ export const createClientsService = async (
     return { client, tenant, user };
   });
 
+  const paramToken: IUserToken = {
+    id: result.user.id,
+    email: result.user.email,
+    tenantId: result.tenant.id,
+    subdomain: result.tenant.subdomain,
+  };
+  
+  const accessToken = generateAccessToken(paramToken);
+
+  const refreshToken = generateRefreshToken(paramToken);
+  
   // Formatear la respuesta
   const response: clientsInterfaces.iClientCreateReturn = ClientReturnCreatedSchema.parse({
     id: result.client.id,
@@ -105,6 +117,8 @@ export const createClientsService = async (
     },
     createdAt: result.client.createdAt,
     updatedAt: result.client.updatedAt,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   });
 
   return response;

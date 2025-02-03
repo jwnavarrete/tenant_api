@@ -51,6 +51,8 @@ export const ClientReturnCreatedSchema = z.object({
   }),
   createdAt: z.date(), // Fecha de creación del Client
   updatedAt: z.date(), // Fecha de última actualización del Client
+  accessToken: z.string(), // Token de acceso
+  refreshToken: z.string(), // Token de refresco
 });
 
 // Esquema para la respuesta después de actualizar el Client
