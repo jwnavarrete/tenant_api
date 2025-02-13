@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "@/errors";
-import { verify, VerifyErrors } from "jsonwebtoken";
+import {
+  verifyAccessToken,
+  decodeAccessToken,
+} from "@/common/lib/sessions";
 import "dotenv/config";
+import { IuserTokenInfos } from "@/interfaces/users.interfaces";
 
 export const validateTokenJwtMiddleware = (
   req: Request,
@@ -15,21 +19,27 @@ export const validateTokenJwtMiddleware = (
 
   const token: string = authToken.split(" ")[1];
 
-  verify(
-    token,
-    String(process.env.SECRET_KEY),
-    (error: VerifyErrors | null, decoded: any) => {
-      if (error) {
-        throw new AppError(error.message, 401);
-      }
-      req.userTokenInfos = {
-        email: decoded.email,
-        id: decoded.sub,
-        admin: decoded.admin,
-      };
-      return;
-    }
-  );
+  try {
+    verifyAccessToken(token);
+    const decoded: IuserTokenInfos = decodeAccessToken(token);
 
-  next();
+    req.userTokenInfos = {
+      email: decoded.email,
+      id: decoded.sub,
+      tenantId: decoded.tenantId,
+      subdomain: decoded.subdomain,
+      type: decoded.type,
+      exp: decoded.exp,
+      role: decoded.role,
+      sub: decoded.sub,
+    };
+    
+    next();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new AppError(error.message, 401);
+    } else {
+      throw new AppError("Unknown error", 401);
+    }
+  }
 };

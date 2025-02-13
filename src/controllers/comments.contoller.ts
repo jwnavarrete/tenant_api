@@ -9,10 +9,11 @@ export const createCommentsController = async (
 ): Promise<Response> => {
   const newsId: string = req.params.id;
   const body: commentsInterfaces.iCommentsCreateBody = req.body;
-  const userInfos: IuserTokenInfos = req.userTokenInfos;
-  const newComments: commentsInterfaces.iCommentsCreateReturn =
-    await commentsService.createCommentsService(body, newsId, userInfos);
-  return res.status(201).json(newComments);
+  // const userInfos: IuserTokenInfos = req.userTokenInfos;
+
+  // const newComments: commentsInterfaces.iCommentsCreateReturn =
+    // await commentsService.createCommentsService(body, newsId, userInfos);
+  return res.status(201).json([]);
 };
 
 export const listAllCommentsByNewsController = async (

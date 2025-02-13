@@ -12,7 +12,7 @@ export const createCommentsService = async (
     data: {
       message: payload.message!,
       newsId: Number(newsId),
-      userId: String(userInfos.id),
+      userId: String(userInfos.email),
     },
     include: {
       user: true,

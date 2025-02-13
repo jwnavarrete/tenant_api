@@ -9,8 +9,10 @@ export const createClientsController = async (
 ): Promise<Response> => {
   const newsId: string = req.params.id;
   const body: clientsInterfaces.iClientCreateBody = req.body;
-  const userInfos: IuserTokenInfos = req.userTokenInfos;
-  const newComments: clientsInterfaces.iClientCreateReturn =
-    await clientsServices.createClientsService(body, newsId, userInfos);
-  return res.status(201).json(newComments);
+  // const userInfos: IuserTokenInfos = req.userTokenInfos;
+  // const newComments: clientsInterfaces.iClientCreateReturn =
+  //   await clientsServices.createClientsService(body, newsId, userInfos);
+  // return res.status(201).json(newComments);
+
+  return res.status(201).json({});
 };

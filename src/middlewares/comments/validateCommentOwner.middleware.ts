@@ -10,7 +10,7 @@ export const validateCommentOwnerdMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   const commentIdParams: string = req.params.id;
-  const userInfosToken: IuserTokenInfos = req.userTokenInfos;
+  // const userInfosToken: IuserTokenInfos = req.userTokenInfos;
 
   if (isNaN(Number(commentIdParams))) {
     throw new AppError("Comment not found", 404);
@@ -28,12 +28,12 @@ export const validateCommentOwnerdMiddleware = async (
     throw new AppError("Comment not found", 404);
   }
 
-  if (
-    findComment.userId !== String(userInfosToken.id) &&
-    !userInfosToken.admin
-  ) {
-    throw new AppError("Insufficient permission", 403);
-  }
+  // if (
+  //   findComment.userId !== String(userInfosToken.id) &&
+  //   !userInfosToken.admin
+  // ) {
+  //   throw new AppError("Insufficient permission", 403);
+  // }
 
   next();
 };

@@ -8,21 +8,22 @@ export const loginRefreshUsersService = async (
   payload: iUserLoginrefresh,
   req: Request
 ): Promise<string> => {
-  verify(
-    payload.token,
-    String(process.env.SECRET_KEY),
-    (error: VerifyErrors | null, decoded: any) => {
-      if (error) {
-        throw new AppError("jwt refresh expired", 401);
-      }
-      req.userTokenInfos = {
-        email: decoded.email,
-        id: decoded.sub,
-        admin: decoded.admin,
-      };
-      return;
-    }
-  );
+  
+  // verify(
+  //   payload.token,
+  //   String(process.env.SECRET_KEY),
+  //   (error: VerifyErrors | null, decoded: any) => {
+  //     if (error) {
+  //       throw new AppError("jwt refresh expired", 401);
+  //     }
+  //     req.userTokenInfos = {
+  //       email: decoded.email,
+  //       id: decoded.sub,
+  //       // admin: decoded.admin,
+  //     };
+  //     return;
+  //   }
+  // );
 
   // expiresIn: process.env.REFRESH_TOKEN_LIFE || "1h",
 
@@ -30,7 +31,7 @@ export const loginRefreshUsersService = async (
   const accessToken: string = sign(
     {
       email: req.userTokenInfos!.email,
-      admin: req.userTokenInfos!.admin,
+      // admin: req.userTokenInfos!.admin,
       type: "access",
     },
     String(process.env.SECRET_KEY),

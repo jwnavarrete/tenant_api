@@ -10,7 +10,7 @@ export const validateNewsOwnerdMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   let newsIdParams: string = req.params.id;
-  const userInfosToken: IuserTokenInfos = req.userTokenInfos;
+  // const userInfosToken: IuserTokenInfos = req.userTokenInfos;
 
   if (req.route.path === "/:tagId/news/:newsId/") {
     newsIdParams = req.params.newsId;
@@ -34,12 +34,12 @@ export const validateNewsOwnerdMiddleware = async (
     throw new AppError("News not found", 404);
   }
 
-  if (
-    findNews.authorId !== String(userInfosToken.id) &&
-    !userInfosToken.admin
-  ) {
-    throw new AppError("Insufficient permission", 403);
-  }
+  // if (
+  //   findNews.authorId !== String(userInfosToken.id) &&
+  //   !userInfosToken.admin
+  // ) {
+  //   throw new AppError("Insufficient permission", 403);
+  // }
 
   next();
 };

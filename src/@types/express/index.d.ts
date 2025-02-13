@@ -6,7 +6,13 @@ declare global {
       userTokenInfos: {
         email: string;
         id: string;
-        admin: boolean;
+        tenantId: string;
+        subdomain: string;
+        type: string;
+        exp: number;
+        role: string;
+        sub: string;
+        // admin: boolean;
       };
     }
   }
