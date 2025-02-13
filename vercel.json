@@ -1,13 +1,23 @@
 {
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node"
-      }
-    ],
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/server.ts"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
     "env": {
-      "PNPM_HOME": ".pnpm"
-    },
-    "installCommand": "pnpm install"
+      "NODE_ENV": "production"
+    }
   }
-  
+}
