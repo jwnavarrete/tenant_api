@@ -56,3 +56,8 @@ authRoutes.post(
   validateBodyMiddleware(EmailVerifySchema),
   authController.AuthCheckEmailExistsController
 );
+
+authRoutes.get(
+  "/saludo",
+  authController.saludo
+);

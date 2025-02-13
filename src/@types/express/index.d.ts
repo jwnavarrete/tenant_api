@@ -14,6 +14,6 @@ declare global {
         sub: string;
         // admin: boolean;
       };
-    }
+    }    
   }
 }

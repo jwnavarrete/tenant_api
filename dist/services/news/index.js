@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.retrieveNewsByUserIdService = exports.updateNewsService = exports.retrieveNewsService = exports.retrieveNewsByIdService = exports.deleteNewsService = exports.createNewsService = void 0;
+const createNews_service_1 = require("./createNews.service");
+Object.defineProperty(exports, "createNewsService", { enumerable: true, get: function () { return createNews_service_1.createNewsService; } });
+const deleteNews_service_1 = require("./deleteNews.service");
+Object.defineProperty(exports, "deleteNewsService", { enumerable: true, get: function () { return deleteNews_service_1.deleteNewsService; } });
+const retrieveNews_service_1 = require("./retrieveNews.service");
+Object.defineProperty(exports, "retrieveNewsService", { enumerable: true, get: function () { return retrieveNews_service_1.retrieveNewsService; } });
+const retrieveNewsById_service_1 = require("./retrieveNewsById.service");
+Object.defineProperty(exports, "retrieveNewsByIdService", { enumerable: true, get: function () { return retrieveNewsById_service_1.retrieveNewsByIdService; } });
+const updateNews_service_1 = require("./updateNews.service");
+Object.defineProperty(exports, "updateNewsService", { enumerable: true, get: function () { return updateNews_service_1.updateNewsService; } });
+const retrieveNewsByUserId_service_1 = require("./retrieveNewsByUserId.service");
+Object.defineProperty(exports, "retrieveNewsByUserIdService", { enumerable: true, get: function () { return retrieveNewsByUserId_service_1.retrieveNewsByUserIdService; } });

@@ -108,3 +108,8 @@ export const AuthCheckEmailExistsController = async (
 
   return res.status(200).json({ email, exists });
 };
+
+export const saludo = (req: Request, res: Response) => {
+  const { name } = req.body;
+  return res.status(200).json({ message: `Hola ${name}` });
+};

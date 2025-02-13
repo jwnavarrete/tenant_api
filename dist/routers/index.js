@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.clientsRoutes = exports.usersRoutes = exports.tagsRoutes = exports.newsRoutes = exports.commentsRoutes = void 0;
+const comments_routes_1 = require("./comments.routes");
+Object.defineProperty(exports, "commentsRoutes", { enumerable: true, get: function () { return comments_routes_1.commentsRoutes; } });
+const news_routes_1 = require("./news.routes");
+Object.defineProperty(exports, "newsRoutes", { enumerable: true, get: function () { return news_routes_1.newsRoutes; } });
+const tags_routes_1 = require("./tags.routes");
+Object.defineProperty(exports, "tagsRoutes", { enumerable: true, get: function () { return tags_routes_1.tagsRoutes; } });
+const users_routes_1 = require("./users.routes");
+Object.defineProperty(exports, "usersRoutes", { enumerable: true, get: function () { return users_routes_1.usersRoutes; } });
+const clients_routes_1 = require("./clients.routes");
+Object.defineProperty(exports, "clientsRoutes", { enumerable: true, get: function () { return clients_routes_1.clientsRoutes; } });

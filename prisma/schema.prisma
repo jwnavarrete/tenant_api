@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -72,26 +73,26 @@ model UserRole {
 }
 
 model User {
-  id                 String @id @default(uuid()) // Identificador único de la relación
+  id                 String         @id @default(uuid()) // Identificador único de la relación
   tenantId           String // Clave foránea que referencia a la tabla Tenant
-  tenant             Tenant @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  email              String @db.VarChar(80)
-  fullname           String @db.VarChar(80)
-  password           String @db.VarChar(120)
-  country            String @db.VarChar(80)
-  phone              String @db.VarChar(25)
-  typeIdentification String @db.VarChar(25)
-  identification     String @db.VarChar(25)
+  tenant             Tenant         @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  email              String         @db.VarChar(80)
+  fullname           String         @db.VarChar(80)
+  password           String         @db.VarChar(120)
+  country            String         @db.VarChar(80)
+  phone              String         @db.VarChar(25)
+  typeIdentification String         @db.VarChar(25)
+  identification     String         @db.VarChar(25)
   // 
-  emailVerified     Boolean @default(false) // Indica si el correo ha sido verificado
-  verificationToken String? // Token para la verificación del correo  
+  emailVerified      Boolean        @default(false) // Indica si el correo ha sido verificado
+  verificationToken  String? // Token para la verificación del correo  
   // isAdmin Boolean @default(false)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  isDeleted    Boolean        @default(false)
-  news         News[]
-  commentsList NewsComments[]
-  roles        UserRole[] // Relación muchos a muchos con Role a través de UserRole
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  isDeleted          Boolean        @default(false)
+  news               News[]
+  commentsList       NewsComments[]
+  roles              UserRole[] // Relación muchos a muchos con Role a través de UserRole
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("users")

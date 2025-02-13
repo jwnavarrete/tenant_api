@@ -9,7 +9,7 @@ import { IuserTokenInfos } from "@/interfaces/users.interfaces";
 
 export const validateTokenJwtMiddleware = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): Response | void => {
   const authToken: string | undefined = req.headers.authorization;
