@@ -19,9 +19,14 @@ app.use((req: Request, _res: Response, next: NextFunction) => {
 
 // Configura CORS para permitir solicitudes desde tu frontend de Next.js
 
+
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("¡Hola, mundo!");
+});
 
 app.use("/api-docs/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // SECURITY MODULES
