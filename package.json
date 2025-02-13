@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "postbuild": "cp -r src/common/Mail/templates dist/common/Mail/templates",
-    "dev": "nodemon --require dotenv/config --require tsconfig-paths/register --watch src --exec ts-node src/server.ts",
-    "start": "node -r module-alias/register -r tsconfig-paths/register dist/server.js",
+    "build": "npx prisma generate --schema=api/prisma/schema.prisma && tsc",
+    "postbuild": "cp -r api/common/Mail/templates dist/common/Mail/templates",
+    "dev": "nodemon --require dotenv/config --require tsconfig-paths/register --watch api --exec ts-node api/index.ts",
+    "start": "node -r module-alias/register -r tsconfig-paths/register dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:prod": "echo 'Migraciones deshabilitadas en producción'"
