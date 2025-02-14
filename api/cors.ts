@@ -1,16 +1,21 @@
 export const corsOptions = {
   origin: (origin: string | undefined, callback: Function) => {
     // Permitir solicitudes desde "incassoapp" y cualquier subdominio de incassoapp
+    const APP_DOMAIN = process.env.APP_DOMAIN || "incassoapp.com";
+    
     const allowedOrigins = [
-      /^https:\/\/incassoapp:\d+$/, // Permite "incassoapp" con cualquier puerto
-      /^https:\/\/([a-z0-9-]+\.)?incassoapp:\d+$/, // Permite cualquier subdominio de "incassoapp" con cualquier puerto
-      /^https:\/\/auth\.incassoapp:443$/, // Permite "auth.incassoapp:443"
-      /^https:\/\/auth\.incassoapp:443\/$/, // Permite "auth.incassoapp:443/"
-      /^https:\/\/incassoapp$/, // Permite "https://incassoapp"
-      /^https:\/\/auth\.incassoapp$/, // Permite "https://auth.incassoapp"
-      /^https:\/\/auth\.incassoapp\.test$/, // Permite "https://auth.incassoapp.test"
-      /^https:\/\/([a-z0-9-]+\.)?incassoapp\.test$/, // Permite cualquier subdominio de "incassoapp.test"
-      /^https:\/\/dazzsoft\.incassoapp\.test$/, // Permite "https://dazzsoft.incassoapp.test"
+      // Permite https://incasso-app.vercel.app:<puerto>
+      new RegExp(`^https://${APP_DOMAIN.replace('.', '\\.')}:\\d+$`),
+      // Permite https://<subdominio>.incasso-app.vercel.app:<puerto>
+      new RegExp(`^https://([a-z0-9-]+\\.)?${APP_DOMAIN.replace('.', '\\.')}:\\d+$`),
+      // Permite https://auth.incasso-app.vercel.app:443
+      new RegExp(`^https://auth\\.${APP_DOMAIN.replace('.', '\\.')}:443$`),
+      // Permite https://auth.incasso-app.vercel.app:443/
+      new RegExp(`^https://auth\\.${APP_DOMAIN.replace('.', '\\.')}:443/$`),
+      // Permite https://incasso-app.vercel.app
+      new RegExp(`^https://${APP_DOMAIN.replace('.', '\\.')}$`),
+      // Permite https://auth.incasso-app.vercel.app
+      new RegExp(`^https://auth\\.${APP_DOMAIN.replace('.', '\\.')}$`),
     ];
 
     const isValidOrigin = allowedOrigins.some((regex) =>

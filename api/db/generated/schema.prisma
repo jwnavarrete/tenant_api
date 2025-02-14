@@ -1,0 +1,147 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated"
+  binaryTargets = ["native", "debian-openssl-3.0.x"] //  "debian-openssl-3.0.x" for google functions
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(uuid()) // Identificador único del tenant
+  subdomain String   @unique // Subdominio único para el tenant
+  clientId  String   @unique // Clave foránea que referencia a la tabla Client
+  client    Client   @relation(fields: [clientId], references: [id]) // Relación con Client
+  users     User[] // Relación uno a muchos con User
+  createdAt DateTime @default(now()) // Fecha de creación
+  updatedAt DateTime @updatedAt // Fecha de última actualización
+
+  @@map("tenant")
+}
+
+model Client {
+  id                String   @id @default(uuid()) // Identificador único del cliente (empresa)
+  type              String // Teléfono de la empresa
+  name              String // Nombre de la empresa
+  kvk               String // Teléfono de la empresa
+  contactEmail      String // Email de contacto de la empresa
+  numberOfEmployees String // Teléfono de la empresa
+  country           String // Teléfono de la empresa
+  address           String // Dirección de la empresa
+  tenant            Tenant? // Relación uno a uno con Tenant
+  termsAccepted     Boolean // Indica si el cliente ha aceptado los términos y condiciones
+  createdAt         DateTime @default(now()) // Fecha de creación
+  updatedAt         DateTime @updatedAt // Fecha de última actualización
+
+  @@map("client")
+}
+
+// model User {
+//   id        String   @id @default(uuid()) // Identificador único del usuario
+//   tenantId  String   // Clave foránea que referencia a la tabla Tenant
+//   tenant    Tenant   @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+//   email     String   @unique // Correo electrónico del usuario (único por tenant)
+//   password  String   // Contraseña cifrada del usuario
+//   roles     UserRole[] // Relación muchos a muchos con Role a través de UserRole
+//   createdAt DateTime @default(now()) // Fecha de creación
+//   updatedAt DateTime @updatedAt // Fecha de última actualización
+// }
+
+model Role {
+  id          String     @id @default(uuid()) // Identificador único del rol
+  name        String     @unique // Nombre del rol (por ejemplo, "Administrador", "Ejecutivo")
+  description String // Descripción del rol
+  users       UserRole[] // Relación muchos a muchos con User a través de UserRole
+  createdAt   DateTime   @default(now()) // Fecha de creación
+  updatedAt   DateTime   @updatedAt // Fecha de última actualización
+
+  @@map("role")
+}
+
+model UserRole {
+  id        String   @id @default(uuid()) // Identificador único de la relación
+  userId    String // Clave foránea que referencia a la tabla User
+  user      User     @relation(fields: [userId], references: [id]) // Relación con User
+  roleId    String // Clave foránea que referencia a la tabla Role
+  role      Role     @relation(fields: [roleId], references: [id]) // Relación con Role
+  createdAt DateTime @default(now()) // Fecha de creación
+  updatedAt DateTime @updatedAt // Fecha de última actualización
+
+  @@unique([userId, roleId]) // Asegura que un usuario no tenga el mismo rol más de una vez
+  @@map("user_role")
+}
+
+model User {
+  id                 String         @id @default(uuid()) // Identificador único de la relación
+  tenantId           String // Clave foránea que referencia a la tabla Tenant
+  tenant             Tenant         @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  email              String         @db.VarChar(80)
+  fullname           String         @db.VarChar(80)
+  password           String         @db.VarChar(120)
+  country            String         @db.VarChar(80)
+  phone              String         @db.VarChar(25)
+  typeIdentification String         @db.VarChar(25)
+  identification     String         @db.VarChar(25)
+  // 
+  emailVerified      Boolean        @default(false) // Indica si el correo ha sido verificado
+  verificationToken  String? // Token para la verificación del correo  
+  // isAdmin Boolean @default(false)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  isDeleted          Boolean        @default(false)
+  news               News[]
+  commentsList       NewsComments[]
+  roles              UserRole[] // Relación muchos a muchos con Role a través de UserRole
+
+  @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
+  @@map("users")
+}
+
+model News {
+  id           Int            @id @default(autoincrement())
+  title        String         @db.VarChar(80)
+  subTitle     String         @db.VarChar(200)
+  content      String
+  type         String         @default("Outros") @db.VarChar(30)
+  published    Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  authorId     String
+  author       User           @relation(fields: [authorId], references: [id])
+  tagsList     TagsNews[]
+  commentsList NewsComments[]
+
+  @@map("news")
+}
+
+model Tag {
+  id   Int        @id @default(autoincrement())
+  name String     @unique @db.VarChar(30)
+  news TagsNews[]
+
+  @@map("tags")
+}
+
+model TagsNews {
+  id     Int  @id @default(autoincrement())
+  news   News @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  newsId Int
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId  Int
+
+  @@map("tags_news")
+}
+
+model NewsComments {
+  id        Int      @id @default(autoincrement())
+  message   String   @db.VarChar(200)
+  createdAt DateTime @default(now())
+  news      News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  newsId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@map("news_comments")
+}
