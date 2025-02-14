@@ -9,10 +9,11 @@
   "scripts": {
     "build": "tsc",
     "ts.check": "tsc --project tsconfig.json",
-    "postbuild": "cp -r src/common/Mail/templates dist/common/Mail/templates",
-    "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --project tsconfig.json src/index.ts",
+    "postbuild": "cp -r src/common/Mail/templates dist/common/Mail/templates && mkdir -p dist/public",
+    "dev": "ts-node --project tsconfig.json src/index.ts",
+    "dev:start": "node dist/index.js",
     "start:dev": "dotenv -e .env ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --project tsconfig.json src/index.ts",
-    "start": "node -r tsconfig-paths/register dist/index.js",
+    "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:prod": "echo 'Migraciones deshabilitadas en producción'"
@@ -30,6 +31,7 @@
   "homepage": "https://github.com/AntonioSantosBJPE/newsApi#readme",
   "dependencies": {
     "@prisma/client": "^6.3.1",
+    "@vercel/node": "^5.1.6",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",

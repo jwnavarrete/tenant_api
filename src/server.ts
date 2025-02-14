@@ -1,12 +1,13 @@
-import app from "./app";
-import "dotenv/config";
+import app from './app';
+import 'dotenv/config';
 import { PrismaClient } from "@prisma/client";
 
+// Inicializa Prisma (si lo necesitas)
 export const prisma = new PrismaClient({ log: ["query"] });
 
-const PORT = process.env.PORT || 3000;
+// No uses `app.listen()` aquí. Vercel se encarga de manejarlo.
+// export default app; // Exporta la aplicación para que Vercel maneje las solicitudes.
 
-app.listen(PORT, () => {
-  console.log(`App is running on http://localhost:${PORT}`);
-});
+app.listen(3000, () => console.log("Server ready on port 3000."));
 
+module.exports = app;

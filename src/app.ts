@@ -5,7 +5,6 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./swagger.json";
 import * as securityRoutes from "./modules/security/routers";
-
 import { corsOptions } from "./cors";
 
 const app: Application = express();
@@ -16,7 +15,6 @@ app.use((req: Request, _res: Response, next: NextFunction) => {
   next();
 });
 
-
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -26,7 +24,6 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api-docs/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-// 
 app.use("/auth/", securityRoutes.authRoutes);
 app.use("/tenant", securityRoutes.tenantRoutes);
 
