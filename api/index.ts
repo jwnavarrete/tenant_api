@@ -1,6 +1,6 @@
 import app from "./app";
 import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "./db/generated";
 
 export const prisma: PrismaClient = new PrismaClient({ log: ["query"] });
 
