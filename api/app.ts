@@ -11,7 +11,6 @@ const app: Application = express();
 
 // Middleware para registrar todas las solicitudes entrantes
 app.use((req: Request, _res: Response, next: NextFunction) => {
-  console.log(`Incoming request: ${req.method} ${req.url}`);
   next();
 });
 

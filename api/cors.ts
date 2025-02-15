@@ -16,13 +16,10 @@ export const corsOptions = {
       origin ? regex.test(origin) : false
     );
 
-    console.log("isValidOrigin:", isValidOrigin);
-
     // Si es un origen válido o no se especifica origen, permite la solicitud
     if (isValidOrigin || !origin) {
       callback(null, true); // Permite la solicitud
     } else {
-      console.log("Blocked by CORS");
       callback(new Error("Not allowed by CORS")); // Bloquea la solicitud si no es permitido
     }
   },

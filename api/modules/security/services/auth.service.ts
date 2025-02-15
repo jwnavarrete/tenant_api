@@ -46,7 +46,6 @@ export const signUp = async (
   payload: iAuthTenantSignUp
 ): Promise<iAuthResponse> => {
   // Validar los datos de entrada
-  console.log("payload", payload);
   const validatedData = AuthSignUpSchema.parse(payload);
   const TENANT_ADMIN_ROLE = process.env.TENANT_ADMIN_ROLE || "";
 
@@ -130,6 +129,7 @@ export const signUp = async (
     identification: result.user.identification,
     tenantId: result.user.tenantId,
     subdomain: result.tenant.subdomain,
+    company: result.client.name,
     role: TENANT_ADMIN_ROLE,
     emailVerified: result.user.emailVerified,
   };
@@ -191,7 +191,6 @@ export const validaSubdomain = async (subdomain: string): Promise<boolean> => {
 
 export const refreshToken = async (refreshToken: string): Promise<any> => {
   const payload = verifyRefreshToken(refreshToken);
-  console.log("payload", payload);
 
   if (!payload.sub) {
     throw new Error("Invalid token payload");
@@ -248,7 +247,11 @@ export const signIn = async (param: iSignInTenant): Promise<iAuthResponse> => {
       },
     },
     include: {
-      tenant: true,
+      tenant: {
+        include: {
+          client: true,
+        },
+      },
       roles: {
         include: {
           role: true,
@@ -286,16 +289,16 @@ export const signIn = async (param: iSignInTenant): Promise<iAuthResponse> => {
     identification: user.identification,
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
+    company: user.tenant.client.name,
     role: user.roles[0].role.name,
     emailVerified: user.emailVerified,
   };
 
+  console.log("paramIdToken", paramIdToken);
+
   const accessToken = generateAccessToken(paramToken);
   const refreshToken = generateRefreshToken(paramToken);
   const idToken = generateIdToken(paramIdToken);
-
-  console.log("User Email:", user.email);
-  console.log("User Fullname:", user.fullname);
 
   const response: iAuthResponse = AuthResponseSchema.parse({
     accessToken: accessToken,

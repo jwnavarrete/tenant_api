@@ -66,6 +66,7 @@ const IdTokenSchema = z.object({
   identification: z.string(),
   tenantId: z.string(),
   subdomain: z.string(),
+  company: z.string(),
   role: z.string(),
   emailVerified: z.boolean(),
 });

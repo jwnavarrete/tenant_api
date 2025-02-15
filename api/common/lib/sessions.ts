@@ -37,6 +37,7 @@ export const generateIdToken = (findUser: iIdToken): string => {
       identification: findUser.identification,
       tenantId: findUser.tenantId,
       subdomain: findUser.subdomain,
+      company: findUser.company,
       role: findUser.role,
       emailVerified: findUser.emailVerified,
       type: "idToken",
@@ -141,7 +142,6 @@ export const createTokenSession = async (
 ) => {
   const decoded = decodeAccessToken(accessToken);
 
-  console.log(`dominio: ${decoded.subdomain}.${APP_DOMAIN}`);
 
   // decoded.
   res.cookie("authToken", JSON.stringify({ accessToken, refreshToken }), {
