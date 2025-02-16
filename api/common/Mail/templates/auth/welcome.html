@@ -1,6 +1,126 @@
-<html>
-  <body>
-    <h1>Bienvenido, {{name}}!</h1>
-    <p>Gracias por registrarte en nuestro servicio.</p>
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bevestig uw account</title>
+  </head>
+  <body
+    style="background-color: #727275; font-family: 'Roboto', Arial, sans-serif"
+  >
+    <!-- Contenedor principal -->
+    <table
+      height="auto"
+      max-width="600px !important"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      align="center"
+    >
+      <tr>
+        <td align="center" width="550px" style="padding: 10px">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <!-- Logo Section -->
+            <tr>
+              <td align="center">
+                <img
+                  src="https://dazzsoft.com/wp-content/uploads/2025/02/Logo-Factura.png"
+                  alt="Logo"
+                  style="width: 150px; height: auto"
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- OTHER -->
+      <tr>
+        <td align="center" style="padding: 0 10px 20px 10px">
+          <!-- Card principal -->
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              background-color: #ffffff;
+              border-radius: 10px;
+              padding: 25px;
+            "
+          >
+            <!-- Content Section -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <h2
+                  style="
+                    color: #191f27;
+                    font-size: 30px;
+                    font-weight: 700;
+                    margin: 0;
+                  "
+                >
+                  Hola {{clientName}}, 👋
+                </h2>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center">
+                <p style="color: #555555; font-size: 15px; margin: 10px 0">
+                  ¡Estamos encantados de tenerte a bordo! 🚀
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center">
+                <p style="color: #555555; font-size: 15px; margin: 10px 0">
+                  En <span style="color: #f26b1d">{{companyName}}</span>, nuestro
+                  objetivo es ofrecerte la mejor experiencia posible. Nos alegra
+                  que ahora formes parte de nuestra comunidad.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Action Section -->
+            <tr>
+              <td align="center">
+                <p style="color: #555555; font-size: 15px; margin: 20px 0">
+                  Si tienes alguna pregunta o necesitas ayuda en cualquier
+                  momento, no dudes en ponerte en contacto con nosotros. Estamos
+                  aquí para ayudarte a aprovechar al máximo nuestra plataforma.
+                  💬
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <p style="color: #555555; font-size: 15px; margin: 20px 0">
+                  ¡Esperamos que disfrutes tu recorrido con nosotros y que
+                  encuentres todo lo que necesitas! 🌟
+                </p>
+              </td>
+            </tr>
+
+            <!-- Support Section -->
+            <tr>
+              <td
+                align="center"
+                style="padding-top: 20px; padding-bottom: 20px"
+              >
+                <img
+                  src="https://bc0792b047.imgdist.com/pub/bfra/aw7adzla/tjo/zzy/tjp/icons8-sobre-circulado-100%20%281%29.png"
+                  alt="Support"
+                  style="width: 48px; height: auto"
+                />
+                <p style="color: #555555; font-size: 14px; margin: 10px 0">
+                  ¿Tiene alguna pregunta o problema? Contáctenos en
+                  {{emailSuport}}
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

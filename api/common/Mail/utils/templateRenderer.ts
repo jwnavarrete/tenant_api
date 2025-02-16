@@ -1,16 +1,21 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
+import Handlebars from "handlebars";
 
-const renderTemplate = (templateName: string, data: Record<string, string>): string => {
+const renderTemplate = (
+  templateName: string,
+  data: Record<string, any>
+): string => {
   const templatePath = path.join(__dirname, `../templates/${templateName}.html`);
-  let template = fs.readFileSync(templatePath, 'utf8');
+  const templateSource = fs.readFileSync(templatePath, "utf8");
 
-  // Reemplaza los placeholders con los datos proporcionados
-  for (const key in data) {
-    template = template.replace(new RegExp(`{{${key}}}`, 'g'), data[key]);
-  }
+  // Compila la plantilla con Handlebars
+  const template = Handlebars.compile(templateSource);
 
-  return template;
+  // Renderiza el HTML con los datos
+  const result = template(data);
+
+  return result;
 };
 
 export default renderTemplate;

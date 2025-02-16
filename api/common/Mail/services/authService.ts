@@ -1,10 +1,16 @@
 import transporter from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
-
+import { iAccountUrls } from "../../../modules/security/interfaces/auth.intercace";
 class AuthMailService {
   static async sendWelcomeEmail(to: string, name: string): Promise<void> {
-    const html = renderTemplate("auth/welcome", { name });
+    const templateParam = {
+      clientName: name,
+      companyName: process.env.COMPANY_NAME || "",
+      emailSuport: process.env.SUPPORT_EMAIL || "",
+    };
+    console.log(templateParam);
+    const html = renderTemplate("auth/welcome", templateParam);
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
       to,
@@ -15,7 +21,13 @@ class AuthMailService {
   }
 
   static async sendVerificationEmail(to: string, link: string): Promise<void> {
-    const html = renderTemplate("auth/verify-email", { link });
+    const templateParam = {
+      companyName: process.env.COMPANY_NAME || "",
+      emailSuport: process.env.SUPPORT_EMAIL || "",
+      link: link,
+    };
+    console.log(templateParam);
+    const html = renderTemplate("auth/verify-email", templateParam);
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
       to,
@@ -26,17 +38,37 @@ class AuthMailService {
   }
 
   static async sendResetPasswordEmail(to: string, link: string): Promise<void> {
-    const html = renderTemplate("reset-password", { link });
+    const templateParam = {
+      companyName: process.env.COMPANY_NAME || "",
+      link: link,
+    };
+    const html = renderTemplate("auth/reset-password", templateParam);
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
       to,
-      subject: "Restablecer contraseña",
+      subject: "[Reset password]",
       html,
     };
     await transporter.sendMail(mailOptions);
   }
 
-  // You can add more email services here for each module
+  static async sendRecoveryUrl(
+    to: string,
+    accountUrls: iAccountUrls
+  ): Promise<void> {
+    const templateParam = {
+      companyName: process.env.COMPANY_NAME || "",
+      accountUrls: accountUrls,
+    };
+    const html = renderTemplate("auth/recovery-url", templateParam);
+    const mailOptions: EmailOptions = {
+      from: process.env.SMTP_USER as string,
+      to,
+      subject: "Forgot your account URL?",
+      html,
+    };
+    await transporter.sendMail(mailOptions);
+  }
 }
 
 export default AuthMailService;

@@ -11,7 +11,7 @@ const app: Application = express();
 
 // Middleware para registrar todas las solicitudes entrantes
 app.use((req: Request, _res: Response, next: NextFunction) => {
-  next();
+  next();  
 });
 
 app.use(cors(corsOptions));
@@ -25,6 +25,7 @@ app.get("/", (_req, res) => {
 app.use("/api-docs/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/auth/", securityRoutes.authRoutes);
 app.use("/tenant", securityRoutes.tenantRoutes);
+app.use("/reset-password", securityRoutes.resetPassword);
 
 app.use(errorHandler);
 

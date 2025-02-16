@@ -93,6 +93,7 @@ model User {
   isDeleted          Boolean        @default(false)
   news               News[]
   commentsList       NewsComments[]
+  resetPasswordToken String? // Token para el restablecimiento de contraseña
   roles              UserRole[] // Relación muchos a muchos con Role a través de UserRole
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant

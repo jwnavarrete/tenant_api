@@ -6,6 +6,7 @@ import {
   AuthTenantSchema,
   EmailTokenVerificationSchema,
   EmailVerifySchema,
+  MagicLoginSchema,
   RefreshTokenSchema,
   ResendVerificationEmailSchema,
   SubdomainSchema,
@@ -55,6 +56,18 @@ authRoutes.post(
   "/validate-email/",
   validateBodyMiddleware(EmailVerifySchema),
   authController.AuthCheckEmailExistsController
+);
+
+authRoutes.post(
+  "/send-recovery-url/",
+  validateBodyMiddleware(EmailVerifySchema),
+  authController.AuthSendUrlRecovery
+);
+
+authRoutes.post(
+  "/verify-recovery-token/",
+  validateBodyMiddleware(MagicLoginSchema),
+  authController.AuthVerifyRecoveryToken
 );
 
 authRoutes.get("/saludo", authController.saludo);

@@ -63,6 +63,13 @@ export const verifyEmailVerificationToken = (
   }
 };
 
+export const verifyMagicLoginToken = (token: string): { id: string; email: string; tenant: string } => {
+  try {
+    return jwt.verify(token, ACCESS_TOKEN_SECRET) as { id: string; email: string; tenant: string };
+  } catch (error) {
+    throw new Error("Invalid magic login token");
+  }
+};
 export const generateMagicLoginToken = (user: {
   id: string;
   email: string;

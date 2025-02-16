@@ -6165,6 +6165,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     isDeleted: boolean | null
+    resetPasswordToken: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -6182,6 +6183,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     isDeleted: boolean | null
+    resetPasswordToken: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -6199,6 +6201,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     isDeleted: number
+    resetPasswordToken: number
     _all: number
   }
 
@@ -6218,6 +6221,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isDeleted?: true
+    resetPasswordToken?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -6235,6 +6239,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isDeleted?: true
+    resetPasswordToken?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -6252,6 +6257,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isDeleted?: true
+    resetPasswordToken?: true
     _all?: true
   }
 
@@ -6342,6 +6348,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     isDeleted: boolean
+    resetPasswordToken: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -6376,6 +6383,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isDeleted?: boolean
+    resetPasswordToken?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
     commentsList?: boolean | User$commentsListArgs<ExtArgs>
@@ -6398,6 +6406,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isDeleted?: boolean
+    resetPasswordToken?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6416,6 +6425,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isDeleted?: boolean
+    resetPasswordToken?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6434,9 +6444,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isDeleted?: boolean
+    resetPasswordToken?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "fullname" | "password" | "country" | "phone" | "typeIdentification" | "identification" | "emailVerified" | "verificationToken" | "createdAt" | "updatedAt" | "isDeleted", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "fullname" | "password" | "country" | "phone" | "typeIdentification" | "identification" | "emailVerified" | "verificationToken" | "createdAt" | "updatedAt" | "isDeleted" | "resetPasswordToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
@@ -6474,6 +6485,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       isDeleted: boolean
+      resetPasswordToken: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -6915,6 +6927,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly isDeleted: FieldRef<"User", 'Boolean'>
+    readonly resetPasswordToken: FieldRef<"User", 'String'>
   }
     
 
@@ -11932,7 +11945,8 @@ export namespace Prisma {
     verificationToken: 'verificationToken',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    isDeleted: 'isDeleted'
+    isDeleted: 'isDeleted',
+    resetPasswordToken: 'resetPasswordToken'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -12351,6 +12365,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     isDeleted?: BoolFilter<"User"> | boolean
+    resetPasswordToken?: StringNullableFilter<"User"> | string | null
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     news?: NewsListRelationFilter
     commentsList?: NewsCommentsListRelationFilter
@@ -12372,6 +12387,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isDeleted?: SortOrder
+    resetPasswordToken?: SortOrderInput | SortOrder
     tenant?: TenantOrderByWithRelationInput
     news?: NewsOrderByRelationAggregateInput
     commentsList?: NewsCommentsOrderByRelationAggregateInput
@@ -12397,6 +12413,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     isDeleted?: BoolFilter<"User"> | boolean
+    resetPasswordToken?: StringNullableFilter<"User"> | string | null
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     news?: NewsListRelationFilter
     commentsList?: NewsCommentsListRelationFilter
@@ -12418,6 +12435,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isDeleted?: SortOrder
+    resetPasswordToken?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -12441,6 +12459,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     isDeleted?: BoolWithAggregatesFilter<"User"> | boolean
+    resetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type NewsWhereInput = {
@@ -12967,6 +12986,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
     news?: NewsCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
@@ -12988,6 +13008,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
@@ -13007,6 +13028,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
@@ -13028,6 +13050,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
@@ -13048,6 +13071,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -13064,6 +13088,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -13081,6 +13106,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewsCreateInput = {
@@ -13591,6 +13617,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isDeleted?: SortOrder
+    resetPasswordToken?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -13608,6 +13635,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isDeleted?: SortOrder
+    resetPasswordToken?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -13625,6 +13653,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isDeleted?: SortOrder
+    resetPasswordToken?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14537,6 +14566,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     news?: NewsCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
     roles?: UserRoleCreateNestedManyWithoutUserInput
@@ -14556,6 +14586,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
@@ -14644,6 +14675,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     isDeleted?: BoolFilter<"User"> | boolean
+    resetPasswordToken?: StringNullableFilter<"User"> | string | null
   }
 
   export type TenantCreateWithoutClientInput = {
@@ -14759,6 +14791,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
     news?: NewsCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
@@ -14779,6 +14812,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
     commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
   }
@@ -14834,6 +14868,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
@@ -14854,6 +14889,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -15103,6 +15139,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
     commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
     roles?: UserRoleCreateNestedManyWithoutUserInput
@@ -15123,6 +15160,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
@@ -15199,6 +15237,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
     roles?: UserRoleUpdateManyWithoutUserNestedInput
@@ -15219,6 +15258,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -15443,6 +15483,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
     news?: NewsCreateNestedManyWithoutAuthorInput
     roles?: UserRoleCreateNestedManyWithoutUserInput
@@ -15463,6 +15504,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
@@ -15533,6 +15575,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
     roles?: UserRoleUpdateManyWithoutUserNestedInput
@@ -15553,6 +15596,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -15571,6 +15615,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isDeleted?: boolean
+    resetPasswordToken?: string | null
   }
 
   export type UserUpdateWithoutTenantInput = {
@@ -15587,6 +15632,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     news?: NewsUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
     roles?: UserRoleUpdateManyWithoutUserNestedInput
@@ -15606,6 +15652,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
     commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
@@ -15625,6 +15672,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserRoleCreateManyRoleInput = {

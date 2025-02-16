@@ -8,9 +8,12 @@ import {
   generateRefreshToken,
   verifyEmailVerificationToken,
   verifyRefreshToken,
+  verifyMagicLoginToken,
 } from "../../../common/lib/sessions";
 
 import {
+  IAccountUrl,
+  iAccountUrls,
   iAuthResponse,
   iAuthTenantSignUp,
   iEmailTokenVerification,
@@ -370,7 +373,7 @@ export const emailExists = async (email: string): Promise<boolean> => {
 
 const generateEmailRecuperationLinks = async (
   email: string
-): Promise<Array<{ subdomain: string; link: string }>> => {
+): Promise<iAccountUrls> => {
   // Obtener todos los tenants y usuarios relacionados en una sola consulta
   const tenantsWithUsers = await prisma.tenant.findMany({
     select: {
@@ -424,12 +427,15 @@ const generateEmailRecuperationLinks = async (
         tenant: tenant.id,
       });
 
-      const link = `https://${tenant.subdomain}.tudominio.com/recuperar?token=${token}`;
+      const recoveryUrlLink = `https://${tenant.subdomain}.${process.env.APP_DOMAIN}/auth/magic_link_login?path=recovery_url&token=${token}&dl_userid=${user.id}&dl_slug=${tenant.subdomain}`;
 
-      return {
+      const account: IAccountUrl = {
         subdomain: tenant.subdomain,
-        link: link,
+        company: tenant.client.name,
+        link: recoveryUrlLink,
       };
+
+      return account;
     });
   });
 
@@ -443,3 +449,146 @@ const generateEmailRecuperationLinks = async (
   // Devolver la lista de enlaces y subdominios
   return links;
 };
+
+export const sendRecoveryUrl = async (email: string): Promise<void> => {
+  const accountUrls: iAccountUrls = await generateEmailRecuperationLinks(email);
+
+  return AuthMailService.sendRecoveryUrl(email, accountUrls);
+};
+
+export const validateMagicLoginToken = async (
+  token: string
+): Promise<iAuthResponse> => {
+  const payload = verifyMagicLoginToken(token);
+
+  if (!payload || !payload.id || !payload.email || !payload.tenant) {
+    throw new Error("Invalid token");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: payload.id, tenantId: payload.tenant },
+    include: {
+      tenant: {
+        include: {
+          client: true,
+        },
+      },
+      roles: {
+        include: {
+          role: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const paramToken: IUserToken = {
+    id: user.id,
+    email: user.email,
+    tenantId: user.tenantId,
+    subdomain: user.tenant.subdomain,
+    role: user.roles[0].role.name,
+  };
+
+  const paramIdToken: iIdToken = {
+    id: user.id,
+    fullname: user.fullname,
+    email: user.email,
+    phone: user.phone,
+    country: user.country,
+    typeIdentification: user.typeIdentification,
+    identification: user.identification,
+    tenantId: user.tenantId,
+    subdomain: user.tenant.subdomain,
+    company: user.tenant.client.name,
+    role: user.roles[0].role.name,
+    emailVerified: user.emailVerified,
+  };
+
+  const accessToken = generateAccessToken(paramToken);
+  const refreshToken = generateRefreshToken(paramToken);
+  const idToken = generateIdToken(paramIdToken);
+
+  const response: iAuthResponse = AuthResponseSchema.parse({
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    idToken: idToken,
+  });
+
+  return response;
+};
+
+export const sendResetPasswordEmail = async (
+  email: string,
+  slug: string
+): Promise<void> => {
+  const user = await prisma.user.findFirst({
+    where: {
+      email: email,
+      tenant: {
+        subdomain: slug,
+      },
+    },
+    include: {
+      tenant: {
+        include: {
+          client: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const token = Math.random().toString(36).substring(2, 15);
+
+  const recoveryUrlLink = `https://${slug}.${process.env.APP_DOMAIN}/auth/change-password?token=${token}&dl_userid=${user.id}`;
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { resetPasswordToken: token },
+  });
+
+  AuthMailService.sendResetPasswordEmail(email, recoveryUrlLink);
+};
+
+export const validateResetPasswordToken = async (
+  token: string,
+  userId: string
+): Promise<boolean> => {
+  const user = await prisma.user.findFirst({
+    where: { resetPasswordToken: token, id: userId },
+  });
+
+  if (!user) {
+    throw new Error("Invalid token");
+  }
+
+  return true;
+};
+
+export const resetPassword = async (
+  token: string,
+  userId: string,
+  password: string
+): Promise<void> => {
+  const user = await prisma.user.findFirst({
+    where: { resetPasswordToken: token, id: userId },
+  });
+
+  if (!user) {
+    throw new Error("Invalid token");
+  }
+
+  const newPassword = await hash(password, 10);
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { password: newPassword, resetPasswordToken: null },
+  });
+}

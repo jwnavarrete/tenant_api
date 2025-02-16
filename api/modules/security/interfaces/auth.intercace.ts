@@ -12,6 +12,7 @@ import {
   EmailTokenVerificationSchema,
   ResendVerificationEmailSchema,
   EmailVerificationResponseSchema,
+  MagicLoginSchema,
 } from "../schemas/auth.schemas";
 
 // Tipos inferidos
@@ -24,9 +25,16 @@ export type iSubdomain = z.infer<typeof SubdomainSchema>;
 export type iRefreshToken = z.infer<typeof RefreshTokenSchema>;
 export type iSignInTenant = z.infer<typeof AuthTenantSchema>;
 export type iIdToken = z.infer<typeof IdTokenSchema>;
-export type iEmailTokenVerification = z.infer<typeof EmailTokenVerificationSchema>;
-export type iResendVerificationEmail = z.infer<typeof ResendVerificationEmailSchema>;
-export type iEmailVerificationResponse = z.infer<typeof EmailVerificationResponseSchema>;
+export type iEmailTokenVerification = z.infer<
+  typeof EmailTokenVerificationSchema
+>;
+export type iResendVerificationEmail = z.infer<
+  typeof ResendVerificationEmailSchema
+>;
+export type iEmailVerificationResponse = z.infer<
+  typeof EmailVerificationResponseSchema
+>;
+export type iMagicLogin = z.infer<typeof MagicLoginSchema>;
 
 export interface IUserToken {
   email: string;
@@ -45,3 +53,11 @@ export interface IuserTokenInfos {
   type: string;
   sub: string;
 }
+
+export interface IAccountUrl {
+  subdomain: string;
+  link: string;
+  company: string;
+}
+
+export type iAccountUrls = IAccountUrl[];

@@ -169,7 +169,8 @@ exports.Prisma.UserScalarFieldEnum = {
   verificationToken: 'verificationToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isDeleted: 'isDeleted'
+  isDeleted: 'isDeleted',
+  resetPasswordToken: 'resetPasswordToken'
 };
 
 exports.Prisma.NewsScalarFieldEnum = {

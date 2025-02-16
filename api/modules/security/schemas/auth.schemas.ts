@@ -79,6 +79,10 @@ const EmailTokenVerificationSchema = z.object({
   token: z.string(),
 });
 
+const MagicLoginSchema = z.object({
+  token: z.string(),
+});
+
 const ResendVerificationEmailSchema = z.object({
   userId: z.string(),
 });
@@ -112,5 +116,6 @@ export {
   EmailTokenVerificationSchema,
   ResendVerificationEmailSchema,
   EmailVerificationResponseSchema,
-  EmailVerifySchema
+  EmailVerifySchema,
+  MagicLoginSchema,  
 };

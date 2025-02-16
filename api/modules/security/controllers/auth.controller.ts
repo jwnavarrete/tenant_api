@@ -1,9 +1,11 @@
+import { sendResetPasswordEmail } from "./../services/auth.service";
 import { Request, Response } from "express";
 import * as authServices from "../services/auth.service";
 import {
   iAuthResponse,
   iAuthTenantSignUp,
   iEmailTokenVerification,
+  iMagicLogin,
   iRefreshToken,
   iResendVerificationEmail,
   iSignInTenant,
@@ -23,7 +25,6 @@ export const authSignUpController = async (
   } catch (error) {
     console.log(error);
     return res.status(401).json({ error: "Error" });
-
   }
 };
 
@@ -118,4 +119,84 @@ export const AuthCheckEmailExistsController = async (
 export const saludo = (req: Request, res: Response) => {
   const { name } = req.body;
   return res.status(200).json({ message: `Hola ${name}` });
+};
+
+export const AuthSendUrlRecovery = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  await authServices.sendRecoveryUrl(email);
+
+  return res.status(200).json({ message: "Recovery URL sent successfully" });
+};
+
+export const AuthVerifyRecoveryToken = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { token }: iMagicLogin = req.body;
+
+  if (!token) {
+    return res.status(400).json({ error: "token is required" });
+  }
+
+  const response: iAuthResponse = await authServices.validateMagicLoginToken(
+    token
+  );
+
+  return res.status(200).json(response);
+};
+
+export const sendResetPasswordEmailController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { email, slug } = req.body;
+
+  if (!email || !slug) {
+    return res.status(400).json({ error: "Email and slug are required" });
+  }
+
+  await authServices.sendResetPasswordEmail(email, slug);
+
+  const message = `if we found a user with email address ${email} in the account, you will receive an email from us shortly`;
+
+  return res.status(200).json({ message });
+};
+
+export const validateResetPasswordTokenController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { token, userId } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ error: "Token is required" });
+  }
+
+  const response = await authServices.validateResetPasswordToken(token, userId);
+
+  return res.status(200).json(response);
+};
+
+export const resetPasswordController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  console.log(req.body);
+  const { token, userId, password } = req.body;
+  
+  if (!token || !userId || !password) {
+    return res.status(400).json({ error: "Token and password are required" });
+  }
+
+  const response = await authServices.resetPassword(token, userId, password);
+
+  return res.status(200).json(response);
 };
