@@ -215,7 +215,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/jnavarrete/workspace/tenant_api/api/db/generated",
+      "value": "/home/jnavarrete/workspace/dazzsoft/tenant_api/api/db/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -224,7 +224,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "debian-openssl-1.1.x",
         "native": true
       },
       {
@@ -233,7 +233,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/jnavarrete/workspace/tenant_api/api/db/schema.prisma",
+    "sourceFilePath": "/home/jnavarrete/workspace/dazzsoft/tenant_api/api/db/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -247,7 +247,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -296,8 +296,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "api/db/generated/libquery_engine-darwin-arm64.dylib.node")
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
+path.join(process.cwd(), "api/db/generated/libquery_engine-debian-openssl-1.1.x.so.node")
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");

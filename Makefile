@@ -3,16 +3,16 @@ postgres-up:
 	docker-compose up -d postgres
 
 migrate:
-	npx prisma migrate dev --name init
+	pnpm prisma migrate dev --name init
 
 generate:
-	npx prisma generate
+	pnpm prisma generate
 
 studio:
-	npx prisma studio
+	pnpm prisma studio
 
 migrate-reset:
-	npx prisma migrate reset --force
+	pnpm prisma migrate reset --force
 
 dev:
 	pnpm dev

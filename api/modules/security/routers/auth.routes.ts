@@ -69,5 +69,3 @@ authRoutes.post(
   validateBodyMiddleware(MagicLoginSchema),
   authController.AuthVerifyRecoveryToken
 );
-
-authRoutes.get("/saludo", authController.saludo);

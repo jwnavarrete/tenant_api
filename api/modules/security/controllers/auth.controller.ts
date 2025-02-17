@@ -1,4 +1,3 @@
-import { sendResetPasswordEmail } from "./../services/auth.service";
 import { Request, Response } from "express";
 import * as authServices from "../services/auth.service";
 import {
@@ -44,11 +43,7 @@ export const authValidaSubdomainController = async (
   if (exists) {
     isValid = true;
   }
-  const allowedSubdomains = process.env.ALLOWED_SUBDOMAINS?.split(",") || [];
 
-  if (allowedSubdomains.includes(subdomain)) {
-    isValid = true;
-  }
   res.json({ subdomain, isValid });
 };
 
@@ -114,11 +109,6 @@ export const AuthCheckEmailExistsController = async (
   const exists = await authServices.emailExists(email);
 
   return res.status(200).json({ email, exists });
-};
-
-export const saludo = (req: Request, res: Response) => {
-  const { name } = req.body;
-  return res.status(200).json({ message: `Hola ${name}` });
 };
 
 export const AuthSendUrlRecovery = async (
@@ -191,7 +181,7 @@ export const resetPasswordController = async (
 ): Promise<Response> => {
   console.log(req.body);
   const { token, userId, password } = req.body;
-  
+
   if (!token || !userId || !password) {
     return res.status(400).json({ error: "Token and password are required" });
   }
