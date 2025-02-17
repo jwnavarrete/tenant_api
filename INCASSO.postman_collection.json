@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "308fea59-5106-4f8e-94c2-6a95080346ad",
+		"name": "INCASSO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32891673"
+	},
+	"item": [
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "reset-password",
+					"item": [
+						{
+							"name": "send-email",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jwnavarretez@gmail.com\",\n    \"slug\": \"dazzsoft\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/reset-password/send-email",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"reset-password",
+										"send-email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"16qm387lnsx\",\n    \"userId\": \"b99622f7-59a6-4ffc-badc-3f1eabb31185\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/reset-password/verify-token",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"reset-password",
+										"verify-token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-password",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"16qm387lnsx\",\n    \"userId\": \"b99622f7-59a6-4ffc-badc-3f1eabb31185\",\n    \"password\": \"@M1n0T4ur0\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/reset-password/update-password",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"reset-password",
+										"update-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "validate-subdomain",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subdomain\": \"demo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/validate-subdomain",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"validate-subdomain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "refresh-token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp3bmF2YXJyZXRlekBnbWFpbC5jb20iLCJ0ZW5hbnRJZCI6ImVkMTBkMTI3LTJlM2EtNDFhNS1iM2QzLTU1MDk4MzVlM2NlNCIsInN1YmRvbWFpbiI6ImRhenpzb2Z0Iiwicm9sZSI6IlRFTkFOVF9BRE1JTiIsInR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzM5MjQ3MDg0LCJleHAiOjE3Mzk4NTE4ODQsInN1YiI6IjcxMmE5YjI3LTA5MGEtNDk2My1hYTk4LWY5YjllYjMwYzI3ZCJ9.EgCa8iVuPVSSh9H1dk34gPyW_0Jactu5Q0gUaGKmoio\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/refresh-token",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"refresh-token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "signin",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jwnavarretez@gmail.com\",\n    \"password\": \"@M1n0T4ur0\",\n    \"subdomain\": \"dazzsoft\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/signin",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validate-email",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jwnavarretez@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/validate-email",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"validate-email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "send-recovery-url",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jwnavarretez@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/send-recovery-url",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"send-recovery-url"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend-verification-email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp3bmF2YXJyZXRlekBnbWFpbC5jb20iLCJ0ZW5hbnRJZCI6IjdmYmU1NjBhLTVlNmMtNDA0Zi1iYzIxLWMyZDNiMmNiNzkzMiIsInN1YmRvbWFpbiI6ImdlbmVyYWxpIiwicm9sZSI6IlRFTkFOVF9BRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MzkzMjA3MDAsImV4cCI6MTczOTMyNDMwMCwic3ViIjoiOTYzNzMzYmUtOTdhMi00YTYwLWI5YjktZjc2MzkyZTk0ODdlIn0.rqsDDSQJrecCtS3J7PZAEaeRwGSVfvd3MvR2Kgec_KA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"963733be-97a2-4a60-b9b9-f76392e9487e\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/resend-verification-email",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"resend-verification-email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "signup",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "https://incassso-app.com",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {\n        \"fullname\": \"John Navarrete\",\n        \"email\": \"jwnavarretez@gmail.com\",\n        \"password\": \"@M1n0T4ur0\",\n        \"phone\": \"0959611479\",\n        \"country\": \"aruba\",\n        \"typeIdentification\": \"sedula\",\n        \"identification\": \"095032323233\"\n    },\n    \"company\": {\n        \"name\": \"Dazzsoft\",\n        \"contactEmail\": \"info@dazzsoft.com\",\n        \"kvk\": \"12345\",\n        \"address\": \"Brisas de Santay\",\n        \"country\": \"aruba\",\n        \"type\": \"eenmanszaak\",\n        \"numberOfEmployees\": \"1-5\",\n        \"termsAccepted\": true,\n        \"numberOfEmployes\": \"10-20\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/auth/signup",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tenant",
+					"item": [
+						{
+							"name": "tenant",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp3bmF2YXJyZXRlekBnbWFpbC5jb20iLCJ0ZW5hbnRJZCI6IjdjM2NlMmE1LTIwZGUtNGViZS05ZDE4LTM1YjMxYWZmNjdhOSIsInN1YmRvbWFpbiI6ImRhenpzb2Z0LTEiLCJyb2xlIjoiVEVOQU5UX0FETUlOIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTczOTQxMTEyMywiZXhwIjoxNzM5NDE0NzIzLCJzdWIiOiI1YWFmYjc0My1hMTYwLTQ5MjktYWI0ZS1mMjVmNTY4MDIxNWMifQ.WJ-OiMhMtAJCsGVHdauElC590fsAR4wQhWGZr7UQmjU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://auth.localhost:3000/",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {\n        \"fullname\": \"John Navarrete\",\n        \"email\": \"jwnavarretez@gmail.com\",\n        \"password\": \"@M1n0T4ur0\",\n        \"phone\": \"0959611479\",\n        \"country\": \"aruba\",\n        \"typeIdentification\": \"sedula\",\n        \"identification\": \"095032323233\"\n    },\n    \"company\": {\n        \"name\": \"Dazzsoft\",\n        \"contactEmail\": \"info@dazzsoft.com\",\n        \"kvk\": \"12345\",\n        \"address\": \"Brisas de Santay\",\n        \"country\": \"aruba\",\n        \"type\": \"eenmanszaak\",\n        \"numberOfEmployees\": \"1-5\",\n        \"termsAccepted\": true,\n        \"numberOfEmployes\": \"10-20\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/tenant",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"tenant"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp3bmF2YXJyZXRlekBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTczODIwNDczMiwiZXhwIjoxNzM4MjA4MzMyLCJzdWIiOiIxIn0.xTApSvbfGMl1mP9b6OuLdf5POl-KGGIwACiIBCd6fok",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": "{% response 'body', 'req_949cdfca25a74417908c138749d21808', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+		}
+	]
+}
