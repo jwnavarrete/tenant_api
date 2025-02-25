@@ -147,14 +147,6 @@ exports.Prisma.RoleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserRoleScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  roleId: 'roleId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -169,39 +161,13 @@ exports.Prisma.UserScalarFieldEnum = {
   verificationToken: 'verificationToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isDeleted: 'isDeleted',
-  resetPasswordToken: 'resetPasswordToken'
-};
-
-exports.Prisma.NewsScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  subTitle: 'subTitle',
-  content: 'content',
-  type: 'type',
-  published: 'published',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  authorId: 'authorId'
-};
-
-exports.Prisma.TagScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.TagsNewsScalarFieldEnum = {
-  id: 'id',
-  newsId: 'newsId',
-  tagId: 'tagId'
-};
-
-exports.Prisma.NewsCommentsScalarFieldEnum = {
-  id: 'id',
-  message: 'message',
-  createdAt: 'createdAt',
-  newsId: 'newsId',
-  userId: 'userId'
+  resetPasswordToken: 'resetPasswordToken',
+  joined: 'joined',
+  invitedById: 'invitedById',
+  lastActive: 'lastActive',
+  status: 'status',
+  invitationToken: 'invitationToken',
+  roleId: 'roleId'
 };
 
 exports.Prisma.SortOrder = {
@@ -224,12 +190,7 @@ exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Client: 'Client',
   Role: 'Role',
-  UserRole: 'UserRole',
-  User: 'User',
-  News: 'News',
-  Tag: 'Tag',
-  TagsNews: 'TagsNews',
-  NewsComments: 'NewsComments'
+  User: 'User'
 };
 
 /**

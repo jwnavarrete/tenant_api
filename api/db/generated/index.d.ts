@@ -29,35 +29,10 @@ export type Client = $Result.DefaultSelection<Prisma.$ClientPayload>
  */
 export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
 /**
- * Model UserRole
- * 
- */
-export type UserRole = $Result.DefaultSelection<Prisma.$UserRolePayload>
-/**
  * Model User
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
-/**
- * Model News
- * 
- */
-export type News = $Result.DefaultSelection<Prisma.$NewsPayload>
-/**
- * Model Tag
- * 
- */
-export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
-/**
- * Model TagsNews
- * 
- */
-export type TagsNews = $Result.DefaultSelection<Prisma.$TagsNewsPayload>
-/**
- * Model NewsComments
- * 
- */
-export type NewsComments = $Result.DefaultSelection<Prisma.$NewsCommentsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -215,16 +190,6 @@ export class PrismaClient<
   get role(): Prisma.RoleDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.userRole`: Exposes CRUD operations for the **UserRole** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserRoles
-    * const userRoles = await prisma.userRole.findMany()
-    * ```
-    */
-  get userRole(): Prisma.UserRoleDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -233,46 +198,6 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.news`: Exposes CRUD operations for the **News** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more News
-    * const news = await prisma.news.findMany()
-    * ```
-    */
-  get news(): Prisma.NewsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Tags
-    * const tags = await prisma.tag.findMany()
-    * ```
-    */
-  get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tagsNews`: Exposes CRUD operations for the **TagsNews** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TagsNews
-    * const tagsNews = await prisma.tagsNews.findMany()
-    * ```
-    */
-  get tagsNews(): Prisma.TagsNewsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.newsComments`: Exposes CRUD operations for the **NewsComments** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more NewsComments
-    * const newsComments = await prisma.newsComments.findMany()
-    * ```
-    */
-  get newsComments(): Prisma.NewsCommentsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -716,12 +641,7 @@ export namespace Prisma {
     Tenant: 'Tenant',
     Client: 'Client',
     Role: 'Role',
-    UserRole: 'UserRole',
-    User: 'User',
-    News: 'News',
-    Tag: 'Tag',
-    TagsNews: 'TagsNews',
-    NewsComments: 'NewsComments'
+    User: 'User'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -737,7 +657,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "tenant" | "client" | "role" | "userRole" | "user" | "news" | "tag" | "tagsNews" | "newsComments"
+      modelProps: "tenant" | "client" | "role" | "user"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -963,80 +883,6 @@ export namespace Prisma {
           }
         }
       }
-      UserRole: {
-        payload: Prisma.$UserRolePayload<ExtArgs>
-        fields: Prisma.UserRoleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserRoleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserRoleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          findFirst: {
-            args: Prisma.UserRoleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserRoleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          findMany: {
-            args: Prisma.UserRoleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>[]
-          }
-          create: {
-            args: Prisma.UserRoleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          createMany: {
-            args: Prisma.UserRoleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.UserRoleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>[]
-          }
-          delete: {
-            args: Prisma.UserRoleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          update: {
-            args: Prisma.UserRoleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          deleteMany: {
-            args: Prisma.UserRoleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserRoleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.UserRoleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>[]
-          }
-          upsert: {
-            args: Prisma.UserRoleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserRolePayload>
-          }
-          aggregate: {
-            args: Prisma.UserRoleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUserRole>
-          }
-          groupBy: {
-            args: Prisma.UserRoleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserRoleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserRoleCountArgs<ExtArgs>
-            result: $Utils.Optional<UserRoleCountAggregateOutputType> | number
-          }
-        }
-      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1108,302 +954,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      News: {
-        payload: Prisma.$NewsPayload<ExtArgs>
-        fields: Prisma.NewsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NewsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NewsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          findFirst: {
-            args: Prisma.NewsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NewsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          findMany: {
-            args: Prisma.NewsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>[]
-          }
-          create: {
-            args: Prisma.NewsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          createMany: {
-            args: Prisma.NewsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.NewsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>[]
-          }
-          delete: {
-            args: Prisma.NewsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          update: {
-            args: Prisma.NewsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          deleteMany: {
-            args: Prisma.NewsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NewsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.NewsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>[]
-          }
-          upsert: {
-            args: Prisma.NewsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
-          }
-          aggregate: {
-            args: Prisma.NewsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNews>
-          }
-          groupBy: {
-            args: Prisma.NewsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NewsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NewsCountArgs<ExtArgs>
-            result: $Utils.Optional<NewsCountAggregateOutputType> | number
-          }
-        }
-      }
-      Tag: {
-        payload: Prisma.$TagPayload<ExtArgs>
-        fields: Prisma.TagFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TagFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TagFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          findFirst: {
-            args: Prisma.TagFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TagFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          findMany: {
-            args: Prisma.TagFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
-          }
-          create: {
-            args: Prisma.TagCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          createMany: {
-            args: Prisma.TagCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TagCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
-          }
-          delete: {
-            args: Prisma.TagDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          update: {
-            args: Prisma.TagUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          deleteMany: {
-            args: Prisma.TagDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TagUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TagUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
-          }
-          upsert: {
-            args: Prisma.TagUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagPayload>
-          }
-          aggregate: {
-            args: Prisma.TagAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTag>
-          }
-          groupBy: {
-            args: Prisma.TagGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TagGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TagCountArgs<ExtArgs>
-            result: $Utils.Optional<TagCountAggregateOutputType> | number
-          }
-        }
-      }
-      TagsNews: {
-        payload: Prisma.$TagsNewsPayload<ExtArgs>
-        fields: Prisma.TagsNewsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TagsNewsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TagsNewsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          findFirst: {
-            args: Prisma.TagsNewsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TagsNewsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          findMany: {
-            args: Prisma.TagsNewsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>[]
-          }
-          create: {
-            args: Prisma.TagsNewsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          createMany: {
-            args: Prisma.TagsNewsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TagsNewsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>[]
-          }
-          delete: {
-            args: Prisma.TagsNewsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          update: {
-            args: Prisma.TagsNewsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          deleteMany: {
-            args: Prisma.TagsNewsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TagsNewsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TagsNewsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>[]
-          }
-          upsert: {
-            args: Prisma.TagsNewsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TagsNewsPayload>
-          }
-          aggregate: {
-            args: Prisma.TagsNewsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTagsNews>
-          }
-          groupBy: {
-            args: Prisma.TagsNewsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TagsNewsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TagsNewsCountArgs<ExtArgs>
-            result: $Utils.Optional<TagsNewsCountAggregateOutputType> | number
-          }
-        }
-      }
-      NewsComments: {
-        payload: Prisma.$NewsCommentsPayload<ExtArgs>
-        fields: Prisma.NewsCommentsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NewsCommentsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NewsCommentsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          findFirst: {
-            args: Prisma.NewsCommentsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NewsCommentsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          findMany: {
-            args: Prisma.NewsCommentsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>[]
-          }
-          create: {
-            args: Prisma.NewsCommentsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          createMany: {
-            args: Prisma.NewsCommentsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.NewsCommentsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>[]
-          }
-          delete: {
-            args: Prisma.NewsCommentsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          update: {
-            args: Prisma.NewsCommentsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          deleteMany: {
-            args: Prisma.NewsCommentsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NewsCommentsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.NewsCommentsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>[]
-          }
-          upsert: {
-            args: Prisma.NewsCommentsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewsCommentsPayload>
-          }
-          aggregate: {
-            args: Prisma.NewsCommentsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNewsComments>
-          }
-          groupBy: {
-            args: Prisma.NewsCommentsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NewsCommentsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NewsCommentsCountArgs<ExtArgs>
-            result: $Utils.Optional<NewsCommentsCountAggregateOutputType> | number
           }
         }
       }
@@ -1494,12 +1044,7 @@ export namespace Prisma {
     tenant?: TenantOmit
     client?: ClientOmit
     role?: RoleOmit
-    userRole?: UserRoleOmit
     user?: UserOmit
-    news?: NewsOmit
-    tag?: TagOmit
-    tagsNews?: TagsNewsOmit
-    newsComments?: NewsCommentsOmit
   }
 
   /* Types for Logging */
@@ -1647,7 +1192,7 @@ export namespace Prisma {
    * RoleCountOutputType without action
    */
   export type RoleCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserRoleWhereInput
+    where?: UserWhereInput
   }
 
 
@@ -1656,15 +1201,11 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    news: number
-    commentsList: number
-    roles: number
+    invitations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | UserCountOutputTypeCountNewsArgs
-    commentsList?: boolean | UserCountOutputTypeCountCommentsListArgs
-    roles?: boolean | UserCountOutputTypeCountRolesArgs
+    invitations?: boolean | UserCountOutputTypeCountInvitationsArgs
   }
 
   // Custom InputTypes
@@ -1681,93 +1222,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountCommentsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsCommentsWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserRoleWhereInput
-  }
-
-
-  /**
-   * Count Type NewsCountOutputType
-   */
-
-  export type NewsCountOutputType = {
-    tagsList: number
-    commentsList: number
-  }
-
-  export type NewsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tagsList?: boolean | NewsCountOutputTypeCountTagsListArgs
-    commentsList?: boolean | NewsCountOutputTypeCountCommentsListArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * NewsCountOutputType without action
-   */
-  export type NewsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsCountOutputType
-     */
-    select?: NewsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * NewsCountOutputType without action
-   */
-  export type NewsCountOutputTypeCountTagsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagsNewsWhereInput
-  }
-
-  /**
-   * NewsCountOutputType without action
-   */
-  export type NewsCountOutputTypeCountCommentsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsCommentsWhereInput
-  }
-
-
-  /**
-   * Count Type TagCountOutputType
-   */
-
-  export type TagCountOutputType = {
-    news: number
-  }
-
-  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | TagCountOutputTypeCountNewsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * TagCountOutputType without action
-   */
-  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagCountOutputType
-     */
-    select?: TagCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TagCountOutputType without action
-   */
-  export type TagCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagsNewsWhereInput
+  export type UserCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -4207,7 +3663,7 @@ export namespace Prisma {
   export type $RolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Role"
     objects: {
-      users: Prisma.$UserRolePayload<ExtArgs>[]
+      users: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4609,7 +4065,7 @@ export namespace Prisma {
    */
   export interface Prisma__RoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends Role$usersArgs<ExtArgs> = {}>(args?: Subset<T, Role$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    users<T extends Role$usersArgs<ExtArgs> = {}>(args?: Subset<T, Role$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5036,23 +4492,23 @@ export namespace Prisma {
    */
   export type Role$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserRole
+     * Select specific fields to fetch from the User
      */
-    select?: UserRoleSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserRole
+     * Omit specific fields from the User
      */
-    omit?: UserRoleOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserRoleInclude<ExtArgs> | null
-    where?: UserRoleWhereInput
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    cursor?: UserRoleWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -5071,1072 +4527,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RoleInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model UserRole
-   */
-
-  export type AggregateUserRole = {
-    _count: UserRoleCountAggregateOutputType | null
-    _min: UserRoleMinAggregateOutputType | null
-    _max: UserRoleMaxAggregateOutputType | null
-  }
-
-  export type UserRoleMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    roleId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserRoleMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    roleId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserRoleCountAggregateOutputType = {
-    id: number
-    userId: number
-    roleId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type UserRoleMinAggregateInputType = {
-    id?: true
-    userId?: true
-    roleId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserRoleMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    roleId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserRoleCountAggregateInputType = {
-    id?: true
-    userId?: true
-    roleId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type UserRoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserRole to aggregate.
-     */
-    where?: UserRoleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserRoles to fetch.
-     */
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserRoleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserRoles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserRoles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned UserRoles
-    **/
-    _count?: true | UserRoleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserRoleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserRoleMaxAggregateInputType
-  }
-
-  export type GetUserRoleAggregateType<T extends UserRoleAggregateArgs> = {
-        [P in keyof T & keyof AggregateUserRole]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUserRole[P]>
-      : GetScalarType<T[P], AggregateUserRole[P]>
-  }
-
-
-
-
-  export type UserRoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserRoleWhereInput
-    orderBy?: UserRoleOrderByWithAggregationInput | UserRoleOrderByWithAggregationInput[]
-    by: UserRoleScalarFieldEnum[] | UserRoleScalarFieldEnum
-    having?: UserRoleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserRoleCountAggregateInputType | true
-    _min?: UserRoleMinAggregateInputType
-    _max?: UserRoleMaxAggregateInputType
-  }
-
-  export type UserRoleGroupByOutputType = {
-    id: string
-    userId: string
-    roleId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: UserRoleCountAggregateOutputType | null
-    _min: UserRoleMinAggregateOutputType | null
-    _max: UserRoleMaxAggregateOutputType | null
-  }
-
-  type GetUserRoleGroupByPayload<T extends UserRoleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserRoleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserRoleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserRoleGroupByOutputType[P]>
-            : GetScalarType<T[P], UserRoleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserRoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    roleId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userRole"]>
-
-  export type UserRoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    roleId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userRole"]>
-
-  export type UserRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    roleId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userRole"]>
-
-  export type UserRoleSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    roleId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type UserRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "roleId" | "createdAt" | "updatedAt", ExtArgs["result"]["userRole"]>
-  export type UserRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }
-  export type UserRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }
-  export type UserRoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    role?: boolean | RoleDefaultArgs<ExtArgs>
-  }
-
-  export type $UserRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UserRole"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      role: Prisma.$RolePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      roleId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["userRole"]>
-    composites: {}
-  }
-
-  type UserRoleGetPayload<S extends boolean | null | undefined | UserRoleDefaultArgs> = $Result.GetResult<Prisma.$UserRolePayload, S>
-
-  type UserRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserRoleCountAggregateInputType | true
-    }
-
-  export interface UserRoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserRole'], meta: { name: 'UserRole' } }
-    /**
-     * Find zero or one UserRole that matches the filter.
-     * @param {UserRoleFindUniqueArgs} args - Arguments to find a UserRole
-     * @example
-     * // Get one UserRole
-     * const userRole = await prisma.userRole.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends UserRoleFindUniqueArgs>(args: SelectSubset<T, UserRoleFindUniqueArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one UserRole that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {UserRoleFindUniqueOrThrowArgs} args - Arguments to find a UserRole
-     * @example
-     * // Get one UserRole
-     * const userRole = await prisma.userRole.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends UserRoleFindUniqueOrThrowArgs>(args: SelectSubset<T, UserRoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first UserRole that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleFindFirstArgs} args - Arguments to find a UserRole
-     * @example
-     * // Get one UserRole
-     * const userRole = await prisma.userRole.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends UserRoleFindFirstArgs>(args?: SelectSubset<T, UserRoleFindFirstArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first UserRole that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleFindFirstOrThrowArgs} args - Arguments to find a UserRole
-     * @example
-     * // Get one UserRole
-     * const userRole = await prisma.userRole.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends UserRoleFindFirstOrThrowArgs>(args?: SelectSubset<T, UserRoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more UserRoles that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all UserRoles
-     * const userRoles = await prisma.userRole.findMany()
-     * 
-     * // Get first 10 UserRoles
-     * const userRoles = await prisma.userRole.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const userRoleWithIdOnly = await prisma.userRole.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends UserRoleFindManyArgs>(args?: SelectSubset<T, UserRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a UserRole.
-     * @param {UserRoleCreateArgs} args - Arguments to create a UserRole.
-     * @example
-     * // Create one UserRole
-     * const UserRole = await prisma.userRole.create({
-     *   data: {
-     *     // ... data to create a UserRole
-     *   }
-     * })
-     * 
-     */
-    create<T extends UserRoleCreateArgs>(args: SelectSubset<T, UserRoleCreateArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many UserRoles.
-     * @param {UserRoleCreateManyArgs} args - Arguments to create many UserRoles.
-     * @example
-     * // Create many UserRoles
-     * const userRole = await prisma.userRole.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends UserRoleCreateManyArgs>(args?: SelectSubset<T, UserRoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many UserRoles and returns the data saved in the database.
-     * @param {UserRoleCreateManyAndReturnArgs} args - Arguments to create many UserRoles.
-     * @example
-     * // Create many UserRoles
-     * const userRole = await prisma.userRole.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many UserRoles and only return the `id`
-     * const userRoleWithIdOnly = await prisma.userRole.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends UserRoleCreateManyAndReturnArgs>(args?: SelectSubset<T, UserRoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a UserRole.
-     * @param {UserRoleDeleteArgs} args - Arguments to delete one UserRole.
-     * @example
-     * // Delete one UserRole
-     * const UserRole = await prisma.userRole.delete({
-     *   where: {
-     *     // ... filter to delete one UserRole
-     *   }
-     * })
-     * 
-     */
-    delete<T extends UserRoleDeleteArgs>(args: SelectSubset<T, UserRoleDeleteArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one UserRole.
-     * @param {UserRoleUpdateArgs} args - Arguments to update one UserRole.
-     * @example
-     * // Update one UserRole
-     * const userRole = await prisma.userRole.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends UserRoleUpdateArgs>(args: SelectSubset<T, UserRoleUpdateArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more UserRoles.
-     * @param {UserRoleDeleteManyArgs} args - Arguments to filter UserRoles to delete.
-     * @example
-     * // Delete a few UserRoles
-     * const { count } = await prisma.userRole.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends UserRoleDeleteManyArgs>(args?: SelectSubset<T, UserRoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserRoles.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many UserRoles
-     * const userRole = await prisma.userRole.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends UserRoleUpdateManyArgs>(args: SelectSubset<T, UserRoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserRoles and returns the data updated in the database.
-     * @param {UserRoleUpdateManyAndReturnArgs} args - Arguments to update many UserRoles.
-     * @example
-     * // Update many UserRoles
-     * const userRole = await prisma.userRole.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more UserRoles and only return the `id`
-     * const userRoleWithIdOnly = await prisma.userRole.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends UserRoleUpdateManyAndReturnArgs>(args: SelectSubset<T, UserRoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one UserRole.
-     * @param {UserRoleUpsertArgs} args - Arguments to update or create a UserRole.
-     * @example
-     * // Update or create a UserRole
-     * const userRole = await prisma.userRole.upsert({
-     *   create: {
-     *     // ... data to create a UserRole
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the UserRole we want to update
-     *   }
-     * })
-     */
-    upsert<T extends UserRoleUpsertArgs>(args: SelectSubset<T, UserRoleUpsertArgs<ExtArgs>>): Prisma__UserRoleClient<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of UserRoles.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleCountArgs} args - Arguments to filter UserRoles to count.
-     * @example
-     * // Count the number of UserRoles
-     * const count = await prisma.userRole.count({
-     *   where: {
-     *     // ... the filter for the UserRoles we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserRoleCountArgs>(
-      args?: Subset<T, UserRoleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserRoleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a UserRole.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserRoleAggregateArgs>(args: Subset<T, UserRoleAggregateArgs>): Prisma.PrismaPromise<GetUserRoleAggregateType<T>>
-
-    /**
-     * Group by UserRole.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserRoleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserRoleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserRoleGroupByArgs['orderBy'] }
-        : { orderBy?: UserRoleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserRoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UserRole model
-   */
-  readonly fields: UserRoleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for UserRole.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserRoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the UserRole model
-   */ 
-  interface UserRoleFieldRefs {
-    readonly id: FieldRef<"UserRole", 'String'>
-    readonly userId: FieldRef<"UserRole", 'String'>
-    readonly roleId: FieldRef<"UserRole", 'String'>
-    readonly createdAt: FieldRef<"UserRole", 'DateTime'>
-    readonly updatedAt: FieldRef<"UserRole", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * UserRole findUnique
-   */
-  export type UserRoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter, which UserRole to fetch.
-     */
-    where: UserRoleWhereUniqueInput
-  }
-
-  /**
-   * UserRole findUniqueOrThrow
-   */
-  export type UserRoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter, which UserRole to fetch.
-     */
-    where: UserRoleWhereUniqueInput
-  }
-
-  /**
-   * UserRole findFirst
-   */
-  export type UserRoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter, which UserRole to fetch.
-     */
-    where?: UserRoleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserRoles to fetch.
-     */
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserRoles.
-     */
-    cursor?: UserRoleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserRoles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserRoles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserRoles.
-     */
-    distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
-  }
-
-  /**
-   * UserRole findFirstOrThrow
-   */
-  export type UserRoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter, which UserRole to fetch.
-     */
-    where?: UserRoleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserRoles to fetch.
-     */
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserRoles.
-     */
-    cursor?: UserRoleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserRoles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserRoles.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserRoles.
-     */
-    distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
-  }
-
-  /**
-   * UserRole findMany
-   */
-  export type UserRoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter, which UserRoles to fetch.
-     */
-    where?: UserRoleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserRoles to fetch.
-     */
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing UserRoles.
-     */
-    cursor?: UserRoleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserRoles from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserRoles.
-     */
-    skip?: number
-    distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
-  }
-
-  /**
-   * UserRole create
-   */
-  export type UserRoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a UserRole.
-     */
-    data: XOR<UserRoleCreateInput, UserRoleUncheckedCreateInput>
-  }
-
-  /**
-   * UserRole createMany
-   */
-  export type UserRoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many UserRoles.
-     */
-    data: UserRoleCreateManyInput | UserRoleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * UserRole createManyAndReturn
-   */
-  export type UserRoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * The data used to create many UserRoles.
-     */
-    data: UserRoleCreateManyInput | UserRoleCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * UserRole update
-   */
-  export type UserRoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a UserRole.
-     */
-    data: XOR<UserRoleUpdateInput, UserRoleUncheckedUpdateInput>
-    /**
-     * Choose, which UserRole to update.
-     */
-    where: UserRoleWhereUniqueInput
-  }
-
-  /**
-   * UserRole updateMany
-   */
-  export type UserRoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update UserRoles.
-     */
-    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyInput>
-    /**
-     * Filter which UserRoles to update
-     */
-    where?: UserRoleWhereInput
-    /**
-     * Limit how many UserRoles to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserRole updateManyAndReturn
-   */
-  export type UserRoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * The data used to update UserRoles.
-     */
-    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyInput>
-    /**
-     * Filter which UserRoles to update
-     */
-    where?: UserRoleWhereInput
-    /**
-     * Limit how many UserRoles to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * UserRole upsert
-   */
-  export type UserRoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the UserRole to update in case it exists.
-     */
-    where: UserRoleWhereUniqueInput
-    /**
-     * In case the UserRole found by the `where` argument doesn't exist, create a new UserRole with this data.
-     */
-    create: XOR<UserRoleCreateInput, UserRoleUncheckedCreateInput>
-    /**
-     * In case the UserRole was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserRoleUpdateInput, UserRoleUncheckedUpdateInput>
-  }
-
-  /**
-   * UserRole delete
-   */
-  export type UserRoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    /**
-     * Filter which UserRole to delete.
-     */
-    where: UserRoleWhereUniqueInput
-  }
-
-  /**
-   * UserRole deleteMany
-   */
-  export type UserRoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserRoles to delete
-     */
-    where?: UserRoleWhereInput
-    /**
-     * Limit how many UserRoles to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * UserRole without action
-   */
-  export type UserRoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
   }
 
 
@@ -6164,8 +4554,13 @@ export namespace Prisma {
     verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    isDeleted: boolean | null
     resetPasswordToken: string | null
+    joined: Date | null
+    invitedById: string | null
+    lastActive: Date | null
+    status: string | null
+    invitationToken: string | null
+    roleId: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -6182,8 +4577,13 @@ export namespace Prisma {
     verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    isDeleted: boolean | null
     resetPasswordToken: string | null
+    joined: Date | null
+    invitedById: string | null
+    lastActive: Date | null
+    status: string | null
+    invitationToken: string | null
+    roleId: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -6200,8 +4600,13 @@ export namespace Prisma {
     verificationToken: number
     createdAt: number
     updatedAt: number
-    isDeleted: number
     resetPasswordToken: number
+    joined: number
+    invitedById: number
+    lastActive: number
+    status: number
+    invitationToken: number
+    roleId: number
     _all: number
   }
 
@@ -6220,8 +4625,13 @@ export namespace Prisma {
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    isDeleted?: true
     resetPasswordToken?: true
+    joined?: true
+    invitedById?: true
+    lastActive?: true
+    status?: true
+    invitationToken?: true
+    roleId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -6238,8 +4648,13 @@ export namespace Prisma {
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    isDeleted?: true
     resetPasswordToken?: true
+    joined?: true
+    invitedById?: true
+    lastActive?: true
+    status?: true
+    invitationToken?: true
+    roleId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -6256,8 +4671,13 @@ export namespace Prisma {
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    isDeleted?: true
     resetPasswordToken?: true
+    joined?: true
+    invitedById?: true
+    lastActive?: true
+    status?: true
+    invitationToken?: true
+    roleId?: true
     _all?: true
   }
 
@@ -6337,18 +4757,23 @@ export namespace Prisma {
     id: string
     tenantId: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname: string | null
+    password: string | null
+    country: string | null
+    phone: string | null
+    typeIdentification: string | null
+    identification: string | null
     emailVerified: boolean
     verificationToken: string | null
     createdAt: Date
     updatedAt: Date
-    isDeleted: boolean
     resetPasswordToken: string | null
+    joined: Date | null
+    invitedById: string | null
+    lastActive: Date | null
+    status: string
+    invitationToken: string | null
+    roleId: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -6382,12 +4807,17 @@ export namespace Prisma {
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    isDeleted?: boolean
     resetPasswordToken?: boolean
+    joined?: boolean
+    invitedById?: boolean
+    lastActive?: boolean
+    status?: boolean
+    invitationToken?: boolean
+    roleId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    news?: boolean | User$newsArgs<ExtArgs>
-    commentsList?: boolean | User$commentsListArgs<ExtArgs>
-    roles?: boolean | User$rolesArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    invitations?: boolean | User$invitationsArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6405,9 +4835,16 @@ export namespace Prisma {
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    isDeleted?: boolean
     resetPasswordToken?: boolean
+    joined?: boolean
+    invitedById?: boolean
+    lastActive?: boolean
+    status?: boolean
+    invitationToken?: boolean
+    roleId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6424,9 +4861,16 @@ export namespace Prisma {
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    isDeleted?: boolean
     resetPasswordToken?: boolean
+    joined?: boolean
+    invitedById?: boolean
+    lastActive?: boolean
+    status?: boolean
+    invitationToken?: boolean
+    roleId?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -6443,49 +4887,63 @@ export namespace Prisma {
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    isDeleted?: boolean
     resetPasswordToken?: boolean
+    joined?: boolean
+    invitedById?: boolean
+    lastActive?: boolean
+    status?: boolean
+    invitationToken?: boolean
+    roleId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "fullname" | "password" | "country" | "phone" | "typeIdentification" | "identification" | "emailVerified" | "verificationToken" | "createdAt" | "updatedAt" | "isDeleted" | "resetPasswordToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "fullname" | "password" | "country" | "phone" | "typeIdentification" | "identification" | "emailVerified" | "verificationToken" | "createdAt" | "updatedAt" | "resetPasswordToken" | "joined" | "invitedById" | "lastActive" | "status" | "invitationToken" | "roleId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
-    news?: boolean | User$newsArgs<ExtArgs>
-    commentsList?: boolean | User$commentsListArgs<ExtArgs>
-    roles?: boolean | User$rolesArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    invitations?: boolean | User$invitationsArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    invitedBy?: boolean | User$invitedByArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
-      news: Prisma.$NewsPayload<ExtArgs>[]
-      commentsList: Prisma.$NewsCommentsPayload<ExtArgs>[]
-      roles: Prisma.$UserRolePayload<ExtArgs>[]
+      invitedBy: Prisma.$UserPayload<ExtArgs> | null
+      invitations: Prisma.$UserPayload<ExtArgs>[]
+      role: Prisma.$RolePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
       email: string
-      fullname: string
-      password: string
-      country: string
-      phone: string
-      typeIdentification: string
-      identification: string
+      fullname: string | null
+      password: string | null
+      country: string | null
+      phone: string | null
+      typeIdentification: string | null
+      identification: string | null
       emailVerified: boolean
       verificationToken: string | null
       createdAt: Date
       updatedAt: Date
-      isDeleted: boolean
       resetPasswordToken: string | null
+      joined: Date | null
+      invitedById: string | null
+      lastActive: Date | null
+      status: string
+      invitationToken: string | null
+      roleId: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -6881,9 +5339,9 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    commentsList<T extends User$commentsListArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsListArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    roles<T extends User$rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    invitedBy<T extends User$invitedByArgs<ExtArgs> = {}>(args?: Subset<T, User$invitedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    invitations<T extends User$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6926,8 +5384,13 @@ export namespace Prisma {
     readonly verificationToken: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
-    readonly isDeleted: FieldRef<"User", 'Boolean'>
     readonly resetPasswordToken: FieldRef<"User", 'String'>
+    readonly joined: FieldRef<"User", 'DateTime'>
+    readonly invitedById: FieldRef<"User", 'String'>
+    readonly lastActive: FieldRef<"User", 'DateTime'>
+    readonly status: FieldRef<"User", 'String'>
+    readonly invitationToken: FieldRef<"User", 'String'>
+    readonly roleId: FieldRef<"User", 'String'>
   }
     
 
@@ -7324,75 +5787,46 @@ export namespace Prisma {
   }
 
   /**
-   * User.news
+   * User.invitedBy
    */
-  export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$invitedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the News
+     * Select specific fields to fetch from the User
      */
-    select?: NewsSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the News
+     * Omit specific fields from the User
      */
-    omit?: NewsOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NewsInclude<ExtArgs> | null
-    where?: NewsWhereInput
-    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
-    cursor?: NewsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
-   * User.commentsList
+   * User.invitations
    */
-  export type User$commentsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NewsComments
+     * Select specific fields to fetch from the User
      */
-    select?: NewsCommentsSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the NewsComments
+     * Omit specific fields from the User
      */
-    omit?: NewsCommentsOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    where?: NewsCommentsWhereInput
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    cursor?: NewsCommentsWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: NewsCommentsScalarFieldEnum | NewsCommentsScalarFieldEnum[]
-  }
-
-  /**
-   * User.roles
-   */
-  export type User$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserRole
-     */
-    select?: UserRoleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserRole
-     */
-    omit?: UserRoleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserRoleInclude<ExtArgs> | null
-    where?: UserRoleWhereInput
-    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[]
-    cursor?: UserRoleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -7411,4459 +5845,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model News
-   */
-
-  export type AggregateNews = {
-    _count: NewsCountAggregateOutputType | null
-    _avg: NewsAvgAggregateOutputType | null
-    _sum: NewsSumAggregateOutputType | null
-    _min: NewsMinAggregateOutputType | null
-    _max: NewsMaxAggregateOutputType | null
-  }
-
-  export type NewsAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type NewsSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type NewsMinAggregateOutputType = {
-    id: number | null
-    title: string | null
-    subTitle: string | null
-    content: string | null
-    type: string | null
-    published: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    authorId: string | null
-  }
-
-  export type NewsMaxAggregateOutputType = {
-    id: number | null
-    title: string | null
-    subTitle: string | null
-    content: string | null
-    type: string | null
-    published: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    authorId: string | null
-  }
-
-  export type NewsCountAggregateOutputType = {
-    id: number
-    title: number
-    subTitle: number
-    content: number
-    type: number
-    published: number
-    createdAt: number
-    updatedAt: number
-    authorId: number
-    _all: number
-  }
-
-
-  export type NewsAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type NewsSumAggregateInputType = {
-    id?: true
-  }
-
-  export type NewsMinAggregateInputType = {
-    id?: true
-    title?: true
-    subTitle?: true
-    content?: true
-    type?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-  }
-
-  export type NewsMaxAggregateInputType = {
-    id?: true
-    title?: true
-    subTitle?: true
-    content?: true
-    type?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-  }
-
-  export type NewsCountAggregateInputType = {
-    id?: true
-    title?: true
-    subTitle?: true
-    content?: true
-    type?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-    _all?: true
-  }
-
-  export type NewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which News to aggregate.
-     */
-    where?: NewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of News to fetch.
-     */
-    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` News from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` News.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned News
-    **/
-    _count?: true | NewsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: NewsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: NewsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NewsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NewsMaxAggregateInputType
-  }
-
-  export type GetNewsAggregateType<T extends NewsAggregateArgs> = {
-        [P in keyof T & keyof AggregateNews]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNews[P]>
-      : GetScalarType<T[P], AggregateNews[P]>
-  }
-
-
-
-
-  export type NewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsWhereInput
-    orderBy?: NewsOrderByWithAggregationInput | NewsOrderByWithAggregationInput[]
-    by: NewsScalarFieldEnum[] | NewsScalarFieldEnum
-    having?: NewsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NewsCountAggregateInputType | true
-    _avg?: NewsAvgAggregateInputType
-    _sum?: NewsSumAggregateInputType
-    _min?: NewsMinAggregateInputType
-    _max?: NewsMaxAggregateInputType
-  }
-
-  export type NewsGroupByOutputType = {
-    id: number
-    title: string
-    subTitle: string
-    content: string
-    type: string
-    published: boolean
-    createdAt: Date
-    updatedAt: Date
-    authorId: string
-    _count: NewsCountAggregateOutputType | null
-    _avg: NewsAvgAggregateOutputType | null
-    _sum: NewsSumAggregateOutputType | null
-    _min: NewsMinAggregateOutputType | null
-    _max: NewsMaxAggregateOutputType | null
-  }
-
-  type GetNewsGroupByPayload<T extends NewsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NewsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NewsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NewsGroupByOutputType[P]>
-            : GetScalarType<T[P], NewsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    subTitle?: boolean
-    content?: boolean
-    type?: boolean
-    published?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-    tagsList?: boolean | News$tagsListArgs<ExtArgs>
-    commentsList?: boolean | News$commentsListArgs<ExtArgs>
-    _count?: boolean | NewsCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["news"]>
-
-  export type NewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    subTitle?: boolean
-    content?: boolean
-    type?: boolean
-    published?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["news"]>
-
-  export type NewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    subTitle?: boolean
-    content?: boolean
-    type?: boolean
-    published?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    authorId?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["news"]>
-
-  export type NewsSelectScalar = {
-    id?: boolean
-    title?: boolean
-    subTitle?: boolean
-    content?: boolean
-    type?: boolean
-    published?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    authorId?: boolean
-  }
-
-  export type NewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subTitle" | "content" | "type" | "published" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["news"]>
-  export type NewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-    tagsList?: boolean | News$tagsListArgs<ExtArgs>
-    commentsList?: boolean | News$commentsListArgs<ExtArgs>
-    _count?: boolean | NewsCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type NewsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $NewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "News"
-    objects: {
-      author: Prisma.$UserPayload<ExtArgs>
-      tagsList: Prisma.$TagsNewsPayload<ExtArgs>[]
-      commentsList: Prisma.$NewsCommentsPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      title: string
-      subTitle: string
-      content: string
-      type: string
-      published: boolean
-      createdAt: Date
-      updatedAt: Date
-      authorId: string
-    }, ExtArgs["result"]["news"]>
-    composites: {}
-  }
-
-  type NewsGetPayload<S extends boolean | null | undefined | NewsDefaultArgs> = $Result.GetResult<Prisma.$NewsPayload, S>
-
-  type NewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NewsCountAggregateInputType | true
-    }
-
-  export interface NewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['News'], meta: { name: 'News' } }
-    /**
-     * Find zero or one News that matches the filter.
-     * @param {NewsFindUniqueArgs} args - Arguments to find a News
-     * @example
-     * // Get one News
-     * const news = await prisma.news.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NewsFindUniqueArgs>(args: SelectSubset<T, NewsFindUniqueArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one News that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NewsFindUniqueOrThrowArgs} args - Arguments to find a News
-     * @example
-     * // Get one News
-     * const news = await prisma.news.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NewsFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first News that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsFindFirstArgs} args - Arguments to find a News
-     * @example
-     * // Get one News
-     * const news = await prisma.news.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NewsFindFirstArgs>(args?: SelectSubset<T, NewsFindFirstArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first News that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsFindFirstOrThrowArgs} args - Arguments to find a News
-     * @example
-     * // Get one News
-     * const news = await prisma.news.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NewsFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more News that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all News
-     * const news = await prisma.news.findMany()
-     * 
-     * // Get first 10 News
-     * const news = await prisma.news.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const newsWithIdOnly = await prisma.news.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends NewsFindManyArgs>(args?: SelectSubset<T, NewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a News.
-     * @param {NewsCreateArgs} args - Arguments to create a News.
-     * @example
-     * // Create one News
-     * const News = await prisma.news.create({
-     *   data: {
-     *     // ... data to create a News
-     *   }
-     * })
-     * 
-     */
-    create<T extends NewsCreateArgs>(args: SelectSubset<T, NewsCreateArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many News.
-     * @param {NewsCreateManyArgs} args - Arguments to create many News.
-     * @example
-     * // Create many News
-     * const news = await prisma.news.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NewsCreateManyArgs>(args?: SelectSubset<T, NewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many News and returns the data saved in the database.
-     * @param {NewsCreateManyAndReturnArgs} args - Arguments to create many News.
-     * @example
-     * // Create many News
-     * const news = await prisma.news.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many News and only return the `id`
-     * const newsWithIdOnly = await prisma.news.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends NewsCreateManyAndReturnArgs>(args?: SelectSubset<T, NewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a News.
-     * @param {NewsDeleteArgs} args - Arguments to delete one News.
-     * @example
-     * // Delete one News
-     * const News = await prisma.news.delete({
-     *   where: {
-     *     // ... filter to delete one News
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NewsDeleteArgs>(args: SelectSubset<T, NewsDeleteArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one News.
-     * @param {NewsUpdateArgs} args - Arguments to update one News.
-     * @example
-     * // Update one News
-     * const news = await prisma.news.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NewsUpdateArgs>(args: SelectSubset<T, NewsUpdateArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more News.
-     * @param {NewsDeleteManyArgs} args - Arguments to filter News to delete.
-     * @example
-     * // Delete a few News
-     * const { count } = await prisma.news.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NewsDeleteManyArgs>(args?: SelectSubset<T, NewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more News.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many News
-     * const news = await prisma.news.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NewsUpdateManyArgs>(args: SelectSubset<T, NewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more News and returns the data updated in the database.
-     * @param {NewsUpdateManyAndReturnArgs} args - Arguments to update many News.
-     * @example
-     * // Update many News
-     * const news = await prisma.news.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more News and only return the `id`
-     * const newsWithIdOnly = await prisma.news.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends NewsUpdateManyAndReturnArgs>(args: SelectSubset<T, NewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one News.
-     * @param {NewsUpsertArgs} args - Arguments to update or create a News.
-     * @example
-     * // Update or create a News
-     * const news = await prisma.news.upsert({
-     *   create: {
-     *     // ... data to create a News
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the News we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NewsUpsertArgs>(args: SelectSubset<T, NewsUpsertArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of News.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCountArgs} args - Arguments to filter News to count.
-     * @example
-     * // Count the number of News
-     * const count = await prisma.news.count({
-     *   where: {
-     *     // ... the filter for the News we want to count
-     *   }
-     * })
-    **/
-    count<T extends NewsCountArgs>(
-      args?: Subset<T, NewsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NewsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a News.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NewsAggregateArgs>(args: Subset<T, NewsAggregateArgs>): Prisma.PrismaPromise<GetNewsAggregateType<T>>
-
-    /**
-     * Group by News.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NewsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NewsGroupByArgs['orderBy'] }
-        : { orderBy?: NewsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the News model
-   */
-  readonly fields: NewsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for News.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    tagsList<T extends News$tagsListArgs<ExtArgs> = {}>(args?: Subset<T, News$tagsListArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    commentsList<T extends News$commentsListArgs<ExtArgs> = {}>(args?: Subset<T, News$commentsListArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the News model
-   */ 
-  interface NewsFieldRefs {
-    readonly id: FieldRef<"News", 'Int'>
-    readonly title: FieldRef<"News", 'String'>
-    readonly subTitle: FieldRef<"News", 'String'>
-    readonly content: FieldRef<"News", 'String'>
-    readonly type: FieldRef<"News", 'String'>
-    readonly published: FieldRef<"News", 'Boolean'>
-    readonly createdAt: FieldRef<"News", 'DateTime'>
-    readonly updatedAt: FieldRef<"News", 'DateTime'>
-    readonly authorId: FieldRef<"News", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * News findUnique
-   */
-  export type NewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter, which News to fetch.
-     */
-    where: NewsWhereUniqueInput
-  }
-
-  /**
-   * News findUniqueOrThrow
-   */
-  export type NewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter, which News to fetch.
-     */
-    where: NewsWhereUniqueInput
-  }
-
-  /**
-   * News findFirst
-   */
-  export type NewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter, which News to fetch.
-     */
-    where?: NewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of News to fetch.
-     */
-    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for News.
-     */
-    cursor?: NewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` News from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` News.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of News.
-     */
-    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
-  }
-
-  /**
-   * News findFirstOrThrow
-   */
-  export type NewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter, which News to fetch.
-     */
-    where?: NewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of News to fetch.
-     */
-    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for News.
-     */
-    cursor?: NewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` News from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` News.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of News.
-     */
-    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
-  }
-
-  /**
-   * News findMany
-   */
-  export type NewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter, which News to fetch.
-     */
-    where?: NewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of News to fetch.
-     */
-    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing News.
-     */
-    cursor?: NewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` News from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` News.
-     */
-    skip?: number
-    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
-  }
-
-  /**
-   * News create
-   */
-  export type NewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a News.
-     */
-    data: XOR<NewsCreateInput, NewsUncheckedCreateInput>
-  }
-
-  /**
-   * News createMany
-   */
-  export type NewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many News.
-     */
-    data: NewsCreateManyInput | NewsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * News createManyAndReturn
-   */
-  export type NewsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * The data used to create many News.
-     */
-    data: NewsCreateManyInput | NewsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * News update
-   */
-  export type NewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a News.
-     */
-    data: XOR<NewsUpdateInput, NewsUncheckedUpdateInput>
-    /**
-     * Choose, which News to update.
-     */
-    where: NewsWhereUniqueInput
-  }
-
-  /**
-   * News updateMany
-   */
-  export type NewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update News.
-     */
-    data: XOR<NewsUpdateManyMutationInput, NewsUncheckedUpdateManyInput>
-    /**
-     * Filter which News to update
-     */
-    where?: NewsWhereInput
-    /**
-     * Limit how many News to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * News updateManyAndReturn
-   */
-  export type NewsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * The data used to update News.
-     */
-    data: XOR<NewsUpdateManyMutationInput, NewsUncheckedUpdateManyInput>
-    /**
-     * Filter which News to update
-     */
-    where?: NewsWhereInput
-    /**
-     * Limit how many News to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * News upsert
-   */
-  export type NewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the News to update in case it exists.
-     */
-    where: NewsWhereUniqueInput
-    /**
-     * In case the News found by the `where` argument doesn't exist, create a new News with this data.
-     */
-    create: XOR<NewsCreateInput, NewsUncheckedCreateInput>
-    /**
-     * In case the News was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NewsUpdateInput, NewsUncheckedUpdateInput>
-  }
-
-  /**
-   * News delete
-   */
-  export type NewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-    /**
-     * Filter which News to delete.
-     */
-    where: NewsWhereUniqueInput
-  }
-
-  /**
-   * News deleteMany
-   */
-  export type NewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which News to delete
-     */
-    where?: NewsWhereInput
-    /**
-     * Limit how many News to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * News.tagsList
-   */
-  export type News$tagsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    where?: TagsNewsWhereInput
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    cursor?: TagsNewsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagsNewsScalarFieldEnum | TagsNewsScalarFieldEnum[]
-  }
-
-  /**
-   * News.commentsList
-   */
-  export type News$commentsListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    where?: NewsCommentsWhereInput
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    cursor?: NewsCommentsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NewsCommentsScalarFieldEnum | NewsCommentsScalarFieldEnum[]
-  }
-
-  /**
-   * News without action
-   */
-  export type NewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the News
-     */
-    select?: NewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the News
-     */
-    omit?: NewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Tag
-   */
-
-  export type AggregateTag = {
-    _count: TagCountAggregateOutputType | null
-    _avg: TagAvgAggregateOutputType | null
-    _sum: TagSumAggregateOutputType | null
-    _min: TagMinAggregateOutputType | null
-    _max: TagMaxAggregateOutputType | null
-  }
-
-  export type TagAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type TagSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type TagMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-  }
-
-  export type TagMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-  }
-
-  export type TagCountAggregateOutputType = {
-    id: number
-    name: number
-    _all: number
-  }
-
-
-  export type TagAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type TagSumAggregateInputType = {
-    id?: true
-  }
-
-  export type TagMinAggregateInputType = {
-    id?: true
-    name?: true
-  }
-
-  export type TagMaxAggregateInputType = {
-    id?: true
-    name?: true
-  }
-
-  export type TagCountAggregateInputType = {
-    id?: true
-    name?: true
-    _all?: true
-  }
-
-  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Tag to aggregate.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Tags
-    **/
-    _count?: true | TagCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TagAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TagSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TagMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TagMaxAggregateInputType
-  }
-
-  export type GetTagAggregateType<T extends TagAggregateArgs> = {
-        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTag[P]>
-      : GetScalarType<T[P], AggregateTag[P]>
-  }
-
-
-
-
-  export type TagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithAggregationInput | TagOrderByWithAggregationInput[]
-    by: TagScalarFieldEnum[] | TagScalarFieldEnum
-    having?: TagScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TagCountAggregateInputType | true
-    _avg?: TagAvgAggregateInputType
-    _sum?: TagSumAggregateInputType
-    _min?: TagMinAggregateInputType
-    _max?: TagMaxAggregateInputType
-  }
-
-  export type TagGroupByOutputType = {
-    id: number
-    name: string
-    _count: TagCountAggregateOutputType | null
-    _avg: TagAvgAggregateOutputType | null
-    _sum: TagSumAggregateOutputType | null
-    _min: TagMinAggregateOutputType | null
-    _max: TagMaxAggregateOutputType | null
-  }
-
-  type GetTagGroupByPayload<T extends TagGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TagGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TagGroupByOutputType[P]>
-            : GetScalarType<T[P], TagGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    news?: boolean | Tag$newsArgs<ExtArgs>
-    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tag"]>
-
-  export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["tag"]>
-
-  export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["tag"]>
-
-  export type TagSelectScalar = {
-    id?: boolean
-    name?: boolean
-  }
-
-  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["tag"]>
-  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | Tag$newsArgs<ExtArgs>
-    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Tag"
-    objects: {
-      news: Prisma.$TagsNewsPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-    }, ExtArgs["result"]["tag"]>
-    composites: {}
-  }
-
-  type TagGetPayload<S extends boolean | null | undefined | TagDefaultArgs> = $Result.GetResult<Prisma.$TagPayload, S>
-
-  type TagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TagCountAggregateInputType | true
-    }
-
-  export interface TagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tag'], meta: { name: 'Tag' } }
-    /**
-     * Find zero or one Tag that matches the filter.
-     * @param {TagFindUniqueArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TagFindUniqueArgs>(args: SelectSubset<T, TagFindUniqueArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one Tag that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TagFindUniqueOrThrowArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TagFindUniqueOrThrowArgs>(args: SelectSubset<T, TagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Tag that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindFirstArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TagFindFirstArgs>(args?: SelectSubset<T, TagFindFirstArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Tag that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindFirstOrThrowArgs} args - Arguments to find a Tag
-     * @example
-     * // Get one Tag
-     * const tag = await prisma.tag.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TagFindFirstOrThrowArgs>(args?: SelectSubset<T, TagFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more Tags that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Tags
-     * const tags = await prisma.tag.findMany()
-     * 
-     * // Get first 10 Tags
-     * const tags = await prisma.tag.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TagFindManyArgs>(args?: SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a Tag.
-     * @param {TagCreateArgs} args - Arguments to create a Tag.
-     * @example
-     * // Create one Tag
-     * const Tag = await prisma.tag.create({
-     *   data: {
-     *     // ... data to create a Tag
-     *   }
-     * })
-     * 
-     */
-    create<T extends TagCreateArgs>(args: SelectSubset<T, TagCreateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many Tags.
-     * @param {TagCreateManyArgs} args - Arguments to create many Tags.
-     * @example
-     * // Create many Tags
-     * const tag = await prisma.tag.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TagCreateManyArgs>(args?: SelectSubset<T, TagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Tags and returns the data saved in the database.
-     * @param {TagCreateManyAndReturnArgs} args - Arguments to create many Tags.
-     * @example
-     * // Create many Tags
-     * const tag = await prisma.tag.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Tags and only return the `id`
-     * const tagWithIdOnly = await prisma.tag.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TagCreateManyAndReturnArgs>(args?: SelectSubset<T, TagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a Tag.
-     * @param {TagDeleteArgs} args - Arguments to delete one Tag.
-     * @example
-     * // Delete one Tag
-     * const Tag = await prisma.tag.delete({
-     *   where: {
-     *     // ... filter to delete one Tag
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TagDeleteArgs>(args: SelectSubset<T, TagDeleteArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one Tag.
-     * @param {TagUpdateArgs} args - Arguments to update one Tag.
-     * @example
-     * // Update one Tag
-     * const tag = await prisma.tag.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TagUpdateArgs>(args: SelectSubset<T, TagUpdateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more Tags.
-     * @param {TagDeleteManyArgs} args - Arguments to filter Tags to delete.
-     * @example
-     * // Delete a few Tags
-     * const { count } = await prisma.tag.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TagDeleteManyArgs>(args?: SelectSubset<T, TagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Tags.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Tags
-     * const tag = await prisma.tag.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TagUpdateManyArgs>(args: SelectSubset<T, TagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Tags and returns the data updated in the database.
-     * @param {TagUpdateManyAndReturnArgs} args - Arguments to update many Tags.
-     * @example
-     * // Update many Tags
-     * const tag = await prisma.tag.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Tags and only return the `id`
-     * const tagWithIdOnly = await prisma.tag.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TagUpdateManyAndReturnArgs>(args: SelectSubset<T, TagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one Tag.
-     * @param {TagUpsertArgs} args - Arguments to update or create a Tag.
-     * @example
-     * // Update or create a Tag
-     * const tag = await prisma.tag.upsert({
-     *   create: {
-     *     // ... data to create a Tag
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Tag we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TagUpsertArgs>(args: SelectSubset<T, TagUpsertArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of Tags.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagCountArgs} args - Arguments to filter Tags to count.
-     * @example
-     * // Count the number of Tags
-     * const count = await prisma.tag.count({
-     *   where: {
-     *     // ... the filter for the Tags we want to count
-     *   }
-     * })
-    **/
-    count<T extends TagCountArgs>(
-      args?: Subset<T, TagCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TagCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Tag.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
-
-    /**
-     * Group by Tag.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TagGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TagGroupByArgs['orderBy'] }
-        : { orderBy?: TagGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Tag model
-   */
-  readonly fields: TagFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Tag.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    news<T extends Tag$newsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Tag model
-   */ 
-  interface TagFieldRefs {
-    readonly id: FieldRef<"Tag", 'Int'>
-    readonly name: FieldRef<"Tag", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Tag findUnique
-   */
-  export type TagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag findUniqueOrThrow
-   */
-  export type TagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag findFirst
-   */
-  export type TagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tags.
-     */
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag findFirstOrThrow
-   */
-  export type TagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tag to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Tags.
-     */
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag findMany
-   */
-  export type TagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter, which Tags to fetch.
-     */
-    where?: TagWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Tags to fetch.
-     */
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Tags.
-     */
-    cursor?: TagWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Tags from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Tags.
-     */
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Tag create
-   */
-  export type TagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Tag.
-     */
-    data: XOR<TagCreateInput, TagUncheckedCreateInput>
-  }
-
-  /**
-   * Tag createMany
-   */
-  export type TagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Tags.
-     */
-    data: TagCreateManyInput | TagCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Tag createManyAndReturn
-   */
-  export type TagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * The data used to create many Tags.
-     */
-    data: TagCreateManyInput | TagCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Tag update
-   */
-  export type TagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Tag.
-     */
-    data: XOR<TagUpdateInput, TagUncheckedUpdateInput>
-    /**
-     * Choose, which Tag to update.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag updateMany
-   */
-  export type TagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Tags.
-     */
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
-    /**
-     * Filter which Tags to update
-     */
-    where?: TagWhereInput
-    /**
-     * Limit how many Tags to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Tag updateManyAndReturn
-   */
-  export type TagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * The data used to update Tags.
-     */
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
-    /**
-     * Filter which Tags to update
-     */
-    where?: TagWhereInput
-    /**
-     * Limit how many Tags to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Tag upsert
-   */
-  export type TagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Tag to update in case it exists.
-     */
-    where: TagWhereUniqueInput
-    /**
-     * In case the Tag found by the `where` argument doesn't exist, create a new Tag with this data.
-     */
-    create: XOR<TagCreateInput, TagUncheckedCreateInput>
-    /**
-     * In case the Tag was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TagUpdateInput, TagUncheckedUpdateInput>
-  }
-
-  /**
-   * Tag delete
-   */
-  export type TagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
-     * Filter which Tag to delete.
-     */
-    where: TagWhereUniqueInput
-  }
-
-  /**
-   * Tag deleteMany
-   */
-  export type TagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Tags to delete
-     */
-    where?: TagWhereInput
-    /**
-     * Limit how many Tags to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Tag.news
-   */
-  export type Tag$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    where?: TagsNewsWhereInput
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    cursor?: TagsNewsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagsNewsScalarFieldEnum | TagsNewsScalarFieldEnum[]
-  }
-
-  /**
-   * Tag without action
-   */
-  export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TagsNews
-   */
-
-  export type AggregateTagsNews = {
-    _count: TagsNewsCountAggregateOutputType | null
-    _avg: TagsNewsAvgAggregateOutputType | null
-    _sum: TagsNewsSumAggregateOutputType | null
-    _min: TagsNewsMinAggregateOutputType | null
-    _max: TagsNewsMaxAggregateOutputType | null
-  }
-
-  export type TagsNewsAvgAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-    tagId: number | null
-  }
-
-  export type TagsNewsSumAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-    tagId: number | null
-  }
-
-  export type TagsNewsMinAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-    tagId: number | null
-  }
-
-  export type TagsNewsMaxAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-    tagId: number | null
-  }
-
-  export type TagsNewsCountAggregateOutputType = {
-    id: number
-    newsId: number
-    tagId: number
-    _all: number
-  }
-
-
-  export type TagsNewsAvgAggregateInputType = {
-    id?: true
-    newsId?: true
-    tagId?: true
-  }
-
-  export type TagsNewsSumAggregateInputType = {
-    id?: true
-    newsId?: true
-    tagId?: true
-  }
-
-  export type TagsNewsMinAggregateInputType = {
-    id?: true
-    newsId?: true
-    tagId?: true
-  }
-
-  export type TagsNewsMaxAggregateInputType = {
-    id?: true
-    newsId?: true
-    tagId?: true
-  }
-
-  export type TagsNewsCountAggregateInputType = {
-    id?: true
-    newsId?: true
-    tagId?: true
-    _all?: true
-  }
-
-  export type TagsNewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TagsNews to aggregate.
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TagsNews to fetch.
-     */
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TagsNewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TagsNews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TagsNews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TagsNews
-    **/
-    _count?: true | TagsNewsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TagsNewsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TagsNewsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TagsNewsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TagsNewsMaxAggregateInputType
-  }
-
-  export type GetTagsNewsAggregateType<T extends TagsNewsAggregateArgs> = {
-        [P in keyof T & keyof AggregateTagsNews]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTagsNews[P]>
-      : GetScalarType<T[P], AggregateTagsNews[P]>
-  }
-
-
-
-
-  export type TagsNewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagsNewsWhereInput
-    orderBy?: TagsNewsOrderByWithAggregationInput | TagsNewsOrderByWithAggregationInput[]
-    by: TagsNewsScalarFieldEnum[] | TagsNewsScalarFieldEnum
-    having?: TagsNewsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TagsNewsCountAggregateInputType | true
-    _avg?: TagsNewsAvgAggregateInputType
-    _sum?: TagsNewsSumAggregateInputType
-    _min?: TagsNewsMinAggregateInputType
-    _max?: TagsNewsMaxAggregateInputType
-  }
-
-  export type TagsNewsGroupByOutputType = {
-    id: number
-    newsId: number
-    tagId: number
-    _count: TagsNewsCountAggregateOutputType | null
-    _avg: TagsNewsAvgAggregateOutputType | null
-    _sum: TagsNewsSumAggregateOutputType | null
-    _min: TagsNewsMinAggregateOutputType | null
-    _max: TagsNewsMaxAggregateOutputType | null
-  }
-
-  type GetTagsNewsGroupByPayload<T extends TagsNewsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TagsNewsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TagsNewsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TagsNewsGroupByOutputType[P]>
-            : GetScalarType<T[P], TagsNewsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TagsNewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    newsId?: boolean
-    tagId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tagsNews"]>
-
-  export type TagsNewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    newsId?: boolean
-    tagId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tagsNews"]>
-
-  export type TagsNewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    newsId?: boolean
-    tagId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tagsNews"]>
-
-  export type TagsNewsSelectScalar = {
-    id?: boolean
-    newsId?: boolean
-    tagId?: boolean
-  }
-
-  export type TagsNewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "newsId" | "tagId", ExtArgs["result"]["tagsNews"]>
-  export type TagsNewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }
-  export type TagsNewsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }
-  export type TagsNewsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    tag?: boolean | TagDefaultArgs<ExtArgs>
-  }
-
-  export type $TagsNewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TagsNews"
-    objects: {
-      news: Prisma.$NewsPayload<ExtArgs>
-      tag: Prisma.$TagPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      newsId: number
-      tagId: number
-    }, ExtArgs["result"]["tagsNews"]>
-    composites: {}
-  }
-
-  type TagsNewsGetPayload<S extends boolean | null | undefined | TagsNewsDefaultArgs> = $Result.GetResult<Prisma.$TagsNewsPayload, S>
-
-  type TagsNewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TagsNewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TagsNewsCountAggregateInputType | true
-    }
-
-  export interface TagsNewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TagsNews'], meta: { name: 'TagsNews' } }
-    /**
-     * Find zero or one TagsNews that matches the filter.
-     * @param {TagsNewsFindUniqueArgs} args - Arguments to find a TagsNews
-     * @example
-     * // Get one TagsNews
-     * const tagsNews = await prisma.tagsNews.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TagsNewsFindUniqueArgs>(args: SelectSubset<T, TagsNewsFindUniqueArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one TagsNews that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TagsNewsFindUniqueOrThrowArgs} args - Arguments to find a TagsNews
-     * @example
-     * // Get one TagsNews
-     * const tagsNews = await prisma.tagsNews.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TagsNewsFindUniqueOrThrowArgs>(args: SelectSubset<T, TagsNewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first TagsNews that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsFindFirstArgs} args - Arguments to find a TagsNews
-     * @example
-     * // Get one TagsNews
-     * const tagsNews = await prisma.tagsNews.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TagsNewsFindFirstArgs>(args?: SelectSubset<T, TagsNewsFindFirstArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first TagsNews that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsFindFirstOrThrowArgs} args - Arguments to find a TagsNews
-     * @example
-     * // Get one TagsNews
-     * const tagsNews = await prisma.tagsNews.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TagsNewsFindFirstOrThrowArgs>(args?: SelectSubset<T, TagsNewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more TagsNews that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TagsNews
-     * const tagsNews = await prisma.tagsNews.findMany()
-     * 
-     * // Get first 10 TagsNews
-     * const tagsNews = await prisma.tagsNews.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const tagsNewsWithIdOnly = await prisma.tagsNews.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TagsNewsFindManyArgs>(args?: SelectSubset<T, TagsNewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a TagsNews.
-     * @param {TagsNewsCreateArgs} args - Arguments to create a TagsNews.
-     * @example
-     * // Create one TagsNews
-     * const TagsNews = await prisma.tagsNews.create({
-     *   data: {
-     *     // ... data to create a TagsNews
-     *   }
-     * })
-     * 
-     */
-    create<T extends TagsNewsCreateArgs>(args: SelectSubset<T, TagsNewsCreateArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many TagsNews.
-     * @param {TagsNewsCreateManyArgs} args - Arguments to create many TagsNews.
-     * @example
-     * // Create many TagsNews
-     * const tagsNews = await prisma.tagsNews.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TagsNewsCreateManyArgs>(args?: SelectSubset<T, TagsNewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TagsNews and returns the data saved in the database.
-     * @param {TagsNewsCreateManyAndReturnArgs} args - Arguments to create many TagsNews.
-     * @example
-     * // Create many TagsNews
-     * const tagsNews = await prisma.tagsNews.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TagsNews and only return the `id`
-     * const tagsNewsWithIdOnly = await prisma.tagsNews.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TagsNewsCreateManyAndReturnArgs>(args?: SelectSubset<T, TagsNewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a TagsNews.
-     * @param {TagsNewsDeleteArgs} args - Arguments to delete one TagsNews.
-     * @example
-     * // Delete one TagsNews
-     * const TagsNews = await prisma.tagsNews.delete({
-     *   where: {
-     *     // ... filter to delete one TagsNews
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TagsNewsDeleteArgs>(args: SelectSubset<T, TagsNewsDeleteArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one TagsNews.
-     * @param {TagsNewsUpdateArgs} args - Arguments to update one TagsNews.
-     * @example
-     * // Update one TagsNews
-     * const tagsNews = await prisma.tagsNews.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TagsNewsUpdateArgs>(args: SelectSubset<T, TagsNewsUpdateArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more TagsNews.
-     * @param {TagsNewsDeleteManyArgs} args - Arguments to filter TagsNews to delete.
-     * @example
-     * // Delete a few TagsNews
-     * const { count } = await prisma.tagsNews.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TagsNewsDeleteManyArgs>(args?: SelectSubset<T, TagsNewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TagsNews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TagsNews
-     * const tagsNews = await prisma.tagsNews.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TagsNewsUpdateManyArgs>(args: SelectSubset<T, TagsNewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TagsNews and returns the data updated in the database.
-     * @param {TagsNewsUpdateManyAndReturnArgs} args - Arguments to update many TagsNews.
-     * @example
-     * // Update many TagsNews
-     * const tagsNews = await prisma.tagsNews.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TagsNews and only return the `id`
-     * const tagsNewsWithIdOnly = await prisma.tagsNews.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TagsNewsUpdateManyAndReturnArgs>(args: SelectSubset<T, TagsNewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one TagsNews.
-     * @param {TagsNewsUpsertArgs} args - Arguments to update or create a TagsNews.
-     * @example
-     * // Update or create a TagsNews
-     * const tagsNews = await prisma.tagsNews.upsert({
-     *   create: {
-     *     // ... data to create a TagsNews
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TagsNews we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TagsNewsUpsertArgs>(args: SelectSubset<T, TagsNewsUpsertArgs<ExtArgs>>): Prisma__TagsNewsClient<$Result.GetResult<Prisma.$TagsNewsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of TagsNews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsCountArgs} args - Arguments to filter TagsNews to count.
-     * @example
-     * // Count the number of TagsNews
-     * const count = await prisma.tagsNews.count({
-     *   where: {
-     *     // ... the filter for the TagsNews we want to count
-     *   }
-     * })
-    **/
-    count<T extends TagsNewsCountArgs>(
-      args?: Subset<T, TagsNewsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TagsNewsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TagsNews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TagsNewsAggregateArgs>(args: Subset<T, TagsNewsAggregateArgs>): Prisma.PrismaPromise<GetTagsNewsAggregateType<T>>
-
-    /**
-     * Group by TagsNews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TagsNewsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TagsNewsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TagsNewsGroupByArgs['orderBy'] }
-        : { orderBy?: TagsNewsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TagsNewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagsNewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TagsNews model
-   */
-  readonly fields: TagsNewsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TagsNews.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TagsNewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    news<T extends NewsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NewsDefaultArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    tag<T extends TagDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TagDefaultArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TagsNews model
-   */ 
-  interface TagsNewsFieldRefs {
-    readonly id: FieldRef<"TagsNews", 'Int'>
-    readonly newsId: FieldRef<"TagsNews", 'Int'>
-    readonly tagId: FieldRef<"TagsNews", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TagsNews findUnique
-   */
-  export type TagsNewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter, which TagsNews to fetch.
-     */
-    where: TagsNewsWhereUniqueInput
-  }
-
-  /**
-   * TagsNews findUniqueOrThrow
-   */
-  export type TagsNewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter, which TagsNews to fetch.
-     */
-    where: TagsNewsWhereUniqueInput
-  }
-
-  /**
-   * TagsNews findFirst
-   */
-  export type TagsNewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter, which TagsNews to fetch.
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TagsNews to fetch.
-     */
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TagsNews.
-     */
-    cursor?: TagsNewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TagsNews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TagsNews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TagsNews.
-     */
-    distinct?: TagsNewsScalarFieldEnum | TagsNewsScalarFieldEnum[]
-  }
-
-  /**
-   * TagsNews findFirstOrThrow
-   */
-  export type TagsNewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter, which TagsNews to fetch.
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TagsNews to fetch.
-     */
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TagsNews.
-     */
-    cursor?: TagsNewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TagsNews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TagsNews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TagsNews.
-     */
-    distinct?: TagsNewsScalarFieldEnum | TagsNewsScalarFieldEnum[]
-  }
-
-  /**
-   * TagsNews findMany
-   */
-  export type TagsNewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter, which TagsNews to fetch.
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TagsNews to fetch.
-     */
-    orderBy?: TagsNewsOrderByWithRelationInput | TagsNewsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TagsNews.
-     */
-    cursor?: TagsNewsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TagsNews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TagsNews.
-     */
-    skip?: number
-    distinct?: TagsNewsScalarFieldEnum | TagsNewsScalarFieldEnum[]
-  }
-
-  /**
-   * TagsNews create
-   */
-  export type TagsNewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TagsNews.
-     */
-    data: XOR<TagsNewsCreateInput, TagsNewsUncheckedCreateInput>
-  }
-
-  /**
-   * TagsNews createMany
-   */
-  export type TagsNewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TagsNews.
-     */
-    data: TagsNewsCreateManyInput | TagsNewsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TagsNews createManyAndReturn
-   */
-  export type TagsNewsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * The data used to create many TagsNews.
-     */
-    data: TagsNewsCreateManyInput | TagsNewsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TagsNews update
-   */
-  export type TagsNewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TagsNews.
-     */
-    data: XOR<TagsNewsUpdateInput, TagsNewsUncheckedUpdateInput>
-    /**
-     * Choose, which TagsNews to update.
-     */
-    where: TagsNewsWhereUniqueInput
-  }
-
-  /**
-   * TagsNews updateMany
-   */
-  export type TagsNewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TagsNews.
-     */
-    data: XOR<TagsNewsUpdateManyMutationInput, TagsNewsUncheckedUpdateManyInput>
-    /**
-     * Filter which TagsNews to update
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * Limit how many TagsNews to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TagsNews updateManyAndReturn
-   */
-  export type TagsNewsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * The data used to update TagsNews.
-     */
-    data: XOR<TagsNewsUpdateManyMutationInput, TagsNewsUncheckedUpdateManyInput>
-    /**
-     * Filter which TagsNews to update
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * Limit how many TagsNews to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TagsNews upsert
-   */
-  export type TagsNewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TagsNews to update in case it exists.
-     */
-    where: TagsNewsWhereUniqueInput
-    /**
-     * In case the TagsNews found by the `where` argument doesn't exist, create a new TagsNews with this data.
-     */
-    create: XOR<TagsNewsCreateInput, TagsNewsUncheckedCreateInput>
-    /**
-     * In case the TagsNews was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TagsNewsUpdateInput, TagsNewsUncheckedUpdateInput>
-  }
-
-  /**
-   * TagsNews delete
-   */
-  export type TagsNewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-    /**
-     * Filter which TagsNews to delete.
-     */
-    where: TagsNewsWhereUniqueInput
-  }
-
-  /**
-   * TagsNews deleteMany
-   */
-  export type TagsNewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TagsNews to delete
-     */
-    where?: TagsNewsWhereInput
-    /**
-     * Limit how many TagsNews to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TagsNews without action
-   */
-  export type TagsNewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TagsNews
-     */
-    select?: TagsNewsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TagsNews
-     */
-    omit?: TagsNewsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagsNewsInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model NewsComments
-   */
-
-  export type AggregateNewsComments = {
-    _count: NewsCommentsCountAggregateOutputType | null
-    _avg: NewsCommentsAvgAggregateOutputType | null
-    _sum: NewsCommentsSumAggregateOutputType | null
-    _min: NewsCommentsMinAggregateOutputType | null
-    _max: NewsCommentsMaxAggregateOutputType | null
-  }
-
-  export type NewsCommentsAvgAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-  }
-
-  export type NewsCommentsSumAggregateOutputType = {
-    id: number | null
-    newsId: number | null
-  }
-
-  export type NewsCommentsMinAggregateOutputType = {
-    id: number | null
-    message: string | null
-    createdAt: Date | null
-    newsId: number | null
-    userId: string | null
-  }
-
-  export type NewsCommentsMaxAggregateOutputType = {
-    id: number | null
-    message: string | null
-    createdAt: Date | null
-    newsId: number | null
-    userId: string | null
-  }
-
-  export type NewsCommentsCountAggregateOutputType = {
-    id: number
-    message: number
-    createdAt: number
-    newsId: number
-    userId: number
-    _all: number
-  }
-
-
-  export type NewsCommentsAvgAggregateInputType = {
-    id?: true
-    newsId?: true
-  }
-
-  export type NewsCommentsSumAggregateInputType = {
-    id?: true
-    newsId?: true
-  }
-
-  export type NewsCommentsMinAggregateInputType = {
-    id?: true
-    message?: true
-    createdAt?: true
-    newsId?: true
-    userId?: true
-  }
-
-  export type NewsCommentsMaxAggregateInputType = {
-    id?: true
-    message?: true
-    createdAt?: true
-    newsId?: true
-    userId?: true
-  }
-
-  export type NewsCommentsCountAggregateInputType = {
-    id?: true
-    message?: true
-    createdAt?: true
-    newsId?: true
-    userId?: true
-    _all?: true
-  }
-
-  export type NewsCommentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewsComments to aggregate.
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewsComments to fetch.
-     */
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NewsCommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewsComments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewsComments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned NewsComments
-    **/
-    _count?: true | NewsCommentsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: NewsCommentsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: NewsCommentsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NewsCommentsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NewsCommentsMaxAggregateInputType
-  }
-
-  export type GetNewsCommentsAggregateType<T extends NewsCommentsAggregateArgs> = {
-        [P in keyof T & keyof AggregateNewsComments]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNewsComments[P]>
-      : GetScalarType<T[P], AggregateNewsComments[P]>
-  }
-
-
-
-
-  export type NewsCommentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsCommentsWhereInput
-    orderBy?: NewsCommentsOrderByWithAggregationInput | NewsCommentsOrderByWithAggregationInput[]
-    by: NewsCommentsScalarFieldEnum[] | NewsCommentsScalarFieldEnum
-    having?: NewsCommentsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NewsCommentsCountAggregateInputType | true
-    _avg?: NewsCommentsAvgAggregateInputType
-    _sum?: NewsCommentsSumAggregateInputType
-    _min?: NewsCommentsMinAggregateInputType
-    _max?: NewsCommentsMaxAggregateInputType
-  }
-
-  export type NewsCommentsGroupByOutputType = {
-    id: number
-    message: string
-    createdAt: Date
-    newsId: number
-    userId: string
-    _count: NewsCommentsCountAggregateOutputType | null
-    _avg: NewsCommentsAvgAggregateOutputType | null
-    _sum: NewsCommentsSumAggregateOutputType | null
-    _min: NewsCommentsMinAggregateOutputType | null
-    _max: NewsCommentsMaxAggregateOutputType | null
-  }
-
-  type GetNewsCommentsGroupByPayload<T extends NewsCommentsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NewsCommentsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NewsCommentsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NewsCommentsGroupByOutputType[P]>
-            : GetScalarType<T[P], NewsCommentsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NewsCommentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    message?: boolean
-    createdAt?: boolean
-    newsId?: boolean
-    userId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newsComments"]>
-
-  export type NewsCommentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    message?: boolean
-    createdAt?: boolean
-    newsId?: boolean
-    userId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newsComments"]>
-
-  export type NewsCommentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    message?: boolean
-    createdAt?: boolean
-    newsId?: boolean
-    userId?: boolean
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["newsComments"]>
-
-  export type NewsCommentsSelectScalar = {
-    id?: boolean
-    message?: boolean
-    createdAt?: boolean
-    newsId?: boolean
-    userId?: boolean
-  }
-
-  export type NewsCommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "message" | "createdAt" | "newsId" | "userId", ExtArgs["result"]["newsComments"]>
-  export type NewsCommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewsCommentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type NewsCommentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    news?: boolean | NewsDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $NewsCommentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "NewsComments"
-    objects: {
-      news: Prisma.$NewsPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      message: string
-      createdAt: Date
-      newsId: number
-      userId: string
-    }, ExtArgs["result"]["newsComments"]>
-    composites: {}
-  }
-
-  type NewsCommentsGetPayload<S extends boolean | null | undefined | NewsCommentsDefaultArgs> = $Result.GetResult<Prisma.$NewsCommentsPayload, S>
-
-  type NewsCommentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NewsCommentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NewsCommentsCountAggregateInputType | true
-    }
-
-  export interface NewsCommentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewsComments'], meta: { name: 'NewsComments' } }
-    /**
-     * Find zero or one NewsComments that matches the filter.
-     * @param {NewsCommentsFindUniqueArgs} args - Arguments to find a NewsComments
-     * @example
-     * // Get one NewsComments
-     * const newsComments = await prisma.newsComments.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NewsCommentsFindUniqueArgs>(args: SelectSubset<T, NewsCommentsFindUniqueArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one NewsComments that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NewsCommentsFindUniqueOrThrowArgs} args - Arguments to find a NewsComments
-     * @example
-     * // Get one NewsComments
-     * const newsComments = await prisma.newsComments.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NewsCommentsFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsCommentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first NewsComments that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsFindFirstArgs} args - Arguments to find a NewsComments
-     * @example
-     * // Get one NewsComments
-     * const newsComments = await prisma.newsComments.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NewsCommentsFindFirstArgs>(args?: SelectSubset<T, NewsCommentsFindFirstArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first NewsComments that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsFindFirstOrThrowArgs} args - Arguments to find a NewsComments
-     * @example
-     * // Get one NewsComments
-     * const newsComments = await prisma.newsComments.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NewsCommentsFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsCommentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more NewsComments that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all NewsComments
-     * const newsComments = await prisma.newsComments.findMany()
-     * 
-     * // Get first 10 NewsComments
-     * const newsComments = await prisma.newsComments.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const newsCommentsWithIdOnly = await prisma.newsComments.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends NewsCommentsFindManyArgs>(args?: SelectSubset<T, NewsCommentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a NewsComments.
-     * @param {NewsCommentsCreateArgs} args - Arguments to create a NewsComments.
-     * @example
-     * // Create one NewsComments
-     * const NewsComments = await prisma.newsComments.create({
-     *   data: {
-     *     // ... data to create a NewsComments
-     *   }
-     * })
-     * 
-     */
-    create<T extends NewsCommentsCreateArgs>(args: SelectSubset<T, NewsCommentsCreateArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many NewsComments.
-     * @param {NewsCommentsCreateManyArgs} args - Arguments to create many NewsComments.
-     * @example
-     * // Create many NewsComments
-     * const newsComments = await prisma.newsComments.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NewsCommentsCreateManyArgs>(args?: SelectSubset<T, NewsCommentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many NewsComments and returns the data saved in the database.
-     * @param {NewsCommentsCreateManyAndReturnArgs} args - Arguments to create many NewsComments.
-     * @example
-     * // Create many NewsComments
-     * const newsComments = await prisma.newsComments.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many NewsComments and only return the `id`
-     * const newsCommentsWithIdOnly = await prisma.newsComments.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends NewsCommentsCreateManyAndReturnArgs>(args?: SelectSubset<T, NewsCommentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a NewsComments.
-     * @param {NewsCommentsDeleteArgs} args - Arguments to delete one NewsComments.
-     * @example
-     * // Delete one NewsComments
-     * const NewsComments = await prisma.newsComments.delete({
-     *   where: {
-     *     // ... filter to delete one NewsComments
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NewsCommentsDeleteArgs>(args: SelectSubset<T, NewsCommentsDeleteArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one NewsComments.
-     * @param {NewsCommentsUpdateArgs} args - Arguments to update one NewsComments.
-     * @example
-     * // Update one NewsComments
-     * const newsComments = await prisma.newsComments.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NewsCommentsUpdateArgs>(args: SelectSubset<T, NewsCommentsUpdateArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more NewsComments.
-     * @param {NewsCommentsDeleteManyArgs} args - Arguments to filter NewsComments to delete.
-     * @example
-     * // Delete a few NewsComments
-     * const { count } = await prisma.newsComments.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NewsCommentsDeleteManyArgs>(args?: SelectSubset<T, NewsCommentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewsComments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many NewsComments
-     * const newsComments = await prisma.newsComments.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NewsCommentsUpdateManyArgs>(args: SelectSubset<T, NewsCommentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewsComments and returns the data updated in the database.
-     * @param {NewsCommentsUpdateManyAndReturnArgs} args - Arguments to update many NewsComments.
-     * @example
-     * // Update many NewsComments
-     * const newsComments = await prisma.newsComments.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more NewsComments and only return the `id`
-     * const newsCommentsWithIdOnly = await prisma.newsComments.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends NewsCommentsUpdateManyAndReturnArgs>(args: SelectSubset<T, NewsCommentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one NewsComments.
-     * @param {NewsCommentsUpsertArgs} args - Arguments to update or create a NewsComments.
-     * @example
-     * // Update or create a NewsComments
-     * const newsComments = await prisma.newsComments.upsert({
-     *   create: {
-     *     // ... data to create a NewsComments
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the NewsComments we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NewsCommentsUpsertArgs>(args: SelectSubset<T, NewsCommentsUpsertArgs<ExtArgs>>): Prisma__NewsCommentsClient<$Result.GetResult<Prisma.$NewsCommentsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of NewsComments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsCountArgs} args - Arguments to filter NewsComments to count.
-     * @example
-     * // Count the number of NewsComments
-     * const count = await prisma.newsComments.count({
-     *   where: {
-     *     // ... the filter for the NewsComments we want to count
-     *   }
-     * })
-    **/
-    count<T extends NewsCommentsCountArgs>(
-      args?: Subset<T, NewsCommentsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NewsCommentsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a NewsComments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NewsCommentsAggregateArgs>(args: Subset<T, NewsCommentsAggregateArgs>): Prisma.PrismaPromise<GetNewsCommentsAggregateType<T>>
-
-    /**
-     * Group by NewsComments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewsCommentsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NewsCommentsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NewsCommentsGroupByArgs['orderBy'] }
-        : { orderBy?: NewsCommentsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NewsCommentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the NewsComments model
-   */
-  readonly fields: NewsCommentsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for NewsComments.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NewsCommentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    news<T extends NewsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NewsDefaultArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the NewsComments model
-   */ 
-  interface NewsCommentsFieldRefs {
-    readonly id: FieldRef<"NewsComments", 'Int'>
-    readonly message: FieldRef<"NewsComments", 'String'>
-    readonly createdAt: FieldRef<"NewsComments", 'DateTime'>
-    readonly newsId: FieldRef<"NewsComments", 'Int'>
-    readonly userId: FieldRef<"NewsComments", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * NewsComments findUnique
-   */
-  export type NewsCommentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which NewsComments to fetch.
-     */
-    where: NewsCommentsWhereUniqueInput
-  }
-
-  /**
-   * NewsComments findUniqueOrThrow
-   */
-  export type NewsCommentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which NewsComments to fetch.
-     */
-    where: NewsCommentsWhereUniqueInput
-  }
-
-  /**
-   * NewsComments findFirst
-   */
-  export type NewsCommentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which NewsComments to fetch.
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewsComments to fetch.
-     */
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewsComments.
-     */
-    cursor?: NewsCommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewsComments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewsComments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewsComments.
-     */
-    distinct?: NewsCommentsScalarFieldEnum | NewsCommentsScalarFieldEnum[]
-  }
-
-  /**
-   * NewsComments findFirstOrThrow
-   */
-  export type NewsCommentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which NewsComments to fetch.
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewsComments to fetch.
-     */
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewsComments.
-     */
-    cursor?: NewsCommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewsComments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewsComments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewsComments.
-     */
-    distinct?: NewsCommentsScalarFieldEnum | NewsCommentsScalarFieldEnum[]
-  }
-
-  /**
-   * NewsComments findMany
-   */
-  export type NewsCommentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which NewsComments to fetch.
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewsComments to fetch.
-     */
-    orderBy?: NewsCommentsOrderByWithRelationInput | NewsCommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing NewsComments.
-     */
-    cursor?: NewsCommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewsComments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewsComments.
-     */
-    skip?: number
-    distinct?: NewsCommentsScalarFieldEnum | NewsCommentsScalarFieldEnum[]
-  }
-
-  /**
-   * NewsComments create
-   */
-  export type NewsCommentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a NewsComments.
-     */
-    data: XOR<NewsCommentsCreateInput, NewsCommentsUncheckedCreateInput>
-  }
-
-  /**
-   * NewsComments createMany
-   */
-  export type NewsCommentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many NewsComments.
-     */
-    data: NewsCommentsCreateManyInput | NewsCommentsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * NewsComments createManyAndReturn
-   */
-  export type NewsCommentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * The data used to create many NewsComments.
-     */
-    data: NewsCommentsCreateManyInput | NewsCommentsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewsComments update
-   */
-  export type NewsCommentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a NewsComments.
-     */
-    data: XOR<NewsCommentsUpdateInput, NewsCommentsUncheckedUpdateInput>
-    /**
-     * Choose, which NewsComments to update.
-     */
-    where: NewsCommentsWhereUniqueInput
-  }
-
-  /**
-   * NewsComments updateMany
-   */
-  export type NewsCommentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update NewsComments.
-     */
-    data: XOR<NewsCommentsUpdateManyMutationInput, NewsCommentsUncheckedUpdateManyInput>
-    /**
-     * Filter which NewsComments to update
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * Limit how many NewsComments to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewsComments updateManyAndReturn
-   */
-  export type NewsCommentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * The data used to update NewsComments.
-     */
-    data: XOR<NewsCommentsUpdateManyMutationInput, NewsCommentsUncheckedUpdateManyInput>
-    /**
-     * Filter which NewsComments to update
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * Limit how many NewsComments to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * NewsComments upsert
-   */
-  export type NewsCommentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the NewsComments to update in case it exists.
-     */
-    where: NewsCommentsWhereUniqueInput
-    /**
-     * In case the NewsComments found by the `where` argument doesn't exist, create a new NewsComments with this data.
-     */
-    create: XOR<NewsCommentsCreateInput, NewsCommentsUncheckedCreateInput>
-    /**
-     * In case the NewsComments was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NewsCommentsUpdateInput, NewsCommentsUncheckedUpdateInput>
-  }
-
-  /**
-   * NewsComments delete
-   */
-  export type NewsCommentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
-    /**
-     * Filter which NewsComments to delete.
-     */
-    where: NewsCommentsWhereUniqueInput
-  }
-
-  /**
-   * NewsComments deleteMany
-   */
-  export type NewsCommentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewsComments to delete
-     */
-    where?: NewsCommentsWhereInput
-    /**
-     * Limit how many NewsComments to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewsComments without action
-   */
-  export type NewsCommentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsComments
-     */
-    select?: NewsCommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsComments
-     */
-    omit?: NewsCommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsCommentsInclude<ExtArgs> | null
   }
 
 
@@ -11920,17 +5901,6 @@ export namespace Prisma {
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
-  export const UserRoleScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    roleId: 'roleId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
-
-
   export const UserScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
@@ -11945,54 +5915,16 @@ export namespace Prisma {
     verificationToken: 'verificationToken',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    isDeleted: 'isDeleted',
-    resetPasswordToken: 'resetPasswordToken'
+    resetPasswordToken: 'resetPasswordToken',
+    joined: 'joined',
+    invitedById: 'invitedById',
+    lastActive: 'lastActive',
+    status: 'status',
+    invitationToken: 'invitationToken',
+    roleId: 'roleId'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const NewsScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    subTitle: 'subTitle',
-    content: 'content',
-    type: 'type',
-    published: 'published',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    authorId: 'authorId'
-  };
-
-  export type NewsScalarFieldEnum = (typeof NewsScalarFieldEnum)[keyof typeof NewsScalarFieldEnum]
-
-
-  export const TagScalarFieldEnum: {
-    id: 'id',
-    name: 'name'
-  };
-
-  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
-
-
-  export const TagsNewsScalarFieldEnum: {
-    id: 'id',
-    newsId: 'newsId',
-    tagId: 'tagId'
-  };
-
-  export type TagsNewsScalarFieldEnum = (typeof TagsNewsScalarFieldEnum)[keyof typeof TagsNewsScalarFieldEnum]
-
-
-  export const NewsCommentsScalarFieldEnum: {
-    id: 'id',
-    message: 'message',
-    createdAt: 'createdAt',
-    newsId: 'newsId',
-    userId: 'userId'
-  };
-
-  export type NewsCommentsScalarFieldEnum = (typeof NewsCommentsScalarFieldEnum)[keyof typeof NewsCommentsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12070,20 +6002,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -12242,7 +6160,7 @@ export namespace Prisma {
     description?: StringFilter<"Role"> | string
     createdAt?: DateTimeFilter<"Role"> | Date | string
     updatedAt?: DateTimeFilter<"Role"> | Date | string
-    users?: UserRoleListRelationFilter
+    users?: UserListRelationFilter
   }
 
   export type RoleOrderByWithRelationInput = {
@@ -12251,7 +6169,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    users?: UserRoleOrderByRelationAggregateInput
+    users?: UserOrderByRelationAggregateInput
   }
 
   export type RoleWhereUniqueInput = Prisma.AtLeast<{
@@ -12263,7 +6181,7 @@ export namespace Prisma {
     description?: StringFilter<"Role"> | string
     createdAt?: DateTimeFilter<"Role"> | Date | string
     updatedAt?: DateTimeFilter<"Role"> | Date | string
-    users?: UserRoleListRelationFilter
+    users?: UserListRelationFilter
   }, "id" | "name">
 
   export type RoleOrderByWithAggregationInput = {
@@ -12288,65 +6206,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
   }
 
-  export type UserRoleWhereInput = {
-    AND?: UserRoleWhereInput | UserRoleWhereInput[]
-    OR?: UserRoleWhereInput[]
-    NOT?: UserRoleWhereInput | UserRoleWhereInput[]
-    id?: StringFilter<"UserRole"> | string
-    userId?: StringFilter<"UserRole"> | string
-    roleId?: StringFilter<"UserRole"> | string
-    createdAt?: DateTimeFilter<"UserRole"> | Date | string
-    updatedAt?: DateTimeFilter<"UserRole"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
-  }
-
-  export type UserRoleOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    role?: RoleOrderByWithRelationInput
-  }
-
-  export type UserRoleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId_roleId?: UserRoleUserIdRoleIdCompoundUniqueInput
-    AND?: UserRoleWhereInput | UserRoleWhereInput[]
-    OR?: UserRoleWhereInput[]
-    NOT?: UserRoleWhereInput | UserRoleWhereInput[]
-    userId?: StringFilter<"UserRole"> | string
-    roleId?: StringFilter<"UserRole"> | string
-    createdAt?: DateTimeFilter<"UserRole"> | Date | string
-    updatedAt?: DateTimeFilter<"UserRole"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
-  }, "id" | "userId_roleId">
-
-  export type UserRoleOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: UserRoleCountOrderByAggregateInput
-    _max?: UserRoleMaxOrderByAggregateInput
-    _min?: UserRoleMinOrderByAggregateInput
-  }
-
-  export type UserRoleScalarWhereWithAggregatesInput = {
-    AND?: UserRoleScalarWhereWithAggregatesInput | UserRoleScalarWhereWithAggregatesInput[]
-    OR?: UserRoleScalarWhereWithAggregatesInput[]
-    NOT?: UserRoleScalarWhereWithAggregatesInput | UserRoleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"UserRole"> | string
-    userId?: StringWithAggregatesFilter<"UserRole"> | string
-    roleId?: StringWithAggregatesFilter<"UserRole"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
-  }
-
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -12354,44 +6213,54 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     tenantId?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    fullname?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    country?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    typeIdentification?: StringFilter<"User"> | string
-    identification?: StringFilter<"User"> | string
+    fullname?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    phone?: StringNullableFilter<"User"> | string | null
+    typeIdentification?: StringNullableFilter<"User"> | string | null
+    identification?: StringNullableFilter<"User"> | string | null
     emailVerified?: BoolFilter<"User"> | boolean
     verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    isDeleted?: BoolFilter<"User"> | boolean
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    joined?: DateTimeNullableFilter<"User"> | Date | string | null
+    invitedById?: StringNullableFilter<"User"> | string | null
+    lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
+    status?: StringFilter<"User"> | string
+    invitationToken?: StringNullableFilter<"User"> | string | null
+    roleId?: StringFilter<"User"> | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-    news?: NewsListRelationFilter
-    commentsList?: NewsCommentsListRelationFilter
-    roles?: UserRoleListRelationFilter
+    invitedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    invitations?: UserListRelationFilter
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     email?: SortOrder
-    fullname?: SortOrder
-    password?: SortOrder
-    country?: SortOrder
-    phone?: SortOrder
-    typeIdentification?: SortOrder
-    identification?: SortOrder
+    fullname?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    typeIdentification?: SortOrderInput | SortOrder
+    identification?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    isDeleted?: SortOrder
     resetPasswordToken?: SortOrderInput | SortOrder
+    joined?: SortOrderInput | SortOrder
+    invitedById?: SortOrderInput | SortOrder
+    lastActive?: SortOrderInput | SortOrder
+    status?: SortOrder
+    invitationToken?: SortOrderInput | SortOrder
+    roleId?: SortOrder
     tenant?: TenantOrderByWithRelationInput
-    news?: NewsOrderByRelationAggregateInput
-    commentsList?: NewsCommentsOrderByRelationAggregateInput
-    roles?: UserRoleOrderByRelationAggregateInput
+    invitedBy?: UserOrderByWithRelationInput
+    invitations?: UserOrderByRelationAggregateInput
+    role?: RoleOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12402,40 +6271,50 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     tenantId?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    fullname?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    country?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    typeIdentification?: StringFilter<"User"> | string
-    identification?: StringFilter<"User"> | string
+    fullname?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    phone?: StringNullableFilter<"User"> | string | null
+    typeIdentification?: StringNullableFilter<"User"> | string | null
+    identification?: StringNullableFilter<"User"> | string | null
     emailVerified?: BoolFilter<"User"> | boolean
     verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    isDeleted?: BoolFilter<"User"> | boolean
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    joined?: DateTimeNullableFilter<"User"> | Date | string | null
+    invitedById?: StringNullableFilter<"User"> | string | null
+    lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
+    status?: StringFilter<"User"> | string
+    invitationToken?: StringNullableFilter<"User"> | string | null
+    roleId?: StringFilter<"User"> | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
-    news?: NewsListRelationFilter
-    commentsList?: NewsCommentsListRelationFilter
-    roles?: UserRoleListRelationFilter
+    invitedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    invitations?: UserListRelationFilter
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }, "id" | "tenantId_email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     email?: SortOrder
-    fullname?: SortOrder
-    password?: SortOrder
-    country?: SortOrder
-    phone?: SortOrder
-    typeIdentification?: SortOrder
-    identification?: SortOrder
+    fullname?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    typeIdentification?: SortOrderInput | SortOrder
+    identification?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    isDeleted?: SortOrder
     resetPasswordToken?: SortOrderInput | SortOrder
+    joined?: SortOrderInput | SortOrder
+    invitedById?: SortOrderInput | SortOrder
+    lastActive?: SortOrderInput | SortOrder
+    status?: SortOrder
+    invitationToken?: SortOrderInput | SortOrder
+    roleId?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -12448,253 +6327,23 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     tenantId?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    fullname?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
-    country?: StringWithAggregatesFilter<"User"> | string
-    phone?: StringWithAggregatesFilter<"User"> | string
-    typeIdentification?: StringWithAggregatesFilter<"User"> | string
-    identification?: StringWithAggregatesFilter<"User"> | string
+    fullname?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    country?: StringNullableWithAggregatesFilter<"User"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
+    typeIdentification?: StringNullableWithAggregatesFilter<"User"> | string | null
+    identification?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     verificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    isDeleted?: BoolWithAggregatesFilter<"User"> | boolean
     resetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
-  }
-
-  export type NewsWhereInput = {
-    AND?: NewsWhereInput | NewsWhereInput[]
-    OR?: NewsWhereInput[]
-    NOT?: NewsWhereInput | NewsWhereInput[]
-    id?: IntFilter<"News"> | number
-    title?: StringFilter<"News"> | string
-    subTitle?: StringFilter<"News"> | string
-    content?: StringFilter<"News"> | string
-    type?: StringFilter<"News"> | string
-    published?: BoolFilter<"News"> | boolean
-    createdAt?: DateTimeFilter<"News"> | Date | string
-    updatedAt?: DateTimeFilter<"News"> | Date | string
-    authorId?: StringFilter<"News"> | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-    tagsList?: TagsNewsListRelationFilter
-    commentsList?: NewsCommentsListRelationFilter
-  }
-
-  export type NewsOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    subTitle?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-    author?: UserOrderByWithRelationInput
-    tagsList?: TagsNewsOrderByRelationAggregateInput
-    commentsList?: NewsCommentsOrderByRelationAggregateInput
-  }
-
-  export type NewsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: NewsWhereInput | NewsWhereInput[]
-    OR?: NewsWhereInput[]
-    NOT?: NewsWhereInput | NewsWhereInput[]
-    title?: StringFilter<"News"> | string
-    subTitle?: StringFilter<"News"> | string
-    content?: StringFilter<"News"> | string
-    type?: StringFilter<"News"> | string
-    published?: BoolFilter<"News"> | boolean
-    createdAt?: DateTimeFilter<"News"> | Date | string
-    updatedAt?: DateTimeFilter<"News"> | Date | string
-    authorId?: StringFilter<"News"> | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-    tagsList?: TagsNewsListRelationFilter
-    commentsList?: NewsCommentsListRelationFilter
-  }, "id">
-
-  export type NewsOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    subTitle?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-    _count?: NewsCountOrderByAggregateInput
-    _avg?: NewsAvgOrderByAggregateInput
-    _max?: NewsMaxOrderByAggregateInput
-    _min?: NewsMinOrderByAggregateInput
-    _sum?: NewsSumOrderByAggregateInput
-  }
-
-  export type NewsScalarWhereWithAggregatesInput = {
-    AND?: NewsScalarWhereWithAggregatesInput | NewsScalarWhereWithAggregatesInput[]
-    OR?: NewsScalarWhereWithAggregatesInput[]
-    NOT?: NewsScalarWhereWithAggregatesInput | NewsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"News"> | number
-    title?: StringWithAggregatesFilter<"News"> | string
-    subTitle?: StringWithAggregatesFilter<"News"> | string
-    content?: StringWithAggregatesFilter<"News"> | string
-    type?: StringWithAggregatesFilter<"News"> | string
-    published?: BoolWithAggregatesFilter<"News"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"News"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"News"> | Date | string
-    authorId?: StringWithAggregatesFilter<"News"> | string
-  }
-
-  export type TagWhereInput = {
-    AND?: TagWhereInput | TagWhereInput[]
-    OR?: TagWhereInput[]
-    NOT?: TagWhereInput | TagWhereInput[]
-    id?: IntFilter<"Tag"> | number
-    name?: StringFilter<"Tag"> | string
-    news?: TagsNewsListRelationFilter
-  }
-
-  export type TagOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    news?: TagsNewsOrderByRelationAggregateInput
-  }
-
-  export type TagWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    name?: string
-    AND?: TagWhereInput | TagWhereInput[]
-    OR?: TagWhereInput[]
-    NOT?: TagWhereInput | TagWhereInput[]
-    news?: TagsNewsListRelationFilter
-  }, "id" | "name">
-
-  export type TagOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    _count?: TagCountOrderByAggregateInput
-    _avg?: TagAvgOrderByAggregateInput
-    _max?: TagMaxOrderByAggregateInput
-    _min?: TagMinOrderByAggregateInput
-    _sum?: TagSumOrderByAggregateInput
-  }
-
-  export type TagScalarWhereWithAggregatesInput = {
-    AND?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
-    OR?: TagScalarWhereWithAggregatesInput[]
-    NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Tag"> | number
-    name?: StringWithAggregatesFilter<"Tag"> | string
-  }
-
-  export type TagsNewsWhereInput = {
-    AND?: TagsNewsWhereInput | TagsNewsWhereInput[]
-    OR?: TagsNewsWhereInput[]
-    NOT?: TagsNewsWhereInput | TagsNewsWhereInput[]
-    id?: IntFilter<"TagsNews"> | number
-    newsId?: IntFilter<"TagsNews"> | number
-    tagId?: IntFilter<"TagsNews"> | number
-    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
-    tag?: XOR<TagScalarRelationFilter, TagWhereInput>
-  }
-
-  export type TagsNewsOrderByWithRelationInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-    news?: NewsOrderByWithRelationInput
-    tag?: TagOrderByWithRelationInput
-  }
-
-  export type TagsNewsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: TagsNewsWhereInput | TagsNewsWhereInput[]
-    OR?: TagsNewsWhereInput[]
-    NOT?: TagsNewsWhereInput | TagsNewsWhereInput[]
-    newsId?: IntFilter<"TagsNews"> | number
-    tagId?: IntFilter<"TagsNews"> | number
-    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
-    tag?: XOR<TagScalarRelationFilter, TagWhereInput>
-  }, "id">
-
-  export type TagsNewsOrderByWithAggregationInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-    _count?: TagsNewsCountOrderByAggregateInput
-    _avg?: TagsNewsAvgOrderByAggregateInput
-    _max?: TagsNewsMaxOrderByAggregateInput
-    _min?: TagsNewsMinOrderByAggregateInput
-    _sum?: TagsNewsSumOrderByAggregateInput
-  }
-
-  export type TagsNewsScalarWhereWithAggregatesInput = {
-    AND?: TagsNewsScalarWhereWithAggregatesInput | TagsNewsScalarWhereWithAggregatesInput[]
-    OR?: TagsNewsScalarWhereWithAggregatesInput[]
-    NOT?: TagsNewsScalarWhereWithAggregatesInput | TagsNewsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"TagsNews"> | number
-    newsId?: IntWithAggregatesFilter<"TagsNews"> | number
-    tagId?: IntWithAggregatesFilter<"TagsNews"> | number
-  }
-
-  export type NewsCommentsWhereInput = {
-    AND?: NewsCommentsWhereInput | NewsCommentsWhereInput[]
-    OR?: NewsCommentsWhereInput[]
-    NOT?: NewsCommentsWhereInput | NewsCommentsWhereInput[]
-    id?: IntFilter<"NewsComments"> | number
-    message?: StringFilter<"NewsComments"> | string
-    createdAt?: DateTimeFilter<"NewsComments"> | Date | string
-    newsId?: IntFilter<"NewsComments"> | number
-    userId?: StringFilter<"NewsComments"> | string
-    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type NewsCommentsOrderByWithRelationInput = {
-    id?: SortOrder
-    message?: SortOrder
-    createdAt?: SortOrder
-    newsId?: SortOrder
-    userId?: SortOrder
-    news?: NewsOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type NewsCommentsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: NewsCommentsWhereInput | NewsCommentsWhereInput[]
-    OR?: NewsCommentsWhereInput[]
-    NOT?: NewsCommentsWhereInput | NewsCommentsWhereInput[]
-    message?: StringFilter<"NewsComments"> | string
-    createdAt?: DateTimeFilter<"NewsComments"> | Date | string
-    newsId?: IntFilter<"NewsComments"> | number
-    userId?: StringFilter<"NewsComments"> | string
-    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type NewsCommentsOrderByWithAggregationInput = {
-    id?: SortOrder
-    message?: SortOrder
-    createdAt?: SortOrder
-    newsId?: SortOrder
-    userId?: SortOrder
-    _count?: NewsCommentsCountOrderByAggregateInput
-    _avg?: NewsCommentsAvgOrderByAggregateInput
-    _max?: NewsCommentsMaxOrderByAggregateInput
-    _min?: NewsCommentsMinOrderByAggregateInput
-    _sum?: NewsCommentsSumOrderByAggregateInput
-  }
-
-  export type NewsCommentsScalarWhereWithAggregatesInput = {
-    AND?: NewsCommentsScalarWhereWithAggregatesInput | NewsCommentsScalarWhereWithAggregatesInput[]
-    OR?: NewsCommentsScalarWhereWithAggregatesInput[]
-    NOT?: NewsCommentsScalarWhereWithAggregatesInput | NewsCommentsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"NewsComments"> | number
-    message?: StringWithAggregatesFilter<"NewsComments"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"NewsComments"> | Date | string
-    newsId?: IntWithAggregatesFilter<"NewsComments"> | number
-    userId?: StringWithAggregatesFilter<"NewsComments"> | string
+    joined?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    invitedById?: StringNullableWithAggregatesFilter<"User"> | string | null
+    lastActive?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    status?: StringWithAggregatesFilter<"User"> | string
+    invitationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    roleId?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type TenantCreateInput = {
@@ -12864,7 +6513,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserRoleCreateNestedManyWithoutRoleInput
+    users?: UserCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateInput = {
@@ -12873,7 +6522,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserRoleUncheckedCreateNestedManyWithoutRoleInput
+    users?: UserUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUpdateInput = {
@@ -12882,7 +6531,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserRoleUpdateManyWithoutRoleNestedInput
+    users?: UserUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateInput = {
@@ -12891,7 +6540,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+    users?: UserUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleCreateManyInput = {
@@ -12918,408 +6567,166 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserRoleCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutRolesInput
-    role: RoleCreateNestedOneWithoutUsersInput
-  }
-
-  export type UserRoleUncheckedCreateInput = {
-    id?: string
-    userId: string
-    roleId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserRoleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutRolesNestedInput
-    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
-  }
-
-  export type UserRoleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    roleId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserRoleCreateManyInput = {
-    id?: string
-    userId: string
-    roleId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserRoleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserRoleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    roleId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type UserCreateInput = {
     id?: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
-    news?: NewsCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
-    roles?: UserRoleCreateNestedManyWithoutUserInput
+    invitedBy?: UserCreateNestedOneWithoutInvitationsInput
+    invitations?: UserCreateNestedManyWithoutInvitedByInput
+    role: RoleCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     tenantId: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
-    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
-    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
+    invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
-    news?: NewsUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
+    invitations?: UserUpdateManyWithoutInvitedByNestedInput
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     tenantId: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type NewsCreateInput = {
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsInput
-    tagsList?: TagsNewsCreateNestedManyWithoutNewsInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsUncheckedCreateInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    tagsList?: TagsNewsUncheckedCreateNestedManyWithoutNewsInput
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsNestedInput
-    tagsList?: TagsNewsUpdateManyWithoutNewsNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutNewsNestedInput
-  }
-
-  export type NewsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    tagsList?: TagsNewsUncheckedUpdateManyWithoutNewsNestedInput
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutNewsNestedInput
-  }
-
-  export type NewsCreateManyInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-  }
-
-  export type NewsUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NewsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagCreateInput = {
-    name: string
-    news?: TagsNewsCreateNestedManyWithoutTagInput
-  }
-
-  export type TagUncheckedCreateInput = {
-    id?: number
-    name: string
-    news?: TagsNewsUncheckedCreateNestedManyWithoutTagInput
-  }
-
-  export type TagUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    news?: TagsNewsUpdateManyWithoutTagNestedInput
-  }
-
-  export type TagUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    news?: TagsNewsUncheckedUpdateManyWithoutTagNestedInput
-  }
-
-  export type TagCreateManyInput = {
-    id?: number
-    name: string
-  }
-
-  export type TagUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagsNewsCreateInput = {
-    news: NewsCreateNestedOneWithoutTagsListInput
-    tag: TagCreateNestedOneWithoutNewsInput
-  }
-
-  export type TagsNewsUncheckedCreateInput = {
-    id?: number
-    newsId: number
-    tagId: number
-  }
-
-  export type TagsNewsUpdateInput = {
-    news?: NewsUpdateOneRequiredWithoutTagsListNestedInput
-    tag?: TagUpdateOneRequiredWithoutNewsNestedInput
-  }
-
-  export type TagsNewsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    newsId?: IntFieldUpdateOperationsInput | number
-    tagId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TagsNewsCreateManyInput = {
-    id?: number
-    newsId: number
-    tagId: number
-  }
-
-  export type TagsNewsUpdateManyMutationInput = {
-
-  }
-
-  export type TagsNewsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    newsId?: IntFieldUpdateOperationsInput | number
-    tagId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type NewsCommentsCreateInput = {
-    message: string
-    createdAt?: Date | string
-    news: NewsCreateNestedOneWithoutCommentsListInput
-    user: UserCreateNestedOneWithoutCommentsListInput
-  }
-
-  export type NewsCommentsUncheckedCreateInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    newsId: number
-    userId: string
-  }
-
-  export type NewsCommentsUpdateInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    news?: NewsUpdateOneRequiredWithoutCommentsListNestedInput
-    user?: UserUpdateOneRequiredWithoutCommentsListNestedInput
-  }
-
-  export type NewsCommentsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsId?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewsCommentsCreateManyInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    newsId: number
-    userId: string
-  }
-
-  export type NewsCommentsUpdateManyMutationInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NewsCommentsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsId?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13479,16 +6886,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type UserRoleListRelationFilter = {
-    every?: UserRoleWhereInput
-    some?: UserRoleWhereInput
-    none?: UserRoleWhereInput
-  }
-
-  export type UserRoleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type RoleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -13513,45 +6910,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type RoleScalarRelationFilter = {
-    is?: RoleWhereInput
-    isNot?: RoleWhereInput
-  }
-
-  export type UserRoleUserIdRoleIdCompoundUniqueInput = {
-    userId: string
-    roleId: string
-  }
-
-  export type UserRoleCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserRoleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserRoleMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    roleId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13567,34 +6925,35 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type TenantScalarRelationFilter = {
     is?: TenantWhereInput
     isNot?: TenantWhereInput
   }
 
-  export type NewsListRelationFilter = {
-    every?: NewsWhereInput
-    some?: NewsWhereInput
-    none?: NewsWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
-  export type NewsCommentsListRelationFilter = {
-    every?: NewsCommentsWhereInput
-    some?: NewsCommentsWhereInput
-    none?: NewsCommentsWhereInput
+  export type RoleScalarRelationFilter = {
+    is?: RoleWhereInput
+    isNot?: RoleWhereInput
   }
 
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type NewsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewsCommentsOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type UserTenantIdEmailCompoundUniqueInput = {
@@ -13616,8 +6975,13 @@ export namespace Prisma {
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    isDeleted?: SortOrder
     resetPasswordToken?: SortOrder
+    joined?: SortOrder
+    invitedById?: SortOrder
+    lastActive?: SortOrder
+    status?: SortOrder
+    invitationToken?: SortOrder
+    roleId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -13634,8 +6998,13 @@ export namespace Prisma {
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    isDeleted?: SortOrder
     resetPasswordToken?: SortOrder
+    joined?: SortOrder
+    invitedById?: SortOrder
+    lastActive?: SortOrder
+    status?: SortOrder
+    invitationToken?: SortOrder
+    roleId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -13652,8 +7021,13 @@ export namespace Prisma {
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    isDeleted?: SortOrder
     resetPasswordToken?: SortOrder
+    joined?: SortOrder
+    invitedById?: SortOrder
+    lastActive?: SortOrder
+    status?: SortOrder
+    invitationToken?: SortOrder
+    roleId?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -13674,182 +7048,18 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type TagsNewsListRelationFilter = {
-    every?: TagsNewsWhereInput
-    some?: TagsNewsWhereInput
-    none?: TagsNewsWhereInput
-  }
-
-  export type TagsNewsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewsCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    subTitle?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type NewsAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type NewsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    subTitle?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type NewsMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    subTitle?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type NewsSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type TagCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-  }
-
-  export type TagAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type TagMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-  }
-
-  export type TagMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-  }
-
-  export type TagSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type NewsScalarRelationFilter = {
-    is?: NewsWhereInput
-    isNot?: NewsWhereInput
-  }
-
-  export type TagScalarRelationFilter = {
-    is?: TagWhereInput
-    isNot?: TagWhereInput
-  }
-
-  export type TagsNewsCountOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-  }
-
-  export type TagsNewsAvgOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-  }
-
-  export type TagsNewsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-  }
-
-  export type TagsNewsMinOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-  }
-
-  export type TagsNewsSumOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-    tagId?: SortOrder
-  }
-
-  export type NewsCommentsCountOrderByAggregateInput = {
-    id?: SortOrder
-    message?: SortOrder
-    createdAt?: SortOrder
-    newsId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type NewsCommentsAvgOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
-  }
-
-  export type NewsCommentsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    message?: SortOrder
-    createdAt?: SortOrder
-    newsId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type NewsCommentsMinOrderByAggregateInput = {
-    id?: SortOrder
-    message?: SortOrder
-    createdAt?: SortOrder
-    newsId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type NewsCommentsSumOrderByAggregateInput = {
-    id?: SortOrder
-    newsId?: SortOrder
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ClientCreateNestedOneWithoutTenantInput = {
@@ -13952,74 +7162,46 @@ export namespace Prisma {
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutClientInput, TenantUpdateWithoutClientInput>, TenantUncheckedUpdateWithoutClientInput>
   }
 
-  export type UserRoleCreateNestedManyWithoutRoleInput = {
-    create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
-    createMany?: UserRoleCreateManyRoleInputEnvelope
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  export type UserCreateNestedManyWithoutRoleInput = {
+    create?: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput> | UserCreateWithoutRoleInput[] | UserUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRoleInput | UserCreateOrConnectWithoutRoleInput[]
+    createMany?: UserCreateManyRoleInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type UserRoleUncheckedCreateNestedManyWithoutRoleInput = {
-    create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
-    createMany?: UserRoleCreateManyRoleInputEnvelope
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  export type UserUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput> | UserCreateWithoutRoleInput[] | UserUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRoleInput | UserCreateOrConnectWithoutRoleInput[]
+    createMany?: UserCreateManyRoleInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type UserRoleUpdateManyWithoutRoleNestedInput = {
-    create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
-    upsert?: UserRoleUpsertWithWhereUniqueWithoutRoleInput | UserRoleUpsertWithWhereUniqueWithoutRoleInput[]
-    createMany?: UserRoleCreateManyRoleInputEnvelope
-    set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    update?: UserRoleUpdateWithWhereUniqueWithoutRoleInput | UserRoleUpdateWithWhereUniqueWithoutRoleInput[]
-    updateMany?: UserRoleUpdateManyWithWhereWithoutRoleInput | UserRoleUpdateManyWithWhereWithoutRoleInput[]
-    deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
+  export type UserUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput> | UserCreateWithoutRoleInput[] | UserUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRoleInput | UserCreateOrConnectWithoutRoleInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRoleInput | UserUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: UserCreateManyRoleInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRoleInput | UserUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRoleInput | UserUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type UserRoleUncheckedUpdateManyWithoutRoleNestedInput = {
-    create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
-    upsert?: UserRoleUpsertWithWhereUniqueWithoutRoleInput | UserRoleUpsertWithWhereUniqueWithoutRoleInput[]
-    createMany?: UserRoleCreateManyRoleInputEnvelope
-    set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    update?: UserRoleUpdateWithWhereUniqueWithoutRoleInput | UserRoleUpdateWithWhereUniqueWithoutRoleInput[]
-    updateMany?: UserRoleUpdateManyWithWhereWithoutRoleInput | UserRoleUpdateManyWithWhereWithoutRoleInput[]
-    deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutRolesInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type RoleCreateNestedOneWithoutUsersInput = {
-    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
-    connect?: RoleWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutRolesNestedInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput
-    upsert?: UserUpsertWithoutRolesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRolesInput, UserUpdateWithoutRolesInput>, UserUncheckedUpdateWithoutRolesInput>
-  }
-
-  export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
-    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
-    upsert?: RoleUpsertWithoutUsersInput
-    connect?: RoleWhereUniqueInput
-    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutUsersInput, RoleUpdateWithoutUsersInput>, RoleUncheckedUpdateWithoutUsersInput>
+  export type UserUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput> | UserCreateWithoutRoleInput[] | UserUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRoleInput | UserCreateOrConnectWithoutRoleInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRoleInput | UserUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: UserCreateManyRoleInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRoleInput | UserUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRoleInput | UserUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutUsersInput = {
@@ -14028,50 +7210,38 @@ export namespace Prisma {
     connect?: TenantWhereUniqueInput
   }
 
-  export type NewsCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
-    createMany?: NewsCreateManyAuthorInputEnvelope
-    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInvitationsInput
+    connect?: UserWhereUniqueInput
   }
 
-  export type NewsCommentsCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput> | NewsCommentsCreateWithoutUserInput[] | NewsCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutUserInput | NewsCommentsCreateOrConnectWithoutUserInput[]
-    createMany?: NewsCommentsCreateManyUserInputEnvelope
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
+  export type UserCreateNestedManyWithoutInvitedByInput = {
+    create?: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput> | UserCreateWithoutInvitedByInput[] | UserUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutInvitedByInput | UserCreateOrConnectWithoutInvitedByInput[]
+    createMany?: UserCreateManyInvitedByInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type UserRoleCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
-    createMany?: UserRoleCreateManyUserInputEnvelope
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  export type RoleCreateNestedOneWithoutUsersInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
+    connect?: RoleWhereUniqueInput
   }
 
-  export type NewsUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
-    createMany?: NewsCreateManyAuthorInputEnvelope
-    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-  }
-
-  export type NewsCommentsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput> | NewsCommentsCreateWithoutUserInput[] | NewsCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutUserInput | NewsCommentsCreateOrConnectWithoutUserInput[]
-    createMany?: NewsCommentsCreateManyUserInputEnvelope
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-  }
-
-  export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
-    createMany?: UserRoleCreateManyUserInputEnvelope
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  export type UserUncheckedCreateNestedManyWithoutInvitedByInput = {
+    create?: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput> | UserCreateWithoutInvitedByInput[] | UserUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutInvitedByInput | UserCreateOrConnectWithoutInvitedByInput[]
+    createMany?: UserCreateManyInvitedByInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type TenantUpdateOneRequiredWithoutUsersNestedInput = {
@@ -14082,292 +7252,50 @@ export namespace Prisma {
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutUsersInput, TenantUpdateWithoutUsersInput>, TenantUncheckedUpdateWithoutUsersInput>
   }
 
-  export type NewsUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
-    upsert?: NewsUpsertWithWhereUniqueWithoutAuthorInput | NewsUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: NewsCreateManyAuthorInputEnvelope
-    set?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    disconnect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    delete?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    update?: NewsUpdateWithWhereUniqueWithoutAuthorInput | NewsUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: NewsUpdateManyWithWhereWithoutAuthorInput | NewsUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
-  }
-
-  export type NewsCommentsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput> | NewsCommentsCreateWithoutUserInput[] | NewsCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutUserInput | NewsCommentsCreateOrConnectWithoutUserInput[]
-    upsert?: NewsCommentsUpsertWithWhereUniqueWithoutUserInput | NewsCommentsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewsCommentsCreateManyUserInputEnvelope
-    set?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    disconnect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    delete?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    update?: NewsCommentsUpdateWithWhereUniqueWithoutUserInput | NewsCommentsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewsCommentsUpdateManyWithWhereWithoutUserInput | NewsCommentsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-  }
-
-  export type UserRoleUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
-    upsert?: UserRoleUpsertWithWhereUniqueWithoutUserInput | UserRoleUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserRoleCreateManyUserInputEnvelope
-    set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-  }
-
-  export type NewsUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
-    upsert?: NewsUpsertWithWhereUniqueWithoutAuthorInput | NewsUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: NewsCreateManyAuthorInputEnvelope
-    set?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    disconnect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    delete?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
-    update?: NewsUpdateWithWhereUniqueWithoutAuthorInput | NewsUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: NewsUpdateManyWithWhereWithoutAuthorInput | NewsUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
-  }
-
-  export type NewsCommentsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput> | NewsCommentsCreateWithoutUserInput[] | NewsCommentsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutUserInput | NewsCommentsCreateOrConnectWithoutUserInput[]
-    upsert?: NewsCommentsUpsertWithWhereUniqueWithoutUserInput | NewsCommentsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewsCommentsCreateManyUserInputEnvelope
-    set?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    disconnect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    delete?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    update?: NewsCommentsUpdateWithWhereUniqueWithoutUserInput | NewsCommentsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewsCommentsUpdateManyWithWhereWithoutUserInput | NewsCommentsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-  }
-
-  export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
-    upsert?: UserRoleUpsertWithWhereUniqueWithoutUserInput | UserRoleUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserRoleCreateManyUserInputEnvelope
-    set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
-    update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutNewsInput = {
-    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
+  export type UserUpdateOneWithoutInvitationsNestedInput = {
+    create?: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInvitationsInput
+    upsert?: UserUpsertWithoutInvitationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInvitationsInput, UserUpdateWithoutInvitationsInput>, UserUncheckedUpdateWithoutInvitationsInput>
   }
 
-  export type TagsNewsCreateNestedManyWithoutNewsInput = {
-    create?: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput> | TagsNewsCreateWithoutNewsInput[] | TagsNewsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutNewsInput | TagsNewsCreateOrConnectWithoutNewsInput[]
-    createMany?: TagsNewsCreateManyNewsInputEnvelope
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
+  export type UserUpdateManyWithoutInvitedByNestedInput = {
+    create?: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput> | UserCreateWithoutInvitedByInput[] | UserUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutInvitedByInput | UserCreateOrConnectWithoutInvitedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutInvitedByInput | UserUpsertWithWhereUniqueWithoutInvitedByInput[]
+    createMany?: UserCreateManyInvitedByInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutInvitedByInput | UserUpdateWithWhereUniqueWithoutInvitedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutInvitedByInput | UserUpdateManyWithWhereWithoutInvitedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type NewsCommentsCreateNestedManyWithoutNewsInput = {
-    create?: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput> | NewsCommentsCreateWithoutNewsInput[] | NewsCommentsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutNewsInput | NewsCommentsCreateOrConnectWithoutNewsInput[]
-    createMany?: NewsCommentsCreateManyNewsInputEnvelope
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
+  export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
+    upsert?: RoleUpsertWithoutUsersInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutUsersInput, RoleUpdateWithoutUsersInput>, RoleUncheckedUpdateWithoutUsersInput>
   }
 
-  export type TagsNewsUncheckedCreateNestedManyWithoutNewsInput = {
-    create?: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput> | TagsNewsCreateWithoutNewsInput[] | TagsNewsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutNewsInput | TagsNewsCreateOrConnectWithoutNewsInput[]
-    createMany?: TagsNewsCreateManyNewsInputEnvelope
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-  }
-
-  export type NewsCommentsUncheckedCreateNestedManyWithoutNewsInput = {
-    create?: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput> | NewsCommentsCreateWithoutNewsInput[] | NewsCommentsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutNewsInput | NewsCommentsCreateOrConnectWithoutNewsInput[]
-    createMany?: NewsCommentsCreateManyNewsInputEnvelope
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutNewsNestedInput = {
-    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
-    upsert?: UserUpsertWithoutNewsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsInput, UserUpdateWithoutNewsInput>, UserUncheckedUpdateWithoutNewsInput>
-  }
-
-  export type TagsNewsUpdateManyWithoutNewsNestedInput = {
-    create?: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput> | TagsNewsCreateWithoutNewsInput[] | TagsNewsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutNewsInput | TagsNewsCreateOrConnectWithoutNewsInput[]
-    upsert?: TagsNewsUpsertWithWhereUniqueWithoutNewsInput | TagsNewsUpsertWithWhereUniqueWithoutNewsInput[]
-    createMany?: TagsNewsCreateManyNewsInputEnvelope
-    set?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    disconnect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    delete?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    update?: TagsNewsUpdateWithWhereUniqueWithoutNewsInput | TagsNewsUpdateWithWhereUniqueWithoutNewsInput[]
-    updateMany?: TagsNewsUpdateManyWithWhereWithoutNewsInput | TagsNewsUpdateManyWithWhereWithoutNewsInput[]
-    deleteMany?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-  }
-
-  export type NewsCommentsUpdateManyWithoutNewsNestedInput = {
-    create?: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput> | NewsCommentsCreateWithoutNewsInput[] | NewsCommentsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutNewsInput | NewsCommentsCreateOrConnectWithoutNewsInput[]
-    upsert?: NewsCommentsUpsertWithWhereUniqueWithoutNewsInput | NewsCommentsUpsertWithWhereUniqueWithoutNewsInput[]
-    createMany?: NewsCommentsCreateManyNewsInputEnvelope
-    set?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    disconnect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    delete?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    update?: NewsCommentsUpdateWithWhereUniqueWithoutNewsInput | NewsCommentsUpdateWithWhereUniqueWithoutNewsInput[]
-    updateMany?: NewsCommentsUpdateManyWithWhereWithoutNewsInput | NewsCommentsUpdateManyWithWhereWithoutNewsInput[]
-    deleteMany?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type TagsNewsUncheckedUpdateManyWithoutNewsNestedInput = {
-    create?: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput> | TagsNewsCreateWithoutNewsInput[] | TagsNewsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutNewsInput | TagsNewsCreateOrConnectWithoutNewsInput[]
-    upsert?: TagsNewsUpsertWithWhereUniqueWithoutNewsInput | TagsNewsUpsertWithWhereUniqueWithoutNewsInput[]
-    createMany?: TagsNewsCreateManyNewsInputEnvelope
-    set?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    disconnect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    delete?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    update?: TagsNewsUpdateWithWhereUniqueWithoutNewsInput | TagsNewsUpdateWithWhereUniqueWithoutNewsInput[]
-    updateMany?: TagsNewsUpdateManyWithWhereWithoutNewsInput | TagsNewsUpdateManyWithWhereWithoutNewsInput[]
-    deleteMany?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-  }
-
-  export type NewsCommentsUncheckedUpdateManyWithoutNewsNestedInput = {
-    create?: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput> | NewsCommentsCreateWithoutNewsInput[] | NewsCommentsUncheckedCreateWithoutNewsInput[]
-    connectOrCreate?: NewsCommentsCreateOrConnectWithoutNewsInput | NewsCommentsCreateOrConnectWithoutNewsInput[]
-    upsert?: NewsCommentsUpsertWithWhereUniqueWithoutNewsInput | NewsCommentsUpsertWithWhereUniqueWithoutNewsInput[]
-    createMany?: NewsCommentsCreateManyNewsInputEnvelope
-    set?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    disconnect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    delete?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    connect?: NewsCommentsWhereUniqueInput | NewsCommentsWhereUniqueInput[]
-    update?: NewsCommentsUpdateWithWhereUniqueWithoutNewsInput | NewsCommentsUpdateWithWhereUniqueWithoutNewsInput[]
-    updateMany?: NewsCommentsUpdateManyWithWhereWithoutNewsInput | NewsCommentsUpdateManyWithWhereWithoutNewsInput[]
-    deleteMany?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-  }
-
-  export type TagsNewsCreateNestedManyWithoutTagInput = {
-    create?: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput> | TagsNewsCreateWithoutTagInput[] | TagsNewsUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutTagInput | TagsNewsCreateOrConnectWithoutTagInput[]
-    createMany?: TagsNewsCreateManyTagInputEnvelope
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-  }
-
-  export type TagsNewsUncheckedCreateNestedManyWithoutTagInput = {
-    create?: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput> | TagsNewsCreateWithoutTagInput[] | TagsNewsUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutTagInput | TagsNewsCreateOrConnectWithoutTagInput[]
-    createMany?: TagsNewsCreateManyTagInputEnvelope
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-  }
-
-  export type TagsNewsUpdateManyWithoutTagNestedInput = {
-    create?: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput> | TagsNewsCreateWithoutTagInput[] | TagsNewsUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutTagInput | TagsNewsCreateOrConnectWithoutTagInput[]
-    upsert?: TagsNewsUpsertWithWhereUniqueWithoutTagInput | TagsNewsUpsertWithWhereUniqueWithoutTagInput[]
-    createMany?: TagsNewsCreateManyTagInputEnvelope
-    set?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    disconnect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    delete?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    update?: TagsNewsUpdateWithWhereUniqueWithoutTagInput | TagsNewsUpdateWithWhereUniqueWithoutTagInput[]
-    updateMany?: TagsNewsUpdateManyWithWhereWithoutTagInput | TagsNewsUpdateManyWithWhereWithoutTagInput[]
-    deleteMany?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-  }
-
-  export type TagsNewsUncheckedUpdateManyWithoutTagNestedInput = {
-    create?: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput> | TagsNewsCreateWithoutTagInput[] | TagsNewsUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: TagsNewsCreateOrConnectWithoutTagInput | TagsNewsCreateOrConnectWithoutTagInput[]
-    upsert?: TagsNewsUpsertWithWhereUniqueWithoutTagInput | TagsNewsUpsertWithWhereUniqueWithoutTagInput[]
-    createMany?: TagsNewsCreateManyTagInputEnvelope
-    set?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    disconnect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    delete?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    connect?: TagsNewsWhereUniqueInput | TagsNewsWhereUniqueInput[]
-    update?: TagsNewsUpdateWithWhereUniqueWithoutTagInput | TagsNewsUpdateWithWhereUniqueWithoutTagInput[]
-    updateMany?: TagsNewsUpdateManyWithWhereWithoutTagInput | TagsNewsUpdateManyWithWhereWithoutTagInput[]
-    deleteMany?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-  }
-
-  export type NewsCreateNestedOneWithoutTagsListInput = {
-    create?: XOR<NewsCreateWithoutTagsListInput, NewsUncheckedCreateWithoutTagsListInput>
-    connectOrCreate?: NewsCreateOrConnectWithoutTagsListInput
-    connect?: NewsWhereUniqueInput
-  }
-
-  export type TagCreateNestedOneWithoutNewsInput = {
-    create?: XOR<TagCreateWithoutNewsInput, TagUncheckedCreateWithoutNewsInput>
-    connectOrCreate?: TagCreateOrConnectWithoutNewsInput
-    connect?: TagWhereUniqueInput
-  }
-
-  export type NewsUpdateOneRequiredWithoutTagsListNestedInput = {
-    create?: XOR<NewsCreateWithoutTagsListInput, NewsUncheckedCreateWithoutTagsListInput>
-    connectOrCreate?: NewsCreateOrConnectWithoutTagsListInput
-    upsert?: NewsUpsertWithoutTagsListInput
-    connect?: NewsWhereUniqueInput
-    update?: XOR<XOR<NewsUpdateToOneWithWhereWithoutTagsListInput, NewsUpdateWithoutTagsListInput>, NewsUncheckedUpdateWithoutTagsListInput>
-  }
-
-  export type TagUpdateOneRequiredWithoutNewsNestedInput = {
-    create?: XOR<TagCreateWithoutNewsInput, TagUncheckedCreateWithoutNewsInput>
-    connectOrCreate?: TagCreateOrConnectWithoutNewsInput
-    upsert?: TagUpsertWithoutNewsInput
-    connect?: TagWhereUniqueInput
-    update?: XOR<XOR<TagUpdateToOneWithWhereWithoutNewsInput, TagUpdateWithoutNewsInput>, TagUncheckedUpdateWithoutNewsInput>
-  }
-
-  export type NewsCreateNestedOneWithoutCommentsListInput = {
-    create?: XOR<NewsCreateWithoutCommentsListInput, NewsUncheckedCreateWithoutCommentsListInput>
-    connectOrCreate?: NewsCreateOrConnectWithoutCommentsListInput
-    connect?: NewsWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutCommentsListInput = {
-    create?: XOR<UserCreateWithoutCommentsListInput, UserUncheckedCreateWithoutCommentsListInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCommentsListInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type NewsUpdateOneRequiredWithoutCommentsListNestedInput = {
-    create?: XOR<NewsCreateWithoutCommentsListInput, NewsUncheckedCreateWithoutCommentsListInput>
-    connectOrCreate?: NewsCreateOrConnectWithoutCommentsListInput
-    upsert?: NewsUpsertWithoutCommentsListInput
-    connect?: NewsWhereUniqueInput
-    update?: XOR<XOR<NewsUpdateToOneWithWhereWithoutCommentsListInput, NewsUpdateWithoutCommentsListInput>, NewsUncheckedUpdateWithoutCommentsListInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutCommentsListNestedInput = {
-    create?: XOR<UserCreateWithoutCommentsListInput, UserUncheckedCreateWithoutCommentsListInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCommentsListInput
-    upsert?: UserUpsertWithoutCommentsListInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsListInput, UserUpdateWithoutCommentsListInput>, UserUncheckedUpdateWithoutCommentsListInput>
+  export type UserUncheckedUpdateManyWithoutInvitedByNestedInput = {
+    create?: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput> | UserCreateWithoutInvitedByInput[] | UserUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutInvitedByInput | UserCreateOrConnectWithoutInvitedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutInvitedByInput | UserUpsertWithWhereUniqueWithoutInvitedByInput[]
+    createMany?: UserCreateManyInvitedByInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutInvitedByInput | UserUpdateWithWhereUniqueWithoutInvitedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutInvitedByInput | UserUpdateManyWithWhereWithoutInvitedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14464,6 +7392,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -14492,31 +7431,18 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ClientCreateWithoutTenantInput = {
@@ -14555,41 +7481,47 @@ export namespace Prisma {
   export type UserCreateWithoutTenantInput = {
     id?: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
-    news?: NewsCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
-    roles?: UserRoleCreateNestedManyWithoutUserInput
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    invitedBy?: UserCreateNestedOneWithoutInvitationsInput
+    invitations?: UserCreateNestedManyWithoutInvitedByInput
+    role: RoleCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutTenantInput = {
     id?: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
-    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
-    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
+    invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
   }
 
   export type UserCreateOrConnectWithoutTenantInput = {
@@ -14664,18 +7596,23 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     tenantId?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    fullname?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    country?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    typeIdentification?: StringFilter<"User"> | string
-    identification?: StringFilter<"User"> | string
+    fullname?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    phone?: StringNullableFilter<"User"> | string | null
+    typeIdentification?: StringNullableFilter<"User"> | string | null
+    identification?: StringNullableFilter<"User"> | string | null
     emailVerified?: BoolFilter<"User"> | boolean
     verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    isDeleted?: BoolFilter<"User"> | boolean
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    joined?: DateTimeNullableFilter<"User"> | Date | string | null
+    invitedById?: StringNullableFilter<"User"> | string | null
+    lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
+    status?: StringFilter<"User"> | string
+    invitationToken?: StringNullableFilter<"User"> | string | null
+    roleId?: StringFilter<"User"> | string
   }
 
   export type TenantCreateWithoutClientInput = {
@@ -14726,199 +7663,76 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
   }
 
-  export type UserRoleCreateWithoutRoleInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutRolesInput
-  }
-
-  export type UserRoleUncheckedCreateWithoutRoleInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserRoleCreateOrConnectWithoutRoleInput = {
-    where: UserRoleWhereUniqueInput
-    create: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
-  }
-
-  export type UserRoleCreateManyRoleInputEnvelope = {
-    data: UserRoleCreateManyRoleInput | UserRoleCreateManyRoleInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserRoleUpsertWithWhereUniqueWithoutRoleInput = {
-    where: UserRoleWhereUniqueInput
-    update: XOR<UserRoleUpdateWithoutRoleInput, UserRoleUncheckedUpdateWithoutRoleInput>
-    create: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
-  }
-
-  export type UserRoleUpdateWithWhereUniqueWithoutRoleInput = {
-    where: UserRoleWhereUniqueInput
-    data: XOR<UserRoleUpdateWithoutRoleInput, UserRoleUncheckedUpdateWithoutRoleInput>
-  }
-
-  export type UserRoleUpdateManyWithWhereWithoutRoleInput = {
-    where: UserRoleScalarWhereInput
-    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyWithoutRoleInput>
-  }
-
-  export type UserRoleScalarWhereInput = {
-    AND?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-    OR?: UserRoleScalarWhereInput[]
-    NOT?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
-    id?: StringFilter<"UserRole"> | string
-    userId?: StringFilter<"UserRole"> | string
-    roleId?: StringFilter<"UserRole"> | string
-    createdAt?: DateTimeFilter<"UserRole"> | Date | string
-    updatedAt?: DateTimeFilter<"UserRole"> | Date | string
-  }
-
-  export type UserCreateWithoutRolesInput = {
+  export type UserCreateWithoutRoleInput = {
     id?: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
     tenant: TenantCreateNestedOneWithoutUsersInput
-    news?: NewsCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
+    invitedBy?: UserCreateNestedOneWithoutInvitationsInput
+    invitations?: UserCreateNestedManyWithoutInvitedByInput
   }
 
-  export type UserUncheckedCreateWithoutRolesInput = {
+  export type UserUncheckedCreateWithoutRoleInput = {
     id?: string
     tenantId: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
-    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
   }
 
-  export type UserCreateOrConnectWithoutRolesInput = {
+  export type UserCreateOrConnectWithoutRoleInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
+    create: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput>
   }
 
-  export type RoleCreateWithoutUsersInput = {
-    id?: string
-    name: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type UserCreateManyRoleInputEnvelope = {
+    data: UserCreateManyRoleInput | UserCreateManyRoleInput[]
+    skipDuplicates?: boolean
   }
 
-  export type RoleUncheckedCreateWithoutUsersInput = {
-    id?: string
-    name: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type UserUpsertWithWhereUniqueWithoutRoleInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutRoleInput, UserUncheckedUpdateWithoutRoleInput>
+    create: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput>
   }
 
-  export type RoleCreateOrConnectWithoutUsersInput = {
-    where: RoleWhereUniqueInput
-    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+  export type UserUpdateWithWhereUniqueWithoutRoleInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutRoleInput, UserUncheckedUpdateWithoutRoleInput>
   }
 
-  export type UserUpsertWithoutRolesInput = {
-    update: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
-    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutRolesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
-  }
-
-  export type UserUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
-    news?: NewsUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type RoleUpsertWithoutUsersInput = {
-    update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
-    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
-    where?: RoleWhereInput
-  }
-
-  export type RoleUpdateToOneWithWhereWithoutUsersInput = {
-    where?: RoleWhereInput
-    data: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type RoleUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RoleUncheckedUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserUpdateManyWithWhereWithoutRoleInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRoleInput>
   }
 
   export type TenantCreateWithoutUsersInput = {
@@ -14942,86 +7756,132 @@ export namespace Prisma {
     create: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
   }
 
-  export type NewsCreateWithoutAuthorInput = {
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tagsList?: TagsNewsCreateNestedManyWithoutNewsInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsUncheckedCreateWithoutAuthorInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tagsList?: TagsNewsUncheckedCreateNestedManyWithoutNewsInput
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsCreateOrConnectWithoutAuthorInput = {
-    where: NewsWhereUniqueInput
-    create: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type NewsCreateManyAuthorInputEnvelope = {
-    data: NewsCreateManyAuthorInput | NewsCreateManyAuthorInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NewsCommentsCreateWithoutUserInput = {
-    message: string
-    createdAt?: Date | string
-    news: NewsCreateNestedOneWithoutCommentsListInput
-  }
-
-  export type NewsCommentsUncheckedCreateWithoutUserInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    newsId: number
-  }
-
-  export type NewsCommentsCreateOrConnectWithoutUserInput = {
-    where: NewsCommentsWhereUniqueInput
-    create: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewsCommentsCreateManyUserInputEnvelope = {
-    data: NewsCommentsCreateManyUserInput | NewsCommentsCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserRoleCreateWithoutUserInput = {
+  export type UserCreateWithoutInvitationsInput = {
     id?: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
-  export type UserRoleUncheckedCreateWithoutUserInput = {
+  export type UserUncheckedCreateWithoutInvitationsInput = {
     id?: string
+    tenantId: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
     roleId: string
+  }
+
+  export type UserCreateOrConnectWithoutInvitationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type UserCreateWithoutInvitedByInput = {
+    id?: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    invitations?: UserCreateNestedManyWithoutInvitedByInput
+    role: RoleCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutInvitedByInput = {
+    id?: string
+    tenantId: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
+    invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
+  }
+
+  export type UserCreateOrConnectWithoutInvitedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput>
+  }
+
+  export type UserCreateManyInvitedByInputEnvelope = {
+    data: UserCreateManyInvitedByInput | UserCreateManyInvitedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RoleCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type UserRoleCreateOrConnectWithoutUserInput = {
-    where: UserRoleWhereUniqueInput
-    create: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
+  export type RoleUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type UserRoleCreateManyUserInputEnvelope = {
-    data: UserRoleCreateManyUserInput | UserRoleCreateManyUserInput[]
-    skipDuplicates?: boolean
+  export type RoleCreateOrConnectWithoutUsersInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
   }
 
   export type TenantUpsertWithoutUsersInput = {
@@ -15051,823 +7911,374 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type NewsUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: NewsWhereUniqueInput
-    update: XOR<NewsUpdateWithoutAuthorInput, NewsUncheckedUpdateWithoutAuthorInput>
-    create: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type NewsUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: NewsWhereUniqueInput
-    data: XOR<NewsUpdateWithoutAuthorInput, NewsUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type NewsUpdateManyWithWhereWithoutAuthorInput = {
-    where: NewsScalarWhereInput
-    data: XOR<NewsUpdateManyMutationInput, NewsUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type NewsScalarWhereInput = {
-    AND?: NewsScalarWhereInput | NewsScalarWhereInput[]
-    OR?: NewsScalarWhereInput[]
-    NOT?: NewsScalarWhereInput | NewsScalarWhereInput[]
-    id?: IntFilter<"News"> | number
-    title?: StringFilter<"News"> | string
-    subTitle?: StringFilter<"News"> | string
-    content?: StringFilter<"News"> | string
-    type?: StringFilter<"News"> | string
-    published?: BoolFilter<"News"> | boolean
-    createdAt?: DateTimeFilter<"News"> | Date | string
-    updatedAt?: DateTimeFilter<"News"> | Date | string
-    authorId?: StringFilter<"News"> | string
-  }
-
-  export type NewsCommentsUpsertWithWhereUniqueWithoutUserInput = {
-    where: NewsCommentsWhereUniqueInput
-    update: XOR<NewsCommentsUpdateWithoutUserInput, NewsCommentsUncheckedUpdateWithoutUserInput>
-    create: XOR<NewsCommentsCreateWithoutUserInput, NewsCommentsUncheckedCreateWithoutUserInput>
-  }
-
-  export type NewsCommentsUpdateWithWhereUniqueWithoutUserInput = {
-    where: NewsCommentsWhereUniqueInput
-    data: XOR<NewsCommentsUpdateWithoutUserInput, NewsCommentsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NewsCommentsUpdateManyWithWhereWithoutUserInput = {
-    where: NewsCommentsScalarWhereInput
-    data: XOR<NewsCommentsUpdateManyMutationInput, NewsCommentsUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NewsCommentsScalarWhereInput = {
-    AND?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-    OR?: NewsCommentsScalarWhereInput[]
-    NOT?: NewsCommentsScalarWhereInput | NewsCommentsScalarWhereInput[]
-    id?: IntFilter<"NewsComments"> | number
-    message?: StringFilter<"NewsComments"> | string
-    createdAt?: DateTimeFilter<"NewsComments"> | Date | string
-    newsId?: IntFilter<"NewsComments"> | number
-    userId?: StringFilter<"NewsComments"> | string
-  }
-
-  export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserRoleWhereUniqueInput
-    update: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>
-    create: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserRoleUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserRoleWhereUniqueInput
-    data: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserRoleUpdateManyWithWhereWithoutUserInput = {
-    where: UserRoleScalarWhereInput
-    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserCreateWithoutNewsInput = {
-    id?: string
-    email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
-    emailVerified?: boolean
-    verificationToken?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isDeleted?: boolean
-    resetPasswordToken?: string | null
-    tenant: TenantCreateNestedOneWithoutUsersInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutUserInput
-    roles?: UserRoleCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutNewsInput = {
-    id?: string
-    tenantId: string
-    email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
-    emailVerified?: boolean
-    verificationToken?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isDeleted?: boolean
-    resetPasswordToken?: string | null
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutUserInput
-    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutNewsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
-  }
-
-  export type TagsNewsCreateWithoutNewsInput = {
-    tag: TagCreateNestedOneWithoutNewsInput
-  }
-
-  export type TagsNewsUncheckedCreateWithoutNewsInput = {
-    id?: number
-    tagId: number
-  }
-
-  export type TagsNewsCreateOrConnectWithoutNewsInput = {
-    where: TagsNewsWhereUniqueInput
-    create: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput>
-  }
-
-  export type TagsNewsCreateManyNewsInputEnvelope = {
-    data: TagsNewsCreateManyNewsInput | TagsNewsCreateManyNewsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NewsCommentsCreateWithoutNewsInput = {
-    message: string
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutCommentsListInput
-  }
-
-  export type NewsCommentsUncheckedCreateWithoutNewsInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    userId: string
-  }
-
-  export type NewsCommentsCreateOrConnectWithoutNewsInput = {
-    where: NewsCommentsWhereUniqueInput
-    create: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput>
-  }
-
-  export type NewsCommentsCreateManyNewsInputEnvelope = {
-    data: NewsCommentsCreateManyNewsInput | NewsCommentsCreateManyNewsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithoutNewsInput = {
-    update: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
-    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+  export type UserUpsertWithoutInvitationsInput = {
+    update: XOR<UserUpdateWithoutInvitationsInput, UserUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutNewsInput = {
+  export type UserUpdateToOneWithWhereWithoutInvitationsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
+    data: XOR<UserUpdateWithoutInvitationsInput, UserUncheckedUpdateWithoutInvitationsInput>
   }
 
-  export type UserUpdateWithoutNewsInput = {
+  export type UserUpdateWithoutInvitationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutNewsInput = {
+  export type UserUncheckedUpdateWithoutInvitationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TagsNewsUpsertWithWhereUniqueWithoutNewsInput = {
-    where: TagsNewsWhereUniqueInput
-    update: XOR<TagsNewsUpdateWithoutNewsInput, TagsNewsUncheckedUpdateWithoutNewsInput>
-    create: XOR<TagsNewsCreateWithoutNewsInput, TagsNewsUncheckedCreateWithoutNewsInput>
-  }
-
-  export type TagsNewsUpdateWithWhereUniqueWithoutNewsInput = {
-    where: TagsNewsWhereUniqueInput
-    data: XOR<TagsNewsUpdateWithoutNewsInput, TagsNewsUncheckedUpdateWithoutNewsInput>
-  }
-
-  export type TagsNewsUpdateManyWithWhereWithoutNewsInput = {
-    where: TagsNewsScalarWhereInput
-    data: XOR<TagsNewsUpdateManyMutationInput, TagsNewsUncheckedUpdateManyWithoutNewsInput>
-  }
-
-  export type TagsNewsScalarWhereInput = {
-    AND?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-    OR?: TagsNewsScalarWhereInput[]
-    NOT?: TagsNewsScalarWhereInput | TagsNewsScalarWhereInput[]
-    id?: IntFilter<"TagsNews"> | number
-    newsId?: IntFilter<"TagsNews"> | number
-    tagId?: IntFilter<"TagsNews"> | number
-  }
-
-  export type NewsCommentsUpsertWithWhereUniqueWithoutNewsInput = {
-    where: NewsCommentsWhereUniqueInput
-    update: XOR<NewsCommentsUpdateWithoutNewsInput, NewsCommentsUncheckedUpdateWithoutNewsInput>
-    create: XOR<NewsCommentsCreateWithoutNewsInput, NewsCommentsUncheckedCreateWithoutNewsInput>
-  }
-
-  export type NewsCommentsUpdateWithWhereUniqueWithoutNewsInput = {
-    where: NewsCommentsWhereUniqueInput
-    data: XOR<NewsCommentsUpdateWithoutNewsInput, NewsCommentsUncheckedUpdateWithoutNewsInput>
-  }
-
-  export type NewsCommentsUpdateManyWithWhereWithoutNewsInput = {
-    where: NewsCommentsScalarWhereInput
-    data: XOR<NewsCommentsUpdateManyMutationInput, NewsCommentsUncheckedUpdateManyWithoutNewsInput>
-  }
-
-  export type TagsNewsCreateWithoutTagInput = {
-    news: NewsCreateNestedOneWithoutTagsListInput
-  }
-
-  export type TagsNewsUncheckedCreateWithoutTagInput = {
-    id?: number
-    newsId: number
-  }
-
-  export type TagsNewsCreateOrConnectWithoutTagInput = {
-    where: TagsNewsWhereUniqueInput
-    create: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput>
-  }
-
-  export type TagsNewsCreateManyTagInputEnvelope = {
-    data: TagsNewsCreateManyTagInput | TagsNewsCreateManyTagInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TagsNewsUpsertWithWhereUniqueWithoutTagInput = {
-    where: TagsNewsWhereUniqueInput
-    update: XOR<TagsNewsUpdateWithoutTagInput, TagsNewsUncheckedUpdateWithoutTagInput>
-    create: XOR<TagsNewsCreateWithoutTagInput, TagsNewsUncheckedCreateWithoutTagInput>
-  }
-
-  export type TagsNewsUpdateWithWhereUniqueWithoutTagInput = {
-    where: TagsNewsWhereUniqueInput
-    data: XOR<TagsNewsUpdateWithoutTagInput, TagsNewsUncheckedUpdateWithoutTagInput>
-  }
-
-  export type TagsNewsUpdateManyWithWhereWithoutTagInput = {
-    where: TagsNewsScalarWhereInput
-    data: XOR<TagsNewsUpdateManyMutationInput, TagsNewsUncheckedUpdateManyWithoutTagInput>
-  }
-
-  export type NewsCreateWithoutTagsListInput = {
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsInput
-    commentsList?: NewsCommentsCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsUncheckedCreateWithoutTagsListInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    commentsList?: NewsCommentsUncheckedCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsCreateOrConnectWithoutTagsListInput = {
-    where: NewsWhereUniqueInput
-    create: XOR<NewsCreateWithoutTagsListInput, NewsUncheckedCreateWithoutTagsListInput>
-  }
-
-  export type TagCreateWithoutNewsInput = {
-    name: string
-  }
-
-  export type TagUncheckedCreateWithoutNewsInput = {
-    id?: number
-    name: string
-  }
-
-  export type TagCreateOrConnectWithoutNewsInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutNewsInput, TagUncheckedCreateWithoutNewsInput>
-  }
-
-  export type NewsUpsertWithoutTagsListInput = {
-    update: XOR<NewsUpdateWithoutTagsListInput, NewsUncheckedUpdateWithoutTagsListInput>
-    create: XOR<NewsCreateWithoutTagsListInput, NewsUncheckedCreateWithoutTagsListInput>
-    where?: NewsWhereInput
-  }
-
-  export type NewsUpdateToOneWithWhereWithoutTagsListInput = {
-    where?: NewsWhereInput
-    data: XOR<NewsUpdateWithoutTagsListInput, NewsUncheckedUpdateWithoutTagsListInput>
-  }
-
-  export type NewsUpdateWithoutTagsListInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutNewsNestedInput
-  }
-
-  export type NewsUncheckedUpdateWithoutTagsListInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutNewsNestedInput
-  }
-
-  export type TagUpsertWithoutNewsInput = {
-    update: XOR<TagUpdateWithoutNewsInput, TagUncheckedUpdateWithoutNewsInput>
-    create: XOR<TagCreateWithoutNewsInput, TagUncheckedCreateWithoutNewsInput>
-    where?: TagWhereInput
-  }
-
-  export type TagUpdateToOneWithWhereWithoutNewsInput = {
-    where?: TagWhereInput
-    data: XOR<TagUpdateWithoutNewsInput, TagUncheckedUpdateWithoutNewsInput>
-  }
-
-  export type TagUpdateWithoutNewsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagUncheckedUpdateWithoutNewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewsCreateWithoutCommentsListInput = {
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsInput
-    tagsList?: TagsNewsCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsUncheckedCreateWithoutCommentsListInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    tagsList?: TagsNewsUncheckedCreateNestedManyWithoutNewsInput
-  }
-
-  export type NewsCreateOrConnectWithoutCommentsListInput = {
-    where: NewsWhereUniqueInput
-    create: XOR<NewsCreateWithoutCommentsListInput, NewsUncheckedCreateWithoutCommentsListInput>
-  }
-
-  export type UserCreateWithoutCommentsListInput = {
-    id?: string
-    email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
-    emailVerified?: boolean
-    verificationToken?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isDeleted?: boolean
-    resetPasswordToken?: string | null
-    tenant: TenantCreateNestedOneWithoutUsersInput
-    news?: NewsCreateNestedManyWithoutAuthorInput
-    roles?: UserRoleCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutCommentsListInput = {
-    id?: string
-    tenantId: string
-    email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
-    emailVerified?: boolean
-    verificationToken?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    isDeleted?: boolean
-    resetPasswordToken?: string | null
-    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
-    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutCommentsListInput = {
+  export type UserUpsertWithWhereUniqueWithoutInvitedByInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCommentsListInput, UserUncheckedCreateWithoutCommentsListInput>
+    update: XOR<UserUpdateWithoutInvitedByInput, UserUncheckedUpdateWithoutInvitedByInput>
+    create: XOR<UserCreateWithoutInvitedByInput, UserUncheckedCreateWithoutInvitedByInput>
   }
 
-  export type NewsUpsertWithoutCommentsListInput = {
-    update: XOR<NewsUpdateWithoutCommentsListInput, NewsUncheckedUpdateWithoutCommentsListInput>
-    create: XOR<NewsCreateWithoutCommentsListInput, NewsUncheckedCreateWithoutCommentsListInput>
-    where?: NewsWhereInput
+  export type UserUpdateWithWhereUniqueWithoutInvitedByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutInvitedByInput, UserUncheckedUpdateWithoutInvitedByInput>
   }
 
-  export type NewsUpdateToOneWithWhereWithoutCommentsListInput = {
-    where?: NewsWhereInput
-    data: XOR<NewsUpdateWithoutCommentsListInput, NewsUncheckedUpdateWithoutCommentsListInput>
+  export type UserUpdateManyWithWhereWithoutInvitedByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutInvitedByInput>
   }
 
-  export type NewsUpdateWithoutCommentsListInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsNestedInput
-    tagsList?: TagsNewsUpdateManyWithoutNewsNestedInput
+  export type RoleUpsertWithoutUsersInput = {
+    update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
+    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+    where?: RoleWhereInput
   }
 
-  export type NewsUncheckedUpdateWithoutCommentsListInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    tagsList?: TagsNewsUncheckedUpdateManyWithoutNewsNestedInput
+  export type RoleUpdateToOneWithWhereWithoutUsersInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
   }
 
-  export type UserUpsertWithoutCommentsListInput = {
-    update: XOR<UserUpdateWithoutCommentsListInput, UserUncheckedUpdateWithoutCommentsListInput>
-    create: XOR<UserCreateWithoutCommentsListInput, UserUncheckedCreateWithoutCommentsListInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutCommentsListInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutCommentsListInput, UserUncheckedUpdateWithoutCommentsListInput>
-  }
-
-  export type UserUpdateWithoutCommentsListInput = {
+  export type RoleUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
-    news?: NewsUpdateManyWithoutAuthorNestedInput
-    roles?: UserRoleUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutCommentsListInput = {
+  export type RoleUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
-    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyTenantInput = {
     id?: string
     email: string
-    fullname: string
-    password: string
-    country: string
-    phone: string
-    typeIdentification: string
-    identification: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
     emailVerified?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    isDeleted?: boolean
     resetPasswordToken?: string | null
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
   }
 
   export type UserUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    news?: NewsUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUpdateManyWithoutUserNestedInput
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
+    invitations?: UserUpdateManyWithoutInvitedByNestedInput
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
-    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutUserNestedInput
-    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    fullname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    typeIdentification?: StringFieldUpdateOperationsInput | string
-    identification?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserRoleCreateManyRoleInput = {
+  export type UserCreateManyRoleInput = {
     id?: string
-    userId: string
+    tenantId: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
   }
 
-  export type UserRoleUpdateWithoutRoleInput = {
+  export type UserUpdateWithoutRoleInput = {
     id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutRolesNestedInput
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
+    invitations?: UserUpdateManyWithoutInvitedByNestedInput
   }
 
-  export type UserRoleUncheckedUpdateWithoutRoleInput = {
+  export type UserUncheckedUpdateWithoutRoleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
   }
 
-  export type UserRoleUncheckedUpdateManyWithoutRoleInput = {
+  export type UserUncheckedUpdateManyWithoutRoleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type NewsCreateManyAuthorInput = {
-    id?: number
-    title: string
-    subTitle: string
-    content: string
-    type?: string
-    published?: boolean
+  export type UserCreateManyInvitedByInput = {
+    id?: string
+    tenantId: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type NewsCommentsCreateManyUserInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    newsId: number
-  }
-
-  export type UserRoleCreateManyUserInput = {
-    id?: string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
     roleId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
-  export type NewsUpdateWithoutAuthorInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagsList?: TagsNewsUpdateManyWithoutNewsNestedInput
-    commentsList?: NewsCommentsUpdateManyWithoutNewsNestedInput
-  }
-
-  export type NewsUncheckedUpdateWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagsList?: TagsNewsUncheckedUpdateManyWithoutNewsNestedInput
-    commentsList?: NewsCommentsUncheckedUpdateManyWithoutNewsNestedInput
-  }
-
-  export type NewsUncheckedUpdateManyWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subTitle?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NewsCommentsUpdateWithoutUserInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    news?: NewsUpdateOneRequiredWithoutCommentsListNestedInput
-  }
-
-  export type NewsCommentsUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type NewsCommentsUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type UserRoleUpdateWithoutUserInput = {
+  export type UserUpdateWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    invitations?: UserUpdateManyWithoutInvitedByNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
-  export type UserRoleUncheckedUpdateWithoutUserInput = {
+  export type UserUncheckedUpdateWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
   }
 
-  export type UserRoleUncheckedUpdateManyWithoutUserInput = {
+  export type UserUncheckedUpdateManyWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TagsNewsCreateManyNewsInput = {
-    id?: number
-    tagId: number
-  }
-
-  export type NewsCommentsCreateManyNewsInput = {
-    id?: number
-    message: string
-    createdAt?: Date | string
-    userId: string
-  }
-
-  export type TagsNewsUpdateWithoutNewsInput = {
-    tag?: TagUpdateOneRequiredWithoutNewsNestedInput
-  }
-
-  export type TagsNewsUncheckedUpdateWithoutNewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    tagId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TagsNewsUncheckedUpdateManyWithoutNewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    tagId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type NewsCommentsUpdateWithoutNewsInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutCommentsListNestedInput
-  }
-
-  export type NewsCommentsUncheckedUpdateWithoutNewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NewsCommentsUncheckedUpdateManyWithoutNewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TagsNewsCreateManyTagInput = {
-    id?: number
-    newsId: number
-  }
-
-  export type TagsNewsUpdateWithoutTagInput = {
-    news?: NewsUpdateOneRequiredWithoutTagsListNestedInput
-  }
-
-  export type TagsNewsUncheckedUpdateWithoutTagInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    newsId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TagsNewsUncheckedUpdateManyWithoutTagInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    newsId?: IntFieldUpdateOperationsInput | number
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
   }
 
 

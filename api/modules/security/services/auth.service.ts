@@ -24,6 +24,7 @@ import {
 } from "../interfaces/auth.intercace";
 import { AuthResponseSchema, AuthSignUpSchema } from "../schemas/auth.schemas";
 import { AuthMailService } from "../../../common/Mail";
+import { CLIENT_STATUS } from "../../../common/lib/constant";
 
 const generateUniqueSubdomain = async (
   companyName: string
@@ -101,17 +102,11 @@ export const signUp = async (
         identification: validatedData.user.identification, // Asegúrate de hashear la contraseña antes de guardarla
         tenantId: tenant.id,
         emailVerified: false,
-      },
-    });
-
-    const user_role = await prisma.userRole.create({
-      data: {
-        userId: user.id,
         roleId: role.id,
       },
     });
     // Devolver el resultado
-    return { client, tenant, user, user_role };
+    return { client, tenant, user };
   });
 
   const paramToken: IUserToken = {
@@ -124,12 +119,12 @@ export const signUp = async (
 
   const paramIdToken: iIdToken = {
     id: result.user.id,
-    fullname: result.user.fullname,
+    fullname: result.user.fullname || "",
     email: result.user.email,
-    phone: result.user.phone,
-    country: result.user.country,
-    typeIdentification: result.user.typeIdentification,
-    identification: result.user.identification,
+    phone: result.user.phone || "",
+    country: result.user.country || "",
+    typeIdentification: result.user.typeIdentification || "",
+    identification: result.user.identification || "",
     tenantId: result.user.tenantId,
     subdomain: result.tenant.subdomain,
     company: result.client.name,
@@ -141,7 +136,10 @@ export const signUp = async (
   const refreshToken = generateRefreshToken(paramToken);
   const idToken = generateIdToken(paramIdToken);
 
-  AuthMailService.sendWelcomeEmail(result.user.email, result.user.fullname);
+  AuthMailService.sendWelcomeEmail(
+    result.user.email,
+    result.user.fullname || ""
+  );
 
   const verificationLink = await generateEmailVerificationLink(result.user.id);
   AuthMailService.sendVerificationEmail(result.user.email, verificationLink);
@@ -174,7 +172,12 @@ export const validaEmailVerificationToken = async (
 
   await prisma.user.update({
     where: { id: user.id },
-    data: { emailVerified: true, verificationToken: null },
+    data: {
+      emailVerified: true,
+      verificationToken: null,
+      joined: new Date(),
+      status: CLIENT_STATUS.ACTIVE,
+    },
   });
 
   return true;
@@ -203,11 +206,7 @@ export const refreshToken = async (refreshToken: string): Promise<any> => {
     where: { id: payload.sub },
     include: {
       tenant: true,
-      roles: {
-        include: {
-          role: true,
-        },
-      },
+      role: true,
     },
   });
 
@@ -215,16 +214,13 @@ export const refreshToken = async (refreshToken: string): Promise<any> => {
     throw new Error("User not found");
   }
 
-  if (user.roles.length === 0) {
-    throw new Error("User has no roles assigned");
-  }
   // user.tenantId
   const paramToken: IUserToken = {
     id: user.id,
     email: user.email,
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
-    role: user.roles[0].role.name,
+    role: user.role.name,
   };
 
   const accessToken = generateAccessToken(paramToken);
@@ -255,11 +251,7 @@ export const signIn = async (param: iSignInTenant): Promise<iAuthResponse> => {
           client: true,
         },
       },
-      roles: {
-        include: {
-          role: true,
-        },
-      },
+      role: true,
     },
   });
 
@@ -267,8 +259,15 @@ export const signIn = async (param: iSignInTenant): Promise<iAuthResponse> => {
     throw new Error("User not found");
   }
 
+  if (user.status !== CLIENT_STATUS.ACTIVE) {
+    throw new Error("User is not active");
+  }
+
   // const validPassword = await compare(password, user.password);
-  const validPassword: boolean = await compare(param.password, user.password);
+  const validPassword: boolean = await compare(
+    param.password,
+    user.password || ""
+  );
 
   if (!validPassword) {
     throw new Error("Invalid password");
@@ -279,25 +278,23 @@ export const signIn = async (param: iSignInTenant): Promise<iAuthResponse> => {
     email: user.email,
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
-    role: user.roles[0].role.name,
+    role: user.role.name,
   };
 
   const paramIdToken: iIdToken = {
     id: user.id,
-    fullname: user.fullname,
+    fullname: user.fullname || "",
     email: user.email,
-    phone: user.phone,
-    country: user.country,
-    typeIdentification: user.typeIdentification,
-    identification: user.identification,
+    phone: user.phone || "",
+    country: user.country || "",
+    typeIdentification: user.typeIdentification || "",
+    identification: user.identification || "",
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
     company: user.tenant.client.name,
-    role: user.roles[0].role.name,
+    role: user.role.name,
     emailVerified: user.emailVerified,
   };
-
-  console.log("paramIdToken", paramIdToken);
 
   const accessToken = generateAccessToken(paramToken);
   const refreshToken = generateRefreshToken(paramToken);
@@ -473,11 +470,7 @@ export const validateMagicLoginToken = async (
           client: true,
         },
       },
-      roles: {
-        include: {
-          role: true,
-        },
-      },
+      role: true,
     },
   });
 
@@ -490,21 +483,21 @@ export const validateMagicLoginToken = async (
     email: user.email,
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
-    role: user.roles[0].role.name,
+    role: user.role.name,
   };
 
   const paramIdToken: iIdToken = {
     id: user.id,
-    fullname: user.fullname,
+    fullname: user.fullname || "",
     email: user.email,
-    phone: user.phone,
-    country: user.country,
-    typeIdentification: user.typeIdentification,
-    identification: user.identification,
+    phone: user.phone || "",
+    country: user.country || "",
+    typeIdentification: user.typeIdentification || "",
+    identification: user.identification || "",
     tenantId: user.tenantId,
     subdomain: user.tenant.subdomain,
     company: user.tenant.client.name,
-    role: user.roles[0].role.name,
+    role: user.role.name,
     emailVerified: user.emailVerified,
   };
 
@@ -543,6 +536,14 @@ export const sendResetPasswordEmail = async (
 
   if (!user) {
     throw new Error("User not found");
+  }
+
+  if (!user.emailVerified) {
+    throw new Error("User email is not verified");
+  }
+
+  if (user.status !== CLIENT_STATUS.ACTIVE) {
+    throw new Error("User is not active or is blocked");
   }
 
   const token = Math.random().toString(36).substring(2, 15);
@@ -591,4 +592,4 @@ export const resetPassword = async (
     where: { id: userId },
     data: { password: newPassword, resetPasswordToken: null },
   });
-}
+};

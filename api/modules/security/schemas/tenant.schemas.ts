@@ -13,7 +13,7 @@ const ClientSchema = z.object({
 const TenantSchema = z.object({
     id: z.string().uuid(),
     subdomain: z.string(),
-    client: ClientSchema,
+    client: ClientSchema.optional(),
 });
 
 const QuerySchema = z.object({

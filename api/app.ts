@@ -3,12 +3,13 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import { errorHandler } from "./errors";
 import cors from "cors";
 import * as securityRoutes from "./modules/security/routers";
+import * as userRoutes from "./modules/security/routers/user.routes";
 import { corsOptions } from "./cors";
 
 const app: Application = express();
 
 app.use((req: Request, _res: Response, next: NextFunction) => {
-  next();  
+  next();
 });
 
 app.use(cors(corsOptions));
@@ -22,6 +23,7 @@ app.get("/", (_req, res) => {
 app.use("/auth/", securityRoutes.authRoutes);
 app.use("/tenant", securityRoutes.tenantRoutes);
 app.use("/reset-password", securityRoutes.resetPassword);
+app.use("/users", userRoutes.userRoutes);
 
 app.use(errorHandler);
 
