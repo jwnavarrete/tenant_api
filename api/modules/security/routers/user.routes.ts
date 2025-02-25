@@ -2,7 +2,6 @@ import { Router } from "express";
 import * as userController from "../controllers/user.controller";
 import { validateTokenJwtMiddleware } from "../../../middlewares/global/validateTokenJwt.middlewares";
 import { validatePermissionUserAdminMiddleware } from "../../../middlewares/global/validateUserAdmin.middleware";
-import { validateQueryMiddleware } from "../../../middlewares/global/validateQuery.middleware";
 import { QueryParamsSchema } from "../../../common/schemas/query.schemas";
 import {
   InviteUserSchema,
