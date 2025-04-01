@@ -170,6 +170,30 @@ exports.Prisma.UserScalarFieldEnum = {
   roleId: 'roleId'
 };
 
+exports.Prisma.GlobalParameterScalarFieldEnum = {
+  id: 'id',
+  porcCobranza: 'porcCobranza',
+  porcAbb: 'porcAbb',
+  diasPlazoEmpresaAanmaning: 'diasPlazoEmpresaAanmaning',
+  diasPlazoConsumidorAanmaning: 'diasPlazoConsumidorAanmaning',
+  diasPlazoEmpresaSommatie: 'diasPlazoEmpresaSommatie',
+  diasPlazoConsumidorSommatie: 'diasPlazoConsumidorSommatie',
+  precioEmpresaPequena: 'precioEmpresaPequena',
+  contribucionEmpresaPequenaPfc: 'contribucionEmpresaPequenaPfc',
+  precioEmpresaGrande: 'precioEmpresaGrande',
+  contribucionEmpresaGrandePfc: 'contribucionEmpresaGrandePfc',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TenantConfigScalarFieldEnum = {
+  tenantId: 'tenantId',
+  parameterId: 'parameterId',
+  porcInteresCobranza: 'porcInteresCobranza',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -190,7 +214,9 @@ exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Client: 'Client',
   Role: 'Role',
-  User: 'User'
+  User: 'User',
+  GlobalParameter: 'GlobalParameter',
+  TenantConfig: 'TenantConfig'
 };
 
 /**

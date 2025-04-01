@@ -105,6 +105,16 @@ export const signUp = async (
         roleId: role.id,
       },
     });
+
+    // AQUI CREAMOS LA CONFIGURACION INICIAL PARA EL TENANT
+    const parameter = await prisma.tenantConfig.create({
+      data: {
+        tenantId: tenant.id,
+        parameterId: process.env.PARAMETER_ID || "",
+        porcInteresCobranza: 0,
+      },
+    });
+
     // Devolver el resultado
     return { client, tenant, user };
   });

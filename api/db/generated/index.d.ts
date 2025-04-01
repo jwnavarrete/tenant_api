@@ -33,6 +33,16 @@ export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model GlobalParameter
+ * 
+ */
+export type GlobalParameter = $Result.DefaultSelection<Prisma.$GlobalParameterPayload>
+/**
+ * Model TenantConfig
+ * 
+ */
+export type TenantConfig = $Result.DefaultSelection<Prisma.$TenantConfigPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +208,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.globalParameter`: Exposes CRUD operations for the **GlobalParameter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GlobalParameters
+    * const globalParameters = await prisma.globalParameter.findMany()
+    * ```
+    */
+  get globalParameter(): Prisma.GlobalParameterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenantConfig`: Exposes CRUD operations for the **TenantConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TenantConfigs
+    * const tenantConfigs = await prisma.tenantConfig.findMany()
+    * ```
+    */
+  get tenantConfig(): Prisma.TenantConfigDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +671,9 @@ export namespace Prisma {
     Tenant: 'Tenant',
     Client: 'Client',
     Role: 'Role',
-    User: 'User'
+    User: 'User',
+    GlobalParameter: 'GlobalParameter',
+    TenantConfig: 'TenantConfig'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -657,7 +689,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "tenant" | "client" | "role" | "user"
+      modelProps: "tenant" | "client" | "role" | "user" | "globalParameter" | "tenantConfig"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -957,6 +989,154 @@ export namespace Prisma {
           }
         }
       }
+      GlobalParameter: {
+        payload: Prisma.$GlobalParameterPayload<ExtArgs>
+        fields: Prisma.GlobalParameterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GlobalParameterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GlobalParameterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          findFirst: {
+            args: Prisma.GlobalParameterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GlobalParameterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          findMany: {
+            args: Prisma.GlobalParameterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>[]
+          }
+          create: {
+            args: Prisma.GlobalParameterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          createMany: {
+            args: Prisma.GlobalParameterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GlobalParameterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>[]
+          }
+          delete: {
+            args: Prisma.GlobalParameterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          update: {
+            args: Prisma.GlobalParameterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          deleteMany: {
+            args: Prisma.GlobalParameterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GlobalParameterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GlobalParameterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>[]
+          }
+          upsert: {
+            args: Prisma.GlobalParameterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalParameterPayload>
+          }
+          aggregate: {
+            args: Prisma.GlobalParameterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlobalParameter>
+          }
+          groupBy: {
+            args: Prisma.GlobalParameterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlobalParameterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GlobalParameterCountArgs<ExtArgs>
+            result: $Utils.Optional<GlobalParameterCountAggregateOutputType> | number
+          }
+        }
+      }
+      TenantConfig: {
+        payload: Prisma.$TenantConfigPayload<ExtArgs>
+        fields: Prisma.TenantConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          findMany: {
+            args: Prisma.TenantConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>[]
+          }
+          create: {
+            args: Prisma.TenantConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          createMany: {
+            args: Prisma.TenantConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          update: {
+            args: Prisma.TenantConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenantConfig>
+          }
+          groupBy: {
+            args: Prisma.TenantConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantConfigCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1045,6 +1225,8 @@ export namespace Prisma {
     client?: ClientOmit
     role?: RoleOmit
     user?: UserOmit
+    globalParameter?: GlobalParameterOmit
+    tenantConfig?: TenantConfigOmit
   }
 
   /* Types for Logging */
@@ -1140,10 +1322,12 @@ export namespace Prisma {
 
   export type TenantCountOutputType = {
     users: number
+    tenantConfigs: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | TenantCountOutputTypeCountUsersArgs
+    tenantConfigs?: boolean | TenantCountOutputTypeCountTenantConfigsArgs
   }
 
   // Custom InputTypes
@@ -1162,6 +1346,13 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountTenantConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantConfigWhereInput
   }
 
 
@@ -1224,6 +1415,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+
+  /**
+   * Count Type GlobalParameterCountOutputType
+   */
+
+  export type GlobalParameterCountOutputType = {
+    tenantConfigs: number
+  }
+
+  export type GlobalParameterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenantConfigs?: boolean | GlobalParameterCountOutputTypeCountTenantConfigsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GlobalParameterCountOutputType without action
+   */
+  export type GlobalParameterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameterCountOutputType
+     */
+    select?: GlobalParameterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GlobalParameterCountOutputType without action
+   */
+  export type GlobalParameterCountOutputTypeCountTenantConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantConfigWhereInput
   }
 
 
@@ -1397,6 +1619,7 @@ export namespace Prisma {
     updatedAt?: boolean
     client?: boolean | ClientDefaultArgs<ExtArgs>
     users?: boolean | Tenant$usersArgs<ExtArgs>
+    tenantConfigs?: boolean | Tenant$tenantConfigsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -1430,6 +1653,7 @@ export namespace Prisma {
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | ClientDefaultArgs<ExtArgs>
     users?: boolean | Tenant$usersArgs<ExtArgs>
+    tenantConfigs?: boolean | Tenant$tenantConfigsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1444,6 +1668,7 @@ export namespace Prisma {
     objects: {
       client: Prisma.$ClientPayload<ExtArgs>
       users: Prisma.$UserPayload<ExtArgs>[]
+      tenantConfigs: Prisma.$TenantConfigPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1847,6 +2072,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     users<T extends Tenant$usersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    tenantConfigs<T extends Tenant$tenantConfigsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$tenantConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2298,6 +2524,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.tenantConfigs
+   */
+  export type Tenant$tenantConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    where?: TenantConfigWhereInput
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    cursor?: TenantConfigWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TenantConfigScalarFieldEnum | TenantConfigScalarFieldEnum[]
   }
 
   /**
@@ -5849,6 +6099,2350 @@ export namespace Prisma {
 
 
   /**
+   * Model GlobalParameter
+   */
+
+  export type AggregateGlobalParameter = {
+    _count: GlobalParameterCountAggregateOutputType | null
+    _avg: GlobalParameterAvgAggregateOutputType | null
+    _sum: GlobalParameterSumAggregateOutputType | null
+    _min: GlobalParameterMinAggregateOutputType | null
+    _max: GlobalParameterMaxAggregateOutputType | null
+  }
+
+  export type GlobalParameterAvgAggregateOutputType = {
+    porcCobranza: number | null
+    porcAbb: number | null
+    diasPlazoEmpresaAanmaning: number | null
+    diasPlazoConsumidorAanmaning: number | null
+    diasPlazoEmpresaSommatie: number | null
+    diasPlazoConsumidorSommatie: number | null
+    precioEmpresaPequena: number | null
+    contribucionEmpresaPequenaPfc: number | null
+    precioEmpresaGrande: number | null
+    contribucionEmpresaGrandePfc: number | null
+  }
+
+  export type GlobalParameterSumAggregateOutputType = {
+    porcCobranza: number | null
+    porcAbb: number | null
+    diasPlazoEmpresaAanmaning: number | null
+    diasPlazoConsumidorAanmaning: number | null
+    diasPlazoEmpresaSommatie: number | null
+    diasPlazoConsumidorSommatie: number | null
+    precioEmpresaPequena: number | null
+    contribucionEmpresaPequenaPfc: number | null
+    precioEmpresaGrande: number | null
+    contribucionEmpresaGrandePfc: number | null
+  }
+
+  export type GlobalParameterMinAggregateOutputType = {
+    id: string | null
+    porcCobranza: number | null
+    porcAbb: number | null
+    diasPlazoEmpresaAanmaning: number | null
+    diasPlazoConsumidorAanmaning: number | null
+    diasPlazoEmpresaSommatie: number | null
+    diasPlazoConsumidorSommatie: number | null
+    precioEmpresaPequena: number | null
+    contribucionEmpresaPequenaPfc: number | null
+    precioEmpresaGrande: number | null
+    contribucionEmpresaGrandePfc: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlobalParameterMaxAggregateOutputType = {
+    id: string | null
+    porcCobranza: number | null
+    porcAbb: number | null
+    diasPlazoEmpresaAanmaning: number | null
+    diasPlazoConsumidorAanmaning: number | null
+    diasPlazoEmpresaSommatie: number | null
+    diasPlazoConsumidorSommatie: number | null
+    precioEmpresaPequena: number | null
+    contribucionEmpresaPequenaPfc: number | null
+    precioEmpresaGrande: number | null
+    contribucionEmpresaGrandePfc: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlobalParameterCountAggregateOutputType = {
+    id: number
+    porcCobranza: number
+    porcAbb: number
+    diasPlazoEmpresaAanmaning: number
+    diasPlazoConsumidorAanmaning: number
+    diasPlazoEmpresaSommatie: number
+    diasPlazoConsumidorSommatie: number
+    precioEmpresaPequena: number
+    contribucionEmpresaPequenaPfc: number
+    precioEmpresaGrande: number
+    contribucionEmpresaGrandePfc: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GlobalParameterAvgAggregateInputType = {
+    porcCobranza?: true
+    porcAbb?: true
+    diasPlazoEmpresaAanmaning?: true
+    diasPlazoConsumidorAanmaning?: true
+    diasPlazoEmpresaSommatie?: true
+    diasPlazoConsumidorSommatie?: true
+    precioEmpresaPequena?: true
+    contribucionEmpresaPequenaPfc?: true
+    precioEmpresaGrande?: true
+    contribucionEmpresaGrandePfc?: true
+  }
+
+  export type GlobalParameterSumAggregateInputType = {
+    porcCobranza?: true
+    porcAbb?: true
+    diasPlazoEmpresaAanmaning?: true
+    diasPlazoConsumidorAanmaning?: true
+    diasPlazoEmpresaSommatie?: true
+    diasPlazoConsumidorSommatie?: true
+    precioEmpresaPequena?: true
+    contribucionEmpresaPequenaPfc?: true
+    precioEmpresaGrande?: true
+    contribucionEmpresaGrandePfc?: true
+  }
+
+  export type GlobalParameterMinAggregateInputType = {
+    id?: true
+    porcCobranza?: true
+    porcAbb?: true
+    diasPlazoEmpresaAanmaning?: true
+    diasPlazoConsumidorAanmaning?: true
+    diasPlazoEmpresaSommatie?: true
+    diasPlazoConsumidorSommatie?: true
+    precioEmpresaPequena?: true
+    contribucionEmpresaPequenaPfc?: true
+    precioEmpresaGrande?: true
+    contribucionEmpresaGrandePfc?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GlobalParameterMaxAggregateInputType = {
+    id?: true
+    porcCobranza?: true
+    porcAbb?: true
+    diasPlazoEmpresaAanmaning?: true
+    diasPlazoConsumidorAanmaning?: true
+    diasPlazoEmpresaSommatie?: true
+    diasPlazoConsumidorSommatie?: true
+    precioEmpresaPequena?: true
+    contribucionEmpresaPequenaPfc?: true
+    precioEmpresaGrande?: true
+    contribucionEmpresaGrandePfc?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GlobalParameterCountAggregateInputType = {
+    id?: true
+    porcCobranza?: true
+    porcAbb?: true
+    diasPlazoEmpresaAanmaning?: true
+    diasPlazoConsumidorAanmaning?: true
+    diasPlazoEmpresaSommatie?: true
+    diasPlazoConsumidorSommatie?: true
+    precioEmpresaPequena?: true
+    contribucionEmpresaPequenaPfc?: true
+    precioEmpresaGrande?: true
+    contribucionEmpresaGrandePfc?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GlobalParameterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalParameter to aggregate.
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalParameters to fetch.
+     */
+    orderBy?: GlobalParameterOrderByWithRelationInput | GlobalParameterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GlobalParameterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalParameters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalParameters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GlobalParameters
+    **/
+    _count?: true | GlobalParameterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GlobalParameterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GlobalParameterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GlobalParameterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GlobalParameterMaxAggregateInputType
+  }
+
+  export type GetGlobalParameterAggregateType<T extends GlobalParameterAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlobalParameter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGlobalParameter[P]>
+      : GetScalarType<T[P], AggregateGlobalParameter[P]>
+  }
+
+
+
+
+  export type GlobalParameterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlobalParameterWhereInput
+    orderBy?: GlobalParameterOrderByWithAggregationInput | GlobalParameterOrderByWithAggregationInput[]
+    by: GlobalParameterScalarFieldEnum[] | GlobalParameterScalarFieldEnum
+    having?: GlobalParameterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GlobalParameterCountAggregateInputType | true
+    _avg?: GlobalParameterAvgAggregateInputType
+    _sum?: GlobalParameterSumAggregateInputType
+    _min?: GlobalParameterMinAggregateInputType
+    _max?: GlobalParameterMaxAggregateInputType
+  }
+
+  export type GlobalParameterGroupByOutputType = {
+    id: string
+    porcCobranza: number
+    porcAbb: number
+    diasPlazoEmpresaAanmaning: number
+    diasPlazoConsumidorAanmaning: number
+    diasPlazoEmpresaSommatie: number
+    diasPlazoConsumidorSommatie: number
+    precioEmpresaPequena: number
+    contribucionEmpresaPequenaPfc: number
+    precioEmpresaGrande: number
+    contribucionEmpresaGrandePfc: number
+    createdAt: Date
+    updatedAt: Date
+    _count: GlobalParameterCountAggregateOutputType | null
+    _avg: GlobalParameterAvgAggregateOutputType | null
+    _sum: GlobalParameterSumAggregateOutputType | null
+    _min: GlobalParameterMinAggregateOutputType | null
+    _max: GlobalParameterMaxAggregateOutputType | null
+  }
+
+  type GetGlobalParameterGroupByPayload<T extends GlobalParameterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GlobalParameterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GlobalParameterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GlobalParameterGroupByOutputType[P]>
+            : GetScalarType<T[P], GlobalParameterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GlobalParameterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    porcCobranza?: boolean
+    porcAbb?: boolean
+    diasPlazoEmpresaAanmaning?: boolean
+    diasPlazoConsumidorAanmaning?: boolean
+    diasPlazoEmpresaSommatie?: boolean
+    diasPlazoConsumidorSommatie?: boolean
+    precioEmpresaPequena?: boolean
+    contribucionEmpresaPequenaPfc?: boolean
+    precioEmpresaGrande?: boolean
+    contribucionEmpresaGrandePfc?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenantConfigs?: boolean | GlobalParameter$tenantConfigsArgs<ExtArgs>
+    _count?: boolean | GlobalParameterCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["globalParameter"]>
+
+  export type GlobalParameterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    porcCobranza?: boolean
+    porcAbb?: boolean
+    diasPlazoEmpresaAanmaning?: boolean
+    diasPlazoConsumidorAanmaning?: boolean
+    diasPlazoEmpresaSommatie?: boolean
+    diasPlazoConsumidorSommatie?: boolean
+    precioEmpresaPequena?: boolean
+    contribucionEmpresaPequenaPfc?: boolean
+    precioEmpresaGrande?: boolean
+    contribucionEmpresaGrandePfc?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["globalParameter"]>
+
+  export type GlobalParameterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    porcCobranza?: boolean
+    porcAbb?: boolean
+    diasPlazoEmpresaAanmaning?: boolean
+    diasPlazoConsumidorAanmaning?: boolean
+    diasPlazoEmpresaSommatie?: boolean
+    diasPlazoConsumidorSommatie?: boolean
+    precioEmpresaPequena?: boolean
+    contribucionEmpresaPequenaPfc?: boolean
+    precioEmpresaGrande?: boolean
+    contribucionEmpresaGrandePfc?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["globalParameter"]>
+
+  export type GlobalParameterSelectScalar = {
+    id?: boolean
+    porcCobranza?: boolean
+    porcAbb?: boolean
+    diasPlazoEmpresaAanmaning?: boolean
+    diasPlazoConsumidorAanmaning?: boolean
+    diasPlazoEmpresaSommatie?: boolean
+    diasPlazoConsumidorSommatie?: boolean
+    precioEmpresaPequena?: boolean
+    contribucionEmpresaPequenaPfc?: boolean
+    precioEmpresaGrande?: boolean
+    contribucionEmpresaGrandePfc?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GlobalParameterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "porcCobranza" | "porcAbb" | "diasPlazoEmpresaAanmaning" | "diasPlazoConsumidorAanmaning" | "diasPlazoEmpresaSommatie" | "diasPlazoConsumidorSommatie" | "precioEmpresaPequena" | "contribucionEmpresaPequenaPfc" | "precioEmpresaGrande" | "contribucionEmpresaGrandePfc" | "createdAt" | "updatedAt", ExtArgs["result"]["globalParameter"]>
+  export type GlobalParameterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenantConfigs?: boolean | GlobalParameter$tenantConfigsArgs<ExtArgs>
+    _count?: boolean | GlobalParameterCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GlobalParameterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GlobalParameterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $GlobalParameterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GlobalParameter"
+    objects: {
+      tenantConfigs: Prisma.$TenantConfigPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      porcCobranza: number
+      porcAbb: number
+      diasPlazoEmpresaAanmaning: number
+      diasPlazoConsumidorAanmaning: number
+      diasPlazoEmpresaSommatie: number
+      diasPlazoConsumidorSommatie: number
+      precioEmpresaPequena: number
+      contribucionEmpresaPequenaPfc: number
+      precioEmpresaGrande: number
+      contribucionEmpresaGrandePfc: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["globalParameter"]>
+    composites: {}
+  }
+
+  type GlobalParameterGetPayload<S extends boolean | null | undefined | GlobalParameterDefaultArgs> = $Result.GetResult<Prisma.$GlobalParameterPayload, S>
+
+  type GlobalParameterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GlobalParameterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlobalParameterCountAggregateInputType | true
+    }
+
+  export interface GlobalParameterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GlobalParameter'], meta: { name: 'GlobalParameter' } }
+    /**
+     * Find zero or one GlobalParameter that matches the filter.
+     * @param {GlobalParameterFindUniqueArgs} args - Arguments to find a GlobalParameter
+     * @example
+     * // Get one GlobalParameter
+     * const globalParameter = await prisma.globalParameter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GlobalParameterFindUniqueArgs>(args: SelectSubset<T, GlobalParameterFindUniqueArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one GlobalParameter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GlobalParameterFindUniqueOrThrowArgs} args - Arguments to find a GlobalParameter
+     * @example
+     * // Get one GlobalParameter
+     * const globalParameter = await prisma.globalParameter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GlobalParameterFindUniqueOrThrowArgs>(args: SelectSubset<T, GlobalParameterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first GlobalParameter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterFindFirstArgs} args - Arguments to find a GlobalParameter
+     * @example
+     * // Get one GlobalParameter
+     * const globalParameter = await prisma.globalParameter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GlobalParameterFindFirstArgs>(args?: SelectSubset<T, GlobalParameterFindFirstArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first GlobalParameter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterFindFirstOrThrowArgs} args - Arguments to find a GlobalParameter
+     * @example
+     * // Get one GlobalParameter
+     * const globalParameter = await prisma.globalParameter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GlobalParameterFindFirstOrThrowArgs>(args?: SelectSubset<T, GlobalParameterFindFirstOrThrowArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more GlobalParameters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GlobalParameters
+     * const globalParameters = await prisma.globalParameter.findMany()
+     * 
+     * // Get first 10 GlobalParameters
+     * const globalParameters = await prisma.globalParameter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const globalParameterWithIdOnly = await prisma.globalParameter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GlobalParameterFindManyArgs>(args?: SelectSubset<T, GlobalParameterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a GlobalParameter.
+     * @param {GlobalParameterCreateArgs} args - Arguments to create a GlobalParameter.
+     * @example
+     * // Create one GlobalParameter
+     * const GlobalParameter = await prisma.globalParameter.create({
+     *   data: {
+     *     // ... data to create a GlobalParameter
+     *   }
+     * })
+     * 
+     */
+    create<T extends GlobalParameterCreateArgs>(args: SelectSubset<T, GlobalParameterCreateArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many GlobalParameters.
+     * @param {GlobalParameterCreateManyArgs} args - Arguments to create many GlobalParameters.
+     * @example
+     * // Create many GlobalParameters
+     * const globalParameter = await prisma.globalParameter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GlobalParameterCreateManyArgs>(args?: SelectSubset<T, GlobalParameterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GlobalParameters and returns the data saved in the database.
+     * @param {GlobalParameterCreateManyAndReturnArgs} args - Arguments to create many GlobalParameters.
+     * @example
+     * // Create many GlobalParameters
+     * const globalParameter = await prisma.globalParameter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GlobalParameters and only return the `id`
+     * const globalParameterWithIdOnly = await prisma.globalParameter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GlobalParameterCreateManyAndReturnArgs>(args?: SelectSubset<T, GlobalParameterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a GlobalParameter.
+     * @param {GlobalParameterDeleteArgs} args - Arguments to delete one GlobalParameter.
+     * @example
+     * // Delete one GlobalParameter
+     * const GlobalParameter = await prisma.globalParameter.delete({
+     *   where: {
+     *     // ... filter to delete one GlobalParameter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GlobalParameterDeleteArgs>(args: SelectSubset<T, GlobalParameterDeleteArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one GlobalParameter.
+     * @param {GlobalParameterUpdateArgs} args - Arguments to update one GlobalParameter.
+     * @example
+     * // Update one GlobalParameter
+     * const globalParameter = await prisma.globalParameter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GlobalParameterUpdateArgs>(args: SelectSubset<T, GlobalParameterUpdateArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more GlobalParameters.
+     * @param {GlobalParameterDeleteManyArgs} args - Arguments to filter GlobalParameters to delete.
+     * @example
+     * // Delete a few GlobalParameters
+     * const { count } = await prisma.globalParameter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GlobalParameterDeleteManyArgs>(args?: SelectSubset<T, GlobalParameterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalParameters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GlobalParameters
+     * const globalParameter = await prisma.globalParameter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GlobalParameterUpdateManyArgs>(args: SelectSubset<T, GlobalParameterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalParameters and returns the data updated in the database.
+     * @param {GlobalParameterUpdateManyAndReturnArgs} args - Arguments to update many GlobalParameters.
+     * @example
+     * // Update many GlobalParameters
+     * const globalParameter = await prisma.globalParameter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GlobalParameters and only return the `id`
+     * const globalParameterWithIdOnly = await prisma.globalParameter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GlobalParameterUpdateManyAndReturnArgs>(args: SelectSubset<T, GlobalParameterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one GlobalParameter.
+     * @param {GlobalParameterUpsertArgs} args - Arguments to update or create a GlobalParameter.
+     * @example
+     * // Update or create a GlobalParameter
+     * const globalParameter = await prisma.globalParameter.upsert({
+     *   create: {
+     *     // ... data to create a GlobalParameter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GlobalParameter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GlobalParameterUpsertArgs>(args: SelectSubset<T, GlobalParameterUpsertArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of GlobalParameters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterCountArgs} args - Arguments to filter GlobalParameters to count.
+     * @example
+     * // Count the number of GlobalParameters
+     * const count = await prisma.globalParameter.count({
+     *   where: {
+     *     // ... the filter for the GlobalParameters we want to count
+     *   }
+     * })
+    **/
+    count<T extends GlobalParameterCountArgs>(
+      args?: Subset<T, GlobalParameterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GlobalParameterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GlobalParameter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GlobalParameterAggregateArgs>(args: Subset<T, GlobalParameterAggregateArgs>): Prisma.PrismaPromise<GetGlobalParameterAggregateType<T>>
+
+    /**
+     * Group by GlobalParameter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalParameterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GlobalParameterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GlobalParameterGroupByArgs['orderBy'] }
+        : { orderBy?: GlobalParameterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GlobalParameterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlobalParameterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GlobalParameter model
+   */
+  readonly fields: GlobalParameterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GlobalParameter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GlobalParameterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenantConfigs<T extends GlobalParameter$tenantConfigsArgs<ExtArgs> = {}>(args?: Subset<T, GlobalParameter$tenantConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GlobalParameter model
+   */ 
+  interface GlobalParameterFieldRefs {
+    readonly id: FieldRef<"GlobalParameter", 'String'>
+    readonly porcCobranza: FieldRef<"GlobalParameter", 'Float'>
+    readonly porcAbb: FieldRef<"GlobalParameter", 'Float'>
+    readonly diasPlazoEmpresaAanmaning: FieldRef<"GlobalParameter", 'Int'>
+    readonly diasPlazoConsumidorAanmaning: FieldRef<"GlobalParameter", 'Int'>
+    readonly diasPlazoEmpresaSommatie: FieldRef<"GlobalParameter", 'Int'>
+    readonly diasPlazoConsumidorSommatie: FieldRef<"GlobalParameter", 'Int'>
+    readonly precioEmpresaPequena: FieldRef<"GlobalParameter", 'Float'>
+    readonly contribucionEmpresaPequenaPfc: FieldRef<"GlobalParameter", 'Float'>
+    readonly precioEmpresaGrande: FieldRef<"GlobalParameter", 'Float'>
+    readonly contribucionEmpresaGrandePfc: FieldRef<"GlobalParameter", 'Float'>
+    readonly createdAt: FieldRef<"GlobalParameter", 'DateTime'>
+    readonly updatedAt: FieldRef<"GlobalParameter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GlobalParameter findUnique
+   */
+  export type GlobalParameterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalParameter to fetch.
+     */
+    where: GlobalParameterWhereUniqueInput
+  }
+
+  /**
+   * GlobalParameter findUniqueOrThrow
+   */
+  export type GlobalParameterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalParameter to fetch.
+     */
+    where: GlobalParameterWhereUniqueInput
+  }
+
+  /**
+   * GlobalParameter findFirst
+   */
+  export type GlobalParameterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalParameter to fetch.
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalParameters to fetch.
+     */
+    orderBy?: GlobalParameterOrderByWithRelationInput | GlobalParameterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalParameters.
+     */
+    cursor?: GlobalParameterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalParameters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalParameters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalParameters.
+     */
+    distinct?: GlobalParameterScalarFieldEnum | GlobalParameterScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalParameter findFirstOrThrow
+   */
+  export type GlobalParameterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalParameter to fetch.
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalParameters to fetch.
+     */
+    orderBy?: GlobalParameterOrderByWithRelationInput | GlobalParameterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalParameters.
+     */
+    cursor?: GlobalParameterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalParameters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalParameters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalParameters.
+     */
+    distinct?: GlobalParameterScalarFieldEnum | GlobalParameterScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalParameter findMany
+   */
+  export type GlobalParameterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalParameters to fetch.
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalParameters to fetch.
+     */
+    orderBy?: GlobalParameterOrderByWithRelationInput | GlobalParameterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GlobalParameters.
+     */
+    cursor?: GlobalParameterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalParameters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalParameters.
+     */
+    skip?: number
+    distinct?: GlobalParameterScalarFieldEnum | GlobalParameterScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalParameter create
+   */
+  export type GlobalParameterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GlobalParameter.
+     */
+    data: XOR<GlobalParameterCreateInput, GlobalParameterUncheckedCreateInput>
+  }
+
+  /**
+   * GlobalParameter createMany
+   */
+  export type GlobalParameterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GlobalParameters.
+     */
+    data: GlobalParameterCreateManyInput | GlobalParameterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlobalParameter createManyAndReturn
+   */
+  export type GlobalParameterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * The data used to create many GlobalParameters.
+     */
+    data: GlobalParameterCreateManyInput | GlobalParameterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlobalParameter update
+   */
+  export type GlobalParameterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GlobalParameter.
+     */
+    data: XOR<GlobalParameterUpdateInput, GlobalParameterUncheckedUpdateInput>
+    /**
+     * Choose, which GlobalParameter to update.
+     */
+    where: GlobalParameterWhereUniqueInput
+  }
+
+  /**
+   * GlobalParameter updateMany
+   */
+  export type GlobalParameterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GlobalParameters.
+     */
+    data: XOR<GlobalParameterUpdateManyMutationInput, GlobalParameterUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalParameters to update
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * Limit how many GlobalParameters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalParameter updateManyAndReturn
+   */
+  export type GlobalParameterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * The data used to update GlobalParameters.
+     */
+    data: XOR<GlobalParameterUpdateManyMutationInput, GlobalParameterUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalParameters to update
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * Limit how many GlobalParameters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalParameter upsert
+   */
+  export type GlobalParameterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GlobalParameter to update in case it exists.
+     */
+    where: GlobalParameterWhereUniqueInput
+    /**
+     * In case the GlobalParameter found by the `where` argument doesn't exist, create a new GlobalParameter with this data.
+     */
+    create: XOR<GlobalParameterCreateInput, GlobalParameterUncheckedCreateInput>
+    /**
+     * In case the GlobalParameter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GlobalParameterUpdateInput, GlobalParameterUncheckedUpdateInput>
+  }
+
+  /**
+   * GlobalParameter delete
+   */
+  export type GlobalParameterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+    /**
+     * Filter which GlobalParameter to delete.
+     */
+    where: GlobalParameterWhereUniqueInput
+  }
+
+  /**
+   * GlobalParameter deleteMany
+   */
+  export type GlobalParameterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalParameters to delete
+     */
+    where?: GlobalParameterWhereInput
+    /**
+     * Limit how many GlobalParameters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalParameter.tenantConfigs
+   */
+  export type GlobalParameter$tenantConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    where?: TenantConfigWhereInput
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    cursor?: TenantConfigWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TenantConfigScalarFieldEnum | TenantConfigScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalParameter without action
+   */
+  export type GlobalParameterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalParameter
+     */
+    select?: GlobalParameterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalParameter
+     */
+    omit?: GlobalParameterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalParameterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TenantConfig
+   */
+
+  export type AggregateTenantConfig = {
+    _count: TenantConfigCountAggregateOutputType | null
+    _avg: TenantConfigAvgAggregateOutputType | null
+    _sum: TenantConfigSumAggregateOutputType | null
+    _min: TenantConfigMinAggregateOutputType | null
+    _max: TenantConfigMaxAggregateOutputType | null
+  }
+
+  export type TenantConfigAvgAggregateOutputType = {
+    porcInteresCobranza: number | null
+  }
+
+  export type TenantConfigSumAggregateOutputType = {
+    porcInteresCobranza: number | null
+  }
+
+  export type TenantConfigMinAggregateOutputType = {
+    tenantId: string | null
+    parameterId: string | null
+    porcInteresCobranza: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantConfigMaxAggregateOutputType = {
+    tenantId: string | null
+    parameterId: string | null
+    porcInteresCobranza: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantConfigCountAggregateOutputType = {
+    tenantId: number
+    parameterId: number
+    porcInteresCobranza: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantConfigAvgAggregateInputType = {
+    porcInteresCobranza?: true
+  }
+
+  export type TenantConfigSumAggregateInputType = {
+    porcInteresCobranza?: true
+  }
+
+  export type TenantConfigMinAggregateInputType = {
+    tenantId?: true
+    parameterId?: true
+    porcInteresCobranza?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantConfigMaxAggregateInputType = {
+    tenantId?: true
+    parameterId?: true
+    porcInteresCobranza?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantConfigCountAggregateInputType = {
+    tenantId?: true
+    parameterId?: true
+    porcInteresCobranza?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantConfig to aggregate.
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantConfigs to fetch.
+     */
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TenantConfigs
+    **/
+    _count?: true | TenantConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TenantConfigAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TenantConfigSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantConfigMaxAggregateInputType
+  }
+
+  export type GetTenantConfigAggregateType<T extends TenantConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenantConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenantConfig[P]>
+      : GetScalarType<T[P], AggregateTenantConfig[P]>
+  }
+
+
+
+
+  export type TenantConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantConfigWhereInput
+    orderBy?: TenantConfigOrderByWithAggregationInput | TenantConfigOrderByWithAggregationInput[]
+    by: TenantConfigScalarFieldEnum[] | TenantConfigScalarFieldEnum
+    having?: TenantConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantConfigCountAggregateInputType | true
+    _avg?: TenantConfigAvgAggregateInputType
+    _sum?: TenantConfigSumAggregateInputType
+    _min?: TenantConfigMinAggregateInputType
+    _max?: TenantConfigMaxAggregateInputType
+  }
+
+  export type TenantConfigGroupByOutputType = {
+    tenantId: string
+    parameterId: string
+    porcInteresCobranza: number
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantConfigCountAggregateOutputType | null
+    _avg: TenantConfigAvgAggregateOutputType | null
+    _sum: TenantConfigSumAggregateOutputType | null
+    _min: TenantConfigMinAggregateOutputType | null
+    _max: TenantConfigMaxAggregateOutputType | null
+  }
+
+  type GetTenantConfigGroupByPayload<T extends TenantConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    parameterId?: boolean
+    porcInteresCobranza?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantConfig"]>
+
+  export type TenantConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    parameterId?: boolean
+    porcInteresCobranza?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantConfig"]>
+
+  export type TenantConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    parameterId?: boolean
+    porcInteresCobranza?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantConfig"]>
+
+  export type TenantConfigSelectScalar = {
+    tenantId?: boolean
+    parameterId?: boolean
+    porcInteresCobranza?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tenantId" | "parameterId" | "porcInteresCobranza" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantConfig"]>
+  export type TenantConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }
+  export type TenantConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }
+  export type TenantConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    parameter?: boolean | GlobalParameterDefaultArgs<ExtArgs>
+  }
+
+  export type $TenantConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TenantConfig"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      parameter: Prisma.$GlobalParameterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tenantId: string
+      parameterId: string
+      porcInteresCobranza: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenantConfig"]>
+    composites: {}
+  }
+
+  type TenantConfigGetPayload<S extends boolean | null | undefined | TenantConfigDefaultArgs> = $Result.GetResult<Prisma.$TenantConfigPayload, S>
+
+  type TenantConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantConfigCountAggregateInputType | true
+    }
+
+  export interface TenantConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantConfig'], meta: { name: 'TenantConfig' } }
+    /**
+     * Find zero or one TenantConfig that matches the filter.
+     * @param {TenantConfigFindUniqueArgs} args - Arguments to find a TenantConfig
+     * @example
+     * // Get one TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantConfigFindUniqueArgs>(args: SelectSubset<T, TenantConfigFindUniqueArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one TenantConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantConfigFindUniqueOrThrowArgs} args - Arguments to find a TenantConfig
+     * @example
+     * // Get one TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first TenantConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigFindFirstArgs} args - Arguments to find a TenantConfig
+     * @example
+     * // Get one TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantConfigFindFirstArgs>(args?: SelectSubset<T, TenantConfigFindFirstArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first TenantConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigFindFirstOrThrowArgs} args - Arguments to find a TenantConfig
+     * @example
+     * // Get one TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more TenantConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TenantConfigs
+     * const tenantConfigs = await prisma.tenantConfig.findMany()
+     * 
+     * // Get first 10 TenantConfigs
+     * const tenantConfigs = await prisma.tenantConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `tenantId`
+     * const tenantConfigWithTenantIdOnly = await prisma.tenantConfig.findMany({ select: { tenantId: true } })
+     * 
+     */
+    findMany<T extends TenantConfigFindManyArgs>(args?: SelectSubset<T, TenantConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a TenantConfig.
+     * @param {TenantConfigCreateArgs} args - Arguments to create a TenantConfig.
+     * @example
+     * // Create one TenantConfig
+     * const TenantConfig = await prisma.tenantConfig.create({
+     *   data: {
+     *     // ... data to create a TenantConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantConfigCreateArgs>(args: SelectSubset<T, TenantConfigCreateArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many TenantConfigs.
+     * @param {TenantConfigCreateManyArgs} args - Arguments to create many TenantConfigs.
+     * @example
+     * // Create many TenantConfigs
+     * const tenantConfig = await prisma.tenantConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantConfigCreateManyArgs>(args?: SelectSubset<T, TenantConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TenantConfigs and returns the data saved in the database.
+     * @param {TenantConfigCreateManyAndReturnArgs} args - Arguments to create many TenantConfigs.
+     * @example
+     * // Create many TenantConfigs
+     * const tenantConfig = await prisma.tenantConfig.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TenantConfigs and only return the `tenantId`
+     * const tenantConfigWithTenantIdOnly = await prisma.tenantConfig.createManyAndReturn({
+     *   select: { tenantId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a TenantConfig.
+     * @param {TenantConfigDeleteArgs} args - Arguments to delete one TenantConfig.
+     * @example
+     * // Delete one TenantConfig
+     * const TenantConfig = await prisma.tenantConfig.delete({
+     *   where: {
+     *     // ... filter to delete one TenantConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantConfigDeleteArgs>(args: SelectSubset<T, TenantConfigDeleteArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one TenantConfig.
+     * @param {TenantConfigUpdateArgs} args - Arguments to update one TenantConfig.
+     * @example
+     * // Update one TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantConfigUpdateArgs>(args: SelectSubset<T, TenantConfigUpdateArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more TenantConfigs.
+     * @param {TenantConfigDeleteManyArgs} args - Arguments to filter TenantConfigs to delete.
+     * @example
+     * // Delete a few TenantConfigs
+     * const { count } = await prisma.tenantConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantConfigDeleteManyArgs>(args?: SelectSubset<T, TenantConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TenantConfigs
+     * const tenantConfig = await prisma.tenantConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantConfigUpdateManyArgs>(args: SelectSubset<T, TenantConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantConfigs and returns the data updated in the database.
+     * @param {TenantConfigUpdateManyAndReturnArgs} args - Arguments to update many TenantConfigs.
+     * @example
+     * // Update many TenantConfigs
+     * const tenantConfig = await prisma.tenantConfig.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TenantConfigs and only return the `tenantId`
+     * const tenantConfigWithTenantIdOnly = await prisma.tenantConfig.updateManyAndReturn({
+     *   select: { tenantId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one TenantConfig.
+     * @param {TenantConfigUpsertArgs} args - Arguments to update or create a TenantConfig.
+     * @example
+     * // Update or create a TenantConfig
+     * const tenantConfig = await prisma.tenantConfig.upsert({
+     *   create: {
+     *     // ... data to create a TenantConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TenantConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantConfigUpsertArgs>(args: SelectSubset<T, TenantConfigUpsertArgs<ExtArgs>>): Prisma__TenantConfigClient<$Result.GetResult<Prisma.$TenantConfigPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of TenantConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigCountArgs} args - Arguments to filter TenantConfigs to count.
+     * @example
+     * // Count the number of TenantConfigs
+     * const count = await prisma.tenantConfig.count({
+     *   where: {
+     *     // ... the filter for the TenantConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantConfigCountArgs>(
+      args?: Subset<T, TenantConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TenantConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantConfigAggregateArgs>(args: Subset<T, TenantConfigAggregateArgs>): Prisma.PrismaPromise<GetTenantConfigAggregateType<T>>
+
+    /**
+     * Group by TenantConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantConfigGroupByArgs['orderBy'] }
+        : { orderBy?: TenantConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TenantConfig model
+   */
+  readonly fields: TenantConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TenantConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    parameter<T extends GlobalParameterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GlobalParameterDefaultArgs<ExtArgs>>): Prisma__GlobalParameterClient<$Result.GetResult<Prisma.$GlobalParameterPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TenantConfig model
+   */ 
+  interface TenantConfigFieldRefs {
+    readonly tenantId: FieldRef<"TenantConfig", 'String'>
+    readonly parameterId: FieldRef<"TenantConfig", 'String'>
+    readonly porcInteresCobranza: FieldRef<"TenantConfig", 'Float'>
+    readonly createdAt: FieldRef<"TenantConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"TenantConfig", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TenantConfig findUnique
+   */
+  export type TenantConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantConfig to fetch.
+     */
+    where: TenantConfigWhereUniqueInput
+  }
+
+  /**
+   * TenantConfig findUniqueOrThrow
+   */
+  export type TenantConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantConfig to fetch.
+     */
+    where: TenantConfigWhereUniqueInput
+  }
+
+  /**
+   * TenantConfig findFirst
+   */
+  export type TenantConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantConfig to fetch.
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantConfigs to fetch.
+     */
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantConfigs.
+     */
+    cursor?: TenantConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantConfigs.
+     */
+    distinct?: TenantConfigScalarFieldEnum | TenantConfigScalarFieldEnum[]
+  }
+
+  /**
+   * TenantConfig findFirstOrThrow
+   */
+  export type TenantConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantConfig to fetch.
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantConfigs to fetch.
+     */
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantConfigs.
+     */
+    cursor?: TenantConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantConfigs.
+     */
+    distinct?: TenantConfigScalarFieldEnum | TenantConfigScalarFieldEnum[]
+  }
+
+  /**
+   * TenantConfig findMany
+   */
+  export type TenantConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantConfigs to fetch.
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantConfigs to fetch.
+     */
+    orderBy?: TenantConfigOrderByWithRelationInput | TenantConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TenantConfigs.
+     */
+    cursor?: TenantConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantConfigs.
+     */
+    skip?: number
+    distinct?: TenantConfigScalarFieldEnum | TenantConfigScalarFieldEnum[]
+  }
+
+  /**
+   * TenantConfig create
+   */
+  export type TenantConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TenantConfig.
+     */
+    data: XOR<TenantConfigCreateInput, TenantConfigUncheckedCreateInput>
+  }
+
+  /**
+   * TenantConfig createMany
+   */
+  export type TenantConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TenantConfigs.
+     */
+    data: TenantConfigCreateManyInput | TenantConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TenantConfig createManyAndReturn
+   */
+  export type TenantConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * The data used to create many TenantConfigs.
+     */
+    data: TenantConfigCreateManyInput | TenantConfigCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantConfig update
+   */
+  export type TenantConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TenantConfig.
+     */
+    data: XOR<TenantConfigUpdateInput, TenantConfigUncheckedUpdateInput>
+    /**
+     * Choose, which TenantConfig to update.
+     */
+    where: TenantConfigWhereUniqueInput
+  }
+
+  /**
+   * TenantConfig updateMany
+   */
+  export type TenantConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TenantConfigs.
+     */
+    data: XOR<TenantConfigUpdateManyMutationInput, TenantConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantConfigs to update
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * Limit how many TenantConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantConfig updateManyAndReturn
+   */
+  export type TenantConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * The data used to update TenantConfigs.
+     */
+    data: XOR<TenantConfigUpdateManyMutationInput, TenantConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantConfigs to update
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * Limit how many TenantConfigs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantConfig upsert
+   */
+  export type TenantConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TenantConfig to update in case it exists.
+     */
+    where: TenantConfigWhereUniqueInput
+    /**
+     * In case the TenantConfig found by the `where` argument doesn't exist, create a new TenantConfig with this data.
+     */
+    create: XOR<TenantConfigCreateInput, TenantConfigUncheckedCreateInput>
+    /**
+     * In case the TenantConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantConfigUpdateInput, TenantConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * TenantConfig delete
+   */
+  export type TenantConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+    /**
+     * Filter which TenantConfig to delete.
+     */
+    where: TenantConfigWhereUniqueInput
+  }
+
+  /**
+   * TenantConfig deleteMany
+   */
+  export type TenantConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantConfigs to delete
+     */
+    where?: TenantConfigWhereInput
+    /**
+     * Limit how many TenantConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantConfig without action
+   */
+  export type TenantConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantConfig
+     */
+    select?: TenantConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantConfig
+     */
+    omit?: TenantConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantConfigInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5927,6 +8521,36 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const GlobalParameterScalarFieldEnum: {
+    id: 'id',
+    porcCobranza: 'porcCobranza',
+    porcAbb: 'porcAbb',
+    diasPlazoEmpresaAanmaning: 'diasPlazoEmpresaAanmaning',
+    diasPlazoConsumidorAanmaning: 'diasPlazoConsumidorAanmaning',
+    diasPlazoEmpresaSommatie: 'diasPlazoEmpresaSommatie',
+    diasPlazoConsumidorSommatie: 'diasPlazoConsumidorSommatie',
+    precioEmpresaPequena: 'precioEmpresaPequena',
+    contribucionEmpresaPequenaPfc: 'contribucionEmpresaPequenaPfc',
+    precioEmpresaGrande: 'precioEmpresaGrande',
+    contribucionEmpresaGrandePfc: 'contribucionEmpresaGrandePfc',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GlobalParameterScalarFieldEnum = (typeof GlobalParameterScalarFieldEnum)[keyof typeof GlobalParameterScalarFieldEnum]
+
+
+  export const TenantConfigScalarFieldEnum: {
+    tenantId: 'tenantId',
+    parameterId: 'parameterId',
+    porcInteresCobranza: 'porcInteresCobranza',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantConfigScalarFieldEnum = (typeof TenantConfigScalarFieldEnum)[keyof typeof TenantConfigScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -5992,6 +8616,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6019,6 +8657,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     users?: UserListRelationFilter
+    tenantConfigs?: TenantConfigListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -6029,6 +8668,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     client?: ClientOrderByWithRelationInput
     users?: UserOrderByRelationAggregateInput
+    tenantConfigs?: TenantConfigOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -6042,6 +8682,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     users?: UserListRelationFilter
+    tenantConfigs?: TenantConfigListRelationFilter
   }, "id" | "subdomain" | "clientId">
 
   export type TenantOrderByWithAggregationInput = {
@@ -6346,6 +8987,164 @@ export namespace Prisma {
     roleId?: StringWithAggregatesFilter<"User"> | string
   }
 
+  export type GlobalParameterWhereInput = {
+    AND?: GlobalParameterWhereInput | GlobalParameterWhereInput[]
+    OR?: GlobalParameterWhereInput[]
+    NOT?: GlobalParameterWhereInput | GlobalParameterWhereInput[]
+    id?: StringFilter<"GlobalParameter"> | string
+    porcCobranza?: FloatFilter<"GlobalParameter"> | number
+    porcAbb?: FloatFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaAanmaning?: IntFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorAanmaning?: IntFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaSommatie?: IntFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorSommatie?: IntFilter<"GlobalParameter"> | number
+    precioEmpresaPequena?: FloatFilter<"GlobalParameter"> | number
+    contribucionEmpresaPequenaPfc?: FloatFilter<"GlobalParameter"> | number
+    precioEmpresaGrande?: FloatFilter<"GlobalParameter"> | number
+    contribucionEmpresaGrandePfc?: FloatFilter<"GlobalParameter"> | number
+    createdAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    updatedAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    tenantConfigs?: TenantConfigListRelationFilter
+  }
+
+  export type GlobalParameterOrderByWithRelationInput = {
+    id?: SortOrder
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenantConfigs?: TenantConfigOrderByRelationAggregateInput
+  }
+
+  export type GlobalParameterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GlobalParameterWhereInput | GlobalParameterWhereInput[]
+    OR?: GlobalParameterWhereInput[]
+    NOT?: GlobalParameterWhereInput | GlobalParameterWhereInput[]
+    porcCobranza?: FloatFilter<"GlobalParameter"> | number
+    porcAbb?: FloatFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaAanmaning?: IntFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorAanmaning?: IntFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaSommatie?: IntFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorSommatie?: IntFilter<"GlobalParameter"> | number
+    precioEmpresaPequena?: FloatFilter<"GlobalParameter"> | number
+    contribucionEmpresaPequenaPfc?: FloatFilter<"GlobalParameter"> | number
+    precioEmpresaGrande?: FloatFilter<"GlobalParameter"> | number
+    contribucionEmpresaGrandePfc?: FloatFilter<"GlobalParameter"> | number
+    createdAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    updatedAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    tenantConfigs?: TenantConfigListRelationFilter
+  }, "id">
+
+  export type GlobalParameterOrderByWithAggregationInput = {
+    id?: SortOrder
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GlobalParameterCountOrderByAggregateInput
+    _avg?: GlobalParameterAvgOrderByAggregateInput
+    _max?: GlobalParameterMaxOrderByAggregateInput
+    _min?: GlobalParameterMinOrderByAggregateInput
+    _sum?: GlobalParameterSumOrderByAggregateInput
+  }
+
+  export type GlobalParameterScalarWhereWithAggregatesInput = {
+    AND?: GlobalParameterScalarWhereWithAggregatesInput | GlobalParameterScalarWhereWithAggregatesInput[]
+    OR?: GlobalParameterScalarWhereWithAggregatesInput[]
+    NOT?: GlobalParameterScalarWhereWithAggregatesInput | GlobalParameterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GlobalParameter"> | string
+    porcCobranza?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    porcAbb?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaAanmaning?: IntWithAggregatesFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorAanmaning?: IntWithAggregatesFilter<"GlobalParameter"> | number
+    diasPlazoEmpresaSommatie?: IntWithAggregatesFilter<"GlobalParameter"> | number
+    diasPlazoConsumidorSommatie?: IntWithAggregatesFilter<"GlobalParameter"> | number
+    precioEmpresaPequena?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    contribucionEmpresaPequenaPfc?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    precioEmpresaGrande?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    contribucionEmpresaGrandePfc?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"GlobalParameter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GlobalParameter"> | Date | string
+  }
+
+  export type TenantConfigWhereInput = {
+    AND?: TenantConfigWhereInput | TenantConfigWhereInput[]
+    OR?: TenantConfigWhereInput[]
+    NOT?: TenantConfigWhereInput | TenantConfigWhereInput[]
+    tenantId?: StringFilter<"TenantConfig"> | string
+    parameterId?: StringFilter<"TenantConfig"> | string
+    porcInteresCobranza?: FloatFilter<"TenantConfig"> | number
+    createdAt?: DateTimeFilter<"TenantConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantConfig"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    parameter?: XOR<GlobalParameterScalarRelationFilter, GlobalParameterWhereInput>
+  }
+
+  export type TenantConfigOrderByWithRelationInput = {
+    tenantId?: SortOrder
+    parameterId?: SortOrder
+    porcInteresCobranza?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    parameter?: GlobalParameterOrderByWithRelationInput
+  }
+
+  export type TenantConfigWhereUniqueInput = Prisma.AtLeast<{
+    tenantId_parameterId?: TenantConfigTenantIdParameterIdCompoundUniqueInput
+    AND?: TenantConfigWhereInput | TenantConfigWhereInput[]
+    OR?: TenantConfigWhereInput[]
+    NOT?: TenantConfigWhereInput | TenantConfigWhereInput[]
+    tenantId?: StringFilter<"TenantConfig"> | string
+    parameterId?: StringFilter<"TenantConfig"> | string
+    porcInteresCobranza?: FloatFilter<"TenantConfig"> | number
+    createdAt?: DateTimeFilter<"TenantConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantConfig"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    parameter?: XOR<GlobalParameterScalarRelationFilter, GlobalParameterWhereInput>
+  }, "tenantId_parameterId">
+
+  export type TenantConfigOrderByWithAggregationInput = {
+    tenantId?: SortOrder
+    parameterId?: SortOrder
+    porcInteresCobranza?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantConfigCountOrderByAggregateInput
+    _avg?: TenantConfigAvgOrderByAggregateInput
+    _max?: TenantConfigMaxOrderByAggregateInput
+    _min?: TenantConfigMinOrderByAggregateInput
+    _sum?: TenantConfigSumOrderByAggregateInput
+  }
+
+  export type TenantConfigScalarWhereWithAggregatesInput = {
+    AND?: TenantConfigScalarWhereWithAggregatesInput | TenantConfigScalarWhereWithAggregatesInput[]
+    OR?: TenantConfigScalarWhereWithAggregatesInput[]
+    NOT?: TenantConfigScalarWhereWithAggregatesInput | TenantConfigScalarWhereWithAggregatesInput[]
+    tenantId?: StringWithAggregatesFilter<"TenantConfig"> | string
+    parameterId?: StringWithAggregatesFilter<"TenantConfig"> | string
+    porcInteresCobranza?: FloatWithAggregatesFilter<"TenantConfig"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"TenantConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TenantConfig"> | Date | string
+  }
+
   export type TenantCreateInput = {
     id?: string
     subdomain: string
@@ -6353,6 +9152,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     client: ClientCreateNestedOneWithoutTenantInput
     users?: UserCreateNestedManyWithoutTenantInput
+    tenantConfigs?: TenantConfigCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -6362,6 +9162,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
+    tenantConfigs?: TenantConfigUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -6371,6 +9172,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutTenantNestedInput
     users?: UserUpdateManyWithoutTenantNestedInput
+    tenantConfigs?: TenantConfigUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -6380,6 +9182,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
+    tenantConfigs?: TenantConfigUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -6729,6 +9532,176 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type GlobalParameterCreateInput = {
+    id?: string
+    porcCobranza?: number
+    porcAbb?: number
+    diasPlazoEmpresaAanmaning?: number
+    diasPlazoConsumidorAanmaning?: number
+    diasPlazoEmpresaSommatie?: number
+    diasPlazoConsumidorSommatie?: number
+    precioEmpresaPequena?: number
+    contribucionEmpresaPequenaPfc?: number
+    precioEmpresaGrande?: number
+    contribucionEmpresaGrandePfc?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenantConfigs?: TenantConfigCreateNestedManyWithoutParameterInput
+  }
+
+  export type GlobalParameterUncheckedCreateInput = {
+    id?: string
+    porcCobranza?: number
+    porcAbb?: number
+    diasPlazoEmpresaAanmaning?: number
+    diasPlazoConsumidorAanmaning?: number
+    diasPlazoEmpresaSommatie?: number
+    diasPlazoConsumidorSommatie?: number
+    precioEmpresaPequena?: number
+    contribucionEmpresaPequenaPfc?: number
+    precioEmpresaGrande?: number
+    contribucionEmpresaGrandePfc?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenantConfigs?: TenantConfigUncheckedCreateNestedManyWithoutParameterInput
+  }
+
+  export type GlobalParameterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenantConfigs?: TenantConfigUpdateManyWithoutParameterNestedInput
+  }
+
+  export type GlobalParameterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenantConfigs?: TenantConfigUncheckedUpdateManyWithoutParameterNestedInput
+  }
+
+  export type GlobalParameterCreateManyInput = {
+    id?: string
+    porcCobranza?: number
+    porcAbb?: number
+    diasPlazoEmpresaAanmaning?: number
+    diasPlazoConsumidorAanmaning?: number
+    diasPlazoEmpresaSommatie?: number
+    diasPlazoConsumidorSommatie?: number
+    precioEmpresaPequena?: number
+    contribucionEmpresaPequenaPfc?: number
+    precioEmpresaGrande?: number
+    contribucionEmpresaGrandePfc?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlobalParameterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalParameterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantConfigCreateInput = {
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutTenantConfigsInput
+    parameter: GlobalParameterCreateNestedOneWithoutTenantConfigsInput
+  }
+
+  export type TenantConfigUncheckedCreateInput = {
+    tenantId: string
+    parameterId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantConfigUpdateInput = {
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutTenantConfigsNestedInput
+    parameter?: GlobalParameterUpdateOneRequiredWithoutTenantConfigsNestedInput
+  }
+
+  export type TenantConfigUncheckedUpdateInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    parameterId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantConfigCreateManyInput = {
+    tenantId: string
+    parameterId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantConfigUpdateManyMutationInput = {
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantConfigUncheckedUpdateManyInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    parameterId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6766,7 +9739,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
+  export type TenantConfigListRelationFilter = {
+    every?: TenantConfigWhereInput
+    some?: TenantConfigWhereInput
+    none?: TenantConfigWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TenantConfigOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7062,6 +10045,176 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type GlobalParameterCountOrderByAggregateInput = {
+    id?: SortOrder
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlobalParameterAvgOrderByAggregateInput = {
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+  }
+
+  export type GlobalParameterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlobalParameterMinOrderByAggregateInput = {
+    id?: SortOrder
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlobalParameterSumOrderByAggregateInput = {
+    porcCobranza?: SortOrder
+    porcAbb?: SortOrder
+    diasPlazoEmpresaAanmaning?: SortOrder
+    diasPlazoConsumidorAanmaning?: SortOrder
+    diasPlazoEmpresaSommatie?: SortOrder
+    diasPlazoConsumidorSommatie?: SortOrder
+    precioEmpresaPequena?: SortOrder
+    contribucionEmpresaPequenaPfc?: SortOrder
+    precioEmpresaGrande?: SortOrder
+    contribucionEmpresaGrandePfc?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type GlobalParameterScalarRelationFilter = {
+    is?: GlobalParameterWhereInput
+    isNot?: GlobalParameterWhereInput
+  }
+
+  export type TenantConfigTenantIdParameterIdCompoundUniqueInput = {
+    tenantId: string
+    parameterId: string
+  }
+
+  export type TenantConfigCountOrderByAggregateInput = {
+    tenantId?: SortOrder
+    parameterId?: SortOrder
+    porcInteresCobranza?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantConfigAvgOrderByAggregateInput = {
+    porcInteresCobranza?: SortOrder
+  }
+
+  export type TenantConfigMaxOrderByAggregateInput = {
+    tenantId?: SortOrder
+    parameterId?: SortOrder
+    porcInteresCobranza?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantConfigMinOrderByAggregateInput = {
+    tenantId?: SortOrder
+    parameterId?: SortOrder
+    porcInteresCobranza?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantConfigSumOrderByAggregateInput = {
+    porcInteresCobranza?: SortOrder
+  }
+
   export type ClientCreateNestedOneWithoutTenantInput = {
     create?: XOR<ClientCreateWithoutTenantInput, ClientUncheckedCreateWithoutTenantInput>
     connectOrCreate?: ClientCreateOrConnectWithoutTenantInput
@@ -7075,11 +10228,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type TenantConfigCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput> | TenantConfigCreateWithoutTenantInput[] | TenantConfigUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutTenantInput | TenantConfigCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantConfigCreateManyTenantInputEnvelope
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<UserCreateWithoutTenantInput, UserUncheckedCreateWithoutTenantInput> | UserCreateWithoutTenantInput[] | UserUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: UserCreateOrConnectWithoutTenantInput | UserCreateOrConnectWithoutTenantInput[]
     createMany?: UserCreateManyTenantInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type TenantConfigUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput> | TenantConfigCreateWithoutTenantInput[] | TenantConfigUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutTenantInput | TenantConfigCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantConfigCreateManyTenantInputEnvelope
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7112,6 +10279,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type TenantConfigUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput> | TenantConfigCreateWithoutTenantInput[] | TenantConfigUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutTenantInput | TenantConfigCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantConfigUpsertWithWhereUniqueWithoutTenantInput | TenantConfigUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantConfigCreateManyTenantInputEnvelope
+    set?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    disconnect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    delete?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    update?: TenantConfigUpdateWithWhereUniqueWithoutTenantInput | TenantConfigUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantConfigUpdateManyWithWhereWithoutTenantInput | TenantConfigUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<UserCreateWithoutTenantInput, UserUncheckedCreateWithoutTenantInput> | UserCreateWithoutTenantInput[] | UserUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: UserCreateOrConnectWithoutTenantInput | UserCreateOrConnectWithoutTenantInput[]
@@ -7124,6 +10305,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutTenantInput | UserUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: UserUpdateManyWithWhereWithoutTenantInput | UserUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type TenantConfigUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput> | TenantConfigCreateWithoutTenantInput[] | TenantConfigUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutTenantInput | TenantConfigCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantConfigUpsertWithWhereUniqueWithoutTenantInput | TenantConfigUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantConfigCreateManyTenantInputEnvelope
+    set?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    disconnect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    delete?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    update?: TenantConfigUpdateWithWhereUniqueWithoutTenantInput | TenantConfigUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantConfigUpdateManyWithWhereWithoutTenantInput | TenantConfigUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutClientInput = {
@@ -7298,6 +10493,92 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type TenantConfigCreateNestedManyWithoutParameterInput = {
+    create?: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput> | TenantConfigCreateWithoutParameterInput[] | TenantConfigUncheckedCreateWithoutParameterInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutParameterInput | TenantConfigCreateOrConnectWithoutParameterInput[]
+    createMany?: TenantConfigCreateManyParameterInputEnvelope
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+  }
+
+  export type TenantConfigUncheckedCreateNestedManyWithoutParameterInput = {
+    create?: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput> | TenantConfigCreateWithoutParameterInput[] | TenantConfigUncheckedCreateWithoutParameterInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutParameterInput | TenantConfigCreateOrConnectWithoutParameterInput[]
+    createMany?: TenantConfigCreateManyParameterInputEnvelope
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TenantConfigUpdateManyWithoutParameterNestedInput = {
+    create?: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput> | TenantConfigCreateWithoutParameterInput[] | TenantConfigUncheckedCreateWithoutParameterInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutParameterInput | TenantConfigCreateOrConnectWithoutParameterInput[]
+    upsert?: TenantConfigUpsertWithWhereUniqueWithoutParameterInput | TenantConfigUpsertWithWhereUniqueWithoutParameterInput[]
+    createMany?: TenantConfigCreateManyParameterInputEnvelope
+    set?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    disconnect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    delete?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    update?: TenantConfigUpdateWithWhereUniqueWithoutParameterInput | TenantConfigUpdateWithWhereUniqueWithoutParameterInput[]
+    updateMany?: TenantConfigUpdateManyWithWhereWithoutParameterInput | TenantConfigUpdateManyWithWhereWithoutParameterInput[]
+    deleteMany?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
+  }
+
+  export type TenantConfigUncheckedUpdateManyWithoutParameterNestedInput = {
+    create?: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput> | TenantConfigCreateWithoutParameterInput[] | TenantConfigUncheckedCreateWithoutParameterInput[]
+    connectOrCreate?: TenantConfigCreateOrConnectWithoutParameterInput | TenantConfigCreateOrConnectWithoutParameterInput[]
+    upsert?: TenantConfigUpsertWithWhereUniqueWithoutParameterInput | TenantConfigUpsertWithWhereUniqueWithoutParameterInput[]
+    createMany?: TenantConfigCreateManyParameterInputEnvelope
+    set?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    disconnect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    delete?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    connect?: TenantConfigWhereUniqueInput | TenantConfigWhereUniqueInput[]
+    update?: TenantConfigUpdateWithWhereUniqueWithoutParameterInput | TenantConfigUpdateWithWhereUniqueWithoutParameterInput[]
+    updateMany?: TenantConfigUpdateManyWithWhereWithoutParameterInput | TenantConfigUpdateManyWithWhereWithoutParameterInput[]
+    deleteMany?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutTenantConfigsInput = {
+    create?: XOR<TenantCreateWithoutTenantConfigsInput, TenantUncheckedCreateWithoutTenantConfigsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutTenantConfigsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type GlobalParameterCreateNestedOneWithoutTenantConfigsInput = {
+    create?: XOR<GlobalParameterCreateWithoutTenantConfigsInput, GlobalParameterUncheckedCreateWithoutTenantConfigsInput>
+    connectOrCreate?: GlobalParameterCreateOrConnectWithoutTenantConfigsInput
+    connect?: GlobalParameterWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutTenantConfigsNestedInput = {
+    create?: XOR<TenantCreateWithoutTenantConfigsInput, TenantUncheckedCreateWithoutTenantConfigsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutTenantConfigsInput
+    upsert?: TenantUpsertWithoutTenantConfigsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutTenantConfigsInput, TenantUpdateWithoutTenantConfigsInput>, TenantUncheckedUpdateWithoutTenantConfigsInput>
+  }
+
+  export type GlobalParameterUpdateOneRequiredWithoutTenantConfigsNestedInput = {
+    create?: XOR<GlobalParameterCreateWithoutTenantConfigsInput, GlobalParameterUncheckedCreateWithoutTenantConfigsInput>
+    connectOrCreate?: GlobalParameterCreateOrConnectWithoutTenantConfigsInput
+    upsert?: GlobalParameterUpsertWithoutTenantConfigsInput
+    connect?: GlobalParameterWhereUniqueInput
+    update?: XOR<XOR<GlobalParameterUpdateToOneWithWhereWithoutTenantConfigsInput, GlobalParameterUpdateWithoutTenantConfigsInput>, GlobalParameterUncheckedUpdateWithoutTenantConfigsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7445,6 +10726,49 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type ClientCreateWithoutTenantInput = {
     id?: string
     type: string
@@ -7534,6 +10858,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TenantConfigCreateWithoutTenantInput = {
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parameter: GlobalParameterCreateNestedOneWithoutTenantConfigsInput
+  }
+
+  export type TenantConfigUncheckedCreateWithoutTenantInput = {
+    parameterId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantConfigCreateOrConnectWithoutTenantInput = {
+    where: TenantConfigWhereUniqueInput
+    create: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantConfigCreateManyTenantInputEnvelope = {
+    data: TenantConfigCreateManyTenantInput | TenantConfigCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientUpsertWithoutTenantInput = {
     update: XOR<ClientUpdateWithoutTenantInput, ClientUncheckedUpdateWithoutTenantInput>
     create: XOR<ClientCreateWithoutTenantInput, ClientUncheckedCreateWithoutTenantInput>
@@ -7615,12 +10963,40 @@ export namespace Prisma {
     roleId?: StringFilter<"User"> | string
   }
 
+  export type TenantConfigUpsertWithWhereUniqueWithoutTenantInput = {
+    where: TenantConfigWhereUniqueInput
+    update: XOR<TenantConfigUpdateWithoutTenantInput, TenantConfigUncheckedUpdateWithoutTenantInput>
+    create: XOR<TenantConfigCreateWithoutTenantInput, TenantConfigUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantConfigUpdateWithWhereUniqueWithoutTenantInput = {
+    where: TenantConfigWhereUniqueInput
+    data: XOR<TenantConfigUpdateWithoutTenantInput, TenantConfigUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TenantConfigUpdateManyWithWhereWithoutTenantInput = {
+    where: TenantConfigScalarWhereInput
+    data: XOR<TenantConfigUpdateManyMutationInput, TenantConfigUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TenantConfigScalarWhereInput = {
+    AND?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
+    OR?: TenantConfigScalarWhereInput[]
+    NOT?: TenantConfigScalarWhereInput | TenantConfigScalarWhereInput[]
+    tenantId?: StringFilter<"TenantConfig"> | string
+    parameterId?: StringFilter<"TenantConfig"> | string
+    porcInteresCobranza?: FloatFilter<"TenantConfig"> | number
+    createdAt?: DateTimeFilter<"TenantConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantConfig"> | Date | string
+  }
+
   export type TenantCreateWithoutClientInput = {
     id?: string
     subdomain: string
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
+    tenantConfigs?: TenantConfigCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutClientInput = {
@@ -7629,6 +11005,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
+    tenantConfigs?: TenantConfigUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutClientInput = {
@@ -7653,6 +11030,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
+    tenantConfigs?: TenantConfigUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutClientInput = {
@@ -7661,6 +11039,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
+    tenantConfigs?: TenantConfigUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -7741,6 +11120,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     client: ClientCreateNestedOneWithoutTenantInput
+    tenantConfigs?: TenantConfigCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutUsersInput = {
@@ -7749,6 +11129,7 @@ export namespace Prisma {
     clientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tenantConfigs?: TenantConfigUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutUsersInput = {
@@ -7901,6 +11282,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutTenantNestedInput
+    tenantConfigs?: TenantConfigUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutUsersInput = {
@@ -7909,6 +11291,7 @@ export namespace Prisma {
     clientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenantConfigs?: TenantConfigUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserUpsertWithoutInvitationsInput = {
@@ -8011,6 +11394,178 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TenantConfigCreateWithoutParameterInput = {
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutTenantConfigsInput
+  }
+
+  export type TenantConfigUncheckedCreateWithoutParameterInput = {
+    tenantId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantConfigCreateOrConnectWithoutParameterInput = {
+    where: TenantConfigWhereUniqueInput
+    create: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput>
+  }
+
+  export type TenantConfigCreateManyParameterInputEnvelope = {
+    data: TenantConfigCreateManyParameterInput | TenantConfigCreateManyParameterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantConfigUpsertWithWhereUniqueWithoutParameterInput = {
+    where: TenantConfigWhereUniqueInput
+    update: XOR<TenantConfigUpdateWithoutParameterInput, TenantConfigUncheckedUpdateWithoutParameterInput>
+    create: XOR<TenantConfigCreateWithoutParameterInput, TenantConfigUncheckedCreateWithoutParameterInput>
+  }
+
+  export type TenantConfigUpdateWithWhereUniqueWithoutParameterInput = {
+    where: TenantConfigWhereUniqueInput
+    data: XOR<TenantConfigUpdateWithoutParameterInput, TenantConfigUncheckedUpdateWithoutParameterInput>
+  }
+
+  export type TenantConfigUpdateManyWithWhereWithoutParameterInput = {
+    where: TenantConfigScalarWhereInput
+    data: XOR<TenantConfigUpdateManyMutationInput, TenantConfigUncheckedUpdateManyWithoutParameterInput>
+  }
+
+  export type TenantCreateWithoutTenantConfigsInput = {
+    id?: string
+    subdomain: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutTenantInput
+    users?: UserCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutTenantConfigsInput = {
+    id?: string
+    subdomain: string
+    clientId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutTenantConfigsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutTenantConfigsInput, TenantUncheckedCreateWithoutTenantConfigsInput>
+  }
+
+  export type GlobalParameterCreateWithoutTenantConfigsInput = {
+    id?: string
+    porcCobranza?: number
+    porcAbb?: number
+    diasPlazoEmpresaAanmaning?: number
+    diasPlazoConsumidorAanmaning?: number
+    diasPlazoEmpresaSommatie?: number
+    diasPlazoConsumidorSommatie?: number
+    precioEmpresaPequena?: number
+    contribucionEmpresaPequenaPfc?: number
+    precioEmpresaGrande?: number
+    contribucionEmpresaGrandePfc?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlobalParameterUncheckedCreateWithoutTenantConfigsInput = {
+    id?: string
+    porcCobranza?: number
+    porcAbb?: number
+    diasPlazoEmpresaAanmaning?: number
+    diasPlazoConsumidorAanmaning?: number
+    diasPlazoEmpresaSommatie?: number
+    diasPlazoConsumidorSommatie?: number
+    precioEmpresaPequena?: number
+    contribucionEmpresaPequenaPfc?: number
+    precioEmpresaGrande?: number
+    contribucionEmpresaGrandePfc?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlobalParameterCreateOrConnectWithoutTenantConfigsInput = {
+    where: GlobalParameterWhereUniqueInput
+    create: XOR<GlobalParameterCreateWithoutTenantConfigsInput, GlobalParameterUncheckedCreateWithoutTenantConfigsInput>
+  }
+
+  export type TenantUpsertWithoutTenantConfigsInput = {
+    update: XOR<TenantUpdateWithoutTenantConfigsInput, TenantUncheckedUpdateWithoutTenantConfigsInput>
+    create: XOR<TenantCreateWithoutTenantConfigsInput, TenantUncheckedCreateWithoutTenantConfigsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutTenantConfigsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutTenantConfigsInput, TenantUncheckedUpdateWithoutTenantConfigsInput>
+  }
+
+  export type TenantUpdateWithoutTenantConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutTenantNestedInput
+    users?: UserUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutTenantConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type GlobalParameterUpsertWithoutTenantConfigsInput = {
+    update: XOR<GlobalParameterUpdateWithoutTenantConfigsInput, GlobalParameterUncheckedUpdateWithoutTenantConfigsInput>
+    create: XOR<GlobalParameterCreateWithoutTenantConfigsInput, GlobalParameterUncheckedCreateWithoutTenantConfigsInput>
+    where?: GlobalParameterWhereInput
+  }
+
+  export type GlobalParameterUpdateToOneWithWhereWithoutTenantConfigsInput = {
+    where?: GlobalParameterWhereInput
+    data: XOR<GlobalParameterUpdateWithoutTenantConfigsInput, GlobalParameterUncheckedUpdateWithoutTenantConfigsInput>
+  }
+
+  export type GlobalParameterUpdateWithoutTenantConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalParameterUncheckedUpdateWithoutTenantConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    porcCobranza?: FloatFieldUpdateOperationsInput | number
+    porcAbb?: FloatFieldUpdateOperationsInput | number
+    diasPlazoEmpresaAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorAanmaning?: IntFieldUpdateOperationsInput | number
+    diasPlazoEmpresaSommatie?: IntFieldUpdateOperationsInput | number
+    diasPlazoConsumidorSommatie?: IntFieldUpdateOperationsInput | number
+    precioEmpresaPequena?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaPequenaPfc?: FloatFieldUpdateOperationsInput | number
+    precioEmpresaGrande?: FloatFieldUpdateOperationsInput | number
+    contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyTenantInput = {
     id?: string
     email: string
@@ -8031,6 +11586,13 @@ export namespace Prisma {
     status?: string
     invitationToken?: string | null
     roleId: string
+  }
+
+  export type TenantConfigCreateManyTenantInput = {
+    parameterId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateWithoutTenantInput = {
@@ -8099,6 +11661,27 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     roleId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TenantConfigUpdateWithoutTenantInput = {
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parameter?: GlobalParameterUpdateOneRequiredWithoutTenantConfigsNestedInput
+  }
+
+  export type TenantConfigUncheckedUpdateWithoutTenantInput = {
+    parameterId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantConfigUncheckedUpdateManyWithoutTenantInput = {
+    parameterId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyRoleInput = {
@@ -8279,6 +11862,34 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     roleId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TenantConfigCreateManyParameterInput = {
+    tenantId: string
+    porcInteresCobranza?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantConfigUpdateWithoutParameterInput = {
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutTenantConfigsNestedInput
+  }
+
+  export type TenantConfigUncheckedUpdateWithoutParameterInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantConfigUncheckedUpdateManyWithoutParameterInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    porcInteresCobranza?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

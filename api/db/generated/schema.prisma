@@ -10,13 +10,14 @@ datasource db {
 }
 
 model Tenant {
-  id        String   @id @default(uuid()) // Identificador único del tenant
-  subdomain String   @unique // Subdominio único para el tenant
-  clientId  String   @unique // Clave foránea que referencia a la tabla Client
-  client    Client   @relation(fields: [clientId], references: [id]) // Relación con Client
-  users     User[] // Relación uno a muchos con User
-  createdAt DateTime @default(now()) // Fecha de creación
-  updatedAt DateTime @updatedAt // Fecha de última actualización
+  id            String         @id @default(uuid()) // Identificador único del tenant
+  subdomain     String         @unique // Subdominio único para el tenant
+  clientId      String         @unique // Clave foránea que referencia a la tabla Client
+  client        Client         @relation(fields: [clientId], references: [id]) // Relación con Client
+  users         User[] // Relación uno a muchos con User
+  tenantConfigs TenantConfig[] // Relación uno a muchos con TenantConfig
+  createdAt     DateTime       @default(now()) // Fecha de creación
+  updatedAt     DateTime       @updatedAt // Fecha de última actualización
 
   @@map("tenant")
 }
@@ -77,4 +78,36 @@ model User {
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("users")
+}
+
+model GlobalParameter {
+  id                            String         @id @default(uuid()) // Identificador único del parámetro
+  porcCobranza                  Float          @default(0) // Porcentaje de cobranza
+  porcAbb                       Float          @default(0) // Porcentaje ABB
+  diasPlazoEmpresaAanmaning     Int            @default(0) // Días de plazo para empresa (aanmaning)
+  diasPlazoConsumidorAanmaning  Int            @default(0) // Días de plazo para consumidor (aanmaning)
+  diasPlazoEmpresaSommatie      Int            @default(0) // Días de plazo para empresa (sommatie)
+  diasPlazoConsumidorSommatie   Int            @default(0) // Días de plazo para consumidor (sommatie)
+  precioEmpresaPequena          Float          @default(0) // Precio para empresa pequeña
+  contribucionEmpresaPequenaPfc Float          @default(0) // Contribución para empresa pequeña PFC
+  precioEmpresaGrande           Float          @default(0) // Precio para empresa grande
+  contribucionEmpresaGrandePfc  Float          @default(0) // Contribución para empresa grande PFC  
+  tenantConfigs                 TenantConfig[] // Relación uno a muchos con TenantConfig
+  createdAt                     DateTime       @default(now()) // Fecha de creación
+  updatedAt                     DateTime       @updatedAt // Fecha de última actualización
+
+  @@map("global_parameters")
+}
+
+model TenantConfig {
+  tenantId            String // Clave foránea que referencia a la tabla Tenant
+  tenant              Tenant          @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  parameterId         String // Clave foránea que referencia a la tabla Parameter
+  parameter           GlobalParameter @relation(fields: [parameterId], references: [id]) // Relación con Parameter
+  porcInteresCobranza Float           @default(0) // Porcentaje de interés de cobranza
+  createdAt           DateTime        @default(now()) // Fecha de creación
+  updatedAt           DateTime        @updatedAt // Fecha de última actualización
+
+  @@unique([tenantId, parameterId]) // Asegura que el email sea único solo para el mismo tenant
+  @@map("tenant_config")
 }
