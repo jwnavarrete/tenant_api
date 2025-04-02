@@ -4,11 +4,11 @@ import {
   IUserResponse,
   IUserUpdate,
 } from "../interfaces/user.intercace";
-import { prisma } from "../../../index";
-import { QueryParams } from "../../../common/interfaces/query.interface";
+import { prisma } from "../../index";
+import { QueryParams } from "../../common/interfaces/query.interface";
 import { UserResponseSchema } from "../schemas/user.schemas";
-import { UserMailService } from "../../../common/Mail";
-import { CLIENT_STATUS } from "../../../common/lib/constant";
+import { UserMailService } from "../../common/Mail";
+import { CLIENT_STATUS } from "../../common/lib/constant";
 
 class UserService {
   async getUsers(
@@ -21,8 +21,7 @@ class UserService {
     limit: number;
   }> {
     const { page, limit, search } = params;
-    console.log(search);
-
+    
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where: {
@@ -134,7 +133,6 @@ class UserService {
 
     UserMailService.sendInvitation(email, companyName, recoveryUrlLink);
 
-    // Update the user with the invitation token
     await prisma.user.update({
       where: {
         id: userId,
@@ -260,20 +258,15 @@ class UserService {
     updateData: Partial<IUserUpdate>
   ): Promise<IUserResponse> {
     const user = await this.getUserById(userId);
-
     if (!user) {
       throw new Error("User not found");
     }
-
-    console.log(updateData);
-
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: {
         ...updateData,
       },
     });
-
     return UserResponseSchema.parse(updatedUser);
   }
 }

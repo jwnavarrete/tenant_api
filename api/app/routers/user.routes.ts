@@ -1,19 +1,17 @@
 import { Router } from "express";
 import * as userController from "../controllers/user.controller";
-import { validateTokenJwtMiddleware } from "../../../middlewares/global/validateTokenJwt.middlewares";
-import { validatePermissionUserAdminMiddleware } from "../../../middlewares/global/validateUserAdmin.middleware";
-import { QueryParamsSchema } from "../../../common/schemas/query.schemas";
+import { validateTokenJwtMiddleware } from "../../middlewares/global/validateTokenJwt.middlewares";
+import { validatePermissionUserAdminMiddleware } from "../../middlewares/global/validateUserAdmin.middleware";
+import { QueryParamsSchema } from "../../common/schemas/query.schemas";
 import {
   InviteUserSchema,
   VerifyInvitationToken,
   RegisterInvitedUserSchema,
   UserIdSchema,
-  ChangeRoleSchema,
-  UserStatusSchema,
   UpdateUserSchema,
 } from "../schemas/user.schemas";
-import { validateBodyMiddleware } from "../../../middlewares/global/validateBody.middleware";
-import { validateParamsMiddleware } from "../../../middlewares/global/validateParams.middleware";
+import { validateBodyMiddleware } from "../../middlewares/global/validateBody.middleware";
+import { validateParamsMiddleware } from "../../middlewares/global/validateParams.middleware";
 
 export const userRoutes: Router = Router();
 

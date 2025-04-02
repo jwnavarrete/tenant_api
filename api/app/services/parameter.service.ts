@@ -1,4 +1,4 @@
-import { prisma } from "../../../index";
+import { prisma } from "../../index";
 import { IParamGeneral } from "../interfaces/parameter.interface";
 
 export const getParameterById = async (id: string) => {

@@ -2,9 +2,7 @@ import "express-async-errors";
 import express, { Application, Request, Response, NextFunction } from "express";
 import { errorHandler } from "./errors";
 import cors from "cors";
-import * as securityRoutes from "./modules/security/routers";
-import * as userRoutes from "./modules/security/routers/user.routes";
-import * as parameterRoutes from "./modules/parameters/routes";
+import * as appRoutes from "./app/routers";
 
 import { corsOptions } from "./cors";
 
@@ -22,12 +20,12 @@ app.get("/", (_req, res) => {
   res.send("¡Hola, mundo!");
 });
 
-app.use("/auth/", securityRoutes.authRoutes);
-app.use("/tenant", securityRoutes.tenantRoutes);
-app.use("/reset-password", securityRoutes.resetPassword);
-app.use("/users", userRoutes.userRoutes);
-app.use("/parameters", parameterRoutes.parameterRoutes);
-app.use("/parameters", parameterRoutes.tenantConfigRoutes);
+app.use("/auth/", appRoutes.authRoutes);
+app.use("/tenant", appRoutes.tenantRoutes);
+app.use("/reset-password", appRoutes.resetPassword);
+app.use("/users", appRoutes.userRoutes);
+app.use("/parameters", appRoutes.parameterRoutes);
+app.use("/parameters", appRoutes.tenantConfigRoutes);
 
 app.use(errorHandler);
 

@@ -1,4 +1,4 @@
-import { prisma } from "../../../index";
+import { prisma } from "../../index";
 
 export const getAllTenant = async () => {
   const tenants = await prisma.tenant.findMany({

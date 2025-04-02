@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import jwt, { sign } from "jsonwebtoken";
+
 import {
   IuserTokenInfos,
   IUserToken,
-} from "../../modules/security/interfaces/auth.intercace";
-import {
   iAuthUserResponse,
   iIdToken,
-} from "../../modules/security/interfaces/auth.intercace";
+} from "../../app/interfaces/auth.intercace";
+
 import { TOKEN_TYPES } from "./constant";
 
 const ACCESS_TOKEN_SECRET = String(process.env.ACCESS_TOKEN_SECRET);

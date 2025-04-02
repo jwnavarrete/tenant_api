@@ -1,4 +1,4 @@
-import { IuserTokenInfos } from "../../modules/security/interfaces/auth.intercace";
+import { IuserTokenInfos } from "../../app/interfaces/auth.intercace";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../../errors";
 import { ROLES } from "../../common/lib/constant";

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as authController from "../controllers/auth.controller";
-import { validateBodyMiddleware } from "../../../middlewares/global/validateBody.middleware";
+import { validateBodyMiddleware } from "../../middlewares/global/validateBody.middleware";
 import { ResetPasswordSchema, ResetPasswordTokenSchema, SendResetPasswordSchema } from "../schemas/reset-password.schemas";
 
 export const resetPassword: Router = Router();

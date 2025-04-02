@@ -1,4 +1,4 @@
-import { prisma } from "../../../index";
+import { prisma } from "../../index";
 import {
   IParamCobro,
   ITenantConfigResponse,
@@ -18,11 +18,9 @@ export const getTenantConfig = async (
       parameter: true,
     },
   });
-
   if (!tenantConfig) {
     throw new Error("Tenant config not found");
-  }
-  console.log(tenantConfig);
+  }    
   const tenantConfigResponse = tenantConfigResponseSchema.parse(tenantConfig);
   return tenantConfigResponse;
 };
@@ -60,7 +58,6 @@ export const updateTenantConfig = async (
       updatedAt: new Date(),
     },
   });
-
   const tenantConfigResponse = await getTenantConfig(tenantId, parameterId);
   return tenantConfigResponse;
 };

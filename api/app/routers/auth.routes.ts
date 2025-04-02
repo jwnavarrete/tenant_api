@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as authController from "../controllers/auth.controller";
-import { validateBodyMiddleware } from "../../../middlewares/global/validateBody.middleware";
+import { validateBodyMiddleware } from "../../middlewares/global/validateBody.middleware";
 import {
   AuthSignUpSchema,
   AuthTenantSchema,
@@ -11,7 +11,7 @@ import {
   ResendVerificationEmailSchema,
   SubdomainSchema,
 } from "../schemas/auth.schemas";
-import { validateTokenJwtMiddleware } from "../../../middlewares/global/validateTokenJwt.middlewares";
+import { validateTokenJwtMiddleware } from "../../middlewares/global/validateTokenJwt.middlewares";
 
 export const authRoutes: Router = Router();
 

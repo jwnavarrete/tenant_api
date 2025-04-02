@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import {
-  IInviteUser,
-  IUserResponse,
+  IInviteUser,  
   IUserUpdate,
 } from "../interfaces/user.intercace";
 import { userService } from "../services/user.service";
@@ -42,10 +41,8 @@ export const inviteUserController = async (
     if (inviteParam.emails.length === 0) {
       return res.status(400).json({ error: "Emails are required" });
     }
-
     // Obtenemos la informacion del token para obtener el tenantId y el sub
     const { tenantId, sub } = userInfosToken;
-
     const invitedById = sub;
 
     const invitationResult = await userService.inviteUser(
@@ -56,11 +53,9 @@ export const inviteUserController = async (
 
     return res.status(200).json(invitationResult);
   } catch (error) {
-    if (error instanceof Error) {
-      // console.log(error.message);
+    if (error instanceof Error) {      
       return res.status(500).json({ error: error.message });
-    } else {
-      // console.log("Error inviting user");
+    } else {      
       return res.status(500).json({ error: "Error inviting user" });
     }
   }

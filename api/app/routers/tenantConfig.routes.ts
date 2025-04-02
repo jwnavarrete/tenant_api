@@ -1,8 +1,8 @@
 import { Router } from "express";
 import * as tenantConfigController from "../controllers/tenantConfig.controller";
-import { validateBodyMiddleware } from "../../../middlewares/global/validateBody.middleware";
+import { validateBodyMiddleware } from "../../middlewares/global/validateBody.middleware";
 import { paramCobroSchema } from "../schemas/tenantConfig.schema";
-import { validateTokenJwtMiddleware } from "../../../middlewares/global/validateTokenJwt.middlewares";
+import { validateTokenJwtMiddleware } from "../../middlewares/global/validateTokenJwt.middlewares";
 
 export const tenantConfigRoutes: Router = Router();
 

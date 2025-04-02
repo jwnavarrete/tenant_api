@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 import { compare } from "bcryptjs";
-import { prisma } from "../../../index";
+import { prisma } from "../../index";
 import {
   generateAccessToken,
   generateMagicLoginToken,
@@ -9,7 +9,7 @@ import {
   verifyEmailVerificationToken,
   verifyRefreshToken,
   verifyMagicLoginToken,
-} from "../../../common/lib/sessions";
+} from "../../common/lib/sessions";
 
 import {
   IAccountUrl,
@@ -23,8 +23,8 @@ import {
   IUserToken,
 } from "../interfaces/auth.intercace";
 import { AuthResponseSchema, AuthSignUpSchema } from "../schemas/auth.schemas";
-import { AuthMailService } from "../../../common/Mail";
-import { CLIENT_STATUS } from "../../../common/lib/constant";
+import { AuthMailService } from "../../common/Mail";
+import { CLIENT_STATUS } from "../../common/lib/constant";
 
 const generateUniqueSubdomain = async (
   companyName: string
