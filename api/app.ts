@@ -26,6 +26,7 @@ app.use("/reset-password", appRoutes.resetPassword);
 app.use("/users", appRoutes.userRoutes);
 app.use("/parameters", appRoutes.parameterRoutes);
 app.use("/parameters", appRoutes.tenantConfigRoutes);
+app.use("/accounts-receivable", appRoutes.accountsReceivableRoutes);
 
 app.use(errorHandler);
 

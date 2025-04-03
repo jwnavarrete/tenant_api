@@ -4,6 +4,7 @@ import { resetPassword } from "./reset-password.routes";
 import { parameterRoutes } from "./parameter.routes";
 import { tenantConfigRoutes } from "./tenantConfig.routes";
 import { userRoutes } from "./user.routes";
+import { accountsReceivableRoutes } from "./accountsReceivable.routes";
 
 export {
   authRoutes,
@@ -12,4 +13,5 @@ export {
   resetPassword,
   parameterRoutes,
   tenantConfigRoutes,
+  accountsReceivableRoutes,
 };

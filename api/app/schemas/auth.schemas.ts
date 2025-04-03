@@ -117,5 +117,5 @@ export {
   ResendVerificationEmailSchema,
   EmailVerificationResponseSchema,
   EmailVerifySchema,
-  MagicLoginSchema,  
+  MagicLoginSchema,
 };

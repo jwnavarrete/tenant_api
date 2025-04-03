@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-import {
-  IInviteUser,  
-  IUserUpdate,
-} from "../interfaces/user.intercace";
+import { IInviteUser, IUserUpdate } from "../interfaces/user.intercace";
 import { userService } from "../services/user.service";
 import { IuserTokenInfos } from "../interfaces/auth.intercace";
 
@@ -53,9 +50,9 @@ export const inviteUserController = async (
 
     return res.status(200).json(invitationResult);
   } catch (error) {
-    if (error instanceof Error) {      
+    if (error instanceof Error) {
       return res.status(500).json({ error: error.message });
-    } else {      
+    } else {
       return res.status(500).json({ error: "Error inviting user" });
     }
   }

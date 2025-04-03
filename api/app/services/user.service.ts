@@ -21,7 +21,7 @@ class UserService {
     limit: number;
   }> {
     const { page, limit, search } = params;
-    
+
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where: {
@@ -268,6 +268,17 @@ class UserService {
       },
     });
     return UserResponseSchema.parse(updatedUser);
+  }
+
+  async getUserByEmail(tenantId: string, email: string) {
+    const user = await prisma.user.findFirst({
+      where: {
+        tenantId,
+        email,
+      },
+    });
+
+    return user;
   }
 }
 

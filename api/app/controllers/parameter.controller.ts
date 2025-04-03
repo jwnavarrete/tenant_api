@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { IParamGeneral } from "../interfaces/parameter.interface";
-import * as paramService from "../services/parameter.service";
+import { parameterService } from "../services/parameter.service";
 
 export const createParamController = async (
   req: Request,
@@ -9,7 +9,7 @@ export const createParamController = async (
   try {
     const body: IParamGeneral = req.body;
 
-    const response = await paramService.createParameter(body);
+    const response = await parameterService.createParameter(body);
 
     return res.status(201).json(response);
   } catch (error) {
@@ -25,7 +25,7 @@ export const getParamController = async (
   try {
     const id = req.params.id;
 
-    const response = await paramService.getParameterById(id);
+    const response = await parameterService.getParameterById(id);
 
     return res.status(200).json(response);
   } catch (error) {
@@ -42,7 +42,7 @@ export const updateParamController = async (
     const id = req.params.id;
     const body: Partial<IParamGeneral> = req.body;
 
-    const response = await paramService.updateParameter(id, body);
+    const response = await parameterService.updateParameter(id, body);
 
     return res.status(200).json(response);
   } catch (error) {

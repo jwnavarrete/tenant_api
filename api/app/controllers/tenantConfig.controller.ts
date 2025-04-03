@@ -3,7 +3,7 @@ import {
   IParamCobro,
   ITenantConfigResponse,
 } from "../interfaces//tenantConfig.interface";
-import * as tenantConfigService from "../services/tenantConfig.service";
+import { tenantConfigService } from "../services/tenantConfig.service";
 import { IuserTokenInfos } from "../interfaces/auth.intercace";
 
 export const getTenantConfig = async (
@@ -14,18 +14,16 @@ export const getTenantConfig = async (
     const userInfosToken: IuserTokenInfos = req.userTokenInfos;
     const tenantId = userInfosToken.tenantId;
     const parameterId = req.params.parameterId;
-        
+
     const response: ITenantConfigResponse =
       await tenantConfigService.getTenantConfig(tenantId, parameterId);
 
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
-    return res
-      .status(401)
-      .json({
-        error: error instanceof Error ? error.message : "Unknown error",
-      });
+    return res.status(401).json({
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 };
 
@@ -48,10 +46,8 @@ export const updateTenantConfig = async (
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
-    return res
-      .status(401)
-      .json({
-        error: error instanceof Error ? error.message : "Unknown error",
-      });
+    return res.status(401).json({
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import * as authServices from "../services/auth.service";
+import { authService } from "../services/auth.service";
+import { tenantService } from "../services/tenant.service";
 import {
   iAuthResponse,
   iAuthTenantSignUp,
@@ -18,7 +19,7 @@ export const authSignUpController = async (
   try {
     const body: iAuthTenantSignUp = req.body;
 
-    const response: iAuthResponse = await authServices.signUp(body);
+    const response: iAuthResponse = await authService.signUp(body);
 
     return res.status(201).json(response);
   } catch (error) {
@@ -38,7 +39,7 @@ export const authValidaSubdomainController = async (
   if (!subdomain) {
     return res.status(400).json({ error: "Subdomain is required" });
   }
-  const exists = await authServices.validaSubdomain(subdomain);
+  const exists = await tenantService.validaSubdomain(subdomain);
 
   if (exists) {
     isValid = true;
@@ -57,7 +58,7 @@ export const AuthRefreshTokenController = async (
     return res.status(400).json({ error: "Refresh token is required" });
   }
 
-  const response = await authServices.refreshToken(refreshToken);
+  const response = await authService.refreshToken(refreshToken);
 
   return res.status(201).json(response);
 };
@@ -69,7 +70,7 @@ export const AuthSingInController = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Email and password are required" });
   }
 
-  const response: iAuthResponse = await authServices.signIn(body);
+  const response: iAuthResponse = await authService.signIn(body);
 
   return res.status(201).json(response);
 };
@@ -84,7 +85,7 @@ export const AuthVerifyEmailController = async (
     return res.status(400).json({ error: "Token is required" });
   }
 
-  const response = await authServices.validaEmailVerificationToken(payload);
+  const response = await authService.validaEmailVerificationToken(payload);
 
   return res.status(201).json(response);
 };
@@ -95,7 +96,7 @@ export const AuthResendVerificationEmailController = async (
 ): Promise<Response> => {
   const payload: iResendVerificationEmail = req.body;
 
-  const response = await authServices.resendVerificationEmail(payload);
+  const response = await authService.resendVerificationEmail(payload);
 
   return res.status(200).json(response);
 };
@@ -106,7 +107,7 @@ export const AuthCheckEmailExistsController = async (
 ) => {
   const { email } = req.body;
 
-  const exists = await authServices.emailExists(email);
+  const exists = await authService.emailExists(email);
 
   return res.status(200).json({ email, exists });
 };
@@ -121,7 +122,7 @@ export const AuthSendUrlRecovery = async (
     return res.status(400).json({ error: "Email is required" });
   }
 
-  await authServices.sendRecoveryUrl(email);
+  await authService.sendRecoveryUrl(email);
 
   return res.status(200).json({ message: "Recovery URL sent successfully" });
 };
@@ -136,7 +137,7 @@ export const AuthVerifyRecoveryToken = async (
     return res.status(400).json({ error: "token is required" });
   }
 
-  const response: iAuthResponse = await authServices.validateMagicLoginToken(
+  const response: iAuthResponse = await authService.validateMagicLoginToken(
     token
   );
 
@@ -153,7 +154,7 @@ export const sendResetPasswordEmailController = async (
     return res.status(400).json({ error: "Email and slug are required" });
   }
 
-  await authServices.sendResetPasswordEmail(email, slug);
+  await authService.sendResetPasswordEmail(email, slug);
 
   const message = `if we found a user with email address ${email} in the account, you will receive an email from us shortly`;
 
@@ -170,7 +171,7 @@ export const validateResetPasswordTokenController = async (
     return res.status(400).json({ error: "Token is required" });
   }
 
-  const response = await authServices.validateResetPasswordToken(token, userId);
+  const response = await authService.validateResetPasswordToken(token, userId);
 
   return res.status(200).json(response);
 };
@@ -186,7 +187,7 @@ export const resetPasswordController = async (
     return res.status(400).json({ error: "Token and password are required" });
   }
 
-  const response = await authServices.resetPassword(token, userId, password);
+  const response = await authService.resetPassword(token, userId, password);
 
   return res.status(200).json(response);
 };

@@ -194,6 +194,64 @@ exports.Prisma.TenantConfigScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AccountsReceivableScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  invoiceNumber: 'invoiceNumber',
+  issueDate: 'issueDate',
+  dueDate: 'dueDate',
+  customerName: 'customerName',
+  customerAddress: 'customerAddress',
+  customerEmail: 'customerEmail',
+  customerPhone: 'customerPhone',
+  invoiceAmount: 'invoiceAmount',
+  amountPaid: 'amountPaid',
+  outstandingBalance: 'outstandingBalance',
+  receivableStatus: 'receivableStatus',
+  collectionStatus: 'collectionStatus',
+  notes: 'notes',
+  debtorId: 'debtorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentDetailScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  paymentDate: 'paymentDate',
+  paymentAmount: 'paymentAmount',
+  paymentMethod: 'paymentMethod',
+  referenceNumber: 'referenceNumber',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DebtorScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  fullname: 'fullname',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  identification: 'identification',
+  employeeId: 'employeeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  fullname: 'fullname',
+  email: 'email',
+  phone: 'phone',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -216,7 +274,11 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   User: 'User',
   GlobalParameter: 'GlobalParameter',
-  TenantConfig: 'TenantConfig'
+  TenantConfig: 'TenantConfig',
+  AccountsReceivable: 'AccountsReceivable',
+  PaymentDetail: 'PaymentDetail',
+  Debtor: 'Debtor',
+  Employee: 'Employee'
 };
 
 /**
