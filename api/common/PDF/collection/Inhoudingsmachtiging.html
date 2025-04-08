@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inhoudingsmachtiging</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .logo {
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            margin-top: 20px;
+            text-align: justify;
+        }
+        .table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Centraal Inning</div>
+        <div style="text-align: right">
+            <strong>Inhoudingsmachtiging</strong><br>
+            Verzenddatum: {{sendDate}}
+        </div>
+    </header>
+    <br><br>
+
+    <div class="content">
+        <p>Ik, ondergetekende, machtig hierbij, op basis van mijn betalingsregelingsovereenkomst van <strong>{{agreementDate}}</strong>, alle geautoriseerde partijen, waaronder ABGI, banken, mijn huidige en toekomstige werkgevers, de overheid, en andere relevante entiteiten, om inhoudingen te verrichten op mijn inkomstenbronnen, uitsluitend op instructie van ABGI. Deze machtiging treedt in werking bij niet-nakoming van mijn betalingsverplichtingen.</p>
+        <h3>Gegevens debiteur:</h3>
+        <p>Naam: {{debtorName}}<br>
+        ID-nummer: {{debtorID}}<br>
+        Ik ga hiermee digitaal akkoord: {{debtorID}}</p>
+    </div>
+</body>
+</html>

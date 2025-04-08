@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingebrekestelling</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px">
+    <header style="display: flex; justify-content: space-between; align-items: center">
+        <div class="logo" style="flex: 1; font-size: 24px; font-weight: bold; color: #ff6600">
+            Centraal Inning
+        </div>
+        <div style="text-align: right">
+            <strong>Ingebrekestelling</strong><br>
+            Verzenddatum: {{sendDate}}
+        </div>
+    </header>
+    <div class="content" style="margin-top: 20px; text-align: justify">
+        <p>Aan: {{recipient}}<br>Av. Universidad<br>Bonaire</p>
+        <p>
+            Uw schuldeiser, <strong><u>Rico Aceme</u></strong>, heeft u conform de wettelijke vereisten voor de buitengerechtelijke fase aangemaand. U bent hierbij in gebreke gesteld. Als gevolg hiervan is uw openstaande vordering van <span class="important">USD {{totalAmount}}</span> geregistreerd in het schuldregister, wat betekent dat u verplicht bent om via het centrale betalingssysteem te betalen.
+        </p>
+        <p>
+            Voor de registratie in het schuldregister bent u een bedrag van <span class="important">USD {{registerCost}}</span> verschuldigd. Dit bedrag staat los van uw openstaande vordering.
+        </p>
+        <p>
+            Momenteel heeft u een financiële blokkade voor de buitengerechtelijke fase totdat u aan uw betalingsverplichtingen voldoet. Tevens informeren wij u dat het collectieve inningstraject tussen alle betrokken schuldeisers is gestart. Dit houdt in dat schuldeisers die deze verplichting onder zich hebben, kunnen overgaan tot het innen of behouden van gelden die aan u zijn toegekend om deze vordering af te lossen, om een gerechtelijke procedure te voorkomen.
+        </p>
+        <p>
+            U kunt deze blokkade oplossen door het totale bedrag van <span class="important">USD {{totalPayment}}</span> (inclusief de kosten van het schuldregister) onmiddellijk en volledig te betalen op bankrekening MCB {{accountNumber}}.
+        </p>
+        <p>
+            Daarnaast willen wij u erop wijzen dat u te allen tijde uw financiële status kunt controleren door een financiële verklaring aan te vragen. Deze service kost <span class="important">USD {{serviceCost}}</span>.
+        </p>
+        <p><strong>Let op:</strong><br>
+            Een financiële blokkade kan alleen worden opgeheven door betaling, het treffen van een betalingsregeling, of via een gerechtelijk bevel.
+        </p>
+    </div>
+    <footer style="margin-top: 40px; font-size: 14px; text-align: justify">
+        <p>Dit bericht is automatisch opgemaakt en daarom niet ondertekend.</p>
+    </footer>
+</body>
+</html>

@@ -9063,12 +9063,16 @@ export namespace Prisma {
     invoiceAmount: number | null
     amountPaid: number | null
     outstandingBalance: number | null
+    collectionPercentage: number | null
+    abbPercentage: number | null
   }
 
   export type AccountsReceivableSumAggregateOutputType = {
     invoiceAmount: number | null
     amountPaid: number | null
     outstandingBalance: number | null
+    collectionPercentage: number | null
+    abbPercentage: number | null
   }
 
   export type AccountsReceivableMinAggregateOutputType = {
@@ -9087,6 +9091,8 @@ export namespace Prisma {
     receivableStatus: string | null
     collectionStatus: string | null
     notes: string | null
+    collectionPercentage: number | null
+    abbPercentage: number | null
     debtorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9108,6 +9114,8 @@ export namespace Prisma {
     receivableStatus: string | null
     collectionStatus: string | null
     notes: string | null
+    collectionPercentage: number | null
+    abbPercentage: number | null
     debtorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9129,6 +9137,8 @@ export namespace Prisma {
     receivableStatus: number
     collectionStatus: number
     notes: number
+    collectionPercentage: number
+    abbPercentage: number
     debtorId: number
     createdAt: number
     updatedAt: number
@@ -9140,12 +9150,16 @@ export namespace Prisma {
     invoiceAmount?: true
     amountPaid?: true
     outstandingBalance?: true
+    collectionPercentage?: true
+    abbPercentage?: true
   }
 
   export type AccountsReceivableSumAggregateInputType = {
     invoiceAmount?: true
     amountPaid?: true
     outstandingBalance?: true
+    collectionPercentage?: true
+    abbPercentage?: true
   }
 
   export type AccountsReceivableMinAggregateInputType = {
@@ -9164,6 +9178,8 @@ export namespace Prisma {
     receivableStatus?: true
     collectionStatus?: true
     notes?: true
+    collectionPercentage?: true
+    abbPercentage?: true
     debtorId?: true
     createdAt?: true
     updatedAt?: true
@@ -9185,6 +9201,8 @@ export namespace Prisma {
     receivableStatus?: true
     collectionStatus?: true
     notes?: true
+    collectionPercentage?: true
+    abbPercentage?: true
     debtorId?: true
     createdAt?: true
     updatedAt?: true
@@ -9206,6 +9224,8 @@ export namespace Prisma {
     receivableStatus?: true
     collectionStatus?: true
     notes?: true
+    collectionPercentage?: true
+    abbPercentage?: true
     debtorId?: true
     createdAt?: true
     updatedAt?: true
@@ -9314,6 +9334,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus: string | null
     notes: string | null
+    collectionPercentage: number
+    abbPercentage: number
     debtorId: string | null
     createdAt: Date
     updatedAt: Date
@@ -9354,6 +9376,8 @@ export namespace Prisma {
     receivableStatus?: boolean
     collectionStatus?: boolean
     notes?: boolean
+    collectionPercentage?: boolean
+    abbPercentage?: boolean
     debtorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9379,6 +9403,8 @@ export namespace Prisma {
     receivableStatus?: boolean
     collectionStatus?: boolean
     notes?: boolean
+    collectionPercentage?: boolean
+    abbPercentage?: boolean
     debtorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9402,6 +9428,8 @@ export namespace Prisma {
     receivableStatus?: boolean
     collectionStatus?: boolean
     notes?: boolean
+    collectionPercentage?: boolean
+    abbPercentage?: boolean
     debtorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9425,12 +9453,14 @@ export namespace Prisma {
     receivableStatus?: boolean
     collectionStatus?: boolean
     notes?: boolean
+    collectionPercentage?: boolean
+    abbPercentage?: boolean
     debtorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountsReceivableOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "invoiceNumber" | "issueDate" | "dueDate" | "customerName" | "customerAddress" | "customerEmail" | "customerPhone" | "invoiceAmount" | "amountPaid" | "outstandingBalance" | "receivableStatus" | "collectionStatus" | "notes" | "debtorId" | "createdAt" | "updatedAt", ExtArgs["result"]["accountsReceivable"]>
+  export type AccountsReceivableOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "invoiceNumber" | "issueDate" | "dueDate" | "customerName" | "customerAddress" | "customerEmail" | "customerPhone" | "invoiceAmount" | "amountPaid" | "outstandingBalance" | "receivableStatus" | "collectionStatus" | "notes" | "collectionPercentage" | "abbPercentage" | "debtorId" | "createdAt" | "updatedAt", ExtArgs["result"]["accountsReceivable"]>
   export type AccountsReceivableInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     paymentDetail?: boolean | AccountsReceivable$paymentDetailArgs<ExtArgs>
@@ -9469,6 +9499,8 @@ export namespace Prisma {
       receivableStatus: string
       collectionStatus: string | null
       notes: string | null
+      collectionPercentage: number
+      abbPercentage: number
       debtorId: string | null
       createdAt: Date
       updatedAt: Date
@@ -9913,6 +9945,8 @@ export namespace Prisma {
     readonly receivableStatus: FieldRef<"AccountsReceivable", 'String'>
     readonly collectionStatus: FieldRef<"AccountsReceivable", 'String'>
     readonly notes: FieldRef<"AccountsReceivable", 'String'>
+    readonly collectionPercentage: FieldRef<"AccountsReceivable", 'Float'>
+    readonly abbPercentage: FieldRef<"AccountsReceivable", 'Float'>
     readonly debtorId: FieldRef<"AccountsReceivable", 'String'>
     readonly createdAt: FieldRef<"AccountsReceivable", 'DateTime'>
     readonly updatedAt: FieldRef<"AccountsReceivable", 'DateTime'>
@@ -10399,6 +10433,7 @@ export namespace Prisma {
     paymentDate: Date | null
     paymentAmount: number | null
     paymentMethod: string | null
+    paymentType: string | null
     referenceNumber: string | null
     notes: string | null
     createdAt: Date | null
@@ -10411,6 +10446,7 @@ export namespace Prisma {
     paymentDate: Date | null
     paymentAmount: number | null
     paymentMethod: string | null
+    paymentType: string | null
     referenceNumber: string | null
     notes: string | null
     createdAt: Date | null
@@ -10423,6 +10459,7 @@ export namespace Prisma {
     paymentDate: number
     paymentAmount: number
     paymentMethod: number
+    paymentType: number
     referenceNumber: number
     notes: number
     createdAt: number
@@ -10445,6 +10482,7 @@ export namespace Prisma {
     paymentDate?: true
     paymentAmount?: true
     paymentMethod?: true
+    paymentType?: true
     referenceNumber?: true
     notes?: true
     createdAt?: true
@@ -10457,6 +10495,7 @@ export namespace Prisma {
     paymentDate?: true
     paymentAmount?: true
     paymentMethod?: true
+    paymentType?: true
     referenceNumber?: true
     notes?: true
     createdAt?: true
@@ -10469,6 +10508,7 @@ export namespace Prisma {
     paymentDate?: true
     paymentAmount?: true
     paymentMethod?: true
+    paymentType?: true
     referenceNumber?: true
     notes?: true
     createdAt?: true
@@ -10568,6 +10608,7 @@ export namespace Prisma {
     paymentDate: Date
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber: string | null
     notes: string | null
     createdAt: Date
@@ -10599,6 +10640,7 @@ export namespace Prisma {
     paymentDate?: boolean
     paymentAmount?: boolean
     paymentMethod?: boolean
+    paymentType?: boolean
     referenceNumber?: boolean
     notes?: boolean
     createdAt?: boolean
@@ -10612,6 +10654,7 @@ export namespace Prisma {
     paymentDate?: boolean
     paymentAmount?: boolean
     paymentMethod?: boolean
+    paymentType?: boolean
     referenceNumber?: boolean
     notes?: boolean
     createdAt?: boolean
@@ -10625,6 +10668,7 @@ export namespace Prisma {
     paymentDate?: boolean
     paymentAmount?: boolean
     paymentMethod?: boolean
+    paymentType?: boolean
     referenceNumber?: boolean
     notes?: boolean
     createdAt?: boolean
@@ -10638,13 +10682,14 @@ export namespace Prisma {
     paymentDate?: boolean
     paymentAmount?: boolean
     paymentMethod?: boolean
+    paymentType?: boolean
     referenceNumber?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PaymentDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountsReceivableId" | "paymentDate" | "paymentAmount" | "paymentMethod" | "referenceNumber" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentDetail"]>
+  export type PaymentDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountsReceivableId" | "paymentDate" | "paymentAmount" | "paymentMethod" | "paymentType" | "referenceNumber" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentDetail"]>
   export type PaymentDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accountsReceivable?: boolean | AccountsReceivableDefaultArgs<ExtArgs>
   }
@@ -10666,6 +10711,7 @@ export namespace Prisma {
       paymentDate: Date
       paymentAmount: number
       paymentMethod: string
+      paymentType: string
       referenceNumber: string | null
       notes: string | null
       createdAt: Date
@@ -11099,6 +11145,7 @@ export namespace Prisma {
     readonly paymentDate: FieldRef<"PaymentDetail", 'DateTime'>
     readonly paymentAmount: FieldRef<"PaymentDetail", 'Float'>
     readonly paymentMethod: FieldRef<"PaymentDetail", 'String'>
+    readonly paymentType: FieldRef<"PaymentDetail", 'String'>
     readonly referenceNumber: FieldRef<"PaymentDetail", 'String'>
     readonly notes: FieldRef<"PaymentDetail", 'String'>
     readonly createdAt: FieldRef<"PaymentDetail", 'DateTime'>
@@ -13989,6 +14036,8 @@ export namespace Prisma {
     receivableStatus: 'receivableStatus',
     collectionStatus: 'collectionStatus',
     notes: 'notes',
+    collectionPercentage: 'collectionPercentage',
+    abbPercentage: 'abbPercentage',
     debtorId: 'debtorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -14003,6 +14052,7 @@ export namespace Prisma {
     paymentDate: 'paymentDate',
     paymentAmount: 'paymentAmount',
     paymentMethod: 'paymentMethod',
+    paymentType: 'paymentType',
     referenceNumber: 'referenceNumber',
     notes: 'notes',
     createdAt: 'createdAt',
@@ -14668,6 +14718,8 @@ export namespace Prisma {
     receivableStatus?: StringFilter<"AccountsReceivable"> | string
     collectionStatus?: StringNullableFilter<"AccountsReceivable"> | string | null
     notes?: StringNullableFilter<"AccountsReceivable"> | string | null
+    collectionPercentage?: FloatFilter<"AccountsReceivable"> | number
+    abbPercentage?: FloatFilter<"AccountsReceivable"> | number
     debtorId?: StringNullableFilter<"AccountsReceivable"> | string | null
     createdAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
     updatedAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
@@ -14692,6 +14744,8 @@ export namespace Prisma {
     receivableStatus?: SortOrder
     collectionStatus?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
     debtorId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14719,6 +14773,8 @@ export namespace Prisma {
     receivableStatus?: StringFilter<"AccountsReceivable"> | string
     collectionStatus?: StringNullableFilter<"AccountsReceivable"> | string | null
     notes?: StringNullableFilter<"AccountsReceivable"> | string | null
+    collectionPercentage?: FloatFilter<"AccountsReceivable"> | number
+    abbPercentage?: FloatFilter<"AccountsReceivable"> | number
     debtorId?: StringNullableFilter<"AccountsReceivable"> | string | null
     createdAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
     updatedAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
@@ -14743,6 +14799,8 @@ export namespace Prisma {
     receivableStatus?: SortOrder
     collectionStatus?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
     debtorId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14772,6 +14830,8 @@ export namespace Prisma {
     receivableStatus?: StringWithAggregatesFilter<"AccountsReceivable"> | string
     collectionStatus?: StringNullableWithAggregatesFilter<"AccountsReceivable"> | string | null
     notes?: StringNullableWithAggregatesFilter<"AccountsReceivable"> | string | null
+    collectionPercentage?: FloatWithAggregatesFilter<"AccountsReceivable"> | number
+    abbPercentage?: FloatWithAggregatesFilter<"AccountsReceivable"> | number
     debtorId?: StringNullableWithAggregatesFilter<"AccountsReceivable"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AccountsReceivable"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AccountsReceivable"> | Date | string
@@ -14786,6 +14846,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFilter<"PaymentDetail"> | Date | string
     paymentAmount?: FloatFilter<"PaymentDetail"> | number
     paymentMethod?: StringFilter<"PaymentDetail"> | string
+    paymentType?: StringFilter<"PaymentDetail"> | string
     referenceNumber?: StringNullableFilter<"PaymentDetail"> | string | null
     notes?: StringNullableFilter<"PaymentDetail"> | string | null
     createdAt?: DateTimeFilter<"PaymentDetail"> | Date | string
@@ -14799,6 +14860,7 @@ export namespace Prisma {
     paymentDate?: SortOrder
     paymentAmount?: SortOrder
     paymentMethod?: SortOrder
+    paymentType?: SortOrder
     referenceNumber?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -14815,6 +14877,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFilter<"PaymentDetail"> | Date | string
     paymentAmount?: FloatFilter<"PaymentDetail"> | number
     paymentMethod?: StringFilter<"PaymentDetail"> | string
+    paymentType?: StringFilter<"PaymentDetail"> | string
     referenceNumber?: StringNullableFilter<"PaymentDetail"> | string | null
     notes?: StringNullableFilter<"PaymentDetail"> | string | null
     createdAt?: DateTimeFilter<"PaymentDetail"> | Date | string
@@ -14828,6 +14891,7 @@ export namespace Prisma {
     paymentDate?: SortOrder
     paymentAmount?: SortOrder
     paymentMethod?: SortOrder
+    paymentType?: SortOrder
     referenceNumber?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -14848,6 +14912,7 @@ export namespace Prisma {
     paymentDate?: DateTimeWithAggregatesFilter<"PaymentDetail"> | Date | string
     paymentAmount?: FloatWithAggregatesFilter<"PaymentDetail"> | number
     paymentMethod?: StringWithAggregatesFilter<"PaymentDetail"> | string
+    paymentType?: StringWithAggregatesFilter<"PaymentDetail"> | string
     referenceNumber?: StringNullableWithAggregatesFilter<"PaymentDetail"> | string | null
     notes?: StringNullableWithAggregatesFilter<"PaymentDetail"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"PaymentDetail"> | Date | string
@@ -15612,6 +15677,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutAccountsReceivableInput
@@ -15635,6 +15702,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     debtorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15656,6 +15725,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutAccountsReceivableNestedInput
@@ -15679,6 +15750,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     debtorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15701,6 +15774,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     debtorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15721,6 +15796,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15741,6 +15818,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     debtorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15751,6 +15830,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -15764,6 +15844,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -15775,6 +15856,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15788,6 +15870,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15800,6 +15883,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -15811,6 +15895,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15823,6 +15908,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16582,6 +16668,8 @@ export namespace Prisma {
     receivableStatus?: SortOrder
     collectionStatus?: SortOrder
     notes?: SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
     debtorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16591,6 +16679,8 @@ export namespace Prisma {
     invoiceAmount?: SortOrder
     amountPaid?: SortOrder
     outstandingBalance?: SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
   }
 
   export type AccountsReceivableMaxOrderByAggregateInput = {
@@ -16609,6 +16699,8 @@ export namespace Prisma {
     receivableStatus?: SortOrder
     collectionStatus?: SortOrder
     notes?: SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
     debtorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16630,6 +16722,8 @@ export namespace Prisma {
     receivableStatus?: SortOrder
     collectionStatus?: SortOrder
     notes?: SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
     debtorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16639,6 +16733,8 @@ export namespace Prisma {
     invoiceAmount?: SortOrder
     amountPaid?: SortOrder
     outstandingBalance?: SortOrder
+    collectionPercentage?: SortOrder
+    abbPercentage?: SortOrder
   }
 
   export type AccountsReceivableScalarRelationFilter = {
@@ -16652,6 +16748,7 @@ export namespace Prisma {
     paymentDate?: SortOrder
     paymentAmount?: SortOrder
     paymentMethod?: SortOrder
+    paymentType?: SortOrder
     referenceNumber?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
@@ -16668,6 +16765,7 @@ export namespace Prisma {
     paymentDate?: SortOrder
     paymentAmount?: SortOrder
     paymentMethod?: SortOrder
+    paymentType?: SortOrder
     referenceNumber?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
@@ -16680,6 +16778,7 @@ export namespace Prisma {
     paymentDate?: SortOrder
     paymentAmount?: SortOrder
     paymentMethod?: SortOrder
+    paymentType?: SortOrder
     referenceNumber?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
@@ -17867,6 +17966,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentDetail?: PaymentDetailCreateNestedManyWithoutAccountsReceivableInput
@@ -17888,6 +17989,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     debtorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18117,6 +18220,8 @@ export namespace Prisma {
     receivableStatus?: StringFilter<"AccountsReceivable"> | string
     collectionStatus?: StringNullableFilter<"AccountsReceivable"> | string | null
     notes?: StringNullableFilter<"AccountsReceivable"> | string | null
+    collectionPercentage?: FloatFilter<"AccountsReceivable"> | number
+    abbPercentage?: FloatFilter<"AccountsReceivable"> | number
     debtorId?: StringNullableFilter<"AccountsReceivable"> | string | null
     createdAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
     updatedAt?: DateTimeFilter<"AccountsReceivable"> | Date | string
@@ -18893,6 +18998,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -18904,6 +19010,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -19013,6 +19120,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFilter<"PaymentDetail"> | Date | string
     paymentAmount?: FloatFilter<"PaymentDetail"> | number
     paymentMethod?: StringFilter<"PaymentDetail"> | string
+    paymentType?: StringFilter<"PaymentDetail"> | string
     referenceNumber?: StringNullableFilter<"PaymentDetail"> | string | null
     notes?: StringNullableFilter<"PaymentDetail"> | string | null
     createdAt?: DateTimeFilter<"PaymentDetail"> | Date | string
@@ -19073,6 +19181,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutAccountsReceivableInput
@@ -19095,6 +19205,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     debtorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19131,6 +19243,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutAccountsReceivableNestedInput
@@ -19153,6 +19267,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     debtorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19255,6 +19371,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutAccountsReceivableInput
@@ -19277,6 +19395,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentDetail?: PaymentDetailUncheckedCreateNestedManyWithoutAccountsReceivableInput
@@ -19624,6 +19744,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     debtorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19758,6 +19880,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentDetail?: PaymentDetailUpdateManyWithoutAccountsReceivableNestedInput
@@ -19779,6 +19903,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     debtorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19800,6 +19926,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     debtorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20149,6 +20277,7 @@ export namespace Prisma {
     paymentDate: Date | string
     paymentAmount: number
     paymentMethod: string
+    paymentType: string
     referenceNumber?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -20160,6 +20289,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20171,6 +20301,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20182,6 +20313,7 @@ export namespace Prisma {
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentAmount?: FloatFieldUpdateOperationsInput | number
     paymentMethod?: StringFieldUpdateOperationsInput | string
+    paymentType?: StringFieldUpdateOperationsInput | string
     referenceNumber?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20204,6 +20336,8 @@ export namespace Prisma {
     receivableStatus: string
     collectionStatus?: string | null
     notes?: string | null
+    collectionPercentage?: number
+    abbPercentage?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20223,6 +20357,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutAccountsReceivableNestedInput
@@ -20245,6 +20381,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentDetail?: PaymentDetailUncheckedUpdateManyWithoutAccountsReceivableNestedInput
@@ -20266,6 +20404,8 @@ export namespace Prisma {
     receivableStatus?: StringFieldUpdateOperationsInput | string
     collectionStatus?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionPercentage?: FloatFieldUpdateOperationsInput | number
+    abbPercentage?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

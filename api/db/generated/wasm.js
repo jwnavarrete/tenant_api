@@ -210,6 +210,8 @@ exports.Prisma.AccountsReceivableScalarFieldEnum = {
   receivableStatus: 'receivableStatus',
   collectionStatus: 'collectionStatus',
   notes: 'notes',
+  collectionPercentage: 'collectionPercentage',
+  abbPercentage: 'abbPercentage',
   debtorId: 'debtorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -221,6 +223,7 @@ exports.Prisma.PaymentDetailScalarFieldEnum = {
   paymentDate: 'paymentDate',
   paymentAmount: 'paymentAmount',
   paymentMethod: 'paymentMethod',
+  paymentType: 'paymentType',
   referenceNumber: 'referenceNumber',
   notes: 'notes',
   createdAt: 'createdAt',

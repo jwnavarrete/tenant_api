@@ -68,6 +68,25 @@ class TenantConfigService {
 
     return this.getTenantConfig(tenantId, parameterId);
   }
+
+  async getTenantConfigsByTenantId(
+    tenantId: string
+  ): Promise<ITenantConfigResponse> {
+    const tenantConfigs = await prisma.tenantConfig.findFirst({
+      where: {
+        tenantId: tenantId,
+      },
+      include: {
+        parameter: true,
+      },
+    });
+
+    if (!tenantConfigs) {
+      throw new Error("No tenant configs found for the given tenant ID");
+    }
+
+    return tenantConfigResponseSchema.parse(tenantConfigs);
+  }
 }
 
 export const tenantConfigService = new TenantConfigService();

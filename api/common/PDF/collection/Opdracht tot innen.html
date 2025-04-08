@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            margin-top: 20px;
+            text-align: justify;
+        }
+        .table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        .debtor-info {
+            display: flex;
+            justify-content: space-between;
+            width: 50%; /* Adjusted to half width */
+        }
+        .debtor-info p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div style="flex: 1;">
+            <p>Aan:<br>{{recipient}}<br>T.a.v. de directeur, de heer {{directorName}}<br>{{address1}}<br>{{city1}}</p>
+        </div>
+        <div style="text-align: right;">
+            <p>{{address2}}<br>{{city2}}<br>Tel: {{phone}}<br>E-mail: {{email}}</p>
+        </div>
+    </header>
+    <div class="content">
+        <p>{{location}}, {{date}}</p>
+        <p>Geachte heer {{directorName}},</p>
+        <p>De Centrale Autoriteit Buiten het Gerecht op Bonaire houdt toezicht op financiële verplichtingen. De standaard inningsprocedure die gehanteerd wordt op Bonaire is het versturen van twee aanmaningen naar de debiteur en een ingebrekestellingsbrief. Bij uitblijven van betaling geven wij opdracht tot inning om gerechtelijke procedures te vermijden.</p>
+        <p>De onderstaande debiteur is officieel in gebreke gesteld door Rico Aceme en staat onder een financiële blokkade in de buitengerechtelijke fase. Het is niet toegestaan om diensten of goederen aan de schuldenaar te leveren zonder een financiële verklaring van de Autoriteit Buiten het Gerecht, waaruit blijkt dat deze aan zijn betalingsverplichtingen heeft voldaan.</p>
+        <p>Wij verzoeken u dringend om in overleg met de debiteur het totale bedrag van USD {{totalAmount}} per direct in te houden en tot betaling over te gaan. Gelieve de betalingen over te maken naar rekeningnummer MCB {{accountNumber}}, onder vermelding van uw naam, bedrijfsnaam, dossiernummer en factuurnummer.</p>
+        <hr>
+        <h3>GEGEVENS DEBITEUR</h3>
+        <div class="debtor-info">
+            <p>ID - Cedula:</p>
+            <p>{{debtorID}}</p>
+        </div>
+        <div class="debtor-info">
+            <p>Debiteur:</p>
+            <p>{{debtorName}}</p>
+        </div>
+        <hr>
+        <br><br><br>
+        <p>Hoogachtend,</p>
+        <br>
+        <p>_____________________________<br><strong><u>{{debtorName}}</u></strong><br>Directeur Autoriteit Buitengerecht CIO</p>
+    </div>
+</body>
+</html>

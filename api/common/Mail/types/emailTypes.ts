@@ -3,4 +3,8 @@ export interface EmailOptions {
   to: string;
   subject: string;
   html: string;
+  attachments?: Array<{
+    filename: string;
+    path: string;
+  }>;
 }

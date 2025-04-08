@@ -60,16 +60,16 @@ INSERT INTO global_parameters (
     "updatedAt"
 ) VALUES (
     '67f55fa0-8598-4ec9-9d5e-2fe980d82e6d',
-    50,
-    20,
-    30,
     15,
-    45,
-    20,
-    1000,
+    6,
+    5,
+    14,
+    2,
+    2,
+    250,
+    100,
+    500,
     200,
-    5000,
-    1000,
     NOW()
 );
 

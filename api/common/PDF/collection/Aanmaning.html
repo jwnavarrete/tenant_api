@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aanmaning</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; margin: 40px">
+    <header
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <div
+        class="logo"
+        style="flex: 1; font-size: 24px; font-weight: bold; color: #ff6600"
+      >
+        Centraal Inning
+      </div>
+      <div style="text-align: right">
+        <strong>Aanmaning</strong><br />
+        Verzenddatum: 09-10-2024
+      </div>
+    </header>
+    <div class="content" style="margin-top: 20px; text-align: justify">
+      <p>Aan: Gris100<br />Av. Universidad<br />Bonaire</p>
+      <p>
+        Uit onze administratie blijkt dat factuurnummer {{invoiceNumber}} niet, of niet
+        volledig is betaald. Het totaalbedrag van USD {{invoiceAmount}} dient binnen {{days}} dagen
+        dagen na dagtekening van deze brief te worden voldaan. Wij verzoeken u
+        kindly transfer the amount to bank account MCB {{accountNumber}}.
+        Vermeld daarbij uw naam, bedrijfsnaam, dossiernummer of factuurnummer.
+      </p>
+      <table
+        class="table"
+        style="margin-top: 20px; border-collapse: collapse; width: 100%"
+      >
+        <tr>
+          <th
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              background-color: #f2f2f2;
+              text-align: left;
+            "
+          >
+            Omschrijving
+          </th>
+          <th
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              background-color: #f2f2f2;
+              text-align: left;
+            "
+          >
+            Bedrag
+          </th>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px">Hoofdsom</td>
+          <td style="border: 1px solid #ddd; padding: 8px">USD {{invoiceNumber}}</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px">
+            Incassokosten {{collectionPercentage}}%
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px">USD {{calculatedCollection}}</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px">ABB {{abbPercentage}}%</td>
+          <td style="border: 1px solid #ddd; padding: 8px">USD {{calculatedABB}}</td>
+        </tr>
+        <tr>
+          <th
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              background-color: #f2f2f2;
+              text-align: left;
+            "
+          >
+            Totaalbedrag
+          </th>
+          <th
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              background-color: #f2f2f2;
+              text-align: left;
+            "
+          >
+            USD {{totalAmount}}
+          </th>
+        </tr>
+      </table>
+      <div
+        class="note"
+        style="margin-top: 20px; font-size: 14px; text-align: justify"
+      >
+        <p>
+          <strong>Let op:</strong> Bij uitblijven van betaling wordt er USD
+          {{fine}} will be charged, and you risk being blocked
+          voor de buitengerechtelijke fase. Dit betekent dat uw
+          betalingsachterstand centraal wordt geregistreerd. U bent in dat geval
+          verplicht om alle betalingen via het centrale betalingspunt te
+          verrichten totdat uw achterstand volledig is voldaan. Alle bijkomende
+          kosten van invordering komen dan voor uw rekening.
+        </p>
+        <p>
+          Voor betaling, reacties of het treffen van een betalingsregeling kunt
+          u terecht op
+          <a href="https://www.centraalinning.com">www.centraalinning.com</a>.
+          Gebruik hiervoor uw inloggegevens. Houd er rekening mee dat uw
+          toegangscode na {{validDays}} dagen niet meer geldig is.
+        </p>
+        <p>Inloggegevens: {{temporaryAccessCode}}</p>
+      </div>
+    </div>
+    <footer style="margin-top: 40px; font-size: 14px; text-align: justify">
+      <p>
+        Dit bericht is automatisch opgesteld door het Centraal Incassoplatform
+        (CI) en verzonden door <strong>Rico Aceme</strong>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -117,27 +117,29 @@ model TenantConfig {
 }
 
 model AccountsReceivable {
-  id                 String          @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
-  tenantId           String // Clave foránea que referencia a la tabla Tenant
-  tenant             Tenant          @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  invoiceNumber      String          @unique // Número único de la factura asociada
-  issueDate          DateTime // Fecha de emisión de la factura
-  dueDate            DateTime // Fecha de vencimiento de la factura
-  customerName       String // Nombre del cliente
-  customerAddress    String // Dirección del cliente
-  customerEmail      String // Email del cliente
-  customerPhone      String // Teléfono del cliente
-  invoiceAmount      Float // Monto total de la factura
-  amountPaid         Float           @default(0) // Monto pagado
-  outstandingBalance Float           @default(0) // Saldo pendiente
-  receivableStatus   String // Estado del registro (paid, pending, overdue)
-  collectionStatus   String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
-  notes              String? // Notas adicionales
-  paymentDetail      PaymentDetail[] // Relación uno a muchos con PaymentDetail   
-  debtorId           String? // Clave foránea que referencia a la tabla Debtor
-  debtor             Debtor?         @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
-  createdAt          DateTime        @default(now()) // Fecha de creación
-  updatedAt          DateTime        @updatedAt // Fecha de última actualización
+  id                   String          @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
+  tenantId             String // Clave foránea que referencia a la tabla Tenant
+  tenant               Tenant          @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  invoiceNumber        String          @unique // Número único de la factura asociada
+  issueDate            DateTime // Fecha de emisión de la factura
+  dueDate              DateTime // Fecha de vencimiento de la factura
+  customerName         String // Nombre del cliente
+  customerAddress      String // Dirección del cliente
+  customerEmail        String // Email del cliente
+  customerPhone        String // Teléfono del cliente
+  invoiceAmount        Float // Monto total de la factura
+  amountPaid           Float           @default(0) // Monto pagado
+  outstandingBalance   Float           @default(0) // Saldo pendiente
+  receivableStatus     String // Estado del registro (paid, pending, overdue)
+  collectionStatus     String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
+  notes                String? // Notas adicionales
+  collectionPercentage Float           @default(0) // Porcentaje de cobranza
+  abbPercentage        Float           @default(0) // Porcentaje ABB  
+  paymentDetail        PaymentDetail[] // Relación uno a muchos con PaymentDetail   
+  debtorId             String? // Clave foránea que referencia a la tabla Debtor
+  debtor               Debtor?         @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
+  createdAt            DateTime        @default(now()) // Fecha de creación
+  updatedAt            DateTime        @updatedAt // Fecha de última actualización
 
   @@map("accounts_receivable")
 }
@@ -149,6 +151,7 @@ model PaymentDetail {
   paymentDate          DateTime // Fecha del pago
   paymentAmount        Float // Monto del pago
   paymentMethod        String // Método de pago (por ejemplo, transferencia, tarjeta, efectivo)
+  paymentType          String // Puede ser "principal", "collection", "abb", etc.
   referenceNumber      String? // Número de referencia del pago
   notes                String? // Notas adicionales sobre el pago
   createdAt            DateTime           @default(now()) // Fecha de creación

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingebrekestelling</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px">
+    <header style="display: flex; justify-content: space-between; align-items: center">
+        <div class="logo" style="flex: 1; font-size: 24px; font-weight: bold; color: #ff6600">
+            Centraal Inning
+        </div>
+        <div style="text-align: right">
+            <strong>Ingebrekestelling</strong><br>
+            Verzenddatum: {{sendDate}}
+        </div>
+    </header>
+    <div class="content" style="margin-top: 20px; text-align: justify">
+        <p>Aan: {{recipient}}<br>Av. Universidad<br>Bonaire</p>
+        <p>
+            Op {{firstReminderDate}} en {{secondReminderDate}} hebben wij u aangemaand om uw openstaande vordering te voldoen. Tot onze spijt bent u uw verplichting niet nagekomen. Bij deze stellen wij u officieel in gebreke.
+        </p>
+    </div>
+    <footer style="margin-top: 40px; font-size: 14px; text-align: justify">
+        <p><strong><u>Rico Aceme</u></strong></p>
+        <p>Dit bericht is automatisch gegenereerd en verzonden via het centrale incassoplatform voor schuldeisers op Bonaire.</p>
+    </footer>
+</body>
+</html>
