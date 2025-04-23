@@ -9,6 +9,7 @@ import { QueryParams } from "../../common/interfaces/query.interface";
 import { UserResponseSchema } from "../schemas/user.schemas";
 import { UserMailService } from "../../common/Mail";
 import { CLIENT_STATUS } from "../../common/lib/constant";
+import { encrypt } from "../../common/lib/encryption";
 
 class UserService {
   async getUsers(
@@ -144,6 +145,27 @@ class UserService {
     });
   }
 
+  async generateRegistrationLink(
+    slug: string,
+    type: string,
+    userId: string,
+    email: string,
+    tmpPass: string
+  ): Promise<string> {
+    // Generate a unique token for the user
+    const payload = {
+      type,
+      userId,
+      email,
+      tmpPass,
+      timestamp: new Date().toISOString(),
+    };
+
+    const hashedPayload = encrypt(payload);
+
+    return `https://${slug}.${process.env.APP_DOMAIN}/users/register?token=${hashedPayload}`;
+  }
+
   async resendInvitation(userId: string): Promise<boolean> {
     const user = await this.getUserById(userId);
     if (!user) {
@@ -174,6 +196,22 @@ class UserService {
     );
 
     return true;
+  }
+
+  async saveTemporaryPassword(userId: string, tempPass: string): Promise<void> {
+    const user = await this.getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const encryptedPassword = await hash(tempPass, 10);
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        password: encryptedPassword,
+      },
+    });
   }
 
   async registerInvitedUser(

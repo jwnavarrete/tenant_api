@@ -7,6 +7,7 @@ export const UserSchema = z.object({
   fullname: z.string().optional(),
   createdAt: z.date(),
   updatedAt: z.date(),
+  status: z.enum(["active", "inactive", "pending"]),
 });
 
 // Schema for Debtor

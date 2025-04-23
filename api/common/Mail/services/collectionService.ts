@@ -1,13 +1,26 @@
 import transporter from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
-import path from "path";
-import { INotification } from "../../../app/interfaces/accountsReceivable.interface";
-
+import renderPDF from "../../PDF/renderPDF";
+import { InvoiceINotification } from "../../../app/interfaces/notification.interface";
 class CollectionService {
-  static async sendAanmaning(to: string, data: INotification): Promise<void> {
-    // 
-    const html = renderTemplate("collection/Aanmaning", data);
+  //
+  static async sendAanmaning(
+    to: string,
+    data: InvoiceINotification
+  ): Promise<void> {
+    //
+    // const templatePath = "user/invitation-debtor";
+    const templatePath = "collection/Aanmaning";
+
+    const html = renderTemplate(templatePath, {
+      ...data,
+      companyName: "Dazzsoft",
+    });
+    //
+    const filename = "Aanmaning.pdf";
+    const PDF = await renderPDF("collection/Aanmaning", filename, data);
+    //
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
       to,
@@ -15,8 +28,8 @@ class CollectionService {
       html,
       attachments: [
         {
-          filename: "document.pdf", // Nombre del archivo adjunto
-          path: path.resolve(__dirname, "../files/prueba.pdf"), // Ruta al archivo PDF
+          filename: filename, // Nombre del archivo adjunto
+          path: PDF, // Ruta al archivo PDF
         },
       ],
     };

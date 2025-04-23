@@ -18,4 +18,11 @@ const ROLES = {
   BAILIFF: "BAILIFF",
 };
 
-export { CLIENT_STATUS, TOKEN_TYPES, ROLES };
+const COLLECTION_STATUS = {
+  INITIAL: "initial",
+  AANMANING: "aanmaning",
+  SOMMATIE: "sommatie",
+  INGEBREKESTELLING: "ingebrekestelling",
+};
+
+export { CLIENT_STATUS, TOKEN_TYPES, ROLES, COLLECTION_STATUS };

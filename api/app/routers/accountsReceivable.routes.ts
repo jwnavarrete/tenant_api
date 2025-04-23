@@ -39,5 +39,5 @@ accountsReceivableRoutes.delete(
 accountsReceivableRoutes.post(
   "/:id/send-notification",
   validateTokenJwtMiddleware,
-  accountsReceivableControler.sendNotification
+  accountsReceivableControler.sendNotificationController
 );

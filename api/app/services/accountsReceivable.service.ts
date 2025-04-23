@@ -1,6 +1,7 @@
 import {
   IExcelImport,
   IExcelImportArray,
+  IInvoiceResponse,
 } from "../interfaces/accountsReceivable.interface";
 import { debtorService } from "./debtor.service";
 import { userService } from "./user.service";
@@ -8,8 +9,8 @@ import { prisma } from "../../index";
 import { roleService } from "./role.service";
 import { tenantService } from "./tenant.service";
 import { tenantConfigService } from "./tenantConfig.service";
-import { ROLES } from "../../common/lib/constant";
-
+import { COLLECTION_STATUS, ROLES } from "../../common/lib/constant";
+import { InvoiceResponseSchema } from "../schemas/accountsReceivable.schemas";
 class AccountsReceivableService {
   //
   async registerInvoices(tenantId: string, data: IExcelImportArray) {
@@ -134,7 +135,7 @@ class AccountsReceivableService {
           amountPaid: 0,
           outstandingBalance: data.invoiceAmount,
           receivableStatus: "pending",
-          collectionStatus: "Aanmaning",
+          collectionStatus: COLLECTION_STATUS.AANMANING,
           collectionPercentage: porcCobranza,
           abbPercentage: porcAbb,
           notes: "",
@@ -169,18 +170,27 @@ class AccountsReceivableService {
     return invoices;
   }
 
-  async getInvoiceById(invoiceId: string) {
+  async getInvoiceById(invoiceId: string): Promise<IInvoiceResponse> {
     const invoice = await prisma.accountsReceivable.findFirst({
       where: {
         id: invoiceId,
       },
       include: {
-        debtor: true,
+        debtor: {
+          include: {
+            user: true,
+          },
+        },
         paymentDetail: true,
       },
     });
 
-    return invoice;
+    if (!invoice) {
+      throw new Error("Invoice not found");
+    }
+    console.log("Invoice", invoice);
+    // Validate the invoice with the schema
+    return InvoiceResponseSchema.parse(invoice);
   }
 
   async updateInvoice(invoiceId: string, data: any) {
