@@ -9,7 +9,7 @@ import { QueryParams } from "../../common/interfaces/query.interface";
 import { UserResponseSchema } from "../schemas/user.schemas";
 import { UserMailService } from "../../common/Mail";
 import { CLIENT_STATUS } from "../../common/lib/constant";
-import { encrypt } from "../../common/lib/encryption";
+import { decrypt, encrypt } from "../../common/lib/encryption";
 
 class UserService {
   async getUsers(
@@ -133,16 +133,6 @@ class UserService {
     const recoveryUrlLink = `https://${slug}.${process.env.APP_DOMAIN}/users/register?token=${token}&dl_userid=${userId}`;
 
     UserMailService.sendInvitation(email, companyName, recoveryUrlLink);
-
-    await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        invitationToken: token,
-        status: CLIENT_STATUS.PENDING,
-      },
-    });
   }
 
   async generateRegistrationLink(
@@ -150,20 +140,26 @@ class UserService {
     type: string,
     userId: string,
     email: string,
-    tmpPass: string
+    token: string
   ): Promise<string> {
     // Generate a unique token for the user
     const payload = {
       type,
       userId,
       email,
-      tmpPass,
+      token,
+      slug,
       timestamp: new Date().toISOString(),
     };
 
     const hashedPayload = encrypt(payload);
+    const demo = decrypt(hashedPayload);
+    console.log("Decrypted payload:", demo);
+    console.log("Hashed payload:", hashedPayload);
 
-    return `https://${slug}.${process.env.APP_DOMAIN}/users/register?token=${hashedPayload}`;
+    return `https://${slug}.${
+      process.env.APP_DOMAIN
+    }/users/register?token=${encodeURIComponent(hashedPayload)}`;
   }
 
   async resendInvitation(userId: string): Promise<boolean> {
@@ -185,7 +181,8 @@ class UserService {
       throw new Error("Company name or slug not found");
     }
 
-    const invitationToken = Math.random().toString(36).substring(2, 15);
+    const invitationToken = await userService.saveInvitationToken(userId);
+    // const invitationToken = Math.random().toString(36).substring(2, 15);
 
     this.sendInvitation(
       slug,
@@ -198,20 +195,31 @@ class UserService {
     return true;
   }
 
-  async saveTemporaryPassword(userId: string, tempPass: string): Promise<void> {
+  generateInvitationToken() {
+    const temporaryAccessCode = Math.random()
+      .toString(36)
+      .substring(2, 12)
+      .toUpperCase(); // Generate a random 10-character alphanumeric code
+    return temporaryAccessCode;
+  }
+
+  async saveInvitationToken(userId: string): Promise<string> {
     const user = await this.getUserById(userId);
     if (!user) {
       throw new Error("User not found");
     }
 
-    const encryptedPassword = await hash(tempPass, 10);
+    const token = this.generateInvitationToken();
 
     await prisma.user.update({
       where: { id: userId },
       data: {
-        password: encryptedPassword,
+        invitationToken: token,
+        status: CLIENT_STATUS.PENDING,
       },
     });
+
+    return token;
   }
 
   async registerInvitedUser(

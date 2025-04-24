@@ -58,17 +58,13 @@ class NotificationService {
       const validDays = 5;
       const fine = 93; // This should be calculated based on the invoice and the days overdue
       // Create a temporary access code
-      const temporaryAccessCode = Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase(); // Generate a random 6-character alphanumeric code
 
       // Check if the user exists
       if (!User?.id) {
         throw new Error("User ID not found");
       }
       // Set Temporary Password
-      userService.saveTemporaryPassword(User?.id, temporaryAccessCode);
+      const invitationToken = await userService.saveInvitationToken(User?.id);
 
       // Generate the registration link
       const urlRegister = await userService.generateRegistrationLink(
@@ -76,7 +72,7 @@ class NotificationService {
         "register-debtor",
         User?.id,
         User?.email,
-        temporaryAccessCode
+        invitationToken
       );
 
       // Create the notification object
@@ -94,7 +90,7 @@ class NotificationService {
         totalAmount: totalAmount,
         fine: fine,
         validDays: validDays,
-        temporaryAccessCode: temporaryAccessCode,
+        temporaryAccessCode: invitationToken,
       };
 
       await CollectionService.sendAanmaning(
