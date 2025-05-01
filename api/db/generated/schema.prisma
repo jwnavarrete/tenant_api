@@ -116,48 +116,145 @@ model TenantConfig {
   @@map("tenant_config")
 }
 
+model PaymentAgreement {
+  id                      String             @id @default(uuid()) // Identificador único del acuerdo de pago
+  accountsReceivableId    String             @unique // Clave foránea que referencia a la tabla AccountsReceivable
+  accountsReceivable      AccountsReceivable @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  initialPayment          Float // Monto del pago inicial
+  remainingBalance        Float // Saldo restante después del pago inicial
+  totalAmount             Float // Monto total acordado
+  numberOfInstallments    Int // Número de cuotas acordadas
+  Installments            Installment[] // Relación uno a muchos con Installment
+  // Removed validityDate field as agreementExpirationDate already serves the purpose
+  paymentStatus           String // Estado del acuerdo (Ej. "active", "completed", "defaulted")
+  lastPaymentDate         DateTime? // Fecha del último pago realizado
+  initialPaymentStatus    String             @default("pending") // Estado del pago inicial (pending, completed)
+  totalPaid               Float              @default(0) // Total pagado hasta el momento
+  isFullyPaid             Boolean            @default(false) // Indica si el acuerdo está completamente pagado
+  accumulatedInterest     Float              @default(0) // Intereses acumulados durante el acuerdo
+  agreementExpirationDate DateTime // Fecha de expiración del acuerdo para pagos
+  createdAt               DateTime           @default(now()) // Fecha de creación
+  updatedAt               DateTime           @updatedAt // Fecha de última actualización
+  PaymentDetail           PaymentDetail[]
+  previousInterestAmount  Float? // Intereses acumulados antes del acuerdo
+
+  @@map("payment_agreement")
+}
+
+model Installment {
+  id                 String           @id @default(uuid())
+  paymentAgreementId String
+  paymentAgreement   PaymentAgreement @relation(fields: [paymentAgreementId], references: [id])
+  installmentNumber  Int // número de cuota (1, 2, 3...)
+  dueDate            DateTime // fecha límite para pagar esta cuota
+  amount             Float // Monto de esta cuota
+  paid               Boolean          @default(false)
+  paidAt             DateTime?
+  status             String           @default("pending") // Estado de la cuota (pending, paid, overdue)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@map("installment")
+}
+
 model AccountsReceivable {
-  id                   String          @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
-  tenantId             String // Clave foránea que referencia a la tabla Tenant
-  tenant               Tenant          @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  invoiceNumber        String          @unique // Número único de la factura asociada
-  issueDate            DateTime // Fecha de emisión de la factura
-  dueDate              DateTime // Fecha de vencimiento de la factura
-  customerName         String // Nombre del cliente
-  customerAddress      String // Dirección del cliente
-  customerEmail        String // Email del cliente
-  customerPhone        String // Teléfono del cliente
-  invoiceAmount        Float // Monto total de la factura
-  amountPaid           Float           @default(0) // Monto pagado
-  outstandingBalance   Float           @default(0) // Saldo pendiente
-  receivableStatus     String // Estado del registro (paid, pending, overdue)
-  collectionStatus     String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
-  notes                String? // Notas adicionales
-  collectionPercentage Float           @default(0) // Porcentaje de cobranza
-  abbPercentage        Float           @default(0) // Porcentaje ABB  
-  paymentDetail        PaymentDetail[] // Relación uno a muchos con PaymentDetail   
-  debtorId             String? // Clave foránea que referencia a la tabla Debtor
-  debtor               Debtor?         @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
-  createdAt            DateTime        @default(now()) // Fecha de creación
-  updatedAt            DateTime        @updatedAt // Fecha de última actualización
+  id                         String               @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
+  tenantId                   String // Clave foránea que referencia a la tabla Tenant
+  tenant                     Tenant               @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  invoiceNumber              String               @unique // Número único de la factura asociada
+  issueDate                  DateTime // Fecha de emisión de la factura
+  dueDate                    DateTime // Fecha de vencimiento de la factura
+  // Información del cliente
+  customerName               String // Nombre del cliente
+  customerAddress            String? // Dirección del cliente
+  customerEmail              String? // Email del cliente
+  customerPhone              String? // Teléfono del cliente
+  // Detalles de la factura
+  invoiceAmount              Float // Monto total de la factura
+  amountPaid                 Float                @default(0) // Monto pagado
+  remainingBalance           Float                @default(0) // Saldo pendiente
+  totalDueToday              Float                @default(0) // Total a pagar hoy
+  // Status de la cuenta por cobrar
+  receivableStatus           String // Estado del registro (paid, pending, overdue)
+  collectionStatus           String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
+  // Gastos de cobranza que el cliente le cobra al deudor
+  clientCollectionPercentage Float                @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
+  clientCollectionAmount     Float                @default(0) // Monto de cobranza que el cliente le cobra al deudor
+  clientAbbPercentage        Float                @default(0) // Porcentaje ABB que el cliente le cobra al deudor
+  clientAbbAmount            Float                @default(0) // Monto ABB que el cliente le cobra al deudor
+  // Gastos de cobranza que el administrador del sistema le cobra al cliente
+  adminCollectionPercentage  Float                @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
+  adminCollectionAmount      Float                @default(0) // Monto de cobranza que el administrador le cobra al cliente
+  adminAbbPercentage         Float                @default(0) // Porcentaje ABB que el administrador le cobra al cliente
+  adminAbbAmount             Float                @default(0) // Monto ABB que el administrador le cobra al cliente
+  notifiedAt                 DateTime? // Fecha en la que se notificó al deudor
+  // Intereses acumulados antes del acuerdo de pago o notificación enviado
+  previousInterestAmount     Float? // Monto de interés acumulado antes de congelarlo
+  interestStartDate          DateTime? // Fecha de inicio del interés
+  interestFrozenAt           DateTime? // Fecha en la que se congeló el interés
+  interestFrozenAmount       Float? // Monto de interés que se congeló
+  interestFrozenPercentage   Float? // Porcentaje de interés que se congeló
+  // Detalles de pago
+  lastPaymentDate            DateTime? // Fecha del último pago
+  paymentDetail              PaymentDetail[] // Relación uno a muchos con PaymentDetail   
+  // Relación con el deudor
+  debtorId                   String? // Clave foránea que referencia a la tabla Debtor
+  debtor                     Debtor?              @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
+  // Auditoría
+  createdAt                  DateTime             @default(now()) // Fecha de creación
+  updatedAt                  DateTime             @updatedAt // Fecha de última actualización
+  // Acuerdo de pago
+  hasPaymentAgreement        Boolean              @default(false) // Indica si tiene un acuerdo de pago
+  paymentAgreementId         String? // Clave foránea que referencia a la tabla PaymentAgreement
+  paymentAgreement           PaymentAgreement?
+  // Relacion con la distribución de pagos
+  PaymentApplication         PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  // Notas adicionales
+  notes                      String? // Notas adicionales
 
   @@map("accounts_receivable")
 }
 
 model PaymentDetail {
-  id                   String             @id @default(uuid()) // Identificador único del detalle de pago
+  id                   String               @id @default(uuid()) // Identificador único del detalle de pago
   accountsReceivableId String // Clave foránea que referencia a la tabla AccountsReceivable
-  accountsReceivable   AccountsReceivable @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  accountsReceivable   AccountsReceivable   @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
   paymentDate          DateTime // Fecha del pago
   paymentAmount        Float // Monto del pago
   paymentMethod        String // Método de pago (por ejemplo, transferencia, tarjeta, efectivo)
-  paymentType          String // Puede ser "principal", "collection", "abb", etc.
   referenceNumber      String? // Número de referencia del pago
   notes                String? // Notas adicionales sobre el pago
-  createdAt            DateTime           @default(now()) // Fecha de creación
-  updatedAt            DateTime           @updatedAt // Fecha de última actualización
+  createdAt            DateTime             @default(now()) // Fecha de creación
+  updatedAt            DateTime             @updatedAt // Fecha de última actualización
+  paymentApplications  PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  paymentAgreementId   String? // Clave foránea que referencia a la tabla PaymentAgreement
+  paymentAgreement     PaymentAgreement?    @relation(fields: [paymentAgreementId], references: [id])
 
   @@map("payment_detail")
+}
+
+model PaymentApplication {
+  id                   String                 @id @default(uuid()) // Identificador único de la aplicación de pago
+  paymentDetailId      String // Clave foránea que referencia a PaymentDetail
+  paymentDetail        PaymentDetail          @relation(fields: [paymentDetailId], references: [id]) // Relación con PaymentDetail
+  accountsReceivableId String // Clave foránea que referencia a AccountsReceivable
+  accountsReceivable   AccountsReceivable     @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  amountApplied        Float // Monto aplicado en esta parte del pago
+  appliedTo            PaymentApplicationType // Enum para saber si es capital, interés, impuesto, etc.
+  createdAt            DateTime               @default(now()) // Fecha de creación
+  updatedAt            DateTime               @updatedAt // Fecha de última actualización
+
+  @@map("payment_application")
+}
+
+enum PaymentApplicationType {
+  CAPITAL
+  INTEREST
+  TAX
+  CLIENT_COLLECTION_FEE
+  CLIENT_ABB_FEE
+  ADMIN_COLLECTION_FEE
+  ADMIN_ABB_FEE
 }
 
 model Debtor {
@@ -170,6 +267,8 @@ model Debtor {
   email              String // Email del deudor
   phone              String? // Teléfono del deudor
   address            String? // Dirección del deudor
+  personType         String? // Tipo de persona: natural o empresa
+  identificationType String? // Tipo de identificación
   identification     String? // Identificación del deudor
   accountsReceivable AccountsReceivable[] // Relación uno a muchos con AccountsReceivable
   employeeId         String? // Clave foránea que referencia a la tabla Employee

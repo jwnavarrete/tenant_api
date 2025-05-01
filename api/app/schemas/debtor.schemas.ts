@@ -22,7 +22,8 @@ export const DebtorSchema = z.object({
   address: z.string().optional(),
   identification: z.string(),
   employeeId: z.string().uuid().nullable(),
-  createdAt: z.date(),
+  identificationType: z.string().optional(),
+  personType: z.string().optional(),
   updatedAt: z.date(),
 });
 
@@ -34,4 +35,14 @@ export const RegisterDebtorSchema = z.object({
   phone: z.string().optional(),
   address: z.string().optional(),
   employeeId: z.string().uuid().nullable().optional(),
+  identificationType: z.enum([
+    "sedula",
+    "passport",
+    "residence_permit",
+    "foreign_id",
+    "kvk_number",
+    "tax_id",
+    "business_registry",
+  ]),
+  personType: z.enum(["individual", "company"]),
 });

@@ -36,6 +36,7 @@ const InvoiceSchema = z.object({
 });
 
 const ExcelImportSchema = z.object({
+  debtorId: z.string().optional(),
   debtorFullname: z.string(),
   debtorEmail: z.string().email(),
   debtorPhone: z.string(),

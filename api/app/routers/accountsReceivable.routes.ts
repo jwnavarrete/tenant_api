@@ -13,31 +13,37 @@ accountsReceivableRoutes.post(
   "/import-invoices",
   validateTokenJwtMiddleware,
   validateBodyMiddleware(ExcelImportSchemaArray),
-  accountsReceivableControler.registerInvoices
+  accountsReceivableControler.registerAccountsReceivables
 );
 
 accountsReceivableRoutes.post(
   "/",
   validateTokenJwtMiddleware,
   validateBodyMiddleware(ExcelImportSchema),
-  accountsReceivableControler.registerInvoice
+  accountsReceivableControler.registerAccountReceivable
 );
 
 accountsReceivableRoutes.get(
   "/",
   validateTokenJwtMiddleware,
-  accountsReceivableControler.getAllInvoices
+  accountsReceivableControler.getAllReceivables
 );
 
 // delete invoice
 accountsReceivableRoutes.delete(
   "/:id",
   validateTokenJwtMiddleware,
-  accountsReceivableControler.deleteInvoice
+  accountsReceivableControler.deleteReceivable
 );
 
 accountsReceivableRoutes.post(
   "/:id/send-notification",
   validateTokenJwtMiddleware,
   accountsReceivableControler.sendNotificationController
+);
+
+accountsReceivableRoutes.get(
+  "/by-user",
+  validateTokenJwtMiddleware,
+  accountsReceivableControler.getReceivablesByUser
 );

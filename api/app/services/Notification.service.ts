@@ -16,7 +16,7 @@ class NotificationService {
     const tenant = await tenantService.validateTenantById(tenantId);
     // Check if the invoice exists
     const invoice: IInvoiceResponse =
-      await accountsReceivableService.getInvoiceById(invoiceId);
+      await accountsReceivableService.getReceivableById(invoiceId);
 
     console.log("Invoice", invoice);
     if (!invoice) {
@@ -36,9 +36,9 @@ class NotificationService {
     try {
       const User = invoice.debtor?.user;
       // Check if the invoice is already sent
-      if (User?.status === "active") {
-        throw new Error("The user is already active on the platform");
-      }
+      // if (User?.status === "active") {
+      //   throw new Error("The user is already active on the platform");
+      // }
 
       const calculatedCollection = parseFloat(
         (invoice.invoiceAmount * (invoice.collectionPercentage / 100)).toFixed(
@@ -93,10 +93,11 @@ class NotificationService {
         temporaryAccessCode: invitationToken,
       };
 
-      await CollectionService.sendAanmaning(
-        "jwnavarretez@gmail.com",
-        notification
-      );
+      const debtorEmail = invoice.debtor?.email;
+
+      if (debtorEmail) {
+        await CollectionService.sendAanmaning(debtorEmail, notification);
+      }
 
       return "Aanmaning sent successfully";
     } catch (error) {

@@ -4,7 +4,10 @@ import { IExcelImportArray } from "../interfaces/accountsReceivable.interface";
 import { IuserTokenInfos } from "../interfaces/auth.intercace";
 import { notificationService } from "../services/Notification.service";
 //
-export const registerInvoices = async (req: Request, res: Response) => {
+export const registerAccountsReceivables = async (
+  req: Request,
+  res: Response
+) => {
   const userInfosToken: IuserTokenInfos = req.userTokenInfos;
   const dataImport: IExcelImportArray = req.body || [];
   const tenantId = userInfosToken?.tenantId;
@@ -22,17 +25,21 @@ export const registerInvoices = async (req: Request, res: Response) => {
     });
   }
   // Registramos los datos
-  const message = await accountsReceivableService.registerInvoices(
-    tenantId,
-    dataImport
-  );
+  const message =
+    await accountsReceivableService.registerAccountsReceivableBatch(
+      tenantId,
+      dataImport
+    );
   return res.json({
     status: "success",
     message,
   });
 };
 
-export const registerInvoice = async (req: Request, res: Response) => {
+export const registerAccountReceivable = async (
+  req: Request,
+  res: Response
+) => {
   const userInfosToken: IuserTokenInfos = req.userTokenInfos;
   const dataImport = req.body;
   const tenantId = userInfosToken?.tenantId;
@@ -49,7 +56,7 @@ export const registerInvoice = async (req: Request, res: Response) => {
     });
   }
   // Registramos los datos
-  const message = await accountsReceivableService.registerInvoice(
+  const message = await accountsReceivableService.registerAccountsReceivable(
     tenantId,
     dataImport
   );
@@ -59,7 +66,7 @@ export const registerInvoice = async (req: Request, res: Response) => {
   });
 };
 
-export const getAllInvoices = async (req: Request, res: Response) => {
+export const getAllReceivables = async (req: Request, res: Response) => {
   const userInfosToken: IuserTokenInfos = req.userTokenInfos;
   const tenantId = userInfosToken?.tenantId;
 
@@ -69,11 +76,11 @@ export const getAllInvoices = async (req: Request, res: Response) => {
     });
   }
 
-  const invoices = await accountsReceivableService.getAllInvoices(tenantId);
+  const invoices = await accountsReceivableService.getAllReceivables(tenantId);
   return res.json({ invoices });
 };
 
-export const deleteInvoice = async (req: Request, res: Response) => {
+export const deleteReceivable = async (req: Request, res: Response) => {
   const userInfosToken: IuserTokenInfos = req.userTokenInfos;
   const tenantId = userInfosToken?.tenantId;
   const invoiceId = req.params.id;
@@ -90,8 +97,31 @@ export const deleteInvoice = async (req: Request, res: Response) => {
     });
   }
 
-  const invoice = await accountsReceivableService.deleteInvoice(invoiceId);
+  const invoice = await accountsReceivableService.deleteReceivable(invoiceId);
   return res.json({ invoice });
+};
+
+export const getReceivablesByUser = async (req: Request, res: Response) => {
+  const userInfosToken: IuserTokenInfos = req.userTokenInfos;
+  const tenantId = userInfosToken?.tenantId;
+  const userId = userInfosToken.sub;
+
+  // const debtorId = req.params.id;
+  if (!tenantId) {
+    return res.status(400).json({
+      error: "Tenant ID is missing",
+    });
+  }
+  if (!userId) {
+    return res.status(400).json({
+      error: "User ID is missing",
+    });
+  }
+  const invoices = await accountsReceivableService.getReceivablesByUser(
+    tenantId,
+    userId
+  );
+  return res.json({ invoices });
 };
 
 export const sendNotificationController = async (

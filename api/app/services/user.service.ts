@@ -225,6 +225,7 @@ class UserService {
   async registerInvitedUser(
     userId: string,
     password: string,
+    email: string,
     fullname: string
   ): Promise<IUserResponse> {
     const user = await prisma.user.findUnique({
@@ -242,6 +243,7 @@ class UserService {
       data: {
         password: encryptedPassword, // You should hash the password before saving it
         fullname,
+        email: email,
         emailVerified: true,
         invitationToken: null,
         joined: new Date(),

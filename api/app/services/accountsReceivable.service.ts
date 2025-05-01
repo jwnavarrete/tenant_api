@@ -4,7 +4,7 @@ import {
   IInvoiceResponse,
 } from "../interfaces/accountsReceivable.interface";
 import { debtorService } from "./debtor.service";
-import { userService } from "./user.service";
+import { calculateLateInterest } from "../../../api/common/lib/general";
 import { prisma } from "../../index";
 import { roleService } from "./role.service";
 import { tenantService } from "./tenant.service";
@@ -13,7 +13,10 @@ import { COLLECTION_STATUS, ROLES } from "../../common/lib/constant";
 import { InvoiceResponseSchema } from "../schemas/accountsReceivable.schemas";
 class AccountsReceivableService {
   //
-  async registerInvoices(tenantId: string, data: IExcelImportArray) {
+  async registerAccountsReceivableBatch(
+    tenantId: string,
+    data: IExcelImportArray
+  ) {
     await tenantService.validateTenantById(tenantId);
     const transaction = await prisma.$transaction(async (prismaTransaction) => {
       const tenantConfig = await tenantConfigService.getTenantConfigsByTenantId(
@@ -21,7 +24,7 @@ class AccountsReceivableService {
       );
 
       for (const record of data) {
-        this.saveInvoice(
+        this.saveAccountsReceivableEntry(
           tenantId,
           record,
           tenantConfig.parameter.porcCobranza,
@@ -34,13 +37,13 @@ class AccountsReceivableService {
     return "Invoices imported successfully";
   }
 
-  async registerInvoice(tenantId: string, data: IExcelImport) {
+  async registerAccountsReceivable(tenantId: string, data: IExcelImport) {
     await tenantService.validateTenantById(tenantId);
     const tenantConfig = await tenantConfigService.getTenantConfigsByTenantId(
       tenantId
     );
     const transaction = await prisma.$transaction(async (prismaTransaction) => {
-      this.saveInvoice(
+      this.saveAccountsReceivableEntry(
         tenantId,
         data,
         tenantConfig.parameter.porcCobranza,
@@ -51,7 +54,7 @@ class AccountsReceivableService {
     return "Invoice imported successfully";
   }
 
-  async saveInvoice(
+  async saveAccountsReceivableEntry(
     tenantId: string,
     data: IExcelImport,
     porcCobranza: number,
@@ -59,32 +62,7 @@ class AccountsReceivableService {
     prismaTransaction = prisma
   ) {
     try {
-      let userId: string | null = null;
       let debtorId: string | null = null;
-
-      // Validamos si el deudor ya existe como usuario
-      const userExist = await userService.getUserByEmail(
-        tenantId,
-        data.debtorEmail
-      );
-
-      if (!userExist) {
-        const roleInfo = await roleService.getRoleByName(ROLES.DEBTOR);
-
-        const newUser = await prismaTransaction.user.create({
-          data: {
-            email: data.debtorEmail,
-            fullname: data.debtorFullname,
-            phone: data.debtorPhone,
-            roleId: roleInfo.id,
-            tenantId: tenantId,
-          },
-        });
-
-        userId = newUser.id;
-      } else {
-        userId = userExist.id;
-      }
 
       if (!data.identification) {
         throw new Error(
@@ -92,35 +70,89 @@ class AccountsReceivableService {
         );
       }
 
-      const debtorExist = await debtorService
-        .getDebtorInfo(
-          tenantId, // Ensure tenant.id is used instead of tenantId
-          data.identification
-        )
-        .catch(() => null);
+      // SI el deudor ya existe, lo buscamos por su identificacion
+      if (data.debtorId) {
+        debtorId = data.debtorId;
 
-      console.log("deudor", debtorExist);
-      // Check if the debtor already exists
-      if (debtorExist) {
-        debtorId = debtorExist.id;
+        const debtorExist = await debtorService
+          .getDebtorById(tenantId, debtorId)
+          .catch(() => null);
+
+        if (!debtorExist) {
+          throw new Error(
+            `Debtor with ID ${debtorId} not found for tenant ${tenantId}`
+          );
+        }
       } else {
-        // Create the debtor and link it to the user
-        const newDebtor = await prismaTransaction.debtor.create({
-          data: {
-            tenantId: tenantId,
-            identification: data.identification!, // Use non-null assertion
-            userId: userId,
-            fullname: data.debtorFullname,
-            email: data.debtorEmail,
-            phone: data.debtorPhone,
-            address: data.debtorAddress,
-          },
-        });
+        // PRIMERO VALIDAMOS SI EL DEUDOR YA EXISTE COMO USUARIO
+        const debtorExist = await debtorService
+          .getDebtorInfo(
+            tenantId, // Ensure tenant.id is used instead of tenantId
+            data.identification
+          )
+          .catch(() => null);
 
-        debtorId = newDebtor.id;
-        //   Generamos el envio de la invitacion al deudor
+        // Validamos si el deudor ya existe
+        if (debtorExist) {
+          debtorId = debtorExist.id;
+        } else {
+          // Si no existe, lo creamos como usuario
+          const roleInfo = await roleService.getRoleByName(ROLES.DEBTOR);
+
+          const newUser = await prismaTransaction.user.create({
+            data: {
+              email: data.debtorEmail,
+              fullname: data.debtorFullname,
+              phone: data.debtorPhone,
+              roleId: roleInfo.id,
+              tenantId: tenantId,
+            },
+          });
+
+          // Create the debtor and link it to the user
+          const newDebtor = await prismaTransaction.debtor.create({
+            data: {
+              tenantId: tenantId,
+              identification: data.identification!, // Use non-null assertion
+              userId: newUser.id,
+              fullname: data.debtorFullname,
+              email: data.debtorEmail,
+              phone: data.debtorPhone,
+              address: data.debtorAddress,
+            },
+          });
+
+          debtorId = newDebtor.id;
+        }
       }
 
+      // Client collection and abb amounts
+      const clientCollectionAmount = (data.invoiceAmount * porcCobranza) / 100;
+      const clientAbbAmount = (clientCollectionAmount * porcAbb) / 100;
+      // Set the admin collection and abb amounts to 0 initially
+      const adminCollectionAmount = (data.invoiceAmount * porcCobranza) / 100;
+      const adminAbbAmount = (adminCollectionAmount * porcAbb) / 100;
+
+      // Fetch tenant configuration to get the percentage of interest for collection
+      const parameterID = process.env.PARAMETER_ID || "";
+      const tenantConfig = await tenantConfigService.getTenantConfig(tenantId, parameterID);
+      const porcInteresCobranza = tenantConfig.porcInteresCobranza || 0;
+
+      // Interest and outstanding balance
+      const { totalLateInterest } = calculateLateInterest(
+        data.invoiceAmount,
+        porcInteresCobranza,
+        new Date(data.dueDate)
+      );
+      const interest = parseFloat(totalLateInterest.toFixed(2));
+
+      // totalDueToday, No calculate the admin collection and abb amounts
+      const totalDueToday =
+        data.invoiceAmount +
+        clientCollectionAmount +
+        clientAbbAmount + interest;
+
+      // Validate the debtor data against the schema
       const invoice = await prismaTransaction.accountsReceivable.create({
         data: {
           tenantId: tenantId,
@@ -133,11 +165,23 @@ class AccountsReceivableService {
           customerEmail: data.debtorEmail,
           customerPhone: data.debtorPhone,
           amountPaid: 0,
-          outstandingBalance: data.invoiceAmount,
+          remainingBalance: data.invoiceAmount,
           receivableStatus: "pending",
           collectionStatus: COLLECTION_STATUS.AANMANING,
-          collectionPercentage: porcCobranza,
-          abbPercentage: porcAbb,
+          // Interest calculation
+          previousInterestAmount: interest,
+          // Set the client collection and abb amounts
+          clientCollectionPercentage: porcCobranza,
+          clientCollectionAmount,
+          clientAbbPercentage: porcAbb,
+          clientAbbAmount,
+          // Set the admin collection and abb amounts
+          adminCollectionPercentage: porcCobranza,
+          adminCollectionAmount,
+          adminAbbPercentage: porcAbb,
+          totalDueToday,
+          adminAbbAmount,
+          // 
           notes: "",
           debtorId: debtorId,
         },
@@ -156,7 +200,7 @@ class AccountsReceivableService {
     }
   }
 
-  async getAllInvoices(tenantId: string) {
+  async getAllReceivables(tenantId: string) {
     const invoices = await prisma.accountsReceivable.findMany({
       where: {
         tenantId: tenantId,
@@ -164,13 +208,18 @@ class AccountsReceivableService {
       include: {
         debtor: true,
         paymentDetail: true,
+        paymentAgreement: {
+          include: {
+            Installments: true,
+          },
+        },
       },
     });
 
     return invoices;
   }
 
-  async getInvoiceById(invoiceId: string): Promise<IInvoiceResponse> {
+  async getReceivableById(invoiceId: string): Promise<IInvoiceResponse> {
     const invoice = await prisma.accountsReceivable.findFirst({
       where: {
         id: invoiceId,
@@ -193,7 +242,7 @@ class AccountsReceivableService {
     return InvoiceResponseSchema.parse(invoice);
   }
 
-  async updateInvoice(invoiceId: string, data: any) {
+  async updateReceivable(invoiceId: string, data: any) {
     const invoice = await prisma.accountsReceivable.update({
       where: {
         id: invoiceId,
@@ -206,9 +255,9 @@ class AccountsReceivableService {
     return invoice;
   }
 
-  async deleteInvoice(invoiceId: string) {
+  async deleteReceivable(invoiceId: string) {
     // Check if the invoice exists
-    const exist = await this.getInvoiceById(invoiceId);
+    const exist = await this.getReceivableById(invoiceId);
 
     if (!exist) {
       throw new Error("Invoice not found");
@@ -221,6 +270,135 @@ class AccountsReceivableService {
     });
 
     return invoice;
+  }
+
+  // Get invoices by debtor ID
+  async getReceivablesByUser(tenantId: string, userId: string) {
+    const invoices = await prisma.accountsReceivable.findMany({
+      where: {
+        tenantId: tenantId,
+        debtor: {
+          userId: userId,
+        },
+      },
+      include: {
+        debtor: {
+          include: {
+            user: true,
+          },
+        },
+        paymentDetail: true,
+        paymentAgreement: {
+          include: {
+            Installments: true,
+          },
+        },
+      },
+    });
+
+    // Fetch tenant configuration to get the percentage of interest for collection
+    const parameterID = process.env.PARAMETER_ID || "";
+    const tenantConfig = await tenantConfigService.getTenantConfig(tenantId, parameterID);
+    const porcInteresCobranza = tenantConfig.porcInteresCobranza || 0;
+
+    // Calculate the interest and total due today for each invoice
+    const invoicesWithCalculations = invoices.map((invoice) => {
+      let interest = 0;
+      let outstandingBalance = 0;
+
+      // Total client Fees
+      const totalFees = invoice.clientCollectionAmount + invoice.clientAbbAmount;
+
+      const amountPaid =
+        invoice.paymentDetail?.reduce((acc, p) => acc + p.paymentAmount, 0) ||
+        0;
+
+      if (invoice.hasPaymentAgreement) {
+        interest = invoice.paymentAgreement?.previousInterestAmount || 0;
+      } else {
+        // Calculate the outstanding balance
+        outstandingBalance = invoice.invoiceAmount - amountPaid;
+
+        // Calculate the outstanding balance
+        const { totalLateInterest } = calculateLateInterest(
+          outstandingBalance,
+          porcInteresCobranza,
+          invoice.dueDate
+        );
+
+        interest = parseFloat(totalLateInterest.toFixed(2));
+      }
+
+      const feesInterest = totalFees + interest;
+      const remainingBalance = invoice.invoiceAmount - amountPaid;
+      const totalDueToday = remainingBalance + feesInterest;
+
+      const additionalData = {
+        invoiceNumber: invoice.invoiceNumber,
+        issueDate: invoice.issueDate.toISOString(),
+        dueDate: invoice.dueDate.toISOString(),
+        customerName: invoice.customerName,
+        customerEmail: invoice.customerEmail,
+        totalDueToday: `$${totalDueToday.toFixed(2)}`,
+        outstandingBalance: `$${remainingBalance.toFixed(2)}`,
+        interest: `$${interest.toFixed(2)}`,
+        feesInterest: `$${feesInterest.toFixed(2)}`,
+        totalFees: `$${totalFees.toFixed(2)}`,
+      };
+
+      const details = [
+        {
+          collectionPercentage: `${invoice.clientCollectionPercentage}%`,
+          collectionAmount: `$${invoice.clientCollectionAmount.toFixed(2)}`,
+          abbPercentage: `${invoice.clientAbbPercentage}%`,
+          abbAmount: `$${invoice.clientAbbAmount.toFixed(2)}`,
+          fees: `$${totalFees.toFixed(2)}`,
+          interest: `$${interest.toFixed(2)}`,
+          // totalDueToday: `$${totalDueToday.toFixed(2)}`,          
+        },
+      ];
+
+      return {
+        ...invoice,
+        totalFees,
+        interest,
+        amountPaid,
+        remainingBalance,
+        totalDueToday,
+        feesInterest,
+        details
+      };
+    });
+
+    return invoicesWithCalculations;
+  }
+
+  async registerPeyment(
+    invoiceId: string,
+    amount: number,
+    paymentMethod: string,
+    paymentType: string,
+    referenceNumber: string,
+    notes: string
+  ) {
+    const invoice = await this.getReceivableById(invoiceId);
+
+    if (!invoice) {
+      throw new Error("Invoice not found");
+    }
+
+    const paymentDetail = await prisma.paymentDetail.create({
+      data: {
+        accountsReceivableId: invoiceId,
+        paymentDate: new Date(),
+        paymentAmount: amount,
+        paymentMethod: paymentMethod,
+        referenceNumber: referenceNumber,
+        notes: notes,
+      },
+    });
+
+    return paymentDetail;
   }
 }
 

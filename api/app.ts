@@ -27,6 +27,8 @@ app.use("/users", appRoutes.userRoutes);
 app.use("/parameters", appRoutes.parameterRoutes);
 app.use("/parameters", appRoutes.tenantConfigRoutes);
 app.use("/accounts-receivable", appRoutes.accountsReceivableRoutes);
+app.use("/debtors", appRoutes.debtorRoutes);
+app.use("/payments", appRoutes.paymentsRoutes);
 
 app.use(errorHandler);
 

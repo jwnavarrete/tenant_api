@@ -110,7 +110,7 @@ export const registerInvitedUserController = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { token, userId, password, fullname } = req.body;
+    const { token, userId, password, email, fullname } = req.body;
 
     const isValid = await userService.verifyInvitationToken(userId, token);
     if (!isValid) {
@@ -120,6 +120,7 @@ export const registerInvitedUserController = async (
     const registrationResult = await userService.registerInvitedUser(
       userId,
       password,
+      email,
       fullname
     );
 

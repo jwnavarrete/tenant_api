@@ -93,6 +93,7 @@ const VerifyInvitationToken = z.object({
 const RegisterInvitedUserSchema = z.object({
   token: z.string(),
   userId: z.string().uuid(),
+  email: z.string().email(),
   fullname: z.string().max(100),
   password: z.string().min(8),
 });

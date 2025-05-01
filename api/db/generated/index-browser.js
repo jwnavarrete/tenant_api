@@ -194,6 +194,38 @@ exports.Prisma.TenantConfigScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PaymentAgreementScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  initialPayment: 'initialPayment',
+  remainingBalance: 'remainingBalance',
+  totalAmount: 'totalAmount',
+  numberOfInstallments: 'numberOfInstallments',
+  paymentStatus: 'paymentStatus',
+  lastPaymentDate: 'lastPaymentDate',
+  initialPaymentStatus: 'initialPaymentStatus',
+  totalPaid: 'totalPaid',
+  isFullyPaid: 'isFullyPaid',
+  accumulatedInterest: 'accumulatedInterest',
+  agreementExpirationDate: 'agreementExpirationDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  previousInterestAmount: 'previousInterestAmount'
+};
+
+exports.Prisma.InstallmentScalarFieldEnum = {
+  id: 'id',
+  paymentAgreementId: 'paymentAgreementId',
+  installmentNumber: 'installmentNumber',
+  dueDate: 'dueDate',
+  amount: 'amount',
+  paid: 'paid',
+  paidAt: 'paidAt',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AccountsReceivableScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -206,15 +238,31 @@ exports.Prisma.AccountsReceivableScalarFieldEnum = {
   customerPhone: 'customerPhone',
   invoiceAmount: 'invoiceAmount',
   amountPaid: 'amountPaid',
-  outstandingBalance: 'outstandingBalance',
+  remainingBalance: 'remainingBalance',
+  totalDueToday: 'totalDueToday',
   receivableStatus: 'receivableStatus',
   collectionStatus: 'collectionStatus',
-  notes: 'notes',
-  collectionPercentage: 'collectionPercentage',
-  abbPercentage: 'abbPercentage',
+  clientCollectionPercentage: 'clientCollectionPercentage',
+  clientCollectionAmount: 'clientCollectionAmount',
+  clientAbbPercentage: 'clientAbbPercentage',
+  clientAbbAmount: 'clientAbbAmount',
+  adminCollectionPercentage: 'adminCollectionPercentage',
+  adminCollectionAmount: 'adminCollectionAmount',
+  adminAbbPercentage: 'adminAbbPercentage',
+  adminAbbAmount: 'adminAbbAmount',
+  notifiedAt: 'notifiedAt',
+  previousInterestAmount: 'previousInterestAmount',
+  interestStartDate: 'interestStartDate',
+  interestFrozenAt: 'interestFrozenAt',
+  interestFrozenAmount: 'interestFrozenAmount',
+  interestFrozenPercentage: 'interestFrozenPercentage',
+  lastPaymentDate: 'lastPaymentDate',
   debtorId: 'debtorId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  hasPaymentAgreement: 'hasPaymentAgreement',
+  paymentAgreementId: 'paymentAgreementId',
+  notes: 'notes'
 };
 
 exports.Prisma.PaymentDetailScalarFieldEnum = {
@@ -223,9 +271,19 @@ exports.Prisma.PaymentDetailScalarFieldEnum = {
   paymentDate: 'paymentDate',
   paymentAmount: 'paymentAmount',
   paymentMethod: 'paymentMethod',
-  paymentType: 'paymentType',
   referenceNumber: 'referenceNumber',
   notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  paymentAgreementId: 'paymentAgreementId'
+};
+
+exports.Prisma.PaymentApplicationScalarFieldEnum = {
+  id: 'id',
+  paymentDetailId: 'paymentDetailId',
+  accountsReceivableId: 'accountsReceivableId',
+  amountApplied: 'amountApplied',
+  appliedTo: 'appliedTo',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -238,6 +296,8 @@ exports.Prisma.DebtorScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   address: 'address',
+  personType: 'personType',
+  identificationType: 'identificationType',
   identification: 'identification',
   employeeId: 'employeeId',
   createdAt: 'createdAt',
@@ -269,7 +329,15 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.PaymentApplicationType = exports.$Enums.PaymentApplicationType = {
+  CAPITAL: 'CAPITAL',
+  INTEREST: 'INTEREST',
+  TAX: 'TAX',
+  CLIENT_COLLECTION_FEE: 'CLIENT_COLLECTION_FEE',
+  CLIENT_ABB_FEE: 'CLIENT_ABB_FEE',
+  ADMIN_COLLECTION_FEE: 'ADMIN_COLLECTION_FEE',
+  ADMIN_ABB_FEE: 'ADMIN_ABB_FEE'
+};
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
@@ -278,8 +346,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   GlobalParameter: 'GlobalParameter',
   TenantConfig: 'TenantConfig',
+  PaymentAgreement: 'PaymentAgreement',
+  Installment: 'Installment',
   AccountsReceivable: 'AccountsReceivable',
   PaymentDetail: 'PaymentDetail',
+  PaymentApplication: 'PaymentApplication',
   Debtor: 'Debtor',
   Employee: 'Employee'
 };
