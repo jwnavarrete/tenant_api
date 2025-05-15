@@ -96,8 +96,11 @@ class NotificationService {
       const subject = `Aanmaning - ${invoice.invoiceNumber}`;
 
       if (debtorEmail) {
-        const fileName = `Aanmaning_${invoice.invoiceNumber}.pdf`;
+        const fileName = `Aanmaning_${invoice.invoiceNumber}`;
         // Render the PDF
+        console.log("templatePath:", templatePath)
+        console.log("fileName:", fileName)
+
         const pdfPath = await renderPDF(
           templatePath,
           fileName,
@@ -130,9 +133,9 @@ class NotificationService {
         days: 5,
         totalAmount: invoice.invoiceAmount,
         accountNumber: "123456789",
-        extraCosts: 0,        
+        extraCosts: 0,
       };
-      
+
       const debtorEmail = invoice.debtor?.email;
       const templatePath = "collection/Sommatie";
       const subject = `Sommatie - ${invoice.invoiceNumber}`;

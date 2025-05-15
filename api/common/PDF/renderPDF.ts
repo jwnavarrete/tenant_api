@@ -9,6 +9,7 @@ const renderPDF = async (
   data: Record<string, any>
 ): Promise<string> => {
   const templatePath = path.join(__dirname, `/${templateName}.html`);
+  console.log("templatePath:", templatePath)
   const templateSource = fs.readFileSync(templatePath, "utf8");
 
   // Compila la plantilla con Handlebars

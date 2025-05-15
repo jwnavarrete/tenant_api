@@ -21,11 +21,7 @@ class CollectionService {
       ? [
         {
           filename: attachmentConfig.filename,
-          path: await renderPDF(
-            attachmentConfig.pdfTemplatePath,
-            attachmentConfig.filename,
-            data
-          ),
+          path: attachmentConfig.pdfTemplatePath,
         },
       ]
       : [];
