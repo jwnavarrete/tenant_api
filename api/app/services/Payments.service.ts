@@ -1,133 +1,147 @@
 import { calculateLateInterest } from "../../../api/common/lib/general";
 import { prisma } from "../../index";
-import { IPaymentApplication } from "../interfaces/payments.interface";
+import { IPaymentApplication, IRegisterPayment, IRegisterPaymentAgreement } from "../interfaces/payments.interface";
+import { RegisterPaymentAgreementSchema } from "../schemas/Payments.schemas";
 import { tenantConfigService } from "./tenantConfig.service";
 
 class PaymentsService {
   // 1. Registrar un pago con distribución de montos entre cuotas
   async registerPayment(
     tenantId: string,
-    invoiceId: string,
-    amount: number,
-    paymentMethod: string,
-    referenceNumber: string,
-    notes: string
+    payload: IRegisterPayment
   ) {
+
+    // Check if the accounts receivable exists
+    const accountsReceivable = await prisma.accountsReceivable.findUnique({
+      where: { id: payload.invoiceId, tenantId: tenantId },
+    });
+
+    if (!accountsReceivable) {
+      throw new Error("Accounts receivable not found");
+    }
     // Verificar si hay un acuerdo de pago asociado
     const paymentAgreement = await prisma.paymentAgreement.findFirst({
       where: {
-        accountsReceivableId: invoiceId,
+        accountsReceivableId: payload.invoiceId,
         accountsReceivable: {
           tenantId: tenantId,
         },
       },
     });
 
+    let remainingAmount = payload.paymentAmount;
+
     if (paymentAgreement) {
-      // Considerar el pago inicial si aún no se ha completado
-      let remainingAmount = amount;
-      if (paymentAgreement.initialPaymentStatus === "pending") {
-        const amountToApply = Math.min(
-          paymentAgreement.initialPayment,
-          remainingAmount
-        );
+      // Si vienen cuotas específicas en el payload
+      if (payload.installmentIds && payload.installmentIds.length > 0) {
+        for (const installmentId of payload.installmentIds) {
+          if (remainingAmount <= 0) break;
 
-        // Crear el detalle del pago para el pago inicial
-        const payment = await prisma.paymentDetail.create({
-          data: {
-            accountsReceivableId: invoiceId,
-            paymentAgreementId: paymentAgreement.id,
-            paymentAmount: amountToApply,
-            paymentMethod,
-            referenceNumber,
-            notes: `Initial Payment: ${notes}`,
-            createdAt: new Date(),
-            paymentDate: new Date(),
-          },
-        });
+          const installment = await prisma.installment.findUnique({
+            where: { id: installmentId },
+          });
 
-        remainingAmount -= amountToApply;
+          if (!installment || installment.paymentAgreementId !== paymentAgreement.id) {
+            throw new Error(`Invalid installment ID: ${installmentId}`);
+          }
 
-        // Distribuir el pago entre capital, interés, impuestos, cobranza, etc.
-        await this.distributePayment(payment.id);
+          const amountToPay = Math.min(installment.remainingAmount, remainingAmount);
+
+          // Actualizar el estado de la cuota
+          const newRemainingAmount = installment.remainingAmount - amountToPay;
+          const newAmountPaid = installment.amountPaid + amountToPay;
+          const newStatus =
+            newRemainingAmount === 0
+              ? "paid"
+              : newAmountPaid > 0
+                ? "partially_paid"
+                : "pending";
+
+          await prisma.installment.update({
+            where: { id: installment.id },
+            data: {
+              amountPaid: newAmountPaid,
+              remainingAmount: newRemainingAmount,
+              paid: newRemainingAmount === 0,
+              paidAt: newRemainingAmount === 0 ? new Date() : null,
+              status: newStatus,
+            },
+          });
+
+          // Crear el detalle del pago especificando información de la cuota
+          const payment = await prisma.paymentDetail.create({
+            data: {
+              accountsReceivableId: payload.invoiceId,
+              paymentAgreementId: paymentAgreement.id,
+              paymentAmount: amountToPay,
+              paymentMethod: payload.paymentMethod,
+              referenceNumber: payload.referenceNumber,
+              notes: `Installment ${installment.installmentNumber}: ${payload.notes}`,
+              createdAt: new Date(),
+              paymentDate: new Date(),
+            },
+          });
+
+          remainingAmount -= amountToPay;
+
+          // Distribuir el pago entre capital, interés, impuestos, cobranza, etc.
+          await this.distributePayment(payment.id);
+        }
       }
 
-      // Obtener cuotas pendientes asociadas al acuerdo de pago
-      const installments = await prisma.installment.findMany({
-        where: {
-          paymentAgreementId: paymentAgreement.id,
-          paid: false, // Solo cuotas no pagadas
-        },
-      });
+      if (payload.initialPaymentStatus === "pending") {
+        const amountToApply = payload.initialPayment || 0;
 
-      for (const installment of installments) {
-        if (remainingAmount <= 0) break;
-
-        const amountToPay = Math.min(installment.amount, remainingAmount);
-
-        // Actualizar el pago de la cuota
-        await prisma.installment.update({
-          where: { id: installment.id },
-          data: {
-            paid: amountToPay === installment.amount,
-            paidAt: amountToPay === installment.amount ? new Date() : null,
-            amount: installment.amount - amountToPay,
-          },
-        });
-
-        // Crear el detalle del pago
+        // Crear el detalle del pago especificando información de la cuota
         const payment = await prisma.paymentDetail.create({
           data: {
-            accountsReceivableId: invoiceId,
+            accountsReceivableId: payload.invoiceId,
             paymentAgreementId: paymentAgreement.id,
-            paymentAmount: amountToPay,
-            paymentMethod,
-            referenceNumber,
-            notes,
+            paymentAmount: amountToApply,
+            paymentMethod: payload.paymentMethod,
+            referenceNumber: payload.referenceNumber,
+            notes: `Initial Payment: ${payload.notes}`,
             createdAt: new Date(),
             paymentDate: new Date(),
           },
         });
 
-        remainingAmount -= amountToPay;
-
-        // Distribuir el pago entre capital, interés, impuestos, cobranza, etc.
-        await this.distributePayment(payment.id);
+        // SI SE CREO EL PAGO SE ACTUALIZA EL ACUERDO DE PAGO
+        if (payment) {
+          await prisma.paymentAgreement.update({
+            where: { id: paymentAgreement.id },
+            data: {
+              initialPaymentStatus:
+                amountToApply === paymentAgreement.initialPayment
+                  ? "completed"
+                  : "pending"
+            },
+          });
+        }
       }
 
       // Enviar el monto restante para recalcular el saldo pendiente, incluso si es cero
       await this.recalculateInvoiceBalance(
         tenantId,
-        invoiceId,
-        remainingAmount
+        payload.invoiceId
       );
     } else {
-      // Verificar que la factura pertenece al tenant
-      const invoice = await prisma.accountsReceivable.findUnique({
-        where: { id: invoiceId, tenantId: tenantId },
-        include: {
-          debtor: true,
-        },
-      });
 
-      if (!invoice) {
-        throw new Error("Invoice not found");
-      }
       // Si no hay acuerdo de pago, registrar el pago directamente
       const payment = await prisma.paymentDetail.create({
         data: {
-          accountsReceivableId: invoiceId,
-          paymentAmount: amount,
-          paymentMethod,
-          referenceNumber,
-          notes,
+          accountsReceivableId: payload.invoiceId,
+          paymentAmount: payload.paymentAmount,
+          paymentMethod: payload.paymentMethod,
+          referenceNumber: payload.referenceNumber,
+          notes: payload.notes,
           createdAt: new Date(),
           paymentDate: new Date(),
         },
       });
 
       // Recalcular el saldo pendiente de la factura
-      await this.recalculateInvoiceBalance(tenantId, invoiceId);
+      await this.recalculateInvoiceBalance(tenantId, payload.invoiceId);
 
       // Distribuir el pago entre capital, interés, impuestos, cobranza, etc.
       await this.distributePayment(payment.id);
@@ -135,6 +149,7 @@ class PaymentsService {
 
     return { success: true };
   }
+
 
   // 3. Obtener todos los pagos de un tenant
   async getAllPayments(tenantId: string) {
@@ -238,8 +253,7 @@ class PaymentsService {
   // 9. Validar consistencia: Recalcular automáticamente el saldo pendiente de una factura
   async recalculateInvoiceBalance(
     tenantId: string,
-    invoiceId: string,
-    remainingAmount: number = 0
+    invoiceId: string
   ) {
     //
     const payments = await prisma.paymentDetail.findMany({
@@ -270,35 +284,69 @@ class PaymentsService {
       where: { id: invoiceId },
       data: {
         remainingBalance: remainingBalance,
-        receivableStatus: remainingBalance <= 0 ? "paid" : "pending",
+        // receivableStatus: remainingBalance <= 0 ? "paid" : "pending",
       },
     });
 
-    // Actualizar el estado del pago inicial y el saldo restante del acuerdo de pago
-    const paymentAgreement = await prisma.paymentAgreement.findFirst({
+    // Recalcular el saldo pendiente del acuerdo de pago, si existe
+    if(invoice.paymentAgreementId){
+      this.recalculatePaymentAgreement(
+        tenantId,
+        invoice.paymentAgreementId
+      ).catch((error) => {
+        console.error("Error recalculating payment agreement:", error);
+      });
+    }
+
+    // Si hay un acuerdo de pago, actualizar el saldo restante
+    await this.updateInvoiceStatusIfPaid(invoiceId);
+  }
+
+
+
+  // Recalcular los valores de PaymentAgreement
+  async recalculatePaymentAgreement(tenantId: string, paymentAgreementId: string) {
+    // Obtener el acuerdo de pago
+    const paymentAgreement = await prisma.paymentAgreement.findUnique({
+      where: { id: paymentAgreementId },
+      include: {
+        Installments: true,
+        PaymentDetail: true
+      },
+    });
+
+    if (!paymentAgreement) {
+      throw new Error("Payment agreement not found");
+    }
+
+    // Obtener todos los pagos relacionados con el acuerdo de pago
+    const payments = await prisma.paymentDetail.findMany({
       where: {
-        accountsReceivableId: invoiceId,
+        paymentAgreementId: paymentAgreementId,
         accountsReceivable: { tenantId: tenantId },
       },
     });
 
-    if (paymentAgreement) {
-      const amountToApply = Math.min(
-        paymentAgreement.initialPayment,
-        remainingAmount
-      );
+    // Calcular el total pagado
+    const totalPaid = payments.reduce(
+      (sum, payment) => sum + payment.paymentAmount,
+      0
+    );
 
-      await prisma.paymentAgreement.update({
-        where: { id: paymentAgreement.id },
-        data: {
-          initialPaymentStatus:
-            amountToApply === paymentAgreement.initialPayment
-              ? "completed"
-              : "pending",
-          totalPaid: paymentAgreement.totalPaid + amountToApply,
-        },
-      });
-    }
+    // Calcular el saldo restante
+    const remainingBalance = paymentAgreement.totalAmount - totalPaid;
+
+    // Actualizar el acuerdo de pago
+    await prisma.paymentAgreement.update({
+      where: { id: paymentAgreementId },
+      data: {
+        totalPaid: parseFloat(totalPaid.toFixed(2)),
+        remainingBalance: parseFloat(remainingBalance.toFixed(2)),
+        paymentStatus: remainingBalance <= 0 ? "completed" : "active",
+      },
+    });
+    
+    return { success: true };
   }
 
   // 10. Validar consistencia: Actualizar estado de factura cuando ya se pagó completamente
@@ -314,9 +362,9 @@ class PaymentsService {
     // Sumamos todos los fees de cobranza y ABB
     const totalFees =
       invoice.clientCollectionAmount
-      + invoice.clientAbbAmount
-      + invoice.adminCollectionAmount
-      + invoice.adminAbbAmount;
+      + invoice.clientAbbAmount;
+    // + invoice.adminCollectionAmount
+    // + invoice.adminAbbAmount;
 
     // Sumamos el monto de la factura con los fees
     const totalWithFees = invoice.invoiceAmount + totalFees;
@@ -330,14 +378,29 @@ class PaymentsService {
       0
     );
 
+    console.log("Total Pagado:", totalPaid);
+    console.log("Total con Fees:", totalWithFees);
+
     if (totalPaid >= totalWithFees) {
       await prisma.accountsReceivable.update({
         where: { id: invoiceId },
         data: {
           receivableStatus: "paid",
+          collectionStatus: "settled",
           remainingBalance: 0,
         },
       });
+
+      // Si hay un acuerdo de pago, actualizar el estado
+      if (invoice.hasPaymentAgreement && invoice.paymentAgreementId) {
+        await prisma.paymentAgreement.update({
+          where: { id: invoice.paymentAgreementId },
+          data: {
+            paymentStatus: "completed",
+            remainingBalance: 0,
+          },
+        });
+      }
     }
   }
 
@@ -365,28 +428,91 @@ class PaymentsService {
 
     const paymentApplications: IPaymentApplication[] = [];
 
+    // Fetch existing payment applications for the invoice
+    const existingApplications = await prisma.paymentApplication.findMany({
+      where: { accountsReceivableId: invoice.id },
+    });
+
+    const appliedAmounts = existingApplications.reduce((acc, app) => {
+      acc[app.appliedTo] = (acc[app.appliedTo] || 0) + app.amountApplied;
+      return acc;
+    }, {} as Record<string, number>);
+
     // Apply to administrative fees (cobranza)
-    if (remainingAmount > 0) {
-      const amountToApply = Math.min(invoice.adminCollectionAmount, remainingAmount); // ABB va al dueño del sistema
+    if (remainingAmount > 0 && (appliedAmounts["ADMIN_COLLECTION_FEE"] || 0) < invoice.adminCollectionAmount) {
+      const amountToApply = Math.min(
+        invoice.adminCollectionAmount - (appliedAmounts["ADMIN_COLLECTION_FEE"] || 0),
+        remainingAmount
+      );
       paymentApplications.push({
         paymentDetailId,
         accountsReceivableId: invoice.id,
         amountApplied: amountToApply,
-        appliedTo: "ADMIN_COLLECTION_FEE", // Categorizado como ABB_FEE
+        appliedTo: "ADMIN_COLLECTION_FEE",
       });
       remainingAmount -= amountToApply;
     }
 
     // Apply to admin ABB fee (intereses de mora)
-    if (remainingAmount > 0) {
-      const amountToApply = Math.min(invoice.adminAbbAmount, remainingAmount);
+    if (remainingAmount > 0 && (appliedAmounts["ADMIN_ABB_FEE"] || 0) < invoice.adminAbbAmount) {
+      const amountToApply = Math.min(
+        invoice.adminAbbAmount - (appliedAmounts["ADMIN_ABB_FEE"] || 0),
+        remainingAmount
+      );
       paymentApplications.push({
         paymentDetailId,
         accountsReceivableId: invoice.id,
         amountApplied: amountToApply,
-        appliedTo: "ADMIN_ABB_FEE", // Categorizado como INTEREST (intereses de mora)
+        appliedTo: "ADMIN_ABB_FEE",
       });
       remainingAmount -= amountToApply;
+    }
+
+    // Apply to client collection fee (cobranza)
+    if (remainingAmount > 0 && (appliedAmounts["CLIENT_COLLECTION_FEE"] || 0) < invoice.clientCollectionAmount) {
+      const amountToApply = Math.min(
+        invoice.clientCollectionAmount - (appliedAmounts["CLIENT_COLLECTION_FEE"] || 0),
+        remainingAmount
+      );
+      paymentApplications.push({
+        paymentDetailId,
+        accountsReceivableId: invoice.id,
+        amountApplied: amountToApply,
+        appliedTo: "CLIENT_COLLECTION_FEE",
+      });
+      remainingAmount -= amountToApply;
+    }
+
+    // Apply to client ABB fee (intereses de mora)
+    if (remainingAmount > 0 && (appliedAmounts["CLIENT_ABB_FEE"] || 0) < invoice.clientAbbAmount) {
+      const amountToApply = Math.min(
+        invoice.clientAbbAmount - (appliedAmounts["CLIENT_ABB_FEE"] || 0),
+        remainingAmount
+      );
+      paymentApplications.push({
+        paymentDetailId,
+        accountsReceivableId: invoice.id,
+        amountApplied: amountToApply,
+        appliedTo: "CLIENT_ABB_FEE",
+      });
+      remainingAmount -= amountToApply;
+    }
+
+    // Apply to interest (intereses de mora)
+    if (remainingAmount > 0) {
+      if (invoice.interestFrozenAmount && (appliedAmounts["INTEREST"] || 0) < invoice.interestFrozenAmount) {
+        const amountToApply = Math.min(
+          invoice.interestFrozenAmount - (appliedAmounts["INTEREST"] || 0),
+          remainingAmount
+        );
+        paymentApplications.push({
+          paymentDetailId,
+          accountsReceivableId: invoice.id,
+          amountApplied: amountToApply,
+          appliedTo: "INTEREST",
+        });
+        remainingAmount -= amountToApply;
+      }
     }
 
     // Apply to capital (capital original)
@@ -396,44 +522,7 @@ class PaymentsService {
         paymentDetailId,
         accountsReceivableId: invoice.id,
         amountApplied: amountToApply,
-        appliedTo: "CAPITAL", // Categorizado como CAPITAL (pago al cliente)
-      });
-      remainingAmount -= amountToApply;
-    }
-
-    // Apply to interest (intereses de mora)
-    if (remainingAmount > 0) {
-      if (invoice.interestFrozenAmount) {
-        const amountToApply = Math.min(invoice.interestFrozenAmount, remainingAmount);
-        paymentApplications.push({
-          paymentDetailId,
-          accountsReceivableId: invoice.id,
-          amountApplied: amountToApply,
-          appliedTo: "INTEREST", // Categorizado como INTEREST (intereses de mora)
-        });
-        remainingAmount -= amountToApply;
-      }
-    }
-
-    // Apply to client collection fee (cobranza)
-    if (remainingAmount > 0) {
-      const amountToApply = Math.min(invoice.clientCollectionAmount, remainingAmount);
-      paymentApplications.push({
-        paymentDetailId,
-        accountsReceivableId: invoice.id,
-        amountApplied: amountToApply,
-        appliedTo: "CLIENT_COLLECTION_FEE", // Categorizado como CLIENT_COLLECTION_FEE
-      });
-      remainingAmount -= amountToApply;
-    }
-    // Apply to client ABB fee (intereses de mora)
-    if (remainingAmount > 0) {
-      const amountToApply = Math.min(invoice.clientAbbAmount, remainingAmount);
-      paymentApplications.push({
-        paymentDetailId,
-        accountsReceivableId: invoice.id,
-        amountApplied: amountToApply,
-        appliedTo: "CLIENT_ABB_FEE", // Categorizado como CLIENT_ABB_FEE
+        appliedTo: "CAPITAL",
       });
       remainingAmount -= amountToApply;
     }
@@ -459,83 +548,80 @@ class PaymentsService {
 
   // 12. Registrar acuerdo de pago
   async registerPaymentAgreement(
-    tenanId: string,
-    invoiceId: string,
-    initialPayment: number,
-    numberOfInstallments: number,
-    validityPeriodInDays: number
+    tenantId: string,
+    payload: IRegisterPaymentAgreement
   ) {
+    // Validate payload using the schema
+    const parsedPayload = RegisterPaymentAgreementSchema.parse(payload);
+
     // Fetch the associated invoice
     const invoice = await prisma.accountsReceivable.findUnique({
-      where: { id: invoiceId, tenantId: tenanId },
+      where: { id: parsedPayload.invoiceId, tenantId: tenantId },
     });
 
     if (!invoice) {
       throw new Error("Invoice not found");
     }
 
-    const totalFees = invoice.clientCollectionAmount + invoice.clientAbbAmount;
-
-    // Fetch tenant configuration to get the percentage of interest for collection
-    const parameterID = process.env.PARAMETER_ID || "";
-    const tenantConfig = await tenantConfigService.getTenantConfig(tenanId, parameterID);
-    const porcInteresCobranza = tenantConfig.porcInteresCobranza || 0;
-    // Calculate interest
-    const { totalLateInterest } = calculateLateInterest(
-      invoice.invoiceAmount,
-      porcInteresCobranza,
-      invoice.dueDate
-    ); // Initialize the previous interest amount
-
-    // Calculate the remaining balance after the initial payment
-    const remainingBalance = invoice.invoiceAmount - initialPayment;
-
-    if (remainingBalance < 0) {
-      throw new Error("Initial payment exceeds invoice amount");
+    // Validate initial payment
+    if (parsedPayload.initialPayment > parsedPayload.totalAmount) {
+      throw new Error("Initial payment exceeds total amount");
     }
 
-    const totalAmount =
-      invoice.invoiceAmount +
-      totalFees +
-      totalLateInterest -
-      initialPayment;
+    // Calculate remaining balance after initial payment
+    const remainingBalance = parsedPayload.totalAmount - parsedPayload.initialPayment;
 
-    // Calculate the installment amount
-    const installmentAmount = remainingBalance / numberOfInstallments;
+    // Validate installments total matches remaining balance
+    const installmentsTotal = parsedPayload.installmentsDetail.reduce(
+      (sum, installment) => sum + parseFloat(installment.amount),
+      0
+    );
 
-    // Calculate the validity date for the payment agreement
-    const validityDate = new Date();
-    validityDate.setDate(validityDate.getDate() + validityPeriodInDays);
+    if (installmentsTotal !== remainingBalance) {
+      throw new Error("Installments total does not match remaining balance");
+    }
+
+    // Validate installment numbers are sequential and unique
+    const installmentNumbers = parsedPayload.installmentsDetail.map(
+      (installment) => installment.installmentNumber
+    );
+    const uniqueInstallmentNumbers = new Set(installmentNumbers);
+
+    if (
+      uniqueInstallmentNumbers.size !== parsedPayload.installmentsDetail.length ||
+      Math.min(...installmentNumbers) !== 1 ||
+      Math.max(...installmentNumbers) !== parsedPayload.installmentsDetail.length
+    ) {
+      throw new Error("Installment numbers must be sequential and unique");
+    }
 
     // Create the payment agreement
     const paymentAgreement = await prisma.paymentAgreement.create({
       data: {
-        accountsReceivableId: invoiceId,
-        initialPayment: parseFloat(initialPayment.toFixed(2)),
+        accountsReceivableId: parsedPayload.invoiceId,
+        initialPayment: parseFloat(parsedPayload.initialPayment.toFixed(2)),
         remainingBalance: parseFloat(remainingBalance.toFixed(2)),
-        totalAmount: parseFloat((totalAmount).toFixed(2)),
-        accumulatedInterest: parseFloat(totalLateInterest.toFixed(2)),
-        numberOfInstallments,
-        agreementExpirationDate: validityDate, // Added the missing property
+        totalAmount: parseFloat(parsedPayload.totalAmount.toFixed(2)),
+        numberOfInstallments: parsedPayload.installments,
+        initialPaymentDeadline: new Date(parsedPayload.initialPaymentDeadline),
         paymentStatus: "active",
-        previousInterestAmount: parseFloat(totalLateInterest.toFixed(2)),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     });
 
-    // Create installments based on the number of installments
-    for (let i = 1; i <= numberOfInstallments; i++) {
-      const installmentDueDate = new Date();
-      installmentDueDate.setMonth(installmentDueDate.getMonth() + i);
-
+    // Create installments
+    for (const installment of parsedPayload.installmentsDetail) {
       await prisma.installment.create({
         data: {
           paymentAgreementId: paymentAgreement.id,
-          installmentNumber: i,
-          dueDate: installmentDueDate,
-          amount: installmentAmount,
+          installmentNumber: installment.installmentNumber,
+          dueDate: new Date(installment.dueDate),
+          originalAmount: parseFloat(installment.amount),
+          amountPaid: 0,
+          remainingAmount: parseFloat(installment.amount),
           paid: false,
+          status: "pending",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -544,9 +630,11 @@ class PaymentsService {
 
     // Update the invoice to link it with the payment agreement
     await prisma.accountsReceivable.update({
-      where: { id: invoiceId },
+      where: { id: parsedPayload.invoiceId },
       data: {
         paymentAgreementId: paymentAgreement.id,
+        hasPaymentAgreement: true,
+        collectionStatus: "payment_agreement",
       },
     });
 

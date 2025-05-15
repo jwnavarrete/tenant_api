@@ -60,6 +60,7 @@ export const registerAccountReceivable = async (
     tenantId,
     dataImport
   );
+  
   return res.json({
     status: "success",
     message,
@@ -143,6 +144,7 @@ export const sendNotificationController = async (
       error: "Invoice ID is missing",
     });
   }
+
 
   const result = await notificationService.sendNotification(
     tenantId,

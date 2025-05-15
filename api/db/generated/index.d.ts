@@ -9467,7 +9467,7 @@ export namespace Prisma {
     totalPaid: number | null
     isFullyPaid: boolean | null
     accumulatedInterest: number | null
-    agreementExpirationDate: Date | null
+    initialPaymentDeadline: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     previousInterestAmount: number | null
@@ -9486,7 +9486,7 @@ export namespace Prisma {
     totalPaid: number | null
     isFullyPaid: boolean | null
     accumulatedInterest: number | null
-    agreementExpirationDate: Date | null
+    initialPaymentDeadline: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     previousInterestAmount: number | null
@@ -9505,7 +9505,7 @@ export namespace Prisma {
     totalPaid: number
     isFullyPaid: number
     accumulatedInterest: number
-    agreementExpirationDate: number
+    initialPaymentDeadline: number
     createdAt: number
     updatedAt: number
     previousInterestAmount: number
@@ -9546,7 +9546,7 @@ export namespace Prisma {
     totalPaid?: true
     isFullyPaid?: true
     accumulatedInterest?: true
-    agreementExpirationDate?: true
+    initialPaymentDeadline?: true
     createdAt?: true
     updatedAt?: true
     previousInterestAmount?: true
@@ -9565,7 +9565,7 @@ export namespace Prisma {
     totalPaid?: true
     isFullyPaid?: true
     accumulatedInterest?: true
-    agreementExpirationDate?: true
+    initialPaymentDeadline?: true
     createdAt?: true
     updatedAt?: true
     previousInterestAmount?: true
@@ -9584,7 +9584,7 @@ export namespace Prisma {
     totalPaid?: true
     isFullyPaid?: true
     accumulatedInterest?: true
-    agreementExpirationDate?: true
+    initialPaymentDeadline?: true
     createdAt?: true
     updatedAt?: true
     previousInterestAmount?: true
@@ -9690,7 +9690,7 @@ export namespace Prisma {
     totalPaid: number
     isFullyPaid: boolean
     accumulatedInterest: number
-    agreementExpirationDate: Date
+    initialPaymentDeadline: Date
     createdAt: Date
     updatedAt: Date
     previousInterestAmount: number | null
@@ -9728,7 +9728,7 @@ export namespace Prisma {
     totalPaid?: boolean
     isFullyPaid?: boolean
     accumulatedInterest?: boolean
-    agreementExpirationDate?: boolean
+    initialPaymentDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     previousInterestAmount?: boolean
@@ -9751,7 +9751,7 @@ export namespace Prisma {
     totalPaid?: boolean
     isFullyPaid?: boolean
     accumulatedInterest?: boolean
-    agreementExpirationDate?: boolean
+    initialPaymentDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     previousInterestAmount?: boolean
@@ -9771,7 +9771,7 @@ export namespace Prisma {
     totalPaid?: boolean
     isFullyPaid?: boolean
     accumulatedInterest?: boolean
-    agreementExpirationDate?: boolean
+    initialPaymentDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     previousInterestAmount?: boolean
@@ -9791,13 +9791,13 @@ export namespace Prisma {
     totalPaid?: boolean
     isFullyPaid?: boolean
     accumulatedInterest?: boolean
-    agreementExpirationDate?: boolean
+    initialPaymentDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     previousInterestAmount?: boolean
   }
 
-  export type PaymentAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountsReceivableId" | "initialPayment" | "remainingBalance" | "totalAmount" | "numberOfInstallments" | "paymentStatus" | "lastPaymentDate" | "initialPaymentStatus" | "totalPaid" | "isFullyPaid" | "accumulatedInterest" | "agreementExpirationDate" | "createdAt" | "updatedAt" | "previousInterestAmount", ExtArgs["result"]["paymentAgreement"]>
+  export type PaymentAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountsReceivableId" | "initialPayment" | "remainingBalance" | "totalAmount" | "numberOfInstallments" | "paymentStatus" | "lastPaymentDate" | "initialPaymentStatus" | "totalPaid" | "isFullyPaid" | "accumulatedInterest" | "initialPaymentDeadline" | "createdAt" | "updatedAt" | "previousInterestAmount", ExtArgs["result"]["paymentAgreement"]>
   export type PaymentAgreementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accountsReceivable?: boolean | AccountsReceivableDefaultArgs<ExtArgs>
     Installments?: boolean | PaymentAgreement$InstallmentsArgs<ExtArgs>
@@ -9831,7 +9831,7 @@ export namespace Prisma {
       totalPaid: number
       isFullyPaid: boolean
       accumulatedInterest: number
-      agreementExpirationDate: Date
+      initialPaymentDeadline: Date
       createdAt: Date
       updatedAt: Date
       previousInterestAmount: number | null
@@ -10273,7 +10273,7 @@ export namespace Prisma {
     readonly totalPaid: FieldRef<"PaymentAgreement", 'Float'>
     readonly isFullyPaid: FieldRef<"PaymentAgreement", 'Boolean'>
     readonly accumulatedInterest: FieldRef<"PaymentAgreement", 'Float'>
-    readonly agreementExpirationDate: FieldRef<"PaymentAgreement", 'DateTime'>
+    readonly initialPaymentDeadline: FieldRef<"PaymentAgreement", 'DateTime'>
     readonly createdAt: FieldRef<"PaymentAgreement", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentAgreement", 'DateTime'>
     readonly previousInterestAmount: FieldRef<"PaymentAgreement", 'Float'>
@@ -10753,12 +10753,16 @@ export namespace Prisma {
 
   export type InstallmentAvgAggregateOutputType = {
     installmentNumber: number | null
-    amount: number | null
+    originalAmount: number | null
+    amountPaid: number | null
+    remainingAmount: number | null
   }
 
   export type InstallmentSumAggregateOutputType = {
     installmentNumber: number | null
-    amount: number | null
+    originalAmount: number | null
+    amountPaid: number | null
+    remainingAmount: number | null
   }
 
   export type InstallmentMinAggregateOutputType = {
@@ -10766,7 +10770,9 @@ export namespace Prisma {
     paymentAgreementId: string | null
     installmentNumber: number | null
     dueDate: Date | null
-    amount: number | null
+    originalAmount: number | null
+    amountPaid: number | null
+    remainingAmount: number | null
     paid: boolean | null
     paidAt: Date | null
     status: string | null
@@ -10779,7 +10785,9 @@ export namespace Prisma {
     paymentAgreementId: string | null
     installmentNumber: number | null
     dueDate: Date | null
-    amount: number | null
+    originalAmount: number | null
+    amountPaid: number | null
+    remainingAmount: number | null
     paid: boolean | null
     paidAt: Date | null
     status: string | null
@@ -10792,7 +10800,9 @@ export namespace Prisma {
     paymentAgreementId: number
     installmentNumber: number
     dueDate: number
-    amount: number
+    originalAmount: number
+    amountPaid: number
+    remainingAmount: number
     paid: number
     paidAt: number
     status: number
@@ -10804,12 +10814,16 @@ export namespace Prisma {
 
   export type InstallmentAvgAggregateInputType = {
     installmentNumber?: true
-    amount?: true
+    originalAmount?: true
+    amountPaid?: true
+    remainingAmount?: true
   }
 
   export type InstallmentSumAggregateInputType = {
     installmentNumber?: true
-    amount?: true
+    originalAmount?: true
+    amountPaid?: true
+    remainingAmount?: true
   }
 
   export type InstallmentMinAggregateInputType = {
@@ -10817,7 +10831,9 @@ export namespace Prisma {
     paymentAgreementId?: true
     installmentNumber?: true
     dueDate?: true
-    amount?: true
+    originalAmount?: true
+    amountPaid?: true
+    remainingAmount?: true
     paid?: true
     paidAt?: true
     status?: true
@@ -10830,7 +10846,9 @@ export namespace Prisma {
     paymentAgreementId?: true
     installmentNumber?: true
     dueDate?: true
-    amount?: true
+    originalAmount?: true
+    amountPaid?: true
+    remainingAmount?: true
     paid?: true
     paidAt?: true
     status?: true
@@ -10843,7 +10861,9 @@ export namespace Prisma {
     paymentAgreementId?: true
     installmentNumber?: true
     dueDate?: true
-    amount?: true
+    originalAmount?: true
+    amountPaid?: true
+    remainingAmount?: true
     paid?: true
     paidAt?: true
     status?: true
@@ -10943,7 +10963,9 @@ export namespace Prisma {
     paymentAgreementId: string
     installmentNumber: number
     dueDate: Date
-    amount: number
+    originalAmount: number
+    amountPaid: number
+    remainingAmount: number
     paid: boolean
     paidAt: Date | null
     status: string
@@ -10975,7 +10997,9 @@ export namespace Prisma {
     paymentAgreementId?: boolean
     installmentNumber?: boolean
     dueDate?: boolean
-    amount?: boolean
+    originalAmount?: boolean
+    amountPaid?: boolean
+    remainingAmount?: boolean
     paid?: boolean
     paidAt?: boolean
     status?: boolean
@@ -10989,7 +11013,9 @@ export namespace Prisma {
     paymentAgreementId?: boolean
     installmentNumber?: boolean
     dueDate?: boolean
-    amount?: boolean
+    originalAmount?: boolean
+    amountPaid?: boolean
+    remainingAmount?: boolean
     paid?: boolean
     paidAt?: boolean
     status?: boolean
@@ -11003,7 +11029,9 @@ export namespace Prisma {
     paymentAgreementId?: boolean
     installmentNumber?: boolean
     dueDate?: boolean
-    amount?: boolean
+    originalAmount?: boolean
+    amountPaid?: boolean
+    remainingAmount?: boolean
     paid?: boolean
     paidAt?: boolean
     status?: boolean
@@ -11017,7 +11045,9 @@ export namespace Prisma {
     paymentAgreementId?: boolean
     installmentNumber?: boolean
     dueDate?: boolean
-    amount?: boolean
+    originalAmount?: boolean
+    amountPaid?: boolean
+    remainingAmount?: boolean
     paid?: boolean
     paidAt?: boolean
     status?: boolean
@@ -11025,7 +11055,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type InstallmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentAgreementId" | "installmentNumber" | "dueDate" | "amount" | "paid" | "paidAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["installment"]>
+  export type InstallmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentAgreementId" | "installmentNumber" | "dueDate" | "originalAmount" | "amountPaid" | "remainingAmount" | "paid" | "paidAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["installment"]>
   export type InstallmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     paymentAgreement?: boolean | PaymentAgreementDefaultArgs<ExtArgs>
   }
@@ -11046,7 +11076,9 @@ export namespace Prisma {
       paymentAgreementId: string
       installmentNumber: number
       dueDate: Date
-      amount: number
+      originalAmount: number
+      amountPaid: number
+      remainingAmount: number
       paid: boolean
       paidAt: Date | null
       status: string
@@ -11480,7 +11512,9 @@ export namespace Prisma {
     readonly paymentAgreementId: FieldRef<"Installment", 'String'>
     readonly installmentNumber: FieldRef<"Installment", 'Int'>
     readonly dueDate: FieldRef<"Installment", 'DateTime'>
-    readonly amount: FieldRef<"Installment", 'Float'>
+    readonly originalAmount: FieldRef<"Installment", 'Float'>
+    readonly amountPaid: FieldRef<"Installment", 'Float'>
+    readonly remainingAmount: FieldRef<"Installment", 'Float'>
     readonly paid: FieldRef<"Installment", 'Boolean'>
     readonly paidAt: FieldRef<"Installment", 'DateTime'>
     readonly status: FieldRef<"Installment", 'String'>
@@ -18394,7 +18428,7 @@ export namespace Prisma {
     totalPaid: 'totalPaid',
     isFullyPaid: 'isFullyPaid',
     accumulatedInterest: 'accumulatedInterest',
-    agreementExpirationDate: 'agreementExpirationDate',
+    initialPaymentDeadline: 'initialPaymentDeadline',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     previousInterestAmount: 'previousInterestAmount'
@@ -18408,7 +18442,9 @@ export namespace Prisma {
     paymentAgreementId: 'paymentAgreementId',
     installmentNumber: 'installmentNumber',
     dueDate: 'dueDate',
-    amount: 'amount',
+    originalAmount: 'originalAmount',
+    amountPaid: 'amountPaid',
+    remainingAmount: 'remainingAmount',
     paid: 'paid',
     paidAt: 'paidAt',
     status: 'status',
@@ -19159,7 +19195,7 @@ export namespace Prisma {
     totalPaid?: FloatFilter<"PaymentAgreement"> | number
     isFullyPaid?: BoolFilter<"PaymentAgreement"> | boolean
     accumulatedInterest?: FloatFilter<"PaymentAgreement"> | number
-    agreementExpirationDate?: DateTimeFilter<"PaymentAgreement"> | Date | string
+    initialPaymentDeadline?: DateTimeFilter<"PaymentAgreement"> | Date | string
     createdAt?: DateTimeFilter<"PaymentAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentAgreement"> | Date | string
     previousInterestAmount?: FloatNullableFilter<"PaymentAgreement"> | number | null
@@ -19181,7 +19217,7 @@ export namespace Prisma {
     totalPaid?: SortOrder
     isFullyPaid?: SortOrder
     accumulatedInterest?: SortOrder
-    agreementExpirationDate?: SortOrder
+    initialPaymentDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     previousInterestAmount?: SortOrderInput | SortOrder
@@ -19206,7 +19242,7 @@ export namespace Prisma {
     totalPaid?: FloatFilter<"PaymentAgreement"> | number
     isFullyPaid?: BoolFilter<"PaymentAgreement"> | boolean
     accumulatedInterest?: FloatFilter<"PaymentAgreement"> | number
-    agreementExpirationDate?: DateTimeFilter<"PaymentAgreement"> | Date | string
+    initialPaymentDeadline?: DateTimeFilter<"PaymentAgreement"> | Date | string
     createdAt?: DateTimeFilter<"PaymentAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentAgreement"> | Date | string
     previousInterestAmount?: FloatNullableFilter<"PaymentAgreement"> | number | null
@@ -19228,7 +19264,7 @@ export namespace Prisma {
     totalPaid?: SortOrder
     isFullyPaid?: SortOrder
     accumulatedInterest?: SortOrder
-    agreementExpirationDate?: SortOrder
+    initialPaymentDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     previousInterestAmount?: SortOrderInput | SortOrder
@@ -19255,7 +19291,7 @@ export namespace Prisma {
     totalPaid?: FloatWithAggregatesFilter<"PaymentAgreement"> | number
     isFullyPaid?: BoolWithAggregatesFilter<"PaymentAgreement"> | boolean
     accumulatedInterest?: FloatWithAggregatesFilter<"PaymentAgreement"> | number
-    agreementExpirationDate?: DateTimeWithAggregatesFilter<"PaymentAgreement"> | Date | string
+    initialPaymentDeadline?: DateTimeWithAggregatesFilter<"PaymentAgreement"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"PaymentAgreement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentAgreement"> | Date | string
     previousInterestAmount?: FloatNullableWithAggregatesFilter<"PaymentAgreement"> | number | null
@@ -19269,7 +19305,9 @@ export namespace Prisma {
     paymentAgreementId?: StringFilter<"Installment"> | string
     installmentNumber?: IntFilter<"Installment"> | number
     dueDate?: DateTimeFilter<"Installment"> | Date | string
-    amount?: FloatFilter<"Installment"> | number
+    originalAmount?: FloatFilter<"Installment"> | number
+    amountPaid?: FloatFilter<"Installment"> | number
+    remainingAmount?: FloatFilter<"Installment"> | number
     paid?: BoolFilter<"Installment"> | boolean
     paidAt?: DateTimeNullableFilter<"Installment"> | Date | string | null
     status?: StringFilter<"Installment"> | string
@@ -19283,7 +19321,9 @@ export namespace Prisma {
     paymentAgreementId?: SortOrder
     installmentNumber?: SortOrder
     dueDate?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
     paid?: SortOrder
     paidAt?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -19300,7 +19340,9 @@ export namespace Prisma {
     paymentAgreementId?: StringFilter<"Installment"> | string
     installmentNumber?: IntFilter<"Installment"> | number
     dueDate?: DateTimeFilter<"Installment"> | Date | string
-    amount?: FloatFilter<"Installment"> | number
+    originalAmount?: FloatFilter<"Installment"> | number
+    amountPaid?: FloatFilter<"Installment"> | number
+    remainingAmount?: FloatFilter<"Installment"> | number
     paid?: BoolFilter<"Installment"> | boolean
     paidAt?: DateTimeNullableFilter<"Installment"> | Date | string | null
     status?: StringFilter<"Installment"> | string
@@ -19314,7 +19356,9 @@ export namespace Prisma {
     paymentAgreementId?: SortOrder
     installmentNumber?: SortOrder
     dueDate?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
     paid?: SortOrder
     paidAt?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -19335,7 +19379,9 @@ export namespace Prisma {
     paymentAgreementId?: StringWithAggregatesFilter<"Installment"> | string
     installmentNumber?: IntWithAggregatesFilter<"Installment"> | number
     dueDate?: DateTimeWithAggregatesFilter<"Installment"> | Date | string
-    amount?: FloatWithAggregatesFilter<"Installment"> | number
+    originalAmount?: FloatWithAggregatesFilter<"Installment"> | number
+    amountPaid?: FloatWithAggregatesFilter<"Installment"> | number
+    remainingAmount?: FloatWithAggregatesFilter<"Installment"> | number
     paid?: BoolWithAggregatesFilter<"Installment"> | boolean
     paidAt?: DateTimeNullableWithAggregatesFilter<"Installment"> | Date | string | null
     status?: StringWithAggregatesFilter<"Installment"> | string
@@ -20490,7 +20536,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -20512,7 +20558,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -20532,7 +20578,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -20554,7 +20600,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -20575,7 +20621,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -20593,7 +20639,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -20612,7 +20658,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -20622,7 +20668,9 @@ export namespace Prisma {
     id?: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -20636,7 +20684,9 @@ export namespace Prisma {
     paymentAgreementId: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -20648,7 +20698,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -20662,7 +20714,9 @@ export namespace Prisma {
     paymentAgreementId?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -20675,7 +20729,9 @@ export namespace Prisma {
     paymentAgreementId: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -20687,7 +20743,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -20700,7 +20758,9 @@ export namespace Prisma {
     paymentAgreementId?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -21937,7 +21997,7 @@ export namespace Prisma {
     totalPaid?: SortOrder
     isFullyPaid?: SortOrder
     accumulatedInterest?: SortOrder
-    agreementExpirationDate?: SortOrder
+    initialPaymentDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     previousInterestAmount?: SortOrder
@@ -21966,7 +22026,7 @@ export namespace Prisma {
     totalPaid?: SortOrder
     isFullyPaid?: SortOrder
     accumulatedInterest?: SortOrder
-    agreementExpirationDate?: SortOrder
+    initialPaymentDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     previousInterestAmount?: SortOrder
@@ -21985,7 +22045,7 @@ export namespace Prisma {
     totalPaid?: SortOrder
     isFullyPaid?: SortOrder
     accumulatedInterest?: SortOrder
-    agreementExpirationDate?: SortOrder
+    initialPaymentDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     previousInterestAmount?: SortOrder
@@ -22027,7 +22087,9 @@ export namespace Prisma {
     paymentAgreementId?: SortOrder
     installmentNumber?: SortOrder
     dueDate?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
     paid?: SortOrder
     paidAt?: SortOrder
     status?: SortOrder
@@ -22037,7 +22099,9 @@ export namespace Prisma {
 
   export type InstallmentAvgOrderByAggregateInput = {
     installmentNumber?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
   }
 
   export type InstallmentMaxOrderByAggregateInput = {
@@ -22045,7 +22109,9 @@ export namespace Prisma {
     paymentAgreementId?: SortOrder
     installmentNumber?: SortOrder
     dueDate?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
     paid?: SortOrder
     paidAt?: SortOrder
     status?: SortOrder
@@ -22058,7 +22124,9 @@ export namespace Prisma {
     paymentAgreementId?: SortOrder
     installmentNumber?: SortOrder
     dueDate?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
     paid?: SortOrder
     paidAt?: SortOrder
     status?: SortOrder
@@ -22068,7 +22136,9 @@ export namespace Prisma {
 
   export type InstallmentSumOrderByAggregateInput = {
     installmentNumber?: SortOrder
-    amount?: SortOrder
+    originalAmount?: SortOrder
+    amountPaid?: SortOrder
+    remainingAmount?: SortOrder
   }
 
   export type DebtorNullableScalarRelationFilter = {
@@ -25013,7 +25083,9 @@ export namespace Prisma {
     id?: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -25025,7 +25097,9 @@ export namespace Prisma {
     id?: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -25196,7 +25270,9 @@ export namespace Prisma {
     paymentAgreementId?: StringFilter<"Installment"> | string
     installmentNumber?: IntFilter<"Installment"> | number
     dueDate?: DateTimeFilter<"Installment"> | Date | string
-    amount?: FloatFilter<"Installment"> | number
+    originalAmount?: FloatFilter<"Installment"> | number
+    amountPaid?: FloatFilter<"Installment"> | number
+    remainingAmount?: FloatFilter<"Installment"> | number
     paid?: BoolFilter<"Installment"> | boolean
     paidAt?: DateTimeNullableFilter<"Installment"> | Date | string | null
     status?: StringFilter<"Installment"> | string
@@ -25248,7 +25324,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25269,7 +25345,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25304,7 +25380,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -25325,7 +25401,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -25446,7 +25522,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25466,7 +25542,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25624,7 +25700,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -25644,7 +25720,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -25808,7 +25884,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25829,7 +25905,7 @@ export namespace Prisma {
     totalPaid?: number
     isFullyPaid?: boolean
     accumulatedInterest?: number
-    agreementExpirationDate: Date | string
+    initialPaymentDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     previousInterestAmount?: number | null
@@ -25973,7 +26049,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -25994,7 +26070,7 @@ export namespace Prisma {
     totalPaid?: FloatFieldUpdateOperationsInput | number
     isFullyPaid?: BoolFieldUpdateOperationsInput | boolean
     accumulatedInterest?: FloatFieldUpdateOperationsInput | number
-    agreementExpirationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    initialPaymentDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previousInterestAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27375,7 +27451,9 @@ export namespace Prisma {
     id?: string
     installmentNumber: number
     dueDate: Date | string
-    amount: number
+    originalAmount: number
+    amountPaid?: number
+    remainingAmount?: number
     paid?: boolean
     paidAt?: Date | string | null
     status?: string
@@ -27399,7 +27477,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -27411,7 +27491,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
@@ -27423,7 +27505,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     installmentNumber?: IntFieldUpdateOperationsInput | number
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    originalAmount?: FloatFieldUpdateOperationsInput | number
+    amountPaid?: FloatFieldUpdateOperationsInput | number
+    remainingAmount?: FloatFieldUpdateOperationsInput | number
     paid?: BoolFieldUpdateOperationsInput | boolean
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string

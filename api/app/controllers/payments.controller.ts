@@ -14,19 +14,11 @@ export const registerPaymentAgreementController = async (
     const userInfosToken: IuserTokenInfos = req.userTokenInfos;
     const tenantId = userInfosToken.tenantId;
 
-    const {
-      invoiceId,
-      initialPayment,
-      numberOfInstallments,
-      validityPeriodInDays,
-    }: IRegisterPaymentAgreement = req.body;
+    const payload: IRegisterPaymentAgreement = req.body;
 
     const response = await paymentsService.registerPaymentAgreement(
       tenantId,
-      invoiceId,
-      initialPayment,
-      numberOfInstallments,
-      validityPeriodInDays
+      payload
     );
 
     if (!response) {
@@ -54,21 +46,11 @@ export const registerPaymentController = async (
     const userInfosToken: IuserTokenInfos = req.userTokenInfos;
     const tenantId = userInfosToken.tenantId;
 
-    const {
-      invoiceId,
-      amount,
-      paymentMethod,
-      referenceNumber,
-      notes,
-    }: IRegisterPayment = req.body;
+    const payload: IRegisterPayment = req.body;
 
     const response = await paymentsService.registerPayment(
       tenantId,
-      invoiceId,
-      amount,
-      paymentMethod,
-      referenceNumber,
-      notes || ""
+      payload
     );
 
     if (!response) {

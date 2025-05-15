@@ -11,6 +11,7 @@ import { tenantService } from "./tenant.service";
 import { tenantConfigService } from "./tenantConfig.service";
 import { COLLECTION_STATUS, ROLES } from "../../common/lib/constant";
 import { InvoiceResponseSchema } from "../schemas/accountsReceivable.schemas";
+import { notificationService } from "./Notification.service";
 class AccountsReceivableService {
   //
   async registerAccountsReceivableBatch(
@@ -50,6 +51,7 @@ class AccountsReceivableService {
         tenantConfig.parameter.porcAbb
       );
     });
+
     console.log("Transaction completed successfully:", transaction);
     return "Invoice imported successfully";
   }
@@ -187,6 +189,14 @@ class AccountsReceivableService {
         },
       });
       console.log(invoice);
+
+      // Send notification to the debtor
+      const result = await notificationService.sendNotification(
+        tenantId,
+        invoice.id
+      );
+      console.log("Notification sent successfully:", result);
+
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(
@@ -305,6 +315,7 @@ class AccountsReceivableService {
     const invoicesWithCalculations = invoices.map((invoice) => {
       let interest = 0;
       let outstandingBalance = 0;
+      let initialPayment = 0;
 
       // Total client Fees
       const totalFees = invoice.clientCollectionAmount + invoice.clientAbbAmount;
@@ -313,8 +324,15 @@ class AccountsReceivableService {
         invoice.paymentDetail?.reduce((acc, p) => acc + p.paymentAmount, 0) ||
         0;
 
+      // console.log("hasPaymentAgreement:", invoice.hasPaymentAgreement);
       if (invoice.hasPaymentAgreement) {
         interest = invoice.paymentAgreement?.previousInterestAmount || 0;
+
+        console.log("paymentAgreement:", invoice.paymentAgreement);
+        if (invoice.paymentAgreement?.initialPaymentStatus === "completed") {
+          initialPayment = invoice.paymentAgreement?.initialPayment || 0;
+        }
+
       } else {
         // Calculate the outstanding balance
         outstandingBalance = invoice.invoiceAmount - amountPaid;
@@ -331,30 +349,20 @@ class AccountsReceivableService {
 
       const feesInterest = totalFees + interest;
       const remainingBalance = invoice.invoiceAmount - amountPaid;
-      const totalDueToday = remainingBalance + feesInterest;
 
-      const additionalData = {
-        invoiceNumber: invoice.invoiceNumber,
-        issueDate: invoice.issueDate.toISOString(),
-        dueDate: invoice.dueDate.toISOString(),
-        customerName: invoice.customerName,
-        customerEmail: invoice.customerEmail,
-        totalDueToday: `$${totalDueToday.toFixed(2)}`,
-        outstandingBalance: `$${remainingBalance.toFixed(2)}`,
-        interest: `$${interest.toFixed(2)}`,
-        feesInterest: `$${feesInterest.toFixed(2)}`,
-        totalFees: `$${totalFees.toFixed(2)}`,
-      };
+      const totalDueToday = remainingBalance + feesInterest;
 
       const details = [
         {
+          invoiceAmount: `$${invoice.invoiceAmount.toFixed(2)}`,
+          amountPaid: `$${amountPaid.toFixed(2)}`,
           collectionPercentage: `${invoice.clientCollectionPercentage}%`,
           collectionAmount: `$${invoice.clientCollectionAmount.toFixed(2)}`,
           abbPercentage: `${invoice.clientAbbPercentage}%`,
           abbAmount: `$${invoice.clientAbbAmount.toFixed(2)}`,
           fees: `$${totalFees.toFixed(2)}`,
           interest: `$${interest.toFixed(2)}`,
-          // totalDueToday: `$${totalDueToday.toFixed(2)}`,          
+          totalDueToday: `$${totalDueToday.toFixed(2)}`,
         },
       ];
 
@@ -366,7 +374,7 @@ class AccountsReceivableService {
         remainingBalance,
         totalDueToday,
         feesInterest,
-        details
+        // details
       };
     });
 

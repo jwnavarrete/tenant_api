@@ -5,6 +5,7 @@ import { tenantService } from "./tenant.service";
 import { IInvoiceResponse } from "../interfaces/accountsReceivable.interface";
 import { COLLECTION_STATUS } from "../../common/lib/constant";
 import { userService } from "./user.service";
+import renderPDF from "../../common/PDF/renderPDF";
 
 class NotificationService {
   //
@@ -27,6 +28,12 @@ class NotificationService {
     if (invoice.collectionStatus === COLLECTION_STATUS.AANMANING) {
       return await this.sendAanmaning(tenant.subdomain, invoice);
     }
+
+    // Send Notification By Collection Status
+    if (invoice.collectionStatus === COLLECTION_STATUS.SOMMATIE) {
+      return await this.sendSommatie(tenant.subdomain, invoice);
+    }
+
   }
 
   async sendAanmaning(
@@ -35,19 +42,10 @@ class NotificationService {
   ): Promise<string> {
     try {
       const User = invoice.debtor?.user;
-      // Check if the invoice is already sent
-      // if (User?.status === "active") {
-      //   throw new Error("The user is already active on the platform");
-      // }
 
-      const calculatedCollection = parseFloat(
-        (invoice.invoiceAmount * (invoice.collectionPercentage / 100)).toFixed(
-          2
-        )
-      );
-      const calculatedABB = parseFloat(
-        (invoice.invoiceAmount * (invoice.abbPercentage / 100)).toFixed(2)
-      );
+      const calculatedCollection = parseFloat(invoice.clientCollectionAmount.toFixed(2));
+      const calculatedABB = parseFloat(invoice.clientAbbAmount.toFixed(2));
+
       const totalAmount = parseFloat(
         (invoice.invoiceAmount + calculatedCollection + calculatedABB).toFixed(
           2
@@ -83,9 +81,9 @@ class NotificationService {
         days: days,
         accountNumber: "123456789",
         urlRegister: urlRegister,
-        collectionPercentage: invoice.collectionPercentage,
+        collectionPercentage: invoice.clientCollectionPercentage,
         calculatedCollection: calculatedCollection,
-        abbPercentage: invoice.abbPercentage,
+        abbPercentage: invoice.clientAbbPercentage,
         calculatedABB: calculatedABB,
         totalAmount: totalAmount,
         fine: fine,
@@ -94,10 +92,66 @@ class NotificationService {
       };
 
       const debtorEmail = invoice.debtor?.email;
+      const templatePath = "collection/Aanmaning";
+      const subject = `Aanmaning - ${invoice.invoiceNumber}`;
 
       if (debtorEmail) {
-        await CollectionService.sendAanmaning(debtorEmail, notification);
+        const fileName = `Aanmaning_${invoice.invoiceNumber}.pdf`;
+        // Render the PDF
+        const pdfPath = await renderPDF(
+          templatePath,
+          fileName,
+          notification
+        )
+
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification, {
+          filename: fileName,
+          pdfTemplatePath: pdfPath,
+        });
       }
+
+      return "Aanmaning sent successfully";
+    } catch (error) {
+      console.error("Error sending Aanmaning:", error);
+      throw new Error("Failed to send Aanmaning");
+    }
+  }
+
+  async sendSommatie(
+    slug: string,
+    invoice: IInvoiceResponse
+  ): Promise<string> {
+    try {
+      // Create the notification object
+      const notification = {
+        sendDate: new Date().toISOString(),
+        destinatario: invoice.debtor?.fullname,
+        previousDate: "xxxxx",
+        days: 5,
+        totalAmount: invoice.invoiceAmount,
+        accountNumber: "123456789",
+        extraCosts: 0,        
+      };
+      
+      const debtorEmail = invoice.debtor?.email;
+      const templatePath = "collection/Sommatie";
+      const subject = `Sommatie - ${invoice.invoiceNumber}`;
+
+      if (debtorEmail) {
+        const fileName = `Sommatie_${invoice.invoiceNumber}.pdf`;
+        // Render the PDF
+        const pdfPath = await renderPDF(
+          templatePath,
+          fileName,
+          notification
+        )
+
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification, {
+          filename: fileName,
+          pdfTemplatePath: pdfPath,
+        });
+      }
+
 
       return "Aanmaning sent successfully";
     } catch (error) {

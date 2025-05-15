@@ -16,16 +16,36 @@ export const PaymentApplicationSchema = z.object({
 });
 
 export const RegisterPaymentAgreementSchema = z.object({
-  invoiceId: z.string(),
   initialPayment: z.number().min(0),
-  numberOfInstallments: z.number().int().min(1),
-  validityPeriodInDays: z.number().int().min(1),
+  initialPaymentDeadline: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Invalid date format",
+  }),
+  installments: z.number().int().min(1),
+  installmentsDetail: z.array(
+    z.object({
+      installmentNumber: z.number().int().min(1),
+      amount: z.string().refine((value) => !isNaN(parseFloat(value)), {
+        message: "Amount must be a valid number",
+      }),
+      dueDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
+        message: "Invalid date format",
+      }),
+    })
+  ),
+  frequency: z.enum(["mensual", "quincenal", "semanal", "diario"]),
+  invoiceId: z.string(),
+  totalAmount: z.number().min(0),
 });
 
 export const RegisterPaymentSchema = z.object({
   invoiceId: z.string(),
-  amount: z.number().min(0),
+  paymentAmount: z.number().min(0),
   paymentMethod: z.string(),
   referenceNumber: z.string(),
   notes: z.string().optional(),
+  installmentIds: z.array(z.string()).optional(), // Optional, if not present, payment goes to the total
+  initialPaymentStatus: z.string().nullable().optional(), // Optional
+  initialPayment: z.number().nullable().optional(), // Optional
 });
+
+

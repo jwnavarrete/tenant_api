@@ -12,20 +12,45 @@ const InvoiceSchema = z.object({
     .union([z.string(), z.date()])
     .transform((date) => (date instanceof Date ? date.toISOString() : date)),
   customerName: z.string(),
-  customerAddress: z.string(),
-  customerEmail: z.string().email(),
-  customerPhone: z.string(),
+  customerAddress: z.string().optional(),
+  customerEmail: z.string().email().optional(),
+  customerPhone: z.string().optional(),
   invoiceAmount: z.number().min(0),
   amountPaid: z.number().min(0).default(0),
-  outstandingBalance: z.number().min(0).default(0),
+  remainingBalance: z.number().min(0).default(0),
+  totalDueToday: z.number().min(0).default(0),
   receivableStatus: z.enum(["paid", "pending", "overdue"]),
   collectionStatus: z
     .enum(["initial", "aanmaning", "sommatie", "ingebrekestelling"])
     .optional()
     .transform((val) => (val ? val.toLowerCase() : val)),
-  notes: z.string().optional(),
-  collectionPercentage: z.number().min(0).default(0),
-  abbPercentage: z.number().min(0).default(0),
+  clientCollectionPercentage: z.number().min(0).default(0),
+  clientCollectionAmount: z.number().min(0).default(0),
+  clientAbbPercentage: z.number().min(0).default(0),
+  clientAbbAmount: z.number().min(0).default(0),
+  adminCollectionPercentage: z.number().min(0).default(0),
+  adminCollectionAmount: z.number().min(0).default(0),
+  adminAbbPercentage: z.number().min(0).default(0),
+  adminAbbAmount: z.number().min(0).default(0),
+  notifiedAt: z
+    .union([z.string(), z.date()])
+    .nullable()
+    .transform((date) => (date instanceof Date ? date.toISOString() : date || null)),
+  previousInterestAmount: z.number().min(0).nullable(),
+  interestStartDate: z
+    .union([z.string(), z.date()])
+    .nullable()
+    .transform((date) => (date instanceof Date ? date.toISOString() : date || null)),
+  interestFrozenAt: z
+    .union([z.string(), z.date()])
+    .nullable()
+    .transform((date) => (date instanceof Date ? date.toISOString() : date || null)),
+  interestFrozenAmount: z.number().min(0).nullable(),
+  interestFrozenPercentage: z.number().min(0).nullable(),
+  lastPaymentDate: z
+    .union([z.string(), z.date()])
+    .nullable()
+    .transform((date) => (date instanceof Date ? date.toISOString() : date || null)),
   debtorId: z.string().optional(),
   createdAt: z
     .union([z.string(), z.date()])
@@ -33,6 +58,9 @@ const InvoiceSchema = z.object({
   updatedAt: z
     .union([z.string(), z.date()])
     .transform((date) => (date instanceof Date ? date.toISOString() : date)),
+  hasPaymentAgreement: z.boolean().default(false),
+  paymentAgreementId: z.string().nullable().optional(),
+  notes: z.string().optional(),
 });
 
 const ExcelImportSchema = z.object({

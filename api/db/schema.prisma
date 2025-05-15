@@ -117,26 +117,26 @@ model TenantConfig {
 }
 
 model PaymentAgreement {
-  id                      String             @id @default(uuid()) // Identificador único del acuerdo de pago
-  accountsReceivableId    String             @unique // Clave foránea que referencia a la tabla AccountsReceivable
-  accountsReceivable      AccountsReceivable @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
-  initialPayment          Float // Monto del pago inicial
-  remainingBalance        Float // Saldo restante después del pago inicial
-  totalAmount             Float // Monto total acordado
-  numberOfInstallments    Int // Número de cuotas acordadas
-  Installments            Installment[] // Relación uno a muchos con Installment
+  id                     String             @id @default(uuid()) // Identificador único del acuerdo de pago
+  accountsReceivableId   String             @unique // Clave foránea que referencia a la tabla AccountsReceivable
+  accountsReceivable     AccountsReceivable @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  initialPayment         Float // Monto del pago inicial
+  remainingBalance       Float // Saldo restante después del pago inicial
+  totalAmount            Float // Monto total acordado
+  numberOfInstallments   Int // Número de cuotas acordadas
+  Installments           Installment[] // Relación uno a muchos con Installment
   // Removed validityDate field as agreementExpirationDate already serves the purpose
-  paymentStatus           String // Estado del acuerdo (Ej. "active", "completed", "defaulted")
-  lastPaymentDate         DateTime? // Fecha del último pago realizado
-  initialPaymentStatus    String             @default("pending") // Estado del pago inicial (pending, completed)
-  totalPaid               Float              @default(0) // Total pagado hasta el momento
-  isFullyPaid             Boolean            @default(false) // Indica si el acuerdo está completamente pagado
-  accumulatedInterest     Float              @default(0) // Intereses acumulados durante el acuerdo
-  agreementExpirationDate DateTime // Fecha de expiración del acuerdo para pagos
-  createdAt               DateTime           @default(now()) // Fecha de creación
-  updatedAt               DateTime           @updatedAt // Fecha de última actualización
-  PaymentDetail           PaymentDetail[]
-  previousInterestAmount  Float? // Intereses acumulados antes del acuerdo
+  paymentStatus          String // Estado del acuerdo (Ej. "active", "completed", "defaulted")
+  lastPaymentDate        DateTime? // Fecha del último pago realizado
+  initialPaymentStatus   String             @default("pending") // Estado del pago inicial (pending, completed)
+  totalPaid              Float              @default(0) // Total pagado hasta el momento
+  isFullyPaid            Boolean            @default(false) // Indica si el acuerdo está completamente pagado
+  accumulatedInterest    Float              @default(0) // Intereses acumulados durante el acuerdo
+  initialPaymentDeadline DateTime
+  createdAt              DateTime           @default(now()) // Fecha de creación
+  updatedAt              DateTime           @updatedAt // Fecha de última actualización
+  PaymentDetail          PaymentDetail[]
+  previousInterestAmount Float? // Intereses acumulados antes del acuerdo
 
   @@map("payment_agreement")
 }
@@ -147,10 +147,12 @@ model Installment {
   paymentAgreement   PaymentAgreement @relation(fields: [paymentAgreementId], references: [id])
   installmentNumber  Int // número de cuota (1, 2, 3...)
   dueDate            DateTime // fecha límite para pagar esta cuota
-  amount             Float // Monto de esta cuota
+  originalAmount     Float // Monto original de esta cuota
+  amountPaid         Float            @default(0) // Monto pagado de esta cuota
+  remainingAmount    Float            @default(0) // Saldo restante de la cuota
   paid               Boolean          @default(false)
   paidAt             DateTime?
-  status             String           @default("pending") // Estado de la cuota (pending, paid, overdue)
+  status             String           @default("pending") // Estado de la cuota (pending, partially_paid, paid, overdue)
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
 
