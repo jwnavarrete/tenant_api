@@ -5,7 +5,13 @@ import { validateTokenJwtMiddleware } from "../../middlewares/global/validateTok
 export const cronRoutes: Router = Router();
 
 cronRoutes.post(
-  "/notificacion-invoices",
+  "/process-notifications",
   // validateTokenJwtMiddleware,
-  cronController.sendCronNotificacionInvoicesController
+  cronController.processNotificationsController
+);
+
+cronRoutes.post(
+  "/pending-notifications",
+  // validateTokenJwtMiddleware,
+  cronController.sendPendingNotificationsController
 );

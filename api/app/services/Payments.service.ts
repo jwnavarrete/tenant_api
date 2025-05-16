@@ -2,6 +2,7 @@ import { calculateLateInterest } from "../../../api/common/lib/general";
 import { prisma } from "../../index";
 import { IPaymentApplication, IRegisterPayment, IRegisterPaymentAgreement } from "../interfaces/payments.interface";
 import { RegisterPaymentAgreementSchema } from "../schemas/Payments.schemas";
+import { notificationService } from "./Notification.service";
 import { tenantConfigService } from "./tenantConfig.service";
 
 class PaymentsService {
@@ -14,6 +15,7 @@ class PaymentsService {
     // Check if the accounts receivable exists
     const accountsReceivable = await prisma.accountsReceivable.findUnique({
       where: { id: payload.invoiceId, tenantId: tenantId },
+      include: { debtor: true },
     });
 
     if (!accountsReceivable) {
@@ -92,32 +94,32 @@ class PaymentsService {
       if (payload.initialPaymentStatus === "pending") {
         const amountToApply = payload.initialPayment || 0;
 
-        // Crear el detalle del pago especificando información de la cuota
-        const payment = await prisma.paymentDetail.create({
-          data: {
-            accountsReceivableId: payload.invoiceId,
-            paymentAgreementId: paymentAgreement.id,
-            paymentAmount: amountToApply,
-            paymentMethod: payload.paymentMethod,
-            referenceNumber: payload.referenceNumber,
-            notes: `Initial Payment: ${payload.notes}`,
-            createdAt: new Date(),
-            paymentDate: new Date(),
-          },
-        });
-
-        // SI SE CREO EL PAGO SE ACTUALIZA EL ACUERDO DE PAGO
-        if (payment) {
-          await prisma.paymentAgreement.update({
-            where: { id: paymentAgreement.id },
+        if (amountToApply > 0) {
+          // Crear el detalle del pago especificando información de la cuota
+          await prisma.paymentDetail.create({
             data: {
-              initialPaymentStatus:
-                amountToApply === paymentAgreement.initialPayment
-                  ? "completed"
-                  : "pending"
+              accountsReceivableId: payload.invoiceId,
+              paymentAgreementId: paymentAgreement.id,
+              paymentAmount: amountToApply,
+              paymentMethod: payload.paymentMethod,
+              referenceNumber: payload.referenceNumber,
+              notes: `Initial Payment: ${payload.notes}`,
+              createdAt: new Date(),
+              paymentDate: new Date(),
             },
           });
         }
+
+        // SI SE CREO EL PAGO SE ACTUALIZA EL ACUERDO DE PAGO
+        await prisma.paymentAgreement.update({
+          where: { id: paymentAgreement.id },
+          data: {
+            initialPaymentStatus:
+              amountToApply === paymentAgreement.initialPayment
+                ? "completed"
+                : "pending"
+          },
+        });
       }
 
       // Enviar el monto restante para recalcular el saldo pendiente, incluso si es cero
@@ -146,6 +148,17 @@ class PaymentsService {
       // Distribuir el pago entre capital, interés, impuestos, cobranza, etc.
       await this.distributePayment(payment.id);
     }
+
+    await notificationService.sendBetalingsbewijs(
+      accountsReceivable.debtor?.fullname || "",
+      payload.paymentMethod,
+      payload.paymentAmount,
+      payload.referenceNumber,
+      accountsReceivable.debtor?.email || "",
+      accountsReceivable.invoiceNumber
+    ).catch((error) => {
+      console.error("Error sending Betalingsbewijs:", error);
+    });
 
     return { success: true };
   }
@@ -197,6 +210,13 @@ class PaymentsService {
   async getPaymentById(paymentId: string) {
     const payment = await prisma.paymentDetail.findUnique({
       where: { id: paymentId },
+      include: {
+        accountsReceivable: {
+          include: {
+            debtor: true,
+          },
+        },
+      },
     });
 
     if (!payment) {
@@ -289,7 +309,7 @@ class PaymentsService {
     });
 
     // Recalcular el saldo pendiente del acuerdo de pago, si existe
-    if(invoice.paymentAgreementId){
+    if (invoice.paymentAgreementId) {
       this.recalculatePaymentAgreement(
         tenantId,
         invoice.paymentAgreementId
@@ -345,7 +365,7 @@ class PaymentsService {
         paymentStatus: remainingBalance <= 0 ? "completed" : "active",
       },
     });
-    
+
     return { success: true };
   }
 

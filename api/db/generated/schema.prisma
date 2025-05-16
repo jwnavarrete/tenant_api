@@ -160,10 +160,10 @@ model Installment {
 }
 
 model AccountsReceivable {
-  id                         String               @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
+  id                         String                   @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
   tenantId                   String // Clave foránea que referencia a la tabla Tenant
-  tenant                     Tenant               @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  invoiceNumber              String               @unique // Número único de la factura asociada
+  tenant                     Tenant                   @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  invoiceNumber              String                   @unique // Número único de la factura asociada
   issueDate                  DateTime // Fecha de emisión de la factura
   dueDate                    DateTime // Fecha de vencimiento de la factura
   // Información del cliente
@@ -173,22 +173,22 @@ model AccountsReceivable {
   customerPhone              String? // Teléfono del cliente
   // Detalles de la factura
   invoiceAmount              Float // Monto total de la factura
-  amountPaid                 Float                @default(0) // Monto pagado
-  remainingBalance           Float                @default(0) // Saldo pendiente
-  totalDueToday              Float                @default(0) // Total a pagar hoy
+  amountPaid                 Float                    @default(0) // Monto pagado
+  remainingBalance           Float                    @default(0) // Saldo pendiente
+  totalDueToday              Float                    @default(0) // Total a pagar hoy
   // Status de la cuenta por cobrar
   receivableStatus           String // Estado del registro (paid, pending, overdue)
   collectionStatus           String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
   // Gastos de cobranza que el cliente le cobra al deudor
-  clientCollectionPercentage Float                @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
-  clientCollectionAmount     Float                @default(0) // Monto de cobranza que el cliente le cobra al deudor
-  clientAbbPercentage        Float                @default(0) // Porcentaje ABB que el cliente le cobra al deudor
-  clientAbbAmount            Float                @default(0) // Monto ABB que el cliente le cobra al deudor
+  clientCollectionPercentage Float                    @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
+  clientCollectionAmount     Float                    @default(0) // Monto de cobranza que el cliente le cobra al deudor
+  clientAbbPercentage        Float                    @default(0) // Porcentaje ABB que el cliente le cobra al deudor
+  clientAbbAmount            Float                    @default(0) // Monto ABB que el cliente le cobra al deudor
   // Gastos de cobranza que el administrador del sistema le cobra al cliente
-  adminCollectionPercentage  Float                @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
-  adminCollectionAmount      Float                @default(0) // Monto de cobranza que el administrador le cobra al cliente
-  adminAbbPercentage         Float                @default(0) // Porcentaje ABB que el administrador le cobra al cliente
-  adminAbbAmount             Float                @default(0) // Monto ABB que el administrador le cobra al cliente
+  adminCollectionPercentage  Float                    @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
+  adminCollectionAmount      Float                    @default(0) // Monto de cobranza que el administrador le cobra al cliente
+  adminAbbPercentage         Float                    @default(0) // Porcentaje ABB que el administrador le cobra al cliente
+  adminAbbAmount             Float                    @default(0) // Monto ABB que el administrador le cobra al cliente
   notifiedAt                 DateTime? // Fecha en la que se notificó al deudor
   // Intereses acumulados antes del acuerdo de pago o notificación enviado
   previousInterestAmount     Float? // Monto de interés acumulado antes de congelarlo
@@ -201,20 +201,39 @@ model AccountsReceivable {
   paymentDetail              PaymentDetail[] // Relación uno a muchos con PaymentDetail   
   // Relación con el deudor
   debtorId                   String? // Clave foránea que referencia a la tabla Debtor
-  debtor                     Debtor?              @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
+  debtor                     Debtor?                  @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
   // Auditoría
-  createdAt                  DateTime             @default(now()) // Fecha de creación
-  updatedAt                  DateTime             @updatedAt // Fecha de última actualización
+  createdAt                  DateTime                 @default(now()) // Fecha de creación
+  updatedAt                  DateTime                 @updatedAt // Fecha de última actualización
   // Acuerdo de pago
-  hasPaymentAgreement        Boolean              @default(false) // Indica si tiene un acuerdo de pago
+  hasPaymentAgreement        Boolean                  @default(false) // Indica si tiene un acuerdo de pago
   paymentAgreementId         String? // Clave foránea que referencia a la tabla PaymentAgreement
   paymentAgreement           PaymentAgreement?
   // Relacion con la distribución de pagos
   PaymentApplication         PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  // Relación con notificaciones
+  notifications              NotificationCollection[] // Relación uno a muchos con NotificationCollection
   // Notas adicionales
   notes                      String? // Notas adicionales
 
   @@map("accounts_receivable")
+}
+
+model NotificationCollection {
+  id                   String              @id @default(uuid())
+  accountsReceivableId String // Clave foránea a AccountsReceivable
+  accountsReceivable   AccountsReceivable  @relation(fields: [accountsReceivableId], references: [id])
+  type                 NotificationType // Tipo de notificación (initial, reminder, final, etc.)
+  status               NotificationStatus // Estado del envío (sent, failed, pending)
+  sentAt               DateTime // Fecha en que se envió la notificación
+  channel              NotificationChannel // Medio: email, sms, whatsapp, etc.
+  responseStatus       String? // Estado de la respuesta si aplica (por ejemplo: opened, bounced, etc.)
+  message              String? // Mensaje enviado
+  error                String? // Detalles del error si falló
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  @@map("notification_collection")
 }
 
 model PaymentDetail {
@@ -257,6 +276,25 @@ enum PaymentApplicationType {
   CLIENT_ABB_FEE
   ADMIN_COLLECTION_FEE
   ADMIN_ABB_FEE
+}
+
+enum NotificationType {
+  AANMANING
+  SOMMATIE
+  INGEBREKESTELLING
+  BLOKKADE
+}
+
+enum NotificationStatus {
+  SENT
+  FAILED
+  PENDING
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
 }
 
 model Debtor {

@@ -148,7 +148,8 @@ export const sendNotificationController = async (
 
   const result = await notificationService.sendNotification(
     tenantId,
-    invoiceId
+    invoiceId,
+    "AANMANING"
   );
 
   return res.json({

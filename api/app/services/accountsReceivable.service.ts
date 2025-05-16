@@ -169,7 +169,7 @@ class AccountsReceivableService {
           amountPaid: 0,
           remainingBalance: data.invoiceAmount,
           receivableStatus: "pending",
-          collectionStatus: COLLECTION_STATUS.AANMANING,
+          collectionStatus: COLLECTION_STATUS.INITIAL,
           // Interest calculation
           previousInterestAmount: interest,
           // Set the client collection and abb amounts
@@ -188,14 +188,14 @@ class AccountsReceivableService {
           debtorId: debtorId,
         },
       });
-      console.log(invoice);
+      // console.log(invoice);
 
       // Send notification to the debtor
-      const result = await notificationService.sendNotification(
-        tenantId,
-        invoice.id
-      );
-      console.log("Notification sent successfully:", result);
+      // const result = await notificationService.sendNotification(
+      //   tenantId,
+      //   invoice.id
+      // );
+      // console.log("Notification sent successfully:", result);
 
     } catch (error) {
       if (error instanceof Error) {
@@ -247,7 +247,6 @@ class AccountsReceivableService {
     if (!invoice) {
       throw new Error("Invoice not found");
     }
-    console.log("Invoice", invoice);
     // Validate the invoice with the schema
     return InvoiceResponseSchema.parse(invoice);
   }

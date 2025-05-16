@@ -1,3 +1,4 @@
+import { prisma } from "../../index";
 import { CollectionService } from "../../common/Mail";
 import { accountsReceivableService } from "../services/accountsReceivable.service";
 import { InvoiceINotification } from "../interfaces/notification.interface";
@@ -6,10 +7,12 @@ import { IInvoiceResponse } from "../interfaces/accountsReceivable.interface";
 import { COLLECTION_STATUS } from "../../common/lib/constant";
 import { userService } from "./user.service";
 import renderPDF from "../../common/PDF/renderPDF";
+import { parameterService } from "./parameter.service";
+import { paymentsService } from "./Payments.service";
 
 class NotificationService {
   //
-  async sendNotification(tenantId: string, invoiceId: string) {
+  async sendNotification(tenantId: string, invoiceId: string, notificationType: string) {
     if (!invoiceId) {
       throw new Error("Invoice not found");
     }
@@ -19,19 +22,29 @@ class NotificationService {
     const invoice: IInvoiceResponse =
       await accountsReceivableService.getReceivableById(invoiceId);
 
-    console.log("Invoice", invoice);
+    // console.log("Invoice", invoice);
     if (!invoice) {
       throw new Error("Invoice not found");
     }
 
     // Send Notification By Collection Status
-    if (invoice.collectionStatus === COLLECTION_STATUS.AANMANING) {
+    console.log("invoice.collectionStatus", invoice.collectionStatus);
+
+    if (notificationType === "AANMANING") {
       return await this.sendAanmaning(tenant.subdomain, invoice);
     }
 
     // Send Notification By Collection Status
-    if (invoice.collectionStatus === COLLECTION_STATUS.SOMMATIE) {
+    if (notificationType === "SOMMATIE") {
       return await this.sendSommatie(tenant.subdomain, invoice);
+    }
+
+    if (notificationType === "INGEBREKESTELLING") {
+      return await this.sendIngebrekestelling(tenant.subdomain, invoice);
+    }
+
+    if (notificationType === "BLOKKADE") {
+      return await this.sendBlokkade(tenant.subdomain, invoice);
     }
 
   }
@@ -52,33 +65,45 @@ class NotificationService {
         )
       );
       //
-      const days = 5; // This should be calculated based on the invoice and the days overdue
-      const validDays = 5;
-      const fine = 93; // This should be calculated based on the invoice and the days overdue
+      const fine = 0; // This should be calculated based on the invoice and the days overdue
+      let urlRegister = "";
+      let invitationToken = "";
       // Create a temporary access code
 
       // Check if the user exists
       if (!User?.id) {
         throw new Error("User ID not found");
       }
-      // Set Temporary Password
-      const invitationToken = await userService.saveInvitationToken(User?.id);
 
-      // Generate the registration link
-      const urlRegister = await userService.generateRegistrationLink(
-        slug,
-        "register-debtor",
-        User?.id,
-        User?.email,
-        invitationToken
+      // 
+      if (User.status !== "active") {
+        // Set Temporary Password
+        invitationToken = await userService.saveInvitationToken(User?.id);
+
+        // Generate the registration link
+        urlRegister = await userService.generateRegistrationLink(
+          slug,
+          "register-debtor",
+          User?.id,
+          User?.email,
+          invitationToken
+        );
+      } else {
+        urlRegister = `https://${slug}.${process.env.APP_DOMAIN}/pending-invoices`;
+        invitationToken = "";
+      }
+
+      const dueDays = Math.ceil(
+        (new Date().getTime() - new Date(invoice.dueDate).getTime()) / (1000 * 60 * 60 * 24)
       );
+      const validDays = await this.getNotificationDays(invoice);
 
       // Create the notification object
       const notification: InvoiceINotification = {
         sendDate: new Date().toISOString(),
         invoiceNumber: invoice.invoiceNumber,
         invoiceAmount: invoice.invoiceAmount,
-        days: days,
+        days: dueDays,
         accountNumber: "123456789",
         urlRegister: urlRegister,
         collectionPercentage: invoice.clientCollectionPercentage,
@@ -96,21 +121,20 @@ class NotificationService {
       const subject = `Aanmaning - ${invoice.invoiceNumber}`;
 
       if (debtorEmail) {
-        const fileName = `Aanmaning_${invoice.invoiceNumber}`;
+        // const fileName = `Aanmaning_${invoice.invoiceNumber}`;
         // Render the PDF
-        console.log("templatePath:", templatePath)
-        console.log("fileName:", fileName)
+        // const pdfPath = await renderPDF(
+        //   templatePath,
+        //   fileName,
+        //   notification
+        // )
 
-        const pdfPath = await renderPDF(
-          templatePath,
-          fileName,
-          notification
-        )
+        // attachments = {
+        //   filename: fileName,
+        //   pdfTemplatePath: pdfPath,
+        // }
 
-        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification, {
-          filename: fileName,
-          pdfTemplatePath: pdfPath,
-        });
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification);
       }
 
       return "Aanmaning sent successfully";
@@ -126,11 +150,14 @@ class NotificationService {
   ): Promise<string> {
     try {
       // Create the notification object
+      const _dias = await this.getNotificationDays(invoice);
+      const lastNotificationDate = await this.getLastNotificationDate(invoice, 'AANMANING');
+
       const notification = {
         sendDate: new Date().toISOString(),
         destinatario: invoice.debtor?.fullname,
-        previousDate: "xxxxx",
-        days: 5,
+        previousDate: lastNotificationDate,
+        days: _dias,
         totalAmount: invoice.invoiceAmount,
         accountNumber: "123456789",
         extraCosts: 0,
@@ -141,26 +168,161 @@ class NotificationService {
       const subject = `Sommatie - ${invoice.invoiceNumber}`;
 
       if (debtorEmail) {
-        const fileName = `Sommatie_${invoice.invoiceNumber}.pdf`;
-        // Render the PDF
-        const pdfPath = await renderPDF(
-          templatePath,
-          fileName,
-          notification
-        )
-
-        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification, {
-          filename: fileName,
-          pdfTemplatePath: pdfPath,
-        });
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification);
       }
 
 
-      return "Aanmaning sent successfully";
+      return "Sommatie sent successfully";
     } catch (error) {
       console.error("Error sending Aanmaning:", error);
       throw new Error("Failed to send Aanmaning");
     }
+  }
+
+  // INGEBREKESTELLING
+  async sendIngebrekestelling(
+    slug: string,
+    invoice: IInvoiceResponse
+  ): Promise<string> {
+    try {
+      const firstReminderDate = await this.getLastNotificationDate(invoice, 'AANMANING');
+      const secondReminderDate = await this.getLastNotificationDate(invoice, 'SOMMATIE');
+      // Create the notification object
+      const notification = {
+        sendDate: new Date().toISOString(),
+        recipient: invoice.debtor?.fullname,
+        firstReminderDate,
+        secondReminderDate
+      };
+
+      const debtorEmail = invoice.debtor?.email;
+      const templatePath = "collection/Ingebrekestelling";
+      const subject = `Ingebrekestelling - ${invoice.invoiceNumber}`;
+
+      if (debtorEmail) {
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification);
+      }
+
+      return "Ingebrekestelling sent successfully";
+    } catch (error) {
+      console.error("Error sending Aanmaning:", error);
+      throw new Error("Failed to send Aanmaning");
+    }
+  }
+
+  async sendBlokkade(
+    slug: string,
+    invoice: IInvoiceResponse
+  ): Promise<string> {
+    try {
+      // Create the notification object
+      const notification = {
+        sendDate: new Date().toISOString(),
+        recipient: invoice.debtor?.fullname,
+        // destinatario: invoice.debtor?.fullname,
+        serviceCost: 0,
+        registerCost: 0,
+        totalAmount: invoice.invoiceAmount,
+        totalPayment: invoice.totalDueToday,
+        accountNumber: "123456789",
+      };
+
+      const debtorEmail = invoice.debtor?.email;
+      const templatePath = "collection/FinancieleBlokkade";
+      const subject = `FinancieleBlokkade - ${invoice.invoiceNumber}`;
+
+      if (debtorEmail) {
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification);
+      }
+
+      return "Blokkade sent successfully";
+    } catch (error) {
+      console.error("Error sending Aanmaning:", error);
+      throw new Error("Failed to send Aanmaning");
+    }
+  }
+
+  // BETALINGSBEWIJS
+  async sendBetalingsbewijs(
+    debtorName: string,
+    paymentMethod: string,
+    paymentAmount: number,
+    referenceNumber: string,
+    email: string,
+    invoiceNumber: string,
+  ): Promise<string> {
+    try {
+
+      // Create the notification object
+      const notification = {
+        paymentDate: new Date().toISOString(),
+        debtorName,
+        paymentMethod,
+        paymentAmount,
+        referenceNumber,
+      };
+      console.log("notification", notification);
+
+      const debtorEmail = email;
+      const templatePath = "collection/Betalingsbewijs";
+      const subject = `Betalingsbewijs - ${invoiceNumber}`;
+
+      if (debtorEmail) {
+        console.log("debtorEmail", debtorEmail);
+        await CollectionService.sendEmail(debtorEmail, templatePath, subject, notification);
+      }
+
+      return "Betalingsbewijs sent successfully";
+    } catch (error) {
+      console.error("Error sending Betalingsbewijs:", error);
+      throw new Error("Failed to send Betalingsbewijs");
+    }
+  }
+
+  private async getNotificationDays(invoice: IInvoiceResponse): Promise<number> {
+    const PARAMETER_ID = process.env.PARAMETER_ID || "";
+    const _parameter = await parameterService.getParameterById(PARAMETER_ID);
+
+    if (!_parameter) {
+      throw new Error("Parameter not found");
+    }
+
+    if (invoice.collectionStatus === "aanmaning") {
+      return invoice.debtor?.personType === "individual"
+        ? _parameter.diasPlazoConsumidorSommatie
+        : _parameter.diasPlazoEmpresaSommatie;
+    }
+
+    if (invoice.collectionStatus === "sommatie") {
+      return invoice.debtor?.personType === "individual"
+        ? _parameter.diasPlazoConsumidorSommatie
+        : _parameter.diasPlazoEmpresaSommatie;
+    }
+
+    return 0;
+  }
+
+  private async getLastNotificationDate(
+    invoice: IInvoiceResponse,
+    type: 'AANMANING' | 'SOMMATIE' | 'INGEBREKESTELLING'
+  ): Promise<Date> {
+    // Fetch the notification collection record based on invoice and type
+    const notificationRecord = await prisma.notificationCollection.findFirst({
+      where: {
+        accountsReceivableId: invoice.id,
+        type: type, // Replace with the appropriate type if needed
+        status: "SENT", // Ensure the status is SENT
+      },
+      orderBy: {
+        sentAt: "desc", // Get the most recent notification
+      },
+    });
+
+    if (!notificationRecord) {
+      throw new Error(`Notification of type ${type} not found`);
+    }
+
+    return notificationRecord.sentAt;
   }
 }
 

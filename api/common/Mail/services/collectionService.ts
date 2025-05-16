@@ -17,22 +17,28 @@ class CollectionService {
       companyName: "Dazzsoft",
     });
 
-    const attachments = attachmentConfig
-      ? [
-        {
-          filename: attachmentConfig.filename,
-          path: attachmentConfig.pdfTemplatePath,
-        },
-      ]
-      : [];
 
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
       to,
       subject,
       html,
-      attachments,
     };
+
+    if (attachmentConfig) {
+      const attachments = attachmentConfig
+        ? [
+          {
+            filename: attachmentConfig.filename,
+            path: attachmentConfig.pdfTemplatePath,
+          },
+        ]
+        : [];
+
+      mailOptions.attachments = attachments;
+    }
+    
+    console.log(`email: ${to}`);
 
     await transporter.sendMail(mailOptions);
   }

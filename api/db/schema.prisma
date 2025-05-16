@@ -211,11 +211,31 @@ model AccountsReceivable {
   paymentAgreement           PaymentAgreement?
   // Relacion con la distribución de pagos
   PaymentApplication         PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  // Relación con notificaciones
+  notifications              NotificationCollection[] // Relación uno a muchos con NotificationCollection
   // Notas adicionales
   notes                      String? // Notas adicionales
 
   @@map("accounts_receivable")
 }
+
+model NotificationCollection {
+  id                 String   @id @default(uuid())
+  accountsReceivableId String  // Clave foránea a AccountsReceivable
+  accountsReceivable AccountsReceivable @relation(fields: [accountsReceivableId], references: [id])
+  type               NotificationType // Tipo de notificación (initial, reminder, final, etc.)
+  status             NotificationStatus // Estado del envío (sent, failed, pending)
+  sentAt             DateTime // Fecha en que se envió la notificación
+  channel            NotificationChannel // Medio: email, sms, whatsapp, etc.
+  responseStatus     String? // Estado de la respuesta si aplica (por ejemplo: opened, bounced, etc.)
+  message            String? // Mensaje enviado
+  error              String? // Detalles del error si falló
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("notification_collection")
+}
+
 
 model PaymentDetail {
   id                   String               @id @default(uuid()) // Identificador único del detalle de pago
@@ -258,6 +278,26 @@ enum PaymentApplicationType {
   ADMIN_COLLECTION_FEE
   ADMIN_ABB_FEE
 }
+
+enum NotificationType {
+  AANMANING
+  SOMMATIE
+  INGEBREKESTELLING
+  BLOKKADE
+}
+
+enum NotificationStatus {
+  SENT
+  FAILED
+  PENDING
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
 
 model Debtor {
   id                 String               @id @default(uuid()) // Identificador único del deudor

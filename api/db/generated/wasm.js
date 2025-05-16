@@ -267,6 +267,20 @@ exports.Prisma.AccountsReceivableScalarFieldEnum = {
   notes: 'notes'
 };
 
+exports.Prisma.NotificationCollectionScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  type: 'type',
+  status: 'status',
+  sentAt: 'sentAt',
+  channel: 'channel',
+  responseStatus: 'responseStatus',
+  message: 'message',
+  error: 'error',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.PaymentDetailScalarFieldEnum = {
   id: 'id',
   accountsReceivableId: 'accountsReceivableId',
@@ -331,6 +345,25 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.NotificationType = exports.$Enums.NotificationType = {
+  AANMANING: 'AANMANING',
+  SOMMATIE: 'SOMMATIE',
+  INGEBREKESTELLING: 'INGEBREKESTELLING',
+  BLOKKADE: 'BLOKKADE'
+};
+
+exports.NotificationStatus = exports.$Enums.NotificationStatus = {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  PENDING: 'PENDING'
+};
+
+exports.NotificationChannel = exports.$Enums.NotificationChannel = {
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  WHATSAPP: 'WHATSAPP'
+};
+
 exports.PaymentApplicationType = exports.$Enums.PaymentApplicationType = {
   CAPITAL: 'CAPITAL',
   INTEREST: 'INTEREST',
@@ -351,6 +384,7 @@ exports.Prisma.ModelName = {
   PaymentAgreement: 'PaymentAgreement',
   Installment: 'Installment',
   AccountsReceivable: 'AccountsReceivable',
+  NotificationCollection: 'NotificationCollection',
   PaymentDetail: 'PaymentDetail',
   PaymentApplication: 'PaymentApplication',
   Debtor: 'Debtor',

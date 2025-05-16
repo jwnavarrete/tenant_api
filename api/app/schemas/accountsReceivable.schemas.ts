@@ -21,7 +21,7 @@ const InvoiceSchema = z.object({
   totalDueToday: z.number().min(0).default(0),
   receivableStatus: z.enum(["paid", "pending", "overdue"]),
   collectionStatus: z
-    .enum(["initial", "aanmaning", "sommatie", "ingebrekestelling"])
+    .enum(["initial", "aanmaning", "sommatie", "ingebrekestelling", "blokkade"])
     .optional()
     .transform((val) => (val ? val.toLowerCase() : val)),
   clientCollectionPercentage: z.number().min(0).default(0),
