@@ -4,7 +4,6 @@ import { accountsReceivableService } from "../services/accountsReceivable.servic
 import { InvoiceINotification } from "../interfaces/notification.interface";
 import { tenantService } from "./tenant.service";
 import { IInvoiceResponse } from "../interfaces/accountsReceivable.interface";
-import { COLLECTION_STATUS } from "../../common/lib/constant";
 import { userService } from "./user.service";
 import renderPDF from "../../common/PDF/renderPDF";
 import { parameterService } from "./parameter.service";
