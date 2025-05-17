@@ -1,4 +1,3 @@
-import { calculateLateInterest } from "../../../api/common/lib/general";
 import { prisma } from "../../index";
 import { IPaymentApplication, IRegisterPayment, IRegisterPaymentAgreement } from "../interfaces/payments.interface";
 import { RegisterPaymentAgreementSchema } from "../schemas/Payments.schemas";

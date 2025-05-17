@@ -1,5 +1,5 @@
-import { NotificationType } from "../../../api/db/generated";
-import { COLLECTION_STATUS } from "../../../api/common/lib/constant";
+import { NotificationType } from "../../db/generated";
+import { COLLECTION_STATUS } from "../../common/lib/constant";
 import { prisma } from "../../index";
 import { parameterService } from "../services/parameter.service";
 import { notificationService } from "./Notification.service";
