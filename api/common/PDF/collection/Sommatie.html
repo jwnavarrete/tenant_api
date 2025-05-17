@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sommatie tot ingebrekestelling</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px">
+    <header style="display: flex; justify-content: space-between; align-items: center">
+        <div class="logo" style="flex: 1; font-size: 24px; font-weight: bold; color: #ff6600">
+            Centraal Inning
+        </div>
+        <div style="text-align: right">
+            <strong>Sommatie tot ingebrekestelling</strong><br>
+            Verzenddatum: {{sendDate}}
+        </div>
+    </header>
+    <div class="content" style="margin-top: 20px; text-align: justify">
+        <p>Aan: {{recipient}}<br>Av. Universidad<br>Bonaire</p>
+        <p>
+            In onze brief d.d. {{previousDate}} hebben wij u aangemaand om uw openstaande schuld te betalen. Aangezien wij geen betaling hebben ontvangen, sommeren wij u hierbij dringend om het totaalbedrag van <span class="important">USD {{totalAmount}}</span> binnen {{days}} dagen na dagtekening van deze brief te voldoen op bankrekening MCB {{accountNumber}}. Aan dit bedrag zijn <span class="important">USD {{extraCosts}}</span> extra kosten toegevoegd.
+        </p>
+        <p>Voor actie of betaling:<br>
+        Bezoek: <a href="http://www.centraalinning.com">www.centraalinning.com</a><br>
+        Gebruik uw inloggegevens: <span class="important">{{loginDetails}}</span></p>
+        <p>Let op: Bij uitblijven van betaling zullen wij genoodzaakt zijn om:</p>
+        <ul>
+            <li>Uw betalingsachterstand centraal te registreren;</li>
+            <li>Uw toegang tot de buitengerechtelijke fase te blokkeren;</li>
+            <li>Incassomaatregelen via partners van het centrale inningsysteem te treffen.</li>
+        </ul>
+        <p>Daarnaast bent u verantwoordelijk voor alle bijkomende kosten bij een gerechtelijke procedure.</p>
+        <p>Los deze kwestie tijdig op om verdere stappen te voorkomen.</p>
+    </div>
+    <footer style="margin-top: 40px; font-size: 14px; text-align: justify">
+        <p>Rico Aceme</p>
+        <p>Dit bericht is namens Rico Aceme verzonden en automatisch gegenereerd via het centrale incassoplatform CI voor schuldeisers op Bonaire. Daarom bevat deze brief geen handtekening.</p>
+    </footer>
+</body>
+</html>

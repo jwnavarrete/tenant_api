@@ -10,7 +10,6 @@ export class AppError extends Error {
   }
 }
 
-
 export const errorHandler = (
   err: Error | AxiosError | any, // Aseguramos que AxiosError esté incluido
   req: Request,

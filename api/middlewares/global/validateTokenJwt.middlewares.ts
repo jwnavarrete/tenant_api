@@ -5,7 +5,7 @@ import {
   decodeAccessToken,
 } from "../../common/lib/sessions";
 import "dotenv/config";
-import { IuserTokenInfos } from "../../modules/security/interfaces/auth.intercace";
+import { IuserTokenInfos } from "../../app/interfaces/auth.intercace";
 
 export const validateTokenJwtMiddleware = (
   req: Request,

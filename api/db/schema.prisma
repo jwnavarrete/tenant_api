@@ -6,17 +6,21 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Tenant {
-  id        String   @id @default(uuid()) // Identificador único del tenant
-  subdomain String   @unique // Subdominio único para el tenant
-  clientId  String   @unique // Clave foránea que referencia a la tabla Client
-  client    Client   @relation(fields: [clientId], references: [id]) // Relación con Client
-  users     User[] // Relación uno a muchos con User
-  createdAt DateTime @default(now()) // Fecha de creación
-  updatedAt DateTime @updatedAt // Fecha de última actualización
+  id                 String               @id @default(uuid()) // Identificador único del tenant
+  subdomain          String               @unique // Subdominio único para el tenant
+  clientId           String               @unique // Clave foránea que referencia a la tabla Client
+  client             Client               @relation(fields: [clientId], references: [id]) // Relación con Client
+  users              User[] // Relación uno a muchos con User
+  tenantConfigs      TenantConfig[] // Relación uno a muchos con TenantConfig
+  accountsReceivable AccountsReceivable[] // Relación uno a muchos con AccountsReceivable
+  debtors            Debtor[] // Relación uno a muchos con Debtor
+  employees          Employee[] // Relación uno a muchos con Employee
+  createdAt          DateTime             @default(now()) // Fecha de creación
+  updatedAt          DateTime             @updatedAt // Fecha de última actualización
 
   @@map("tenant")
 }
@@ -38,111 +42,299 @@ model Client {
   @@map("client")
 }
 
-// model User {
-//   id        String   @id @default(uuid()) // Identificador único del usuario
-//   tenantId  String   // Clave foránea que referencia a la tabla Tenant
-//   tenant    Tenant   @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-//   email     String   @unique // Correo electrónico del usuario (único por tenant)
-//   password  String   // Contraseña cifrada del usuario
-//   roles     UserRole[] // Relación muchos a muchos con Role a través de UserRole
-//   createdAt DateTime @default(now()) // Fecha de creación
-//   updatedAt DateTime @updatedAt // Fecha de última actualización
-// }
-
 model Role {
-  id          String     @id @default(uuid()) // Identificador único del rol
-  name        String     @unique // Nombre del rol (por ejemplo, "Administrador", "Ejecutivo")
+  id          String   @id @default(uuid()) // Identificador único del rol
+  name        String   @unique // Nombre del rol (por ejemplo, "Administrador", "Ejecutivo")
   description String // Descripción del rol
-  users       UserRole[] // Relación muchos a muchos con User a través de UserRole
-  createdAt   DateTime   @default(now()) // Fecha de creación
-  updatedAt   DateTime   @updatedAt // Fecha de última actualización
+  users       User[] // Relación uno a muchos con User
+  createdAt   DateTime @default(now()) // Fecha de creación
+  updatedAt   DateTime @updatedAt // Fecha de última actualización
 
   @@map("role")
 }
 
-model UserRole {
-  id        String   @id @default(uuid()) // Identificador único de la relación
-  userId    String // Clave foránea que referencia a la tabla User
-  user      User     @relation(fields: [userId], references: [id]) // Relación con User
-  roleId    String // Clave foránea que referencia a la tabla Role
-  role      Role     @relation(fields: [roleId], references: [id]) // Relación con Role
-  createdAt DateTime @default(now()) // Fecha de creación
-  updatedAt DateTime @updatedAt // Fecha de última actualización
-
-  @@unique([userId, roleId]) // Asegura que un usuario no tenga el mismo rol más de una vez
-  @@map("user_role")
-}
-
 model User {
-  id                 String         @id @default(uuid()) // Identificador único de la relación
+  id                 String    @id @default(uuid()) // Identificador único de la relación
   tenantId           String // Clave foránea que referencia a la tabla Tenant
-  tenant             Tenant         @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  email              String         @db.VarChar(80)
-  fullname           String         @db.VarChar(80)
-  password           String         @db.VarChar(120)
-  country            String         @db.VarChar(80)
-  phone              String         @db.VarChar(25)
-  typeIdentification String         @db.VarChar(25)
-  identification     String         @db.VarChar(25)
-  // 
-  emailVerified      Boolean        @default(false) // Indica si el correo ha sido verificado
+  tenant             Tenant    @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  email              String    @db.VarChar(80)
+  fullname           String?   @db.VarChar(80)
+  password           String?   @db.VarChar(120)
+  country            String?   @db.VarChar(80)
+  phone              String?   @db.VarChar(25)
+  typeIdentification String?   @db.VarChar(25)
+  identification     String?   @db.VarChar(25)
+  emailVerified      Boolean   @default(false) // Indica si el correo ha sido verificado
   verificationToken  String? // Token para la verificación del correo  
-  // isAdmin Boolean @default(false)
-  createdAt          DateTime       @default(now())
-  updatedAt          DateTime       @updatedAt
-  isDeleted          Boolean        @default(false)
-  news               News[]
-  commentsList       NewsComments[]
-  resetPasswordToken  String? // Token para el restablecimiento de contraseña
-  roles              UserRole[] // Relación muchos a muchos con Role a través de UserRole
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  resetPasswordToken String? // Token para el restablecimiento de contraseña
+  joined             DateTime? // Fecha en la que se unió al tenant
+  invitedById        String? // Clave foránea que referencia al usuario que lo invitó
+  invitedBy          User?     @relation("UserInvitations", fields: [invitedById], references: [id])
+  invitations        User[]    @relation("UserInvitations")
+  lastActive         DateTime? // Fecha de último login
+  status             String    @default("pending") // Estado del usuario (pending, active, inactive)
+  invitationToken    String? // Token para gestionar la invitación
+  roleId             String // Clave foránea que referencia a la tabla Role
+  debtors            Debtor[] // Relación uno a muchos con Debtor
+  role               Role      @relation(fields: [roleId], references: [id]) // Relación uno a muchos con Role
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("users")
 }
 
-model News {
-  id           Int            @id @default(autoincrement())
-  title        String         @db.VarChar(80)
-  subTitle     String         @db.VarChar(200)
-  content      String
-  type         String         @default("Outros") @db.VarChar(30)
-  published    Boolean        @default(true)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  authorId     String
-  author       User           @relation(fields: [authorId], references: [id])
-  tagsList     TagsNews[]
-  commentsList NewsComments[]
+model GlobalParameter {
+  id                            String         @id @default(uuid()) // Identificador único del parámetro
+  porcCobranza                  Float          @default(0) // Porcentaje de cobranza
+  porcAbb                       Float          @default(0) // Porcentaje ABB
+  diasPlazoEmpresaAanmaning     Int            @default(0) // Días de plazo para empresa (aanmaning)
+  diasPlazoConsumidorAanmaning  Int            @default(0) // Días de plazo para consumidor (aanmaning)
+  diasPlazoEmpresaSommatie      Int            @default(0) // Días de plazo para empresa (sommatie)
+  diasPlazoConsumidorSommatie   Int            @default(0) // Días de plazo para consumidor (sommatie)
+  precioEmpresaPequena          Float          @default(0) // Precio para empresa pequeña
+  contribucionEmpresaPequenaPfc Float          @default(0) // Contribución para empresa pequeña PFC
+  precioEmpresaGrande           Float          @default(0) // Precio para empresa grande
+  contribucionEmpresaGrandePfc  Float          @default(0) // Contribución para empresa grande PFC  
+  tenantConfigs                 TenantConfig[] // Relación uno a muchos con TenantConfig
+  createdAt                     DateTime       @default(now()) // Fecha de creación
+  updatedAt                     DateTime       @updatedAt // Fecha de última actualización
 
-  @@map("news")
+  @@map("global_parameters")
 }
 
-model Tag {
-  id   Int        @id @default(autoincrement())
-  name String     @unique @db.VarChar(30)
-  news TagsNews[]
+model TenantConfig {
+  tenantId            String // Clave foránea que referencia a la tabla Tenant
+  tenant              Tenant          @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  parameterId         String // Clave foránea que referencia a la tabla Parameter
+  parameter           GlobalParameter @relation(fields: [parameterId], references: [id]) // Relación con Parameter
+  porcInteresCobranza Float           @default(0) // Porcentaje de interés de cobranza
+  createdAt           DateTime        @default(now()) // Fecha de creación
+  updatedAt           DateTime        @updatedAt // Fecha de última actualización
 
-  @@map("tags")
+  @@unique([tenantId, parameterId]) // Asegura que el email sea único solo para el mismo tenant
+  @@map("tenant_config")
 }
 
-model TagsNews {
-  id     Int  @id @default(autoincrement())
-  news   News @relation(fields: [newsId], references: [id], onDelete: Cascade)
-  newsId Int
-  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
-  tagId  Int
+model PaymentAgreement {
+  id                     String             @id @default(uuid()) // Identificador único del acuerdo de pago
+  accountsReceivableId   String             @unique // Clave foránea que referencia a la tabla AccountsReceivable
+  accountsReceivable     AccountsReceivable @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  initialPayment         Float // Monto del pago inicial
+  remainingBalance       Float // Saldo restante después del pago inicial
+  totalAmount            Float // Monto total acordado
+  numberOfInstallments   Int // Número de cuotas acordadas
+  Installments           Installment[] // Relación uno a muchos con Installment
+  // Removed validityDate field as agreementExpirationDate already serves the purpose
+  paymentStatus          String // Estado del acuerdo (Ej. "active", "completed", "defaulted")
+  lastPaymentDate        DateTime? // Fecha del último pago realizado
+  initialPaymentStatus   String             @default("pending") // Estado del pago inicial (pending, completed)
+  totalPaid              Float              @default(0) // Total pagado hasta el momento
+  isFullyPaid            Boolean            @default(false) // Indica si el acuerdo está completamente pagado
+  accumulatedInterest    Float              @default(0) // Intereses acumulados durante el acuerdo
+  initialPaymentDeadline DateTime
+  createdAt              DateTime           @default(now()) // Fecha de creación
+  updatedAt              DateTime           @updatedAt // Fecha de última actualización
+  PaymentDetail          PaymentDetail[]
+  previousInterestAmount Float? // Intereses acumulados antes del acuerdo
 
-  @@map("tags_news")
+  @@map("payment_agreement")
 }
 
-model NewsComments {
-  id        Int      @id @default(autoincrement())
-  message   String   @db.VarChar(200)
-  createdAt DateTime @default(now())
-  news      News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
-  newsId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+model Installment {
+  id                 String           @id @default(uuid())
+  paymentAgreementId String
+  paymentAgreement   PaymentAgreement @relation(fields: [paymentAgreementId], references: [id])
+  installmentNumber  Int // número de cuota (1, 2, 3...)
+  dueDate            DateTime // fecha límite para pagar esta cuota
+  originalAmount     Float // Monto original de esta cuota
+  amountPaid         Float            @default(0) // Monto pagado de esta cuota
+  remainingAmount    Float            @default(0) // Saldo restante de la cuota
+  paid               Boolean          @default(false)
+  paidAt             DateTime?
+  status             String           @default("pending") // Estado de la cuota (pending, partially_paid, paid, overdue)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
 
-  @@map("news_comments")
+  @@map("installment")
+}
+
+model AccountsReceivable {
+  id                         String               @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
+  tenantId                   String // Clave foránea que referencia a la tabla Tenant
+  tenant                     Tenant               @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  invoiceNumber              String               @unique // Número único de la factura asociada
+  issueDate                  DateTime // Fecha de emisión de la factura
+  dueDate                    DateTime // Fecha de vencimiento de la factura
+  // Información del cliente
+  customerName               String // Nombre del cliente
+  customerAddress            String? // Dirección del cliente
+  customerEmail              String? // Email del cliente
+  customerPhone              String? // Teléfono del cliente
+  // Detalles de la factura
+  invoiceAmount              Float // Monto total de la factura
+  amountPaid                 Float                @default(0) // Monto pagado
+  remainingBalance           Float                @default(0) // Saldo pendiente
+  totalDueToday              Float                @default(0) // Total a pagar hoy
+  // Status de la cuenta por cobrar
+  receivableStatus           String // Estado del registro (paid, pending, overdue)
+  collectionStatus           String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
+  // Gastos de cobranza que el cliente le cobra al deudor
+  clientCollectionPercentage Float                @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
+  clientCollectionAmount     Float                @default(0) // Monto de cobranza que el cliente le cobra al deudor
+  clientAbbPercentage        Float                @default(0) // Porcentaje ABB que el cliente le cobra al deudor
+  clientAbbAmount            Float                @default(0) // Monto ABB que el cliente le cobra al deudor
+  // Gastos de cobranza que el administrador del sistema le cobra al cliente
+  adminCollectionPercentage  Float                @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
+  adminCollectionAmount      Float                @default(0) // Monto de cobranza que el administrador le cobra al cliente
+  adminAbbPercentage         Float                @default(0) // Porcentaje ABB que el administrador le cobra al cliente
+  adminAbbAmount             Float                @default(0) // Monto ABB que el administrador le cobra al cliente
+  notifiedAt                 DateTime? // Fecha en la que se notificó al deudor
+  // Intereses acumulados antes del acuerdo de pago o notificación enviado
+  previousInterestAmount     Float? // Monto de interés acumulado antes de congelarlo
+  interestStartDate          DateTime? // Fecha de inicio del interés
+  interestFrozenAt           DateTime? // Fecha en la que se congeló el interés
+  interestFrozenAmount       Float? // Monto de interés que se congeló
+  interestFrozenPercentage   Float? // Porcentaje de interés que se congeló
+  // Detalles de pago
+  lastPaymentDate            DateTime? // Fecha del último pago
+  paymentDetail              PaymentDetail[] // Relación uno a muchos con PaymentDetail   
+  // Relación con el deudor
+  debtorId                   String? // Clave foránea que referencia a la tabla Debtor
+  debtor                     Debtor?              @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
+  // Auditoría
+  createdAt                  DateTime             @default(now()) // Fecha de creación
+  updatedAt                  DateTime             @updatedAt // Fecha de última actualización
+  // Acuerdo de pago
+  hasPaymentAgreement        Boolean              @default(false) // Indica si tiene un acuerdo de pago
+  paymentAgreementId         String? // Clave foránea que referencia a la tabla PaymentAgreement
+  paymentAgreement           PaymentAgreement?
+  // Relacion con la distribución de pagos
+  PaymentApplication         PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  // Relación con notificaciones
+  notifications              NotificationCollection[] // Relación uno a muchos con NotificationCollection
+  // Notas adicionales
+  notes                      String? // Notas adicionales
+
+  @@map("accounts_receivable")
+}
+
+model NotificationCollection {
+  id                 String   @id @default(uuid())
+  accountsReceivableId String  // Clave foránea a AccountsReceivable
+  accountsReceivable AccountsReceivable @relation(fields: [accountsReceivableId], references: [id])
+  type               NotificationType // Tipo de notificación (initial, reminder, final, etc.)
+  status             NotificationStatus // Estado del envío (sent, failed, pending)
+  sentAt             DateTime // Fecha en que se envió la notificación
+  channel            NotificationChannel // Medio: email, sms, whatsapp, etc.
+  responseStatus     String? // Estado de la respuesta si aplica (por ejemplo: opened, bounced, etc.)
+  message            String? // Mensaje enviado
+  error              String? // Detalles del error si falló
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("notification_collection")
+}
+
+
+model PaymentDetail {
+  id                   String               @id @default(uuid()) // Identificador único del detalle de pago
+  accountsReceivableId String // Clave foránea que referencia a la tabla AccountsReceivable
+  accountsReceivable   AccountsReceivable   @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  paymentDate          DateTime // Fecha del pago
+  paymentAmount        Float // Monto del pago
+  paymentMethod        String // Método de pago (por ejemplo, transferencia, tarjeta, efectivo)
+  referenceNumber      String? // Número de referencia del pago
+  notes                String? // Notas adicionales sobre el pago
+  createdAt            DateTime             @default(now()) // Fecha de creación
+  updatedAt            DateTime             @updatedAt // Fecha de última actualización
+  paymentApplications  PaymentApplication[] // Relación uno a muchos con PaymentApplication
+  paymentAgreementId   String? // Clave foránea que referencia a la tabla PaymentAgreement
+  paymentAgreement     PaymentAgreement?    @relation(fields: [paymentAgreementId], references: [id])
+
+  @@map("payment_detail")
+}
+
+model PaymentApplication {
+  id                   String                 @id @default(uuid()) // Identificador único de la aplicación de pago
+  paymentDetailId      String // Clave foránea que referencia a PaymentDetail
+  paymentDetail        PaymentDetail          @relation(fields: [paymentDetailId], references: [id]) // Relación con PaymentDetail
+  accountsReceivableId String // Clave foránea que referencia a AccountsReceivable
+  accountsReceivable   AccountsReceivable     @relation(fields: [accountsReceivableId], references: [id]) // Relación con AccountsReceivable
+  amountApplied        Float // Monto aplicado en esta parte del pago
+  appliedTo            PaymentApplicationType // Enum para saber si es capital, interés, impuesto, etc.
+  createdAt            DateTime               @default(now()) // Fecha de creación
+  updatedAt            DateTime               @updatedAt // Fecha de última actualización
+
+  @@map("payment_application")
+}
+
+enum PaymentApplicationType {
+  CAPITAL
+  INTEREST
+  TAX
+  CLIENT_COLLECTION_FEE
+  CLIENT_ABB_FEE
+  ADMIN_COLLECTION_FEE
+  ADMIN_ABB_FEE
+}
+
+enum NotificationType {
+  AANMANING
+  SOMMATIE
+  INGEBREKESTELLING
+  BLOKKADE
+}
+
+enum NotificationStatus {
+  SENT
+  FAILED
+  PENDING
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
+
+model Debtor {
+  id                 String               @id @default(uuid()) // Identificador único del deudor
+  tenantId           String // Clave foránea que referencia a la tabla Tenant
+  tenant             Tenant               @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  userId             String? // Clave foránea opcional que referencia a la tabla User
+  user               User?                @relation(fields: [userId], references: [id]) // Relación opcional con User
+  fullname           String // Nombre completo del deudor
+  email              String // Email del deudor
+  phone              String? // Teléfono del deudor
+  address            String? // Dirección del deudor
+  personType         String? // Tipo de persona: natural o empresa
+  identificationType String? // Tipo de identificación
+  identification     String? // Identificación del deudor
+  accountsReceivable AccountsReceivable[] // Relación uno a muchos con AccountsReceivable
+  employeeId         String? // Clave foránea que referencia a la tabla Employee
+  employee           Employee?            @relation(fields: [employeeId], references: [id]) // Relación con Employee
+  createdAt          DateTime             @default(now()) // Fecha de creación
+  updatedAt          DateTime             @updatedAt // Fecha de última actualización
+
+  @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
+  @@unique([tenantId, identification]) // Asegura que la identificación sea única solo para el mismo tenant
+  @@map("debtors")
+}
+
+model Employee {
+  id        String   @id @default(uuid()) // Identificador único del empleado
+  tenantId  String // Clave foránea que referencia a la tabla Tenant
+  tenant    Tenant   @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  fullname  String // Nombre completo del empleado
+  email     String   @unique // Email del empleado
+  phone     String? // Teléfono del empleado
+  position  String? // Cargo o posición del empleado
+  debtors   Debtor[] // Relación uno a muchos con Debtor
+  createdAt DateTime @default(now()) // Fecha de creación
+  updatedAt DateTime @updatedAt // Fecha de última actualización
+
+  @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
+  @@map("employees")
 }

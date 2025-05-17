@@ -1,7 +1,7 @@
 import transporter from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
-import { iAccountUrls } from "../../../modules/security/interfaces/auth.intercace";
+import { iAccountUrls } from "../../../app/interfaces/auth.intercace";
 class AuthMailService {
   static async sendWelcomeEmail(to: string, name: string): Promise<void> {
     const templateParam = {
@@ -9,7 +9,6 @@ class AuthMailService {
       companyName: process.env.COMPANY_NAME || "",
       emailSuport: process.env.SUPPORT_EMAIL || "",
     };
-    console.log(templateParam);
     const html = renderTemplate("auth/welcome", templateParam);
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,
@@ -26,7 +25,6 @@ class AuthMailService {
       emailSuport: process.env.SUPPORT_EMAIL || "",
       link: link,
     };
-    console.log(templateParam);
     const html = renderTemplate("auth/verify-email", templateParam);
     const mailOptions: EmailOptions = {
       from: process.env.SMTP_USER as string,

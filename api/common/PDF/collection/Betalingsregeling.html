@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betalingsregeling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .logo {
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signature p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Centraal Inning</div>
+        <div style="text-align: right">
+            <strong>Betalingsregeling</strong><br>
+            Verzenddatum: {{sendDate}}
+        </div>
+    </header>
+    <div class="content">
+        <table class="table">
+            <tr>
+                <th>Datum betalingsregeling</th>
+                <td>{{paymentArrangementDate}}</td>
+            </tr>
+            <tr>
+                <th>Factuurnummer</th>
+                <td>{{invoiceNumber}}</td>
+            </tr>
+            <tr>
+                <th>Debiteurnaam</th>
+                <td>{{debtorName}}</td>
+            </tr>
+            <tr>
+                <th>Totaal verschuldigd bedrag</th>
+                <td>USD {{totalAmountDue}}</td>
+            </tr>
+            <tr>
+                <th>Aflossingstermijnen</th>
+                <td>{{installments}}</td>
+            </tr>
+            <tr>
+                <th>Aflossingsbedrag</th>
+                <td>USD {{installmentAmount}}</td>
+            </tr>
+            <tr>
+                <th>Startdatum</th>
+                <td>{{startDate}}</td>
+            </tr>
+            <tr>
+                <th>Einddatum</th>
+                <td>{{endDate}}</td>
+            </tr>
+            <tr>
+                <th>Bankrekening voor betaling</th>
+                <td>{{bankAccount}}</td>
+            </tr>
+            <tr>
+                <th>Betalingskenmerk</th>
+                <td>{{paymentReference}}</td>
+            </tr>
+        </table>
+        <h2>Voorwaarden</h2>
+        <p>Afwijken van de vastgestelde betalingsregeling is niet toegestaan. Bij afwijking of niet-nakoming worden extra kosten in rekening gebracht, en bent u verplicht het verschuldigde bedrag via het gecentraliseerde betalingspunt te voldoen. Dit machtigt automatisch uw huidige en toekomstige werkgever, evenals betrokken personen of bedrijven die aan CIO verbonden zijn, om het verschuldigde bedrag te innen in opdracht van ABGI, zoals vastgelegd in de ondertekende documenten.</p>
+        <p>Deze overeenkomst is automatisch gegenereerd tussen schuldeiser en schuldenaar en kan uitsluitend worden aangemaakt wanneer beide partijen zijn ingelogd op het incassosysteem CI. Door deze beveiligde inlogprocedure wordt de digitale handtekening van beide partijen beschouwd als wettelijk overeengekomen en volledig betrouwbaar.</p>
+        <div class="signature">
+            <p><strong>ARGHUPXX00</strong></p>
+            <p><strong>GRIS100XXX77</strong></p>
+        </div>
+        <div class="signature">
+            <p>___________________________</p>
+            <p>________________________</p>
+        </div>
+        <div class="signature">
+            <p>Schuldeiser (<strong><u>Rico Aceme</u></strong>)</p>
+            <p>Schuldenaar ({{debtorName}})</p>
+        </div>
+    </div>
+</body>
+</html>

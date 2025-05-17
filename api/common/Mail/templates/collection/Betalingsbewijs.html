@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betalingsbewijs</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px">
+    <header style="text-align: center; margin-bottom: 20px;">
+        <h1>BETALINGSBEWIJS</h1>
+    </header>
+    <div class="content" style="margin-top: 20px; text-align: center">
+        <table style="margin: 0 auto; border-collapse: collapse; width: 50%;">
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Debiteur</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{debtor}}</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Betaaldatum</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{paymentDate}}</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Betaalmethode</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{paymentMethod}}</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Betaalbedrag</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">USD {{paymentAmount}}</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Referentienummer</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{referenceNumber}}</td>
+            </tr>
+        </table>
+        <p style="margin-top: 20px;">Bedankt voor uw betaling.</p>
+    </div>
+    <footer style="margin-top: 40px; text-align: center; font-size: 14px;">
+        <p>Centraal Incassoplatform voor ondernemers van Bonaire.</p>
+    </footer>
+</body>
+</html>

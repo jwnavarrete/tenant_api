@@ -8,6 +8,9 @@ migrate:
 generate:
 	pnpm prisma generate
 
+migrate-deploy:
+	pnpm prisma migrate deploy
+
 studio:
 	pnpm prisma studio
 

@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import jwt, { sign } from "jsonwebtoken";
-import {IuserTokenInfos, IUserToken} from "../../modules/security/interfaces/auth.intercace"
+
 import {
+  IuserTokenInfos,
+  IUserToken,
   iAuthUserResponse,
   iIdToken,
-} from "../../modules/security/interfaces/auth.intercace";
+} from "../../app/interfaces/auth.intercace";
+
+import { TOKEN_TYPES } from "./constant";
 
 const ACCESS_TOKEN_SECRET = String(process.env.ACCESS_TOKEN_SECRET);
 const REFRESH_TOKEN_SECRET = String(process.env.REFRESH_TOKEN_SECRET);
@@ -63,9 +67,15 @@ export const verifyEmailVerificationToken = (
   }
 };
 
-export const verifyMagicLoginToken = (token: string): { id: string; email: string; tenant: string } => {
+export const verifyMagicLoginToken = (
+  token: string
+): { id: string; email: string; tenant: string } => {
   try {
-    return jwt.verify(token, ACCESS_TOKEN_SECRET) as { id: string; email: string; tenant: string };
+    return jwt.verify(token, ACCESS_TOKEN_SECRET) as {
+      id: string;
+      email: string;
+      tenant: string;
+    };
   } catch (error) {
     throw new Error("Invalid magic login token");
   }
@@ -124,6 +134,25 @@ export const generateRefreshToken = (findUser: IUserToken): string => {
   );
 };
 
+export const generateInvitationToken = (user: {
+  id: string;
+  email: string;
+  tenant: string;
+}): string => {
+  return sign(
+    {
+      email: user.email,
+      tenant: user.tenant,
+      type: TOKEN_TYPES.INVITE_USER,
+    },
+    ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "48h",
+      subject: user.id,
+    }
+  );
+};
+
 export const verifyAccessToken = (token: string): IuserTokenInfos => {
   try {
     return jwt.verify(token, ACCESS_TOKEN_SECRET) as IuserTokenInfos;
@@ -148,7 +177,6 @@ export const createTokenSession = async (
   userInfo: iAuthUserResponse | null
 ) => {
   const decoded = decodeAccessToken(accessToken);
-
 
   // decoded.
   res.cookie("authToken", JSON.stringify({ accessToken, refreshToken }), {

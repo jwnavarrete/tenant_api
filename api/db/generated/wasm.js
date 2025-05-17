@@ -147,14 +147,6 @@ exports.Prisma.RoleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserRoleScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  roleId: 'roleId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -169,39 +161,174 @@ exports.Prisma.UserScalarFieldEnum = {
   verificationToken: 'verificationToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isDeleted: 'isDeleted',
-  resetPasswordToken: 'resetPasswordToken'
+  resetPasswordToken: 'resetPasswordToken',
+  joined: 'joined',
+  invitedById: 'invitedById',
+  lastActive: 'lastActive',
+  status: 'status',
+  invitationToken: 'invitationToken',
+  roleId: 'roleId'
 };
 
-exports.Prisma.NewsScalarFieldEnum = {
+exports.Prisma.GlobalParameterScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  subTitle: 'subTitle',
-  content: 'content',
-  type: 'type',
-  published: 'published',
+  porcCobranza: 'porcCobranza',
+  porcAbb: 'porcAbb',
+  diasPlazoEmpresaAanmaning: 'diasPlazoEmpresaAanmaning',
+  diasPlazoConsumidorAanmaning: 'diasPlazoConsumidorAanmaning',
+  diasPlazoEmpresaSommatie: 'diasPlazoEmpresaSommatie',
+  diasPlazoConsumidorSommatie: 'diasPlazoConsumidorSommatie',
+  precioEmpresaPequena: 'precioEmpresaPequena',
+  contribucionEmpresaPequenaPfc: 'contribucionEmpresaPequenaPfc',
+  precioEmpresaGrande: 'precioEmpresaGrande',
+  contribucionEmpresaGrandePfc: 'contribucionEmpresaGrandePfc',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TenantConfigScalarFieldEnum = {
+  tenantId: 'tenantId',
+  parameterId: 'parameterId',
+  porcInteresCobranza: 'porcInteresCobranza',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentAgreementScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  initialPayment: 'initialPayment',
+  remainingBalance: 'remainingBalance',
+  totalAmount: 'totalAmount',
+  numberOfInstallments: 'numberOfInstallments',
+  paymentStatus: 'paymentStatus',
+  lastPaymentDate: 'lastPaymentDate',
+  initialPaymentStatus: 'initialPaymentStatus',
+  totalPaid: 'totalPaid',
+  isFullyPaid: 'isFullyPaid',
+  accumulatedInterest: 'accumulatedInterest',
+  initialPaymentDeadline: 'initialPaymentDeadline',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  authorId: 'authorId'
+  previousInterestAmount: 'previousInterestAmount'
 };
 
-exports.Prisma.TagScalarFieldEnum = {
+exports.Prisma.InstallmentScalarFieldEnum = {
   id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.TagsNewsScalarFieldEnum = {
-  id: 'id',
-  newsId: 'newsId',
-  tagId: 'tagId'
-};
-
-exports.Prisma.NewsCommentsScalarFieldEnum = {
-  id: 'id',
-  message: 'message',
+  paymentAgreementId: 'paymentAgreementId',
+  installmentNumber: 'installmentNumber',
+  dueDate: 'dueDate',
+  originalAmount: 'originalAmount',
+  amountPaid: 'amountPaid',
+  remainingAmount: 'remainingAmount',
+  paid: 'paid',
+  paidAt: 'paidAt',
+  status: 'status',
   createdAt: 'createdAt',
-  newsId: 'newsId',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AccountsReceivableScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  invoiceNumber: 'invoiceNumber',
+  issueDate: 'issueDate',
+  dueDate: 'dueDate',
+  customerName: 'customerName',
+  customerAddress: 'customerAddress',
+  customerEmail: 'customerEmail',
+  customerPhone: 'customerPhone',
+  invoiceAmount: 'invoiceAmount',
+  amountPaid: 'amountPaid',
+  remainingBalance: 'remainingBalance',
+  totalDueToday: 'totalDueToday',
+  receivableStatus: 'receivableStatus',
+  collectionStatus: 'collectionStatus',
+  clientCollectionPercentage: 'clientCollectionPercentage',
+  clientCollectionAmount: 'clientCollectionAmount',
+  clientAbbPercentage: 'clientAbbPercentage',
+  clientAbbAmount: 'clientAbbAmount',
+  adminCollectionPercentage: 'adminCollectionPercentage',
+  adminCollectionAmount: 'adminCollectionAmount',
+  adminAbbPercentage: 'adminAbbPercentage',
+  adminAbbAmount: 'adminAbbAmount',
+  notifiedAt: 'notifiedAt',
+  previousInterestAmount: 'previousInterestAmount',
+  interestStartDate: 'interestStartDate',
+  interestFrozenAt: 'interestFrozenAt',
+  interestFrozenAmount: 'interestFrozenAmount',
+  interestFrozenPercentage: 'interestFrozenPercentage',
+  lastPaymentDate: 'lastPaymentDate',
+  debtorId: 'debtorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  hasPaymentAgreement: 'hasPaymentAgreement',
+  paymentAgreementId: 'paymentAgreementId',
+  notes: 'notes'
+};
+
+exports.Prisma.NotificationCollectionScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  type: 'type',
+  status: 'status',
+  sentAt: 'sentAt',
+  channel: 'channel',
+  responseStatus: 'responseStatus',
+  message: 'message',
+  error: 'error',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentDetailScalarFieldEnum = {
+  id: 'id',
+  accountsReceivableId: 'accountsReceivableId',
+  paymentDate: 'paymentDate',
+  paymentAmount: 'paymentAmount',
+  paymentMethod: 'paymentMethod',
+  referenceNumber: 'referenceNumber',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  paymentAgreementId: 'paymentAgreementId'
+};
+
+exports.Prisma.PaymentApplicationScalarFieldEnum = {
+  id: 'id',
+  paymentDetailId: 'paymentDetailId',
+  accountsReceivableId: 'accountsReceivableId',
+  amountApplied: 'amountApplied',
+  appliedTo: 'appliedTo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DebtorScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  fullname: 'fullname',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  personType: 'personType',
+  identificationType: 'identificationType',
+  identification: 'identification',
+  employeeId: 'employeeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  fullname: 'fullname',
+  email: 'email',
+  phone: 'phone',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -218,18 +345,50 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.NotificationType = exports.$Enums.NotificationType = {
+  AANMANING: 'AANMANING',
+  SOMMATIE: 'SOMMATIE',
+  INGEBREKESTELLING: 'INGEBREKESTELLING',
+  BLOKKADE: 'BLOKKADE'
+};
 
+exports.NotificationStatus = exports.$Enums.NotificationStatus = {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  PENDING: 'PENDING'
+};
+
+exports.NotificationChannel = exports.$Enums.NotificationChannel = {
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  WHATSAPP: 'WHATSAPP'
+};
+
+exports.PaymentApplicationType = exports.$Enums.PaymentApplicationType = {
+  CAPITAL: 'CAPITAL',
+  INTEREST: 'INTEREST',
+  TAX: 'TAX',
+  CLIENT_COLLECTION_FEE: 'CLIENT_COLLECTION_FEE',
+  CLIENT_ABB_FEE: 'CLIENT_ABB_FEE',
+  ADMIN_COLLECTION_FEE: 'ADMIN_COLLECTION_FEE',
+  ADMIN_ABB_FEE: 'ADMIN_ABB_FEE'
+};
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Client: 'Client',
   Role: 'Role',
-  UserRole: 'UserRole',
   User: 'User',
-  News: 'News',
-  Tag: 'Tag',
-  TagsNews: 'TagsNews',
-  NewsComments: 'NewsComments'
+  GlobalParameter: 'GlobalParameter',
+  TenantConfig: 'TenantConfig',
+  PaymentAgreement: 'PaymentAgreement',
+  Installment: 'Installment',
+  AccountsReceivable: 'AccountsReceivable',
+  NotificationCollection: 'NotificationCollection',
+  PaymentDetail: 'PaymentDetail',
+  PaymentApplication: 'PaymentApplication',
+  Debtor: 'Debtor',
+  Employee: 'Employee'
 };
 
 /**
