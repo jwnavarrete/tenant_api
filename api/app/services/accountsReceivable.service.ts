@@ -4,14 +4,13 @@ import {
   IInvoiceResponse,
 } from "../interfaces/accountsReceivable.interface";
 import { debtorService } from "./debtor.service";
-import { calculateLateInterest } from "../../../api/common/lib/general";
+import { calculateLateInterest } from "../../common/lib/general";
 import { prisma } from "../../index";
 import { roleService } from "./role.service";
 import { tenantService } from "./tenant.service";
 import { tenantConfigService } from "./tenantConfig.service";
 import { COLLECTION_STATUS, ROLES } from "../../common/lib/constant";
 import { InvoiceResponseSchema } from "../schemas/accountsReceivable.schemas";
-import { notificationService } from "./Notification.service";
 class AccountsReceivableService {
   //
   async registerAccountsReceivableBatch(
