@@ -1,4 +1,4 @@
-import transporter from "../config/nodemailer";
+import {createTransporter} from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
 import renderPDF from "../../PDF/renderPDF";
@@ -40,7 +40,7 @@ class CollectionService {
     
     console.log(`email: ${to}`);
 
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 }
 

@@ -105,14 +105,17 @@ class CronService {
             if (lastStatus === "AANMANING")
                 return param?.diasPlazoConsumidorAanmaning || 0;
             if (lastStatus === "SOMMATIE")
-                return param?.diasPlazoConsumidorSommatie || 0;            
+                return param?.diasPlazoConsumidorSommatie || 0;
         } else {
             if (lastStatus === "AANMANING")
                 return param?.AanmaningdiasPlazoEmpresaSommatie || 0;
             if (lastStatus === "SOMMATIE")
-                return param?.diasPlazoEmpresaSommatie || 0;
-
+                return param?.diasPlazoEmpresaSommatie || 0;        
         }
+
+        if (lastStatus === "INGEBREKESTELLING")
+            return 1;
+
         return 0;
     }
 
@@ -170,6 +173,8 @@ class CronService {
                     invoiceId,
                     notification.type
                 );
+
+                
 
                 console.log("response", response);
 

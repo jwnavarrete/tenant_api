@@ -331,6 +331,23 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DebtorContributionScalarFieldEnum = {
+  id: 'id',
+  debtorId: 'debtorId',
+  companyId: 'companyId',
+  companyName: 'companyName',
+  companyContact: 'companyContact',
+  companyEmail: 'companyEmail',
+  companyPhone: 'companyPhone',
+  extraInfo: 'extraInfo',
+  verificationStatus: 'verificationStatus',
+  createdByUserId: 'createdByUserId',
+  notes: 'notes',
+  isPublic: 'isPublic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -388,7 +405,8 @@ exports.Prisma.ModelName = {
   PaymentDetail: 'PaymentDetail',
   PaymentApplication: 'PaymentApplication',
   Debtor: 'Debtor',
-  Employee: 'Employee'
+  Employee: 'Employee',
+  DebtorContribution: 'DebtorContribution'
 };
 
 /**

@@ -52,6 +52,7 @@ export const getAllDebtorsController = async (
 ): Promise<Response> => {
   try {
     const userInfosToken: IuserTokenInfos = req.userTokenInfos;
+    
     const tenantId = userInfosToken?.tenantId;
 
     const response = await debtorService.getAllDebtors(tenantId);

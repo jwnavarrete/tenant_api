@@ -188,14 +188,7 @@ class AccountsReceivableService {
         },
       });
       // console.log(invoice);
-
-      // Send notification to the debtor
-      // const result = await notificationService.sendNotification(
-      //   tenantId,
-      //   invoice.id
-      // );
-      // console.log("Notification sent successfully:", result);
-
+      
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(

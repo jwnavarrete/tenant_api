@@ -10,6 +10,16 @@ export const UserSchema = z.object({
   status: z.enum(["active", "inactive", "pending"]),
 });
 
+export const DebtorBasicInfoSchema = z.object({
+  id: z.string().uuid(),
+  fullname: z.string().min(1, "Fullname is required"),
+  email: z.string().email("Invalid email format"),
+  phone: z.string().optional(),
+  identificationType: z.string().optional(),
+  personType: z.string().optional(),
+  updatedAt: z.date(),
+});
+
 // Schema for Debtor
 export const DebtorSchema = z.object({
   id: z.string().uuid(),

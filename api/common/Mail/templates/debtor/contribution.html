@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solicitud de ayuda para completar información del deudor</title>
+  </head>
+  <body style="background-color: #727275; font-family: 'Roboto', Arial, sans-serif">
+    <!-- Contenedor principal -->
+    <table
+      height="auto"
+      max-width="600px !important"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      align="center"
+    >
+      <tr>
+        <td align="center" width="550px" style="padding: 10px">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <!-- Sección del logo -->
+            <tr>
+              <td align="center">
+                <img
+                  src="https://dazzsoft.com/wp-content/uploads/2025/02/Logo-Factura.png"
+                  alt="Logo"
+                  style="width: 150px; height: auto"
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- OTRO -->
+      <tr>
+        <td align="center" style="padding: 0 10px 20px 10px">
+          <!-- Tarjeta principal -->
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              background-color: #ffffff;
+              border-radius: 10px;
+              padding: 25px;
+            "
+          >
+            <!-- Sección de contenido -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <h2
+                  style="
+                    color: #191f27;
+                    font-size: 26px;
+                    font-weight: 700;
+                    margin: 0;
+                  "
+                >
+                  ¡Ayúdanos a completar la información del deudor!
+                </h2>
+                <p style="color: #555555; font-size: 15px; margin: 20px 0">
+                  Estimados equipos,<br /><br />
+                  Estamos trabajando para mantener actualizada la información de nuestros deudores y necesitamos su colaboración.<br /><br />
+                  Por favor, ayúdennos a completar los datos del siguiente deudor:
+                </p>
+                <p style="color: #191f27; font-size: 18px; font-weight: 600; margin: 10px 0;">
+                  {{debtorName}}
+                </p>
+                <p style="color: #555555; font-size: 15px; margin: 20px 0">
+                  Pueden acceder directamente al sistema y filtrar la información del deudor haciendo clic en el siguiente botón:
+                </p>
+              </td>
+            </tr>
+
+            <!-- Sección de acción -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <a
+                  href="{{link}}"
+                  style="
+                    background-color: #f26b1d;
+                    color: #ffffff;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: 700;
+                    display: inline-block;
+                  "
+                >
+                    Aportar información del deudor
+                </a>
+              </td>
+            </tr>
+
+            <!-- Sección de soporte -->
+            <!-- <tr>
+              <td align="center" style="padding-top: 20px; padding-bottom: 20px">
+                <img
+                  src="https://img.icons8.com/ios/50/000000/teamwork.png"
+                  alt="Colaboración"
+                  style="width: 50px; height: auto"
+                />
+                <p style="color: #555555; font-size: 14px; margin: 10px 0">
+                  Si tienen dudas o necesitan asistencia, pueden contactarnos en <a href="mailto:{{supportEmail}}" style="color: #f26b1d;">{{supportEmail}}</a>
+                </p>
+              </td>
+            </tr> -->
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

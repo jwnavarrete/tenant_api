@@ -8,6 +8,7 @@ import { userRoutes } from "./user.routes";
 import { accountsReceivableRoutes } from "./accountsReceivable.routes";
 import { debtorRoutes } from "./debtor.routes";
 import { cronRoutes } from "./cron.routes";
+import { debtorContributionRoutes } from "./debtorContribution.routes";
 
 export {
   authRoutes,
@@ -19,5 +20,6 @@ export {
   accountsReceivableRoutes,
   debtorRoutes,
   paymentsRoutes,
-  cronRoutes
+  cronRoutes,
+  debtorContributionRoutes
 };

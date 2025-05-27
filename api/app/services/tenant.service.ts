@@ -56,7 +56,9 @@ class TenantService {
     const tenant = await prisma.tenant.findUnique({
       where: {
         id: tenantId,
-      },
+      }, include: {
+        client: true
+      }
     });
 
     if (!tenant) {

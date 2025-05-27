@@ -83,6 +83,11 @@ export type Debtor = $Result.DefaultSelection<Prisma.$DebtorPayload>
  * 
  */
 export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
+/**
+ * Model DebtorContribution
+ * 
+ */
+export type DebtorContribution = $Result.DefaultSelection<Prisma.$DebtorContributionPayload>
 
 /**
  * Enums
@@ -410,6 +415,16 @@ export class PrismaClient<
     * ```
     */
   get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.debtorContribution`: Exposes CRUD operations for the **DebtorContribution** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DebtorContributions
+    * const debtorContributions = await prisma.debtorContribution.findMany()
+    * ```
+    */
+  get debtorContribution(): Prisma.DebtorContributionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -863,7 +878,8 @@ export namespace Prisma {
     PaymentDetail: 'PaymentDetail',
     PaymentApplication: 'PaymentApplication',
     Debtor: 'Debtor',
-    Employee: 'Employee'
+    Employee: 'Employee',
+    DebtorContribution: 'DebtorContribution'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -879,7 +895,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "tenant" | "client" | "role" | "user" | "globalParameter" | "tenantConfig" | "paymentAgreement" | "installment" | "accountsReceivable" | "notificationCollection" | "paymentDetail" | "paymentApplication" | "debtor" | "employee"
+      modelProps: "tenant" | "client" | "role" | "user" | "globalParameter" | "tenantConfig" | "paymentAgreement" | "installment" | "accountsReceivable" | "notificationCollection" | "paymentDetail" | "paymentApplication" | "debtor" | "employee" | "debtorContribution"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1919,6 +1935,80 @@ export namespace Prisma {
           }
         }
       }
+      DebtorContribution: {
+        payload: Prisma.$DebtorContributionPayload<ExtArgs>
+        fields: Prisma.DebtorContributionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DebtorContributionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DebtorContributionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          findFirst: {
+            args: Prisma.DebtorContributionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DebtorContributionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          findMany: {
+            args: Prisma.DebtorContributionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>[]
+          }
+          create: {
+            args: Prisma.DebtorContributionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          createMany: {
+            args: Prisma.DebtorContributionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DebtorContributionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>[]
+          }
+          delete: {
+            args: Prisma.DebtorContributionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          update: {
+            args: Prisma.DebtorContributionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          deleteMany: {
+            args: Prisma.DebtorContributionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DebtorContributionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DebtorContributionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>[]
+          }
+          upsert: {
+            args: Prisma.DebtorContributionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorContributionPayload>
+          }
+          aggregate: {
+            args: Prisma.DebtorContributionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDebtorContribution>
+          }
+          groupBy: {
+            args: Prisma.DebtorContributionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DebtorContributionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DebtorContributionCountArgs<ExtArgs>
+            result: $Utils.Optional<DebtorContributionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2017,6 +2107,7 @@ export namespace Prisma {
     paymentApplication?: PaymentApplicationOmit
     debtor?: DebtorOmit
     employee?: EmployeeOmit
+    debtorContribution?: DebtorContributionOmit
   }
 
   /* Types for Logging */
@@ -2174,6 +2265,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ClientCountOutputType
+   */
+
+  export type ClientCountOutputType = {
+    debtorContributions: number
+  }
+
+  export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    debtorContributions?: boolean | ClientCountOutputTypeCountDebtorContributionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientCountOutputType
+     */
+    select?: ClientCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountDebtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DebtorContributionWhereInput
+  }
+
+
+  /**
    * Count Type RoleCountOutputType
    */
 
@@ -2211,11 +2333,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     invitations: number
     debtors: number
+    debtorContributions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     invitations?: boolean | UserCountOutputTypeCountInvitationsArgs
     debtors?: boolean | UserCountOutputTypeCountDebtorsArgs
+    debtorContributions?: boolean | UserCountOutputTypeCountDebtorContributionsArgs
   }
 
   // Custom InputTypes
@@ -2241,6 +2365,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountDebtorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DebtorWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDebtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DebtorContributionWhereInput
   }
 
 
@@ -2401,10 +2532,12 @@ export namespace Prisma {
 
   export type DebtorCountOutputType = {
     accountsReceivable: number
+    debtorContributions: number
   }
 
   export type DebtorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accountsReceivable?: boolean | DebtorCountOutputTypeCountAccountsReceivableArgs
+    debtorContributions?: boolean | DebtorCountOutputTypeCountDebtorContributionsArgs
   }
 
   // Custom InputTypes
@@ -2423,6 +2556,13 @@ export namespace Prisma {
    */
   export type DebtorCountOutputTypeCountAccountsReceivableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountsReceivableWhereInput
+  }
+
+  /**
+   * DebtorCountOutputType without action
+   */
+  export type DebtorCountOutputTypeCountDebtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DebtorContributionWhereInput
   }
 
 
@@ -3874,6 +4014,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | Client$tenantArgs<ExtArgs>
+    debtorContributions?: boolean | Client$debtorContributionsArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
   export type ClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3921,6 +4063,8 @@ export namespace Prisma {
   export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "name" | "kvk" | "contactEmail" | "numberOfEmployees" | "country" | "address" | "termsAccepted" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | Client$tenantArgs<ExtArgs>
+    debtorContributions?: boolean | Client$debtorContributionsArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type ClientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3929,6 +4073,7 @@ export namespace Prisma {
     name: "Client"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs> | null
+      debtorContributions: Prisma.$DebtorContributionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4337,6 +4482,7 @@ export namespace Prisma {
   export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends Client$tenantArgs<ExtArgs> = {}>(args?: Subset<T, Client$tenantArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    debtorContributions<T extends Client$debtorContributionsArgs<ExtArgs> = {}>(args?: Subset<T, Client$debtorContributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4781,6 +4927,30 @@ export namespace Prisma {
      */
     include?: TenantInclude<ExtArgs> | null
     where?: TenantWhereInput
+  }
+
+  /**
+   * Client.debtorContributions
+   */
+  export type Client$debtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    where?: DebtorContributionWhereInput
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    cursor?: DebtorContributionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
   }
 
   /**
@@ -6160,6 +6330,7 @@ export namespace Prisma {
     invitedBy?: boolean | User$invitedByArgs<ExtArgs>
     invitations?: boolean | User$invitationsArgs<ExtArgs>
     debtors?: boolean | User$debtorsArgs<ExtArgs>
+    debtorContributions?: boolean | User$debtorContributionsArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -6245,6 +6416,7 @@ export namespace Prisma {
     invitedBy?: boolean | User$invitedByArgs<ExtArgs>
     invitations?: boolean | User$invitationsArgs<ExtArgs>
     debtors?: boolean | User$debtorsArgs<ExtArgs>
+    debtorContributions?: boolean | User$debtorContributionsArgs<ExtArgs>
     role?: boolean | RoleDefaultArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -6266,6 +6438,7 @@ export namespace Prisma {
       invitedBy: Prisma.$UserPayload<ExtArgs> | null
       invitations: Prisma.$UserPayload<ExtArgs>[]
       debtors: Prisma.$DebtorPayload<ExtArgs>[]
+      debtorContributions: Prisma.$DebtorContributionPayload<ExtArgs>[]
       role: Prisma.$RolePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6687,6 +6860,7 @@ export namespace Prisma {
     invitedBy<T extends User$invitedByArgs<ExtArgs> = {}>(args?: Subset<T, User$invitedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     invitations<T extends User$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     debtors<T extends User$debtorsArgs<ExtArgs> = {}>(args?: Subset<T, User$debtorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    debtorContributions<T extends User$debtorContributionsArgs<ExtArgs> = {}>(args?: Subset<T, User$debtorContributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7197,6 +7371,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DebtorScalarFieldEnum | DebtorScalarFieldEnum[]
+  }
+
+  /**
+   * User.debtorContributions
+   */
+  export type User$debtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    where?: DebtorContributionWhereInput
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    cursor?: DebtorContributionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
   }
 
   /**
@@ -17469,6 +17667,7 @@ export namespace Prisma {
     user?: boolean | Debtor$userArgs<ExtArgs>
     accountsReceivable?: boolean | Debtor$accountsReceivableArgs<ExtArgs>
     employee?: boolean | Debtor$employeeArgs<ExtArgs>
+    debtorContributions?: boolean | Debtor$debtorContributionsArgs<ExtArgs>
     _count?: boolean | DebtorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["debtor"]>
 
@@ -17532,6 +17731,7 @@ export namespace Prisma {
     user?: boolean | Debtor$userArgs<ExtArgs>
     accountsReceivable?: boolean | Debtor$accountsReceivableArgs<ExtArgs>
     employee?: boolean | Debtor$employeeArgs<ExtArgs>
+    debtorContributions?: boolean | Debtor$debtorContributionsArgs<ExtArgs>
     _count?: boolean | DebtorCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DebtorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17552,6 +17752,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs> | null
       accountsReceivable: Prisma.$AccountsReceivablePayload<ExtArgs>[]
       employee: Prisma.$EmployeePayload<ExtArgs> | null
+      debtorContributions: Prisma.$DebtorContributionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17965,6 +18166,7 @@ export namespace Prisma {
     user<T extends Debtor$userArgs<ExtArgs> = {}>(args?: Subset<T, Debtor$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     accountsReceivable<T extends Debtor$accountsReceivableArgs<ExtArgs> = {}>(args?: Subset<T, Debtor$accountsReceivableArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountsReceivablePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     employee<T extends Debtor$employeeArgs<ExtArgs> = {}>(args?: Subset<T, Debtor$employeeArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    debtorContributions<T extends Debtor$debtorContributionsArgs<ExtArgs> = {}>(args?: Subset<T, Debtor$debtorContributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18462,6 +18664,30 @@ export namespace Prisma {
      */
     include?: EmployeeInclude<ExtArgs> | null
     where?: EmployeeWhereInput
+  }
+
+  /**
+   * Debtor.debtorContributions
+   */
+  export type Debtor$debtorContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    where?: DebtorContributionWhereInput
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    cursor?: DebtorContributionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
   }
 
   /**
@@ -19611,6 +19837,1216 @@ export namespace Prisma {
 
 
   /**
+   * Model DebtorContribution
+   */
+
+  export type AggregateDebtorContribution = {
+    _count: DebtorContributionCountAggregateOutputType | null
+    _min: DebtorContributionMinAggregateOutputType | null
+    _max: DebtorContributionMaxAggregateOutputType | null
+  }
+
+  export type DebtorContributionMinAggregateOutputType = {
+    id: string | null
+    debtorId: string | null
+    companyId: string | null
+    companyName: string | null
+    companyContact: string | null
+    companyEmail: string | null
+    companyPhone: string | null
+    extraInfo: string | null
+    verificationStatus: string | null
+    createdByUserId: string | null
+    notes: string | null
+    isPublic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DebtorContributionMaxAggregateOutputType = {
+    id: string | null
+    debtorId: string | null
+    companyId: string | null
+    companyName: string | null
+    companyContact: string | null
+    companyEmail: string | null
+    companyPhone: string | null
+    extraInfo: string | null
+    verificationStatus: string | null
+    createdByUserId: string | null
+    notes: string | null
+    isPublic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DebtorContributionCountAggregateOutputType = {
+    id: number
+    debtorId: number
+    companyId: number
+    companyName: number
+    companyContact: number
+    companyEmail: number
+    companyPhone: number
+    extraInfo: number
+    verificationStatus: number
+    createdByUserId: number
+    notes: number
+    isPublic: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DebtorContributionMinAggregateInputType = {
+    id?: true
+    debtorId?: true
+    companyId?: true
+    companyName?: true
+    companyContact?: true
+    companyEmail?: true
+    companyPhone?: true
+    extraInfo?: true
+    verificationStatus?: true
+    createdByUserId?: true
+    notes?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DebtorContributionMaxAggregateInputType = {
+    id?: true
+    debtorId?: true
+    companyId?: true
+    companyName?: true
+    companyContact?: true
+    companyEmail?: true
+    companyPhone?: true
+    extraInfo?: true
+    verificationStatus?: true
+    createdByUserId?: true
+    notes?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DebtorContributionCountAggregateInputType = {
+    id?: true
+    debtorId?: true
+    companyId?: true
+    companyName?: true
+    companyContact?: true
+    companyEmail?: true
+    companyPhone?: true
+    extraInfo?: true
+    verificationStatus?: true
+    createdByUserId?: true
+    notes?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DebtorContributionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DebtorContribution to aggregate.
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DebtorContributions to fetch.
+     */
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DebtorContributionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DebtorContributions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DebtorContributions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DebtorContributions
+    **/
+    _count?: true | DebtorContributionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DebtorContributionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DebtorContributionMaxAggregateInputType
+  }
+
+  export type GetDebtorContributionAggregateType<T extends DebtorContributionAggregateArgs> = {
+        [P in keyof T & keyof AggregateDebtorContribution]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDebtorContribution[P]>
+      : GetScalarType<T[P], AggregateDebtorContribution[P]>
+  }
+
+
+
+
+  export type DebtorContributionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DebtorContributionWhereInput
+    orderBy?: DebtorContributionOrderByWithAggregationInput | DebtorContributionOrderByWithAggregationInput[]
+    by: DebtorContributionScalarFieldEnum[] | DebtorContributionScalarFieldEnum
+    having?: DebtorContributionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DebtorContributionCountAggregateInputType | true
+    _min?: DebtorContributionMinAggregateInputType
+    _max?: DebtorContributionMaxAggregateInputType
+  }
+
+  export type DebtorContributionGroupByOutputType = {
+    id: string
+    debtorId: string
+    companyId: string
+    companyName: string | null
+    companyContact: string | null
+    companyEmail: string | null
+    companyPhone: string | null
+    extraInfo: string | null
+    verificationStatus: string
+    createdByUserId: string | null
+    notes: string | null
+    isPublic: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: DebtorContributionCountAggregateOutputType | null
+    _min: DebtorContributionMinAggregateOutputType | null
+    _max: DebtorContributionMaxAggregateOutputType | null
+  }
+
+  type GetDebtorContributionGroupByPayload<T extends DebtorContributionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DebtorContributionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DebtorContributionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DebtorContributionGroupByOutputType[P]>
+            : GetScalarType<T[P], DebtorContributionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DebtorContributionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    debtorId?: boolean
+    companyId?: boolean
+    companyName?: boolean
+    companyContact?: boolean
+    companyEmail?: boolean
+    companyPhone?: boolean
+    extraInfo?: boolean
+    verificationStatus?: boolean
+    createdByUserId?: boolean
+    notes?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["debtorContribution"]>
+
+  export type DebtorContributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    debtorId?: boolean
+    companyId?: boolean
+    companyName?: boolean
+    companyContact?: boolean
+    companyEmail?: boolean
+    companyPhone?: boolean
+    extraInfo?: boolean
+    verificationStatus?: boolean
+    createdByUserId?: boolean
+    notes?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["debtorContribution"]>
+
+  export type DebtorContributionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    debtorId?: boolean
+    companyId?: boolean
+    companyName?: boolean
+    companyContact?: boolean
+    companyEmail?: boolean
+    companyPhone?: boolean
+    extraInfo?: boolean
+    verificationStatus?: boolean
+    createdByUserId?: boolean
+    notes?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["debtorContribution"]>
+
+  export type DebtorContributionSelectScalar = {
+    id?: boolean
+    debtorId?: boolean
+    companyId?: boolean
+    companyName?: boolean
+    companyContact?: boolean
+    companyEmail?: boolean
+    companyPhone?: boolean
+    extraInfo?: boolean
+    verificationStatus?: boolean
+    createdByUserId?: boolean
+    notes?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DebtorContributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "debtorId" | "companyId" | "companyName" | "companyContact" | "companyEmail" | "companyPhone" | "extraInfo" | "verificationStatus" | "createdByUserId" | "notes" | "isPublic" | "createdAt" | "updatedAt", ExtArgs["result"]["debtorContribution"]>
+  export type DebtorContributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }
+  export type DebtorContributionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }
+  export type DebtorContributionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    debtor?: boolean | DebtorDefaultArgs<ExtArgs>
+    company?: boolean | ClientDefaultArgs<ExtArgs>
+    createdByUser?: boolean | DebtorContribution$createdByUserArgs<ExtArgs>
+  }
+
+  export type $DebtorContributionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DebtorContribution"
+    objects: {
+      debtor: Prisma.$DebtorPayload<ExtArgs>
+      company: Prisma.$ClientPayload<ExtArgs>
+      createdByUser: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      debtorId: string
+      companyId: string
+      companyName: string | null
+      companyContact: string | null
+      companyEmail: string | null
+      companyPhone: string | null
+      extraInfo: string | null
+      verificationStatus: string
+      createdByUserId: string | null
+      notes: string | null
+      isPublic: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["debtorContribution"]>
+    composites: {}
+  }
+
+  type DebtorContributionGetPayload<S extends boolean | null | undefined | DebtorContributionDefaultArgs> = $Result.GetResult<Prisma.$DebtorContributionPayload, S>
+
+  type DebtorContributionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DebtorContributionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DebtorContributionCountAggregateInputType | true
+    }
+
+  export interface DebtorContributionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DebtorContribution'], meta: { name: 'DebtorContribution' } }
+    /**
+     * Find zero or one DebtorContribution that matches the filter.
+     * @param {DebtorContributionFindUniqueArgs} args - Arguments to find a DebtorContribution
+     * @example
+     * // Get one DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DebtorContributionFindUniqueArgs>(args: SelectSubset<T, DebtorContributionFindUniqueArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one DebtorContribution that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DebtorContributionFindUniqueOrThrowArgs} args - Arguments to find a DebtorContribution
+     * @example
+     * // Get one DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DebtorContributionFindUniqueOrThrowArgs>(args: SelectSubset<T, DebtorContributionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first DebtorContribution that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionFindFirstArgs} args - Arguments to find a DebtorContribution
+     * @example
+     * // Get one DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DebtorContributionFindFirstArgs>(args?: SelectSubset<T, DebtorContributionFindFirstArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first DebtorContribution that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionFindFirstOrThrowArgs} args - Arguments to find a DebtorContribution
+     * @example
+     * // Get one DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DebtorContributionFindFirstOrThrowArgs>(args?: SelectSubset<T, DebtorContributionFindFirstOrThrowArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more DebtorContributions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DebtorContributions
+     * const debtorContributions = await prisma.debtorContribution.findMany()
+     * 
+     * // Get first 10 DebtorContributions
+     * const debtorContributions = await prisma.debtorContribution.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const debtorContributionWithIdOnly = await prisma.debtorContribution.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DebtorContributionFindManyArgs>(args?: SelectSubset<T, DebtorContributionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a DebtorContribution.
+     * @param {DebtorContributionCreateArgs} args - Arguments to create a DebtorContribution.
+     * @example
+     * // Create one DebtorContribution
+     * const DebtorContribution = await prisma.debtorContribution.create({
+     *   data: {
+     *     // ... data to create a DebtorContribution
+     *   }
+     * })
+     * 
+     */
+    create<T extends DebtorContributionCreateArgs>(args: SelectSubset<T, DebtorContributionCreateArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many DebtorContributions.
+     * @param {DebtorContributionCreateManyArgs} args - Arguments to create many DebtorContributions.
+     * @example
+     * // Create many DebtorContributions
+     * const debtorContribution = await prisma.debtorContribution.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DebtorContributionCreateManyArgs>(args?: SelectSubset<T, DebtorContributionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DebtorContributions and returns the data saved in the database.
+     * @param {DebtorContributionCreateManyAndReturnArgs} args - Arguments to create many DebtorContributions.
+     * @example
+     * // Create many DebtorContributions
+     * const debtorContribution = await prisma.debtorContribution.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DebtorContributions and only return the `id`
+     * const debtorContributionWithIdOnly = await prisma.debtorContribution.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DebtorContributionCreateManyAndReturnArgs>(args?: SelectSubset<T, DebtorContributionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a DebtorContribution.
+     * @param {DebtorContributionDeleteArgs} args - Arguments to delete one DebtorContribution.
+     * @example
+     * // Delete one DebtorContribution
+     * const DebtorContribution = await prisma.debtorContribution.delete({
+     *   where: {
+     *     // ... filter to delete one DebtorContribution
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DebtorContributionDeleteArgs>(args: SelectSubset<T, DebtorContributionDeleteArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one DebtorContribution.
+     * @param {DebtorContributionUpdateArgs} args - Arguments to update one DebtorContribution.
+     * @example
+     * // Update one DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DebtorContributionUpdateArgs>(args: SelectSubset<T, DebtorContributionUpdateArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more DebtorContributions.
+     * @param {DebtorContributionDeleteManyArgs} args - Arguments to filter DebtorContributions to delete.
+     * @example
+     * // Delete a few DebtorContributions
+     * const { count } = await prisma.debtorContribution.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DebtorContributionDeleteManyArgs>(args?: SelectSubset<T, DebtorContributionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DebtorContributions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DebtorContributions
+     * const debtorContribution = await prisma.debtorContribution.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DebtorContributionUpdateManyArgs>(args: SelectSubset<T, DebtorContributionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DebtorContributions and returns the data updated in the database.
+     * @param {DebtorContributionUpdateManyAndReturnArgs} args - Arguments to update many DebtorContributions.
+     * @example
+     * // Update many DebtorContributions
+     * const debtorContribution = await prisma.debtorContribution.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DebtorContributions and only return the `id`
+     * const debtorContributionWithIdOnly = await prisma.debtorContribution.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DebtorContributionUpdateManyAndReturnArgs>(args: SelectSubset<T, DebtorContributionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one DebtorContribution.
+     * @param {DebtorContributionUpsertArgs} args - Arguments to update or create a DebtorContribution.
+     * @example
+     * // Update or create a DebtorContribution
+     * const debtorContribution = await prisma.debtorContribution.upsert({
+     *   create: {
+     *     // ... data to create a DebtorContribution
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DebtorContribution we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DebtorContributionUpsertArgs>(args: SelectSubset<T, DebtorContributionUpsertArgs<ExtArgs>>): Prisma__DebtorContributionClient<$Result.GetResult<Prisma.$DebtorContributionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of DebtorContributions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionCountArgs} args - Arguments to filter DebtorContributions to count.
+     * @example
+     * // Count the number of DebtorContributions
+     * const count = await prisma.debtorContribution.count({
+     *   where: {
+     *     // ... the filter for the DebtorContributions we want to count
+     *   }
+     * })
+    **/
+    count<T extends DebtorContributionCountArgs>(
+      args?: Subset<T, DebtorContributionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DebtorContributionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DebtorContribution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DebtorContributionAggregateArgs>(args: Subset<T, DebtorContributionAggregateArgs>): Prisma.PrismaPromise<GetDebtorContributionAggregateType<T>>
+
+    /**
+     * Group by DebtorContribution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorContributionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DebtorContributionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DebtorContributionGroupByArgs['orderBy'] }
+        : { orderBy?: DebtorContributionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DebtorContributionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDebtorContributionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DebtorContribution model
+   */
+  readonly fields: DebtorContributionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DebtorContribution.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DebtorContributionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    debtor<T extends DebtorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DebtorDefaultArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    company<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    createdByUser<T extends DebtorContribution$createdByUserArgs<ExtArgs> = {}>(args?: Subset<T, DebtorContribution$createdByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DebtorContribution model
+   */ 
+  interface DebtorContributionFieldRefs {
+    readonly id: FieldRef<"DebtorContribution", 'String'>
+    readonly debtorId: FieldRef<"DebtorContribution", 'String'>
+    readonly companyId: FieldRef<"DebtorContribution", 'String'>
+    readonly companyName: FieldRef<"DebtorContribution", 'String'>
+    readonly companyContact: FieldRef<"DebtorContribution", 'String'>
+    readonly companyEmail: FieldRef<"DebtorContribution", 'String'>
+    readonly companyPhone: FieldRef<"DebtorContribution", 'String'>
+    readonly extraInfo: FieldRef<"DebtorContribution", 'String'>
+    readonly verificationStatus: FieldRef<"DebtorContribution", 'String'>
+    readonly createdByUserId: FieldRef<"DebtorContribution", 'String'>
+    readonly notes: FieldRef<"DebtorContribution", 'String'>
+    readonly isPublic: FieldRef<"DebtorContribution", 'Boolean'>
+    readonly createdAt: FieldRef<"DebtorContribution", 'DateTime'>
+    readonly updatedAt: FieldRef<"DebtorContribution", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DebtorContribution findUnique
+   */
+  export type DebtorContributionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter, which DebtorContribution to fetch.
+     */
+    where: DebtorContributionWhereUniqueInput
+  }
+
+  /**
+   * DebtorContribution findUniqueOrThrow
+   */
+  export type DebtorContributionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter, which DebtorContribution to fetch.
+     */
+    where: DebtorContributionWhereUniqueInput
+  }
+
+  /**
+   * DebtorContribution findFirst
+   */
+  export type DebtorContributionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter, which DebtorContribution to fetch.
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DebtorContributions to fetch.
+     */
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DebtorContributions.
+     */
+    cursor?: DebtorContributionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DebtorContributions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DebtorContributions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DebtorContributions.
+     */
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
+  }
+
+  /**
+   * DebtorContribution findFirstOrThrow
+   */
+  export type DebtorContributionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter, which DebtorContribution to fetch.
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DebtorContributions to fetch.
+     */
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DebtorContributions.
+     */
+    cursor?: DebtorContributionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DebtorContributions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DebtorContributions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DebtorContributions.
+     */
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
+  }
+
+  /**
+   * DebtorContribution findMany
+   */
+  export type DebtorContributionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter, which DebtorContributions to fetch.
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DebtorContributions to fetch.
+     */
+    orderBy?: DebtorContributionOrderByWithRelationInput | DebtorContributionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DebtorContributions.
+     */
+    cursor?: DebtorContributionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DebtorContributions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DebtorContributions.
+     */
+    skip?: number
+    distinct?: DebtorContributionScalarFieldEnum | DebtorContributionScalarFieldEnum[]
+  }
+
+  /**
+   * DebtorContribution create
+   */
+  export type DebtorContributionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DebtorContribution.
+     */
+    data: XOR<DebtorContributionCreateInput, DebtorContributionUncheckedCreateInput>
+  }
+
+  /**
+   * DebtorContribution createMany
+   */
+  export type DebtorContributionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DebtorContributions.
+     */
+    data: DebtorContributionCreateManyInput | DebtorContributionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DebtorContribution createManyAndReturn
+   */
+  export type DebtorContributionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * The data used to create many DebtorContributions.
+     */
+    data: DebtorContributionCreateManyInput | DebtorContributionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DebtorContribution update
+   */
+  export type DebtorContributionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DebtorContribution.
+     */
+    data: XOR<DebtorContributionUpdateInput, DebtorContributionUncheckedUpdateInput>
+    /**
+     * Choose, which DebtorContribution to update.
+     */
+    where: DebtorContributionWhereUniqueInput
+  }
+
+  /**
+   * DebtorContribution updateMany
+   */
+  export type DebtorContributionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DebtorContributions.
+     */
+    data: XOR<DebtorContributionUpdateManyMutationInput, DebtorContributionUncheckedUpdateManyInput>
+    /**
+     * Filter which DebtorContributions to update
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * Limit how many DebtorContributions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DebtorContribution updateManyAndReturn
+   */
+  export type DebtorContributionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * The data used to update DebtorContributions.
+     */
+    data: XOR<DebtorContributionUpdateManyMutationInput, DebtorContributionUncheckedUpdateManyInput>
+    /**
+     * Filter which DebtorContributions to update
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * Limit how many DebtorContributions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DebtorContribution upsert
+   */
+  export type DebtorContributionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DebtorContribution to update in case it exists.
+     */
+    where: DebtorContributionWhereUniqueInput
+    /**
+     * In case the DebtorContribution found by the `where` argument doesn't exist, create a new DebtorContribution with this data.
+     */
+    create: XOR<DebtorContributionCreateInput, DebtorContributionUncheckedCreateInput>
+    /**
+     * In case the DebtorContribution was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DebtorContributionUpdateInput, DebtorContributionUncheckedUpdateInput>
+  }
+
+  /**
+   * DebtorContribution delete
+   */
+  export type DebtorContributionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+    /**
+     * Filter which DebtorContribution to delete.
+     */
+    where: DebtorContributionWhereUniqueInput
+  }
+
+  /**
+   * DebtorContribution deleteMany
+   */
+  export type DebtorContributionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DebtorContributions to delete
+     */
+    where?: DebtorContributionWhereInput
+    /**
+     * Limit how many DebtorContributions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DebtorContribution.createdByUser
+   */
+  export type DebtorContribution$createdByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * DebtorContribution without action
+   */
+  export type DebtorContributionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DebtorContribution
+     */
+    select?: DebtorContributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DebtorContribution
+     */
+    omit?: DebtorContributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DebtorContributionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19880,6 +21316,26 @@ export namespace Prisma {
   export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
 
 
+  export const DebtorContributionScalarFieldEnum: {
+    id: 'id',
+    debtorId: 'debtorId',
+    companyId: 'companyId',
+    companyName: 'companyName',
+    companyContact: 'companyContact',
+    companyEmail: 'companyEmail',
+    companyPhone: 'companyPhone',
+    extraInfo: 'extraInfo',
+    verificationStatus: 'verificationStatus',
+    createdByUserId: 'createdByUserId',
+    notes: 'notes',
+    isPublic: 'isPublic',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DebtorContributionScalarFieldEnum = (typeof DebtorContributionScalarFieldEnum)[keyof typeof DebtorContributionScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20117,6 +21573,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
+    debtorContributions?: DebtorContributionListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -20132,6 +21589,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
+    debtorContributions?: DebtorContributionOrderByRelationAggregateInput
   }
 
   export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -20150,6 +21608,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
+    debtorContributions?: DebtorContributionListRelationFilter
   }, "id">
 
   export type ClientOrderByWithAggregationInput = {
@@ -20269,6 +21728,7 @@ export namespace Prisma {
     invitedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     invitations?: UserListRelationFilter
     debtors?: DebtorListRelationFilter
+    debtorContributions?: DebtorContributionListRelationFilter
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }
 
@@ -20297,6 +21757,7 @@ export namespace Prisma {
     invitedBy?: UserOrderByWithRelationInput
     invitations?: UserOrderByRelationAggregateInput
     debtors?: DebtorOrderByRelationAggregateInput
+    debtorContributions?: DebtorContributionOrderByRelationAggregateInput
     role?: RoleOrderByWithRelationInput
   }
 
@@ -20329,6 +21790,7 @@ export namespace Prisma {
     invitedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     invitations?: UserListRelationFilter
     debtors?: DebtorListRelationFilter
+    debtorContributions?: DebtorContributionListRelationFilter
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }, "id" | "tenantId_email">
 
@@ -21243,6 +22705,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     accountsReceivable?: AccountsReceivableListRelationFilter
     employee?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    debtorContributions?: DebtorContributionListRelationFilter
   }
 
   export type DebtorOrderByWithRelationInput = {
@@ -21263,6 +22726,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     accountsReceivable?: AccountsReceivableOrderByRelationAggregateInput
     employee?: EmployeeOrderByWithRelationInput
+    debtorContributions?: DebtorContributionOrderByRelationAggregateInput
   }
 
   export type DebtorWhereUniqueInput = Prisma.AtLeast<{
@@ -21288,6 +22752,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     accountsReceivable?: AccountsReceivableListRelationFilter
     employee?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    debtorContributions?: DebtorContributionListRelationFilter
   }, "id" | "tenantId_email" | "tenantId_identification">
 
   export type DebtorOrderByWithAggregationInput = {
@@ -21402,6 +22867,112 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
   }
 
+  export type DebtorContributionWhereInput = {
+    AND?: DebtorContributionWhereInput | DebtorContributionWhereInput[]
+    OR?: DebtorContributionWhereInput[]
+    NOT?: DebtorContributionWhereInput | DebtorContributionWhereInput[]
+    id?: StringFilter<"DebtorContribution"> | string
+    debtorId?: StringFilter<"DebtorContribution"> | string
+    companyId?: StringFilter<"DebtorContribution"> | string
+    companyName?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyContact?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyEmail?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyPhone?: StringNullableFilter<"DebtorContribution"> | string | null
+    extraInfo?: StringNullableFilter<"DebtorContribution"> | string | null
+    verificationStatus?: StringFilter<"DebtorContribution"> | string
+    createdByUserId?: StringNullableFilter<"DebtorContribution"> | string | null
+    notes?: StringNullableFilter<"DebtorContribution"> | string | null
+    isPublic?: BoolFilter<"DebtorContribution"> | boolean
+    createdAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+    updatedAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+    debtor?: XOR<DebtorScalarRelationFilter, DebtorWhereInput>
+    company?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type DebtorContributionOrderByWithRelationInput = {
+    id?: SortOrder
+    debtorId?: SortOrder
+    companyId?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    companyContact?: SortOrderInput | SortOrder
+    companyEmail?: SortOrderInput | SortOrder
+    companyPhone?: SortOrderInput | SortOrder
+    extraInfo?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    debtor?: DebtorOrderByWithRelationInput
+    company?: ClientOrderByWithRelationInput
+    createdByUser?: UserOrderByWithRelationInput
+  }
+
+  export type DebtorContributionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DebtorContributionWhereInput | DebtorContributionWhereInput[]
+    OR?: DebtorContributionWhereInput[]
+    NOT?: DebtorContributionWhereInput | DebtorContributionWhereInput[]
+    debtorId?: StringFilter<"DebtorContribution"> | string
+    companyId?: StringFilter<"DebtorContribution"> | string
+    companyName?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyContact?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyEmail?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyPhone?: StringNullableFilter<"DebtorContribution"> | string | null
+    extraInfo?: StringNullableFilter<"DebtorContribution"> | string | null
+    verificationStatus?: StringFilter<"DebtorContribution"> | string
+    createdByUserId?: StringNullableFilter<"DebtorContribution"> | string | null
+    notes?: StringNullableFilter<"DebtorContribution"> | string | null
+    isPublic?: BoolFilter<"DebtorContribution"> | boolean
+    createdAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+    updatedAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+    debtor?: XOR<DebtorScalarRelationFilter, DebtorWhereInput>
+    company?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type DebtorContributionOrderByWithAggregationInput = {
+    id?: SortOrder
+    debtorId?: SortOrder
+    companyId?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    companyContact?: SortOrderInput | SortOrder
+    companyEmail?: SortOrderInput | SortOrder
+    companyPhone?: SortOrderInput | SortOrder
+    extraInfo?: SortOrderInput | SortOrder
+    verificationStatus?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DebtorContributionCountOrderByAggregateInput
+    _max?: DebtorContributionMaxOrderByAggregateInput
+    _min?: DebtorContributionMinOrderByAggregateInput
+  }
+
+  export type DebtorContributionScalarWhereWithAggregatesInput = {
+    AND?: DebtorContributionScalarWhereWithAggregatesInput | DebtorContributionScalarWhereWithAggregatesInput[]
+    OR?: DebtorContributionScalarWhereWithAggregatesInput[]
+    NOT?: DebtorContributionScalarWhereWithAggregatesInput | DebtorContributionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DebtorContribution"> | string
+    debtorId?: StringWithAggregatesFilter<"DebtorContribution"> | string
+    companyId?: StringWithAggregatesFilter<"DebtorContribution"> | string
+    companyName?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    companyContact?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    companyEmail?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    companyPhone?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    extraInfo?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    verificationStatus?: StringWithAggregatesFilter<"DebtorContribution"> | string
+    createdByUserId?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"DebtorContribution"> | string | null
+    isPublic?: BoolWithAggregatesFilter<"DebtorContribution"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"DebtorContribution"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DebtorContribution"> | Date | string
+  }
+
   export type TenantCreateInput = {
     id?: string
     subdomain: string
@@ -21490,6 +23061,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutClientInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCompanyInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -21505,6 +23077,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantUncheckedCreateNestedOneWithoutClientInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type ClientUpdateInput = {
@@ -21520,6 +23093,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutClientNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -21535,6 +23109,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUncheckedUpdateOneWithoutClientNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -21661,6 +23236,7 @@ export namespace Prisma {
     invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     invitations?: UserCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
@@ -21687,6 +23263,7 @@ export namespace Prisma {
     roleId: string
     invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUpdateInput = {
@@ -21711,6 +23288,7 @@ export namespace Prisma {
     invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
     invitations?: UserUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
@@ -21737,6 +23315,7 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
     invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -22779,6 +24358,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutDebtorsInput
     accountsReceivable?: AccountsReceivableCreateNestedManyWithoutDebtorInput
     employee?: EmployeeCreateNestedOneWithoutDebtorsInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUncheckedCreateInput = {
@@ -22796,6 +24376,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accountsReceivable?: AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUpdateInput = {
@@ -22813,6 +24394,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutDebtorsNestedInput
     accountsReceivable?: AccountsReceivableUpdateManyWithoutDebtorNestedInput
     employee?: EmployeeUpdateOneWithoutDebtorsNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateInput = {
@@ -22830,6 +24412,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorCreateManyInput = {
@@ -22953,6 +24536,122 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionCreateInput = {
+    id?: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    debtor: DebtorCreateNestedOneWithoutDebtorContributionsInput
+    company: ClientCreateNestedOneWithoutDebtorContributionsInput
+    createdByUser?: UserCreateNestedOneWithoutDebtorContributionsInput
+  }
+
+  export type DebtorContributionUncheckedCreateInput = {
+    id?: string
+    debtorId: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtor?: DebtorUpdateOneRequiredWithoutDebtorContributionsNestedInput
+    company?: ClientUpdateOneRequiredWithoutDebtorContributionsNestedInput
+    createdByUser?: UserUpdateOneWithoutDebtorContributionsNestedInput
+  }
+
+  export type DebtorContributionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionCreateManyInput = {
+    id?: string
+    debtorId: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23102,6 +24801,16 @@ export namespace Prisma {
   export type TenantNullableScalarRelationFilter = {
     is?: TenantWhereInput | null
     isNot?: TenantWhereInput | null
+  }
+
+  export type DebtorContributionListRelationFilter = {
+    every?: DebtorContributionWhereInput
+    some?: DebtorContributionWhereInput
+    none?: DebtorContributionWhereInput
+  }
+
+  export type DebtorContributionOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ClientCountOrderByAggregateInput = {
@@ -24177,6 +25886,62 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DebtorScalarRelationFilter = {
+    is?: DebtorWhereInput
+    isNot?: DebtorWhereInput
+  }
+
+  export type DebtorContributionCountOrderByAggregateInput = {
+    id?: SortOrder
+    debtorId?: SortOrder
+    companyId?: SortOrder
+    companyName?: SortOrder
+    companyContact?: SortOrder
+    companyEmail?: SortOrder
+    companyPhone?: SortOrder
+    extraInfo?: SortOrder
+    verificationStatus?: SortOrder
+    createdByUserId?: SortOrder
+    notes?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DebtorContributionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    debtorId?: SortOrder
+    companyId?: SortOrder
+    companyName?: SortOrder
+    companyContact?: SortOrder
+    companyEmail?: SortOrder
+    companyPhone?: SortOrder
+    extraInfo?: SortOrder
+    verificationStatus?: SortOrder
+    createdByUserId?: SortOrder
+    notes?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DebtorContributionMinOrderByAggregateInput = {
+    id?: SortOrder
+    debtorId?: SortOrder
+    companyId?: SortOrder
+    companyName?: SortOrder
+    companyContact?: SortOrder
+    companyEmail?: SortOrder
+    companyPhone?: SortOrder
+    extraInfo?: SortOrder
+    verificationStatus?: SortOrder
+    createdByUserId?: SortOrder
+    notes?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ClientCreateNestedOneWithoutTenantInput = {
     create?: XOR<ClientCreateWithoutTenantInput, ClientUncheckedCreateWithoutTenantInput>
     connectOrCreate?: ClientCreateOrConnectWithoutTenantInput
@@ -24415,10 +26180,24 @@ export namespace Prisma {
     connect?: TenantWhereUniqueInput
   }
 
+  export type DebtorContributionCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput> | DebtorContributionCreateWithoutCompanyInput[] | DebtorContributionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCompanyInput | DebtorContributionCreateOrConnectWithoutCompanyInput[]
+    createMany?: DebtorContributionCreateManyCompanyInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+  }
+
   export type TenantUncheckedCreateNestedOneWithoutClientInput = {
     create?: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
     connectOrCreate?: TenantCreateOrConnectWithoutClientInput
     connect?: TenantWhereUniqueInput
+  }
+
+  export type DebtorContributionUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput> | DebtorContributionCreateWithoutCompanyInput[] | DebtorContributionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCompanyInput | DebtorContributionCreateOrConnectWithoutCompanyInput[]
+    createMany?: DebtorContributionCreateManyCompanyInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -24435,6 +26214,20 @@ export namespace Prisma {
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutClientInput, TenantUpdateWithoutClientInput>, TenantUncheckedUpdateWithoutClientInput>
   }
 
+  export type DebtorContributionUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput> | DebtorContributionCreateWithoutCompanyInput[] | DebtorContributionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCompanyInput | DebtorContributionCreateOrConnectWithoutCompanyInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutCompanyInput | DebtorContributionUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: DebtorContributionCreateManyCompanyInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutCompanyInput | DebtorContributionUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutCompanyInput | DebtorContributionUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
+  }
+
   export type TenantUncheckedUpdateOneWithoutClientNestedInput = {
     create?: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
     connectOrCreate?: TenantCreateOrConnectWithoutClientInput
@@ -24443,6 +26236,20 @@ export namespace Prisma {
     delete?: TenantWhereInput | boolean
     connect?: TenantWhereUniqueInput
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutClientInput, TenantUpdateWithoutClientInput>, TenantUncheckedUpdateWithoutClientInput>
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput> | DebtorContributionCreateWithoutCompanyInput[] | DebtorContributionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCompanyInput | DebtorContributionCreateOrConnectWithoutCompanyInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutCompanyInput | DebtorContributionUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: DebtorContributionCreateManyCompanyInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutCompanyInput | DebtorContributionUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutCompanyInput | DebtorContributionUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -24513,6 +26320,13 @@ export namespace Prisma {
     connect?: DebtorWhereUniqueInput | DebtorWhereUniqueInput[]
   }
 
+  export type DebtorContributionCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput> | DebtorContributionCreateWithoutCreatedByUserInput[] | DebtorContributionUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCreatedByUserInput | DebtorContributionCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: DebtorContributionCreateManyCreatedByUserInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+  }
+
   export type RoleCreateNestedOneWithoutUsersInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
@@ -24531,6 +26345,13 @@ export namespace Prisma {
     connectOrCreate?: DebtorCreateOrConnectWithoutUserInput | DebtorCreateOrConnectWithoutUserInput[]
     createMany?: DebtorCreateManyUserInputEnvelope
     connect?: DebtorWhereUniqueInput | DebtorWhereUniqueInput[]
+  }
+
+  export type DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput> | DebtorContributionCreateWithoutCreatedByUserInput[] | DebtorContributionUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCreatedByUserInput | DebtorContributionCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: DebtorContributionCreateManyCreatedByUserInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -24587,6 +26408,20 @@ export namespace Prisma {
     deleteMany?: DebtorScalarWhereInput | DebtorScalarWhereInput[]
   }
 
+  export type DebtorContributionUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput> | DebtorContributionCreateWithoutCreatedByUserInput[] | DebtorContributionUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCreatedByUserInput | DebtorContributionCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutCreatedByUserInput | DebtorContributionUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: DebtorContributionCreateManyCreatedByUserInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutCreatedByUserInput | DebtorContributionUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutCreatedByUserInput | DebtorContributionUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
+  }
+
   export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
@@ -24621,6 +26456,20 @@ export namespace Prisma {
     update?: DebtorUpdateWithWhereUniqueWithoutUserInput | DebtorUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DebtorUpdateManyWithWhereWithoutUserInput | DebtorUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DebtorScalarWhereInput | DebtorScalarWhereInput[]
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput> | DebtorContributionCreateWithoutCreatedByUserInput[] | DebtorContributionUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutCreatedByUserInput | DebtorContributionCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutCreatedByUserInput | DebtorContributionUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: DebtorContributionCreateManyCreatedByUserInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutCreatedByUserInput | DebtorContributionUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutCreatedByUserInput | DebtorContributionUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
   }
 
   export type TenantConfigCreateNestedManyWithoutParameterInput = {
@@ -25172,11 +27021,25 @@ export namespace Prisma {
     connect?: EmployeeWhereUniqueInput
   }
 
+  export type DebtorContributionCreateNestedManyWithoutDebtorInput = {
+    create?: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput> | DebtorContributionCreateWithoutDebtorInput[] | DebtorContributionUncheckedCreateWithoutDebtorInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutDebtorInput | DebtorContributionCreateOrConnectWithoutDebtorInput[]
+    createMany?: DebtorContributionCreateManyDebtorInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+  }
+
   export type AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput = {
     create?: XOR<AccountsReceivableCreateWithoutDebtorInput, AccountsReceivableUncheckedCreateWithoutDebtorInput> | AccountsReceivableCreateWithoutDebtorInput[] | AccountsReceivableUncheckedCreateWithoutDebtorInput[]
     connectOrCreate?: AccountsReceivableCreateOrConnectWithoutDebtorInput | AccountsReceivableCreateOrConnectWithoutDebtorInput[]
     createMany?: AccountsReceivableCreateManyDebtorInputEnvelope
     connect?: AccountsReceivableWhereUniqueInput | AccountsReceivableWhereUniqueInput[]
+  }
+
+  export type DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput = {
+    create?: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput> | DebtorContributionCreateWithoutDebtorInput[] | DebtorContributionUncheckedCreateWithoutDebtorInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutDebtorInput | DebtorContributionCreateOrConnectWithoutDebtorInput[]
+    createMany?: DebtorContributionCreateManyDebtorInputEnvelope
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
   }
 
   export type TenantUpdateOneRequiredWithoutDebtorsNestedInput = {
@@ -25221,6 +27084,20 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutDebtorsInput, EmployeeUpdateWithoutDebtorsInput>, EmployeeUncheckedUpdateWithoutDebtorsInput>
   }
 
+  export type DebtorContributionUpdateManyWithoutDebtorNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput> | DebtorContributionCreateWithoutDebtorInput[] | DebtorContributionUncheckedCreateWithoutDebtorInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutDebtorInput | DebtorContributionCreateOrConnectWithoutDebtorInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutDebtorInput | DebtorContributionUpsertWithWhereUniqueWithoutDebtorInput[]
+    createMany?: DebtorContributionCreateManyDebtorInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutDebtorInput | DebtorContributionUpdateWithWhereUniqueWithoutDebtorInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutDebtorInput | DebtorContributionUpdateManyWithWhereWithoutDebtorInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
+  }
+
   export type AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput = {
     create?: XOR<AccountsReceivableCreateWithoutDebtorInput, AccountsReceivableUncheckedCreateWithoutDebtorInput> | AccountsReceivableCreateWithoutDebtorInput[] | AccountsReceivableUncheckedCreateWithoutDebtorInput[]
     connectOrCreate?: AccountsReceivableCreateOrConnectWithoutDebtorInput | AccountsReceivableCreateOrConnectWithoutDebtorInput[]
@@ -25233,6 +27110,20 @@ export namespace Prisma {
     update?: AccountsReceivableUpdateWithWhereUniqueWithoutDebtorInput | AccountsReceivableUpdateWithWhereUniqueWithoutDebtorInput[]
     updateMany?: AccountsReceivableUpdateManyWithWhereWithoutDebtorInput | AccountsReceivableUpdateManyWithWhereWithoutDebtorInput[]
     deleteMany?: AccountsReceivableScalarWhereInput | AccountsReceivableScalarWhereInput[]
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput = {
+    create?: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput> | DebtorContributionCreateWithoutDebtorInput[] | DebtorContributionUncheckedCreateWithoutDebtorInput[]
+    connectOrCreate?: DebtorContributionCreateOrConnectWithoutDebtorInput | DebtorContributionCreateOrConnectWithoutDebtorInput[]
+    upsert?: DebtorContributionUpsertWithWhereUniqueWithoutDebtorInput | DebtorContributionUpsertWithWhereUniqueWithoutDebtorInput[]
+    createMany?: DebtorContributionCreateManyDebtorInputEnvelope
+    set?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    disconnect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    delete?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    connect?: DebtorContributionWhereUniqueInput | DebtorContributionWhereUniqueInput[]
+    update?: DebtorContributionUpdateWithWhereUniqueWithoutDebtorInput | DebtorContributionUpdateWithWhereUniqueWithoutDebtorInput[]
+    updateMany?: DebtorContributionUpdateManyWithWhereWithoutDebtorInput | DebtorContributionUpdateManyWithWhereWithoutDebtorInput[]
+    deleteMany?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutEmployeesInput = {
@@ -25289,6 +27180,50 @@ export namespace Prisma {
     update?: DebtorUpdateWithWhereUniqueWithoutEmployeeInput | DebtorUpdateWithWhereUniqueWithoutEmployeeInput[]
     updateMany?: DebtorUpdateManyWithWhereWithoutEmployeeInput | DebtorUpdateManyWithWhereWithoutEmployeeInput[]
     deleteMany?: DebtorScalarWhereInput | DebtorScalarWhereInput[]
+  }
+
+  export type DebtorCreateNestedOneWithoutDebtorContributionsInput = {
+    create?: XOR<DebtorCreateWithoutDebtorContributionsInput, DebtorUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: DebtorCreateOrConnectWithoutDebtorContributionsInput
+    connect?: DebtorWhereUniqueInput
+  }
+
+  export type ClientCreateNestedOneWithoutDebtorContributionsInput = {
+    create?: XOR<ClientCreateWithoutDebtorContributionsInput, ClientUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutDebtorContributionsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDebtorContributionsInput = {
+    create?: XOR<UserCreateWithoutDebtorContributionsInput, UserUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDebtorContributionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DebtorUpdateOneRequiredWithoutDebtorContributionsNestedInput = {
+    create?: XOR<DebtorCreateWithoutDebtorContributionsInput, DebtorUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: DebtorCreateOrConnectWithoutDebtorContributionsInput
+    upsert?: DebtorUpsertWithoutDebtorContributionsInput
+    connect?: DebtorWhereUniqueInput
+    update?: XOR<XOR<DebtorUpdateToOneWithWhereWithoutDebtorContributionsInput, DebtorUpdateWithoutDebtorContributionsInput>, DebtorUncheckedUpdateWithoutDebtorContributionsInput>
+  }
+
+  export type ClientUpdateOneRequiredWithoutDebtorContributionsNestedInput = {
+    create?: XOR<ClientCreateWithoutDebtorContributionsInput, ClientUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutDebtorContributionsInput
+    upsert?: ClientUpsertWithoutDebtorContributionsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutDebtorContributionsInput, ClientUpdateWithoutDebtorContributionsInput>, ClientUncheckedUpdateWithoutDebtorContributionsInput>
+  }
+
+  export type UserUpdateOneWithoutDebtorContributionsNestedInput = {
+    create?: XOR<UserCreateWithoutDebtorContributionsInput, UserUncheckedCreateWithoutDebtorContributionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDebtorContributionsInput
+    upsert?: UserUpsertWithoutDebtorContributionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDebtorContributionsInput, UserUpdateWithoutDebtorContributionsInput>, UserUncheckedUpdateWithoutDebtorContributionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -25588,6 +27523,7 @@ export namespace Prisma {
     termsAccepted: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCompanyInput
   }
 
   export type ClientUncheckedCreateWithoutTenantInput = {
@@ -25602,6 +27538,7 @@ export namespace Prisma {
     termsAccepted: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type ClientCreateOrConnectWithoutTenantInput = {
@@ -25630,6 +27567,7 @@ export namespace Prisma {
     invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     invitations?: UserCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
@@ -25655,6 +27593,7 @@ export namespace Prisma {
     roleId: string
     invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutTenantInput = {
@@ -25799,6 +27738,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutDebtorsInput
     accountsReceivable?: AccountsReceivableCreateNestedManyWithoutDebtorInput
     employee?: EmployeeCreateNestedOneWithoutDebtorsInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUncheckedCreateWithoutTenantInput = {
@@ -25815,6 +27755,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accountsReceivable?: AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorCreateOrConnectWithoutTenantInput = {
@@ -25882,6 +27823,7 @@ export namespace Prisma {
     termsAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtorContributions?: DebtorContributionUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTenantInput = {
@@ -25896,6 +27838,7 @@ export namespace Prisma {
     termsAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutTenantInput = {
@@ -26119,6 +28062,48 @@ export namespace Prisma {
     create: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
   }
 
+  export type DebtorContributionCreateWithoutCompanyInput = {
+    id?: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    debtor: DebtorCreateNestedOneWithoutDebtorContributionsInput
+    createdByUser?: UserCreateNestedOneWithoutDebtorContributionsInput
+  }
+
+  export type DebtorContributionUncheckedCreateWithoutCompanyInput = {
+    id?: string
+    debtorId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionCreateOrConnectWithoutCompanyInput = {
+    where: DebtorContributionWhereUniqueInput
+    create: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type DebtorContributionCreateManyCompanyInputEnvelope = {
+    data: DebtorContributionCreateManyCompanyInput | DebtorContributionCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantUpsertWithoutClientInput = {
     update: XOR<TenantUpdateWithoutClientInput, TenantUncheckedUpdateWithoutClientInput>
     create: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
@@ -26154,6 +28139,42 @@ export namespace Prisma {
     employees?: EmployeeUncheckedUpdateManyWithoutTenantNestedInput
   }
 
+  export type DebtorContributionUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: DebtorContributionWhereUniqueInput
+    update: XOR<DebtorContributionUpdateWithoutCompanyInput, DebtorContributionUncheckedUpdateWithoutCompanyInput>
+    create: XOR<DebtorContributionCreateWithoutCompanyInput, DebtorContributionUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type DebtorContributionUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: DebtorContributionWhereUniqueInput
+    data: XOR<DebtorContributionUpdateWithoutCompanyInput, DebtorContributionUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type DebtorContributionUpdateManyWithWhereWithoutCompanyInput = {
+    where: DebtorContributionScalarWhereInput
+    data: XOR<DebtorContributionUpdateManyMutationInput, DebtorContributionUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type DebtorContributionScalarWhereInput = {
+    AND?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
+    OR?: DebtorContributionScalarWhereInput[]
+    NOT?: DebtorContributionScalarWhereInput | DebtorContributionScalarWhereInput[]
+    id?: StringFilter<"DebtorContribution"> | string
+    debtorId?: StringFilter<"DebtorContribution"> | string
+    companyId?: StringFilter<"DebtorContribution"> | string
+    companyName?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyContact?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyEmail?: StringNullableFilter<"DebtorContribution"> | string | null
+    companyPhone?: StringNullableFilter<"DebtorContribution"> | string | null
+    extraInfo?: StringNullableFilter<"DebtorContribution"> | string | null
+    verificationStatus?: StringFilter<"DebtorContribution"> | string
+    createdByUserId?: StringNullableFilter<"DebtorContribution"> | string | null
+    notes?: StringNullableFilter<"DebtorContribution"> | string | null
+    isPublic?: BoolFilter<"DebtorContribution"> | boolean
+    createdAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+    updatedAt?: DateTimeFilter<"DebtorContribution"> | Date | string
+  }
+
   export type UserCreateWithoutRoleInput = {
     id?: string
     email: string
@@ -26176,6 +28197,7 @@ export namespace Prisma {
     invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     invitations?: UserCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -26200,6 +28222,7 @@ export namespace Prisma {
     invitationToken?: string | null
     invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -26278,6 +28301,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutUsersInput
     invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     debtors?: DebtorCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
@@ -26303,6 +28327,7 @@ export namespace Prisma {
     invitationToken?: string | null
     roleId: string
     debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutInvitationsInput = {
@@ -26331,6 +28356,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutUsersInput
     invitations?: UserCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
@@ -26356,6 +28382,7 @@ export namespace Prisma {
     roleId: string
     invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
     debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutInvitedByInput = {
@@ -26382,6 +28409,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutDebtorsInput
     accountsReceivable?: AccountsReceivableCreateNestedManyWithoutDebtorInput
     employee?: EmployeeCreateNestedOneWithoutDebtorsInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUncheckedCreateWithoutUserInput = {
@@ -26398,6 +28426,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accountsReceivable?: AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorCreateOrConnectWithoutUserInput = {
@@ -26407,6 +28436,48 @@ export namespace Prisma {
 
   export type DebtorCreateManyUserInputEnvelope = {
     data: DebtorCreateManyUserInput | DebtorCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DebtorContributionCreateWithoutCreatedByUserInput = {
+    id?: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    debtor: DebtorCreateNestedOneWithoutDebtorContributionsInput
+    company: ClientCreateNestedOneWithoutDebtorContributionsInput
+  }
+
+  export type DebtorContributionUncheckedCreateWithoutCreatedByUserInput = {
+    id?: string
+    debtorId: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionCreateOrConnectWithoutCreatedByUserInput = {
+    where: DebtorContributionWhereUniqueInput
+    create: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput>
+  }
+
+  export type DebtorContributionCreateManyCreatedByUserInputEnvelope = {
+    data: DebtorContributionCreateManyCreatedByUserInput | DebtorContributionCreateManyCreatedByUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -26498,6 +28569,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
     debtors?: DebtorUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
@@ -26523,6 +28595,7 @@ export namespace Prisma {
     invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     roleId?: StringFieldUpdateOperationsInput | string
     debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutInvitedByInput = {
@@ -26555,6 +28628,22 @@ export namespace Prisma {
   export type DebtorUpdateManyWithWhereWithoutUserInput = {
     where: DebtorScalarWhereInput
     data: XOR<DebtorUpdateManyMutationInput, DebtorUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DebtorContributionUpsertWithWhereUniqueWithoutCreatedByUserInput = {
+    where: DebtorContributionWhereUniqueInput
+    update: XOR<DebtorContributionUpdateWithoutCreatedByUserInput, DebtorContributionUncheckedUpdateWithoutCreatedByUserInput>
+    create: XOR<DebtorContributionCreateWithoutCreatedByUserInput, DebtorContributionUncheckedCreateWithoutCreatedByUserInput>
+  }
+
+  export type DebtorContributionUpdateWithWhereUniqueWithoutCreatedByUserInput = {
+    where: DebtorContributionWhereUniqueInput
+    data: XOR<DebtorContributionUpdateWithoutCreatedByUserInput, DebtorContributionUncheckedUpdateWithoutCreatedByUserInput>
+  }
+
+  export type DebtorContributionUpdateManyWithWhereWithoutCreatedByUserInput = {
+    where: DebtorContributionScalarWhereInput
+    data: XOR<DebtorContributionUpdateManyMutationInput, DebtorContributionUncheckedUpdateManyWithoutCreatedByUserInput>
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -27267,6 +29356,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutDebtorsInput
     user?: UserCreateNestedOneWithoutDebtorsInput
     employee?: EmployeeCreateNestedOneWithoutDebtorsInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUncheckedCreateWithoutAccountsReceivableInput = {
@@ -27283,6 +29373,7 @@ export namespace Prisma {
     employeeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorCreateOrConnectWithoutAccountsReceivableInput = {
@@ -27475,6 +29566,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutDebtorsNestedInput
     user?: UserUpdateOneWithoutDebtorsNestedInput
     employee?: EmployeeUpdateOneWithoutDebtorsNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateWithoutAccountsReceivableInput = {
@@ -27491,6 +29583,7 @@ export namespace Prisma {
     employeeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput
   }
 
   export type PaymentAgreementUpsertWithoutAccountsReceivableInput = {
@@ -28416,6 +30509,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutUsersInput
     invitedBy?: UserCreateNestedOneWithoutInvitationsInput
     invitations?: UserCreateNestedManyWithoutInvitedByInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutCreatedByUserInput
     role: RoleCreateNestedOneWithoutUsersInput
   }
 
@@ -28441,6 +30535,7 @@ export namespace Prisma {
     invitationToken?: string | null
     roleId: string
     invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutDebtorsInput = {
@@ -28569,6 +30664,48 @@ export namespace Prisma {
     create: XOR<EmployeeCreateWithoutDebtorsInput, EmployeeUncheckedCreateWithoutDebtorsInput>
   }
 
+  export type DebtorContributionCreateWithoutDebtorInput = {
+    id?: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: ClientCreateNestedOneWithoutDebtorContributionsInput
+    createdByUser?: UserCreateNestedOneWithoutDebtorContributionsInput
+  }
+
+  export type DebtorContributionUncheckedCreateWithoutDebtorInput = {
+    id?: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionCreateOrConnectWithoutDebtorInput = {
+    where: DebtorContributionWhereUniqueInput
+    create: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput>
+  }
+
+  export type DebtorContributionCreateManyDebtorInputEnvelope = {
+    data: DebtorContributionCreateManyDebtorInput | DebtorContributionCreateManyDebtorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantUpsertWithoutDebtorsInput = {
     update: XOR<TenantUpdateWithoutDebtorsInput, TenantUncheckedUpdateWithoutDebtorsInput>
     create: XOR<TenantCreateWithoutDebtorsInput, TenantUncheckedCreateWithoutDebtorsInput>
@@ -28636,6 +30773,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
     invitations?: UserUpdateManyWithoutInvitedByNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
@@ -28661,6 +30799,7 @@ export namespace Prisma {
     invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     roleId?: StringFieldUpdateOperationsInput | string
     invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type AccountsReceivableUpsertWithWhereUniqueWithoutDebtorInput = {
@@ -28712,6 +30851,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DebtorContributionUpsertWithWhereUniqueWithoutDebtorInput = {
+    where: DebtorContributionWhereUniqueInput
+    update: XOR<DebtorContributionUpdateWithoutDebtorInput, DebtorContributionUncheckedUpdateWithoutDebtorInput>
+    create: XOR<DebtorContributionCreateWithoutDebtorInput, DebtorContributionUncheckedCreateWithoutDebtorInput>
+  }
+
+  export type DebtorContributionUpdateWithWhereUniqueWithoutDebtorInput = {
+    where: DebtorContributionWhereUniqueInput
+    data: XOR<DebtorContributionUpdateWithoutDebtorInput, DebtorContributionUncheckedUpdateWithoutDebtorInput>
+  }
+
+  export type DebtorContributionUpdateManyWithWhereWithoutDebtorInput = {
+    where: DebtorContributionScalarWhereInput
+    data: XOR<DebtorContributionUpdateManyMutationInput, DebtorContributionUncheckedUpdateManyWithoutDebtorInput>
+  }
+
   export type TenantCreateWithoutEmployeesInput = {
     id?: string
     subdomain: string
@@ -28755,6 +30910,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutDebtorsInput
     user?: UserCreateNestedOneWithoutDebtorsInput
     accountsReceivable?: AccountsReceivableCreateNestedManyWithoutDebtorInput
+    debtorContributions?: DebtorContributionCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorUncheckedCreateWithoutEmployeeInput = {
@@ -28771,6 +30927,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accountsReceivable?: AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput
+    debtorContributions?: DebtorContributionUncheckedCreateNestedManyWithoutDebtorInput
   }
 
   export type DebtorCreateOrConnectWithoutEmployeeInput = {
@@ -28832,6 +30989,282 @@ export namespace Prisma {
   export type DebtorUpdateManyWithWhereWithoutEmployeeInput = {
     where: DebtorScalarWhereInput
     data: XOR<DebtorUpdateManyMutationInput, DebtorUncheckedUpdateManyWithoutEmployeeInput>
+  }
+
+  export type DebtorCreateWithoutDebtorContributionsInput = {
+    id?: string
+    fullname: string
+    email: string
+    phone?: string | null
+    address?: string | null
+    personType?: string | null
+    identificationType?: string | null
+    identification?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutDebtorsInput
+    user?: UserCreateNestedOneWithoutDebtorsInput
+    accountsReceivable?: AccountsReceivableCreateNestedManyWithoutDebtorInput
+    employee?: EmployeeCreateNestedOneWithoutDebtorsInput
+  }
+
+  export type DebtorUncheckedCreateWithoutDebtorContributionsInput = {
+    id?: string
+    tenantId: string
+    userId?: string | null
+    fullname: string
+    email: string
+    phone?: string | null
+    address?: string | null
+    personType?: string | null
+    identificationType?: string | null
+    identification?: string | null
+    employeeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accountsReceivable?: AccountsReceivableUncheckedCreateNestedManyWithoutDebtorInput
+  }
+
+  export type DebtorCreateOrConnectWithoutDebtorContributionsInput = {
+    where: DebtorWhereUniqueInput
+    create: XOR<DebtorCreateWithoutDebtorContributionsInput, DebtorUncheckedCreateWithoutDebtorContributionsInput>
+  }
+
+  export type ClientCreateWithoutDebtorContributionsInput = {
+    id?: string
+    type: string
+    name: string
+    kvk: string
+    contactEmail: string
+    numberOfEmployees: string
+    country: string
+    address: string
+    termsAccepted: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutDebtorContributionsInput = {
+    id?: string
+    type: string
+    name: string
+    kvk: string
+    contactEmail: string
+    numberOfEmployees: string
+    country: string
+    address: string
+    termsAccepted: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantUncheckedCreateNestedOneWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutDebtorContributionsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutDebtorContributionsInput, ClientUncheckedCreateWithoutDebtorContributionsInput>
+  }
+
+  export type UserCreateWithoutDebtorContributionsInput = {
+    id?: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    invitedBy?: UserCreateNestedOneWithoutInvitationsInput
+    invitations?: UserCreateNestedManyWithoutInvitedByInput
+    debtors?: DebtorCreateNestedManyWithoutUserInput
+    role: RoleCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutDebtorContributionsInput = {
+    id?: string
+    tenantId: string
+    email: string
+    fullname?: string | null
+    password?: string | null
+    country?: string | null
+    phone?: string | null
+    typeIdentification?: string | null
+    identification?: string | null
+    emailVerified?: boolean
+    verificationToken?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetPasswordToken?: string | null
+    joined?: Date | string | null
+    invitedById?: string | null
+    lastActive?: Date | string | null
+    status?: string
+    invitationToken?: string | null
+    roleId: string
+    invitations?: UserUncheckedCreateNestedManyWithoutInvitedByInput
+    debtors?: DebtorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDebtorContributionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDebtorContributionsInput, UserUncheckedCreateWithoutDebtorContributionsInput>
+  }
+
+  export type DebtorUpsertWithoutDebtorContributionsInput = {
+    update: XOR<DebtorUpdateWithoutDebtorContributionsInput, DebtorUncheckedUpdateWithoutDebtorContributionsInput>
+    create: XOR<DebtorCreateWithoutDebtorContributionsInput, DebtorUncheckedCreateWithoutDebtorContributionsInput>
+    where?: DebtorWhereInput
+  }
+
+  export type DebtorUpdateToOneWithWhereWithoutDebtorContributionsInput = {
+    where?: DebtorWhereInput
+    data: XOR<DebtorUpdateWithoutDebtorContributionsInput, DebtorUncheckedUpdateWithoutDebtorContributionsInput>
+  }
+
+  export type DebtorUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    personType?: NullableStringFieldUpdateOperationsInput | string | null
+    identificationType?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutDebtorsNestedInput
+    user?: UserUpdateOneWithoutDebtorsNestedInput
+    accountsReceivable?: AccountsReceivableUpdateManyWithoutDebtorNestedInput
+    employee?: EmployeeUpdateOneWithoutDebtorsNestedInput
+  }
+
+  export type DebtorUncheckedUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    personType?: NullableStringFieldUpdateOperationsInput | string | null
+    identificationType?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    employeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput
+  }
+
+  export type ClientUpsertWithoutDebtorContributionsInput = {
+    update: XOR<ClientUpdateWithoutDebtorContributionsInput, ClientUncheckedUpdateWithoutDebtorContributionsInput>
+    create: XOR<ClientCreateWithoutDebtorContributionsInput, ClientUncheckedCreateWithoutDebtorContributionsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutDebtorContributionsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutDebtorContributionsInput, ClientUncheckedUpdateWithoutDebtorContributionsInput>
+  }
+
+  export type ClientUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    kvk?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    termsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    kvk?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    termsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUncheckedUpdateOneWithoutClientNestedInput
+  }
+
+  export type UserUpsertWithoutDebtorContributionsInput = {
+    update: XOR<UserUpdateWithoutDebtorContributionsInput, UserUncheckedUpdateWithoutDebtorContributionsInput>
+    create: XOR<UserCreateWithoutDebtorContributionsInput, UserUncheckedCreateWithoutDebtorContributionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDebtorContributionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDebtorContributionsInput, UserUncheckedUpdateWithoutDebtorContributionsInput>
+  }
+
+  export type UserUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
+    invitations?: UserUpdateManyWithoutInvitedByNestedInput
+    debtors?: DebtorUpdateManyWithoutUserNestedInput
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDebtorContributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullname?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    typeIdentification?: NullableStringFieldUpdateOperationsInput | string | null
+    identification?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    joined?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
+    debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyTenantInput = {
@@ -28947,6 +31380,7 @@ export namespace Prisma {
     invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
     invitations?: UserUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
@@ -28972,6 +31406,7 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
     invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutTenantInput = {
@@ -29153,6 +31588,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutDebtorsNestedInput
     accountsReceivable?: AccountsReceivableUpdateManyWithoutDebtorNestedInput
     employee?: EmployeeUpdateOneWithoutDebtorsNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateWithoutTenantInput = {
@@ -29169,6 +31605,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateManyWithoutTenantInput = {
@@ -29218,6 +31655,70 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DebtorContributionCreateManyCompanyInput = {
+    id?: string
+    debtorId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DebtorContributionUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtor?: DebtorUpdateOneRequiredWithoutDebtorContributionsNestedInput
+    createdByUser?: UserUpdateOneWithoutDebtorContributionsNestedInput
+  }
+
+  export type DebtorContributionUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyRoleInput = {
     id?: string
     tenantId: string
@@ -29262,6 +31763,7 @@ export namespace Prisma {
     invitedBy?: UserUpdateOneWithoutInvitationsNestedInput
     invitations?: UserUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -29286,6 +31788,7 @@ export namespace Prisma {
     invitationToken?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -29347,6 +31850,22 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DebtorContributionCreateManyCreatedByUserInput = {
+    id?: string
+    debtorId: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29368,6 +31887,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
     invitations?: UserUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutCreatedByUserNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
   }
 
@@ -29393,6 +31913,7 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
     invitations?: UserUncheckedUpdateManyWithoutInvitedByNestedInput
     debtors?: DebtorUncheckedUpdateManyWithoutUserNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutInvitedByInput = {
@@ -29431,6 +31952,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutDebtorsNestedInput
     accountsReceivable?: AccountsReceivableUpdateManyWithoutDebtorNestedInput
     employee?: EmployeeUpdateOneWithoutDebtorsNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateWithoutUserInput = {
@@ -29447,6 +31969,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateManyWithoutUserInput = {
@@ -29460,6 +31983,54 @@ export namespace Prisma {
     identificationType?: NullableStringFieldUpdateOperationsInput | string | null
     identification?: NullableStringFieldUpdateOperationsInput | string | null
     employeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionUpdateWithoutCreatedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    debtor?: DebtorUpdateOneRequiredWithoutDebtorContributionsNestedInput
+    company?: ClientUpdateOneRequiredWithoutDebtorContributionsNestedInput
+  }
+
+  export type DebtorContributionUncheckedUpdateWithoutCreatedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutCreatedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtorId?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29810,6 +32381,22 @@ export namespace Prisma {
     notes?: string | null
   }
 
+  export type DebtorContributionCreateManyDebtorInput = {
+    id?: string
+    companyId: string
+    companyName?: string | null
+    companyContact?: string | null
+    companyEmail?: string | null
+    companyPhone?: string | null
+    extraInfo?: string | null
+    verificationStatus?: string
+    createdByUserId?: string | null
+    notes?: string | null
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AccountsReceivableUpdateWithoutDebtorInput = {
     id?: StringFieldUpdateOperationsInput | string
     invoiceNumber?: StringFieldUpdateOperationsInput | string
@@ -29932,6 +32519,54 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type DebtorContributionUpdateWithoutDebtorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: ClientUpdateOneRequiredWithoutDebtorContributionsNestedInput
+    createdByUser?: UserUpdateOneWithoutDebtorContributionsNestedInput
+  }
+
+  export type DebtorContributionUncheckedUpdateWithoutDebtorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorContributionUncheckedUpdateManyWithoutDebtorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    extraInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DebtorCreateManyEmployeeInput = {
     id?: string
     tenantId: string
@@ -29961,6 +32596,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutDebtorsNestedInput
     user?: UserUpdateOneWithoutDebtorsNestedInput
     accountsReceivable?: AccountsReceivableUpdateManyWithoutDebtorNestedInput
+    debtorContributions?: DebtorContributionUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateWithoutEmployeeInput = {
@@ -29977,6 +32613,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutDebtorNestedInput
+    debtorContributions?: DebtorContributionUncheckedUpdateManyWithoutDebtorNestedInput
   }
 
   export type DebtorUncheckedUpdateManyWithoutEmployeeInput = {

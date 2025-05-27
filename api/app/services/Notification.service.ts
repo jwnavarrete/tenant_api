@@ -8,6 +8,8 @@ import { userService } from "./user.service";
 import renderPDF from "../../common/PDF/renderPDF";
 import { parameterService } from "./parameter.service";
 import { paymentsService } from "./Payments.service";
+import { debtorContributionService } from "./debtorContribution.service";
+import { ICreateDebtorContribution } from "../interfaces/DebtorContribution.interface";
 
 class NotificationService {
   //
@@ -43,9 +45,18 @@ class NotificationService {
     }
 
     if (notificationType === "BLOKKADE") {
+      if (invoice.debtorId) {
+        const contribution: ICreateDebtorContribution = {
+          debtorId: invoice.debtorId,
+          isPublic: false,
+          notes: null,
+        };        
+        // tenant.client.contactEmail
+        await debtorContributionService.createContribution(invoice.tenantId, contribution);
+      }
+
       return await this.sendBlokkade(tenant.subdomain, invoice);
     }
-
   }
 
   async sendAanmaning(

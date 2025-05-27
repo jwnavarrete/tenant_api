@@ -36,6 +36,7 @@ model Client {
   address           String // Dirección de la empresa
   tenant            Tenant? // Relación uno a uno con Tenant
   termsAccepted     Boolean // Indica si el cliente ha aceptado los términos y condiciones
+  debtorContributions DebtorContribution[] // Relación uno a muchos con DebtorContribution
   createdAt         DateTime @default(now()) // Fecha de creación
   updatedAt         DateTime @updatedAt // Fecha de última actualización
 
@@ -52,7 +53,6 @@ model Role {
 
   @@map("role")
 }
-
 model User {
   id                 String    @id @default(uuid()) // Identificador único de la relación
   tenantId           String // Clave foránea que referencia a la tabla Tenant
@@ -78,6 +78,7 @@ model User {
   invitationToken    String? // Token para gestionar la invitación
   roleId             String // Clave foránea que referencia a la tabla Role
   debtors            Debtor[] // Relación uno a muchos con Debtor
+  debtorContributions DebtorContribution[] // Relación uno a muchos con DebtorContribution (createdByUser)
   role               Role      @relation(fields: [roleId], references: [id]) // Relación uno a muchos con Role
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
@@ -297,8 +298,6 @@ enum NotificationChannel {
   SMS
   WHATSAPP
 }
-
-
 model Debtor {
   id                 String               @id @default(uuid()) // Identificador único del deudor
   tenantId           String // Clave foránea que referencia a la tabla Tenant
@@ -315,6 +314,7 @@ model Debtor {
   accountsReceivable AccountsReceivable[] // Relación uno a muchos con AccountsReceivable
   employeeId         String? // Clave foránea que referencia a la tabla Employee
   employee           Employee?            @relation(fields: [employeeId], references: [id]) // Relación con Employee
+  debtorContributions DebtorContribution[] // Relación uno a muchos con DebtorContribution
   createdAt          DateTime             @default(now()) // Fecha de creación
   updatedAt          DateTime             @updatedAt // Fecha de última actualización
 
@@ -337,4 +337,26 @@ model Employee {
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("employees")
+}
+
+model DebtorContribution {
+  id                String      @id @default(uuid()) // Unique identifier for the contribution
+  debtorId          String      // FK to Debtor (natural person)
+  debtor            Debtor      @relation(fields: [debtorId], references: [id])
+  companyId         String      // FK to Client (company providing the info)
+  company           Client      @relation(fields: [companyId], references: [id])
+  companyName       String?     // Name of the company where the debtor works
+  companyContact    String?     // Contact person at the company
+  companyEmail      String?     // Email of the company/contact
+  companyPhone      String?     // Phone number of the company/contact
+  extraInfo         String?     // Información adicional o detalles extra sobre la contribución
+  verificationStatus String     @default("pending") // Estatus de verificación: pending, contributed, accepted
+  createdByUserId   String?     // Optional FK to User who made the contribution
+  createdByUser     User?       @relation(fields: [createdByUserId], references: [id])
+  notes             String?     // Optional notes
+  isPublic          Boolean     @default(false) // Whether the info can be shown to other companies
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@map("debtor_contributions")
 }

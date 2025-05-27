@@ -1,4 +1,4 @@
-import transporter from "../config/nodemailer";
+import {createTransporter} from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
 import { iAccountUrls } from "../../../app/interfaces/auth.intercace";
@@ -16,7 +16,7 @@ class AuthMailService {
       subject: `Welcome to ${process.env.APP_DOMAIN} 🎉`,
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendVerificationEmail(to: string, link: string): Promise<void> {
@@ -32,6 +32,7 @@ class AuthMailService {
       subject: "[Confirm your email]",
       html,
     };
+    const transporter = createTransporter();
     await transporter.sendMail(mailOptions);
   }
 
@@ -47,7 +48,7 @@ class AuthMailService {
       subject: "[Reset password]",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendRecoveryUrl(
@@ -65,7 +66,7 @@ class AuthMailService {
       subject: "Forgot your account URL?",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 }
 
