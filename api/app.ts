@@ -31,6 +31,7 @@ app.use("/debtors", appRoutes.debtorRoutes);
 app.use("/payments", appRoutes.paymentsRoutes);
 app.use("/cron", appRoutes.cronRoutes);
 app.use("/debtor-contribution", appRoutes.debtorContributionRoutes);
+app.use("/reports", appRoutes.reportRoutes);
 
 app.use(errorHandler);
 

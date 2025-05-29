@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reporte de Acuerdo de Pago</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm 15mm 25mm 15mm;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin: 0;
+        background: #fff;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+      .logo-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .logo-container img {
+        max-width: 180px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo en la parte superior -->
+    <div class="logo-container">
+      <img
+        src="https://dazzsoft.com/wp-content/uploads/2025/02/Logo-Factura.svg"
+        alt="Logo CIO"
+      />
+    </div>
+
+    <!-- Cabecera del Reporte -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; margin-bottom: 20px"
+    >
+      <tr style="background: #f2984a; color: #fff">
+        <td
+          colspan="4"
+          align="center"
+          style="font-size: 22px; font-weight: bold"
+        >
+          REPORTE DE ACUERDO DE PAGO
+        </td>
+      </tr>
+      <tr>
+        <td><b>Empresa (Cliente):</b></td>
+        <td>{{client.name}}</td>
+        <td><b>Fecha de Emisión:</b></td>
+        <td>{{paymentAgreement.createdAtFormatted}}</td>
+      </tr>
+      <tr>
+        <td><b>Dirección:</b></td>
+        <td>{{client.address}}</td>
+        <td><b>Email de Contacto:</b></td>
+        <td>{{client.contactEmail}}</td>
+      </tr>
+      <tr>
+        <td><b>País:</b></td>
+        <td>{{client.country}}</td>
+        <td><b>Teléfono:</b></td>
+        <td>{{client.kvk}}</td>
+      </tr>
+    </table>
+
+    <!-- Información del Deudor -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; margin-bottom: 20px"
+    >
+      <tr style="background: #f2984a; color: #fff; text-align: center">
+        <td colspan="4" style="font-weight: bold">Datos del Deudor</td>
+      </tr>
+      <tr>
+        <td><b>Nombre:</b></td>
+        <td>{{accountsReceivable.debtor.fullname}}</td>
+        <td><b>Email:</b></td>
+        <td>{{accountsReceivable.debtor.email}}</td>
+      </tr>
+      <tr>
+        <td><b>Teléfono:</b></td>
+        <td>{{accountsReceivable.debtor.phone}}</td>
+        <td><b>Identificación:</b></td>
+        <td>{{accountsReceivable.debtor.identification}}</td>
+      </tr>
+      <tr>
+        <td><b>Dirección:</b></td>
+        <td colspan="3">{{accountsReceivable.debtor.address}}</td>
+      </tr>
+    </table>
+
+    <!-- Información de la Cuenta por Cobrar -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; margin-bottom: 20px"
+    >
+      <tr style="background: #f2984a; color: #fff; text-align: center">
+        <td colspan="4" style="font-weight: bold">Cuenta por Cobrar</td>
+      </tr>
+      <tr>
+        <td><b>Número de Factura:</b></td>
+        <td>{{accountsReceivable.invoiceNumber}}</td>
+        <td><b>Estado:</b></td>
+        <td>{{accountsReceivable.receivableStatus}}</td>
+      </tr>
+      <tr>
+        <td><b>Fecha de Emisión:</b></td>
+        <td>{{accountsReceivable.issueDateFormatted}}</td>
+        <td><b>Fecha de Vencimiento:</b></td>
+        <td>{{accountsReceivable.dueDateFormatted}}</td>
+      </tr>
+    </table>
+
+    <!-- Resumen de Valores -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; margin-bottom: 20px"
+    >
+      <tr style="background: #f2984a; color: #fff">
+        <td colspan="2" style="font-weight: bold; text-align: center">
+          Resumen de Valores
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Monto Factura:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.invoiceAmountFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Honorarios / Cargos:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalFeesFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Total con Honorarios:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalAmountWithFeesFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Monto Pagado:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalPaidFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Saldo Pendiente:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalRemainingBalanceFormatted}}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Tabla de Cuotas -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; margin-bottom: 20px"
+    >
+      <tr style="background: #f2984a; color: #fff; text-align: center">
+        <td colspan="6" style="font-weight: bold">Detalle de Cuotas</td>
+      </tr>
+      <tr style="background: #f8f8f8">
+        <th>#</th>
+        <th>Fecha de Vencimiento</th>
+        <th>Monto Original</th>
+        <th>Monto Pagado</th>
+        <th>Saldo</th>
+        <th>Estado</th>
+      </tr>
+      {{#each paymentAgreement.installments}}
+      <tr>
+        <td align="center">{{number}}</td>
+        <td align="center">{{dueDateFormatted}}</td>
+        <td align="right">{{originalAmountFormatted}}</td>
+        <td align="right">{{amountPaidFormatted}}</td>
+        <td align="right">{{remainingAmountFormatted}}</td>
+        <td align="center">{{status}}</td>
+      </tr>
+      {{/each}}
+    </table>
+
+    <!-- Historial de Pagos -->
+    <table
+      width="100%"
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse"
+    >
+      <tr style="background: #f2984a; color: #fff; text-align: center">
+        <td colspan="6" style="font-weight: bold">Historial de Pagos</td>
+      </tr>
+      <tr style="background: #f8f8f8">
+        <th>Fecha de Pago</th>
+        <th>Monto</th>
+        <th>Método</th>
+        <th>Referencia</th>
+        <th>Notas</th>
+      </tr>
+      {{#each paymentAgreement.PaymentDetail}}
+      <tr>
+        <td align="center">{{paymentDateFormatted}}</td>
+        <td align="right">{{paymentAmountFormatted}}</td>
+        <td align="center">{{paymentMethod}}</td>
+        <td align="center">{{referenceNumber}}</td>
+        <td>{{notes}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  </body>
+</html>

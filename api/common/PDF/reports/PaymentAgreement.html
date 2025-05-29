@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reporte de Acuerdo de Pago</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm 15mm 25mm 15mm;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin: 0;
+        background: #fff;
+        color: #222;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #f2984a;
+        margin-bottom: 5px;
+      }
+      .logo-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .logo-container img {
+        max-width: 90px;
+        height: auto;
+      }
+      .section-title {
+        background: #f2984a;
+        color: #fff;
+        padding: 8px;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 7px 6px;
+      }
+      th {
+        background: #f8f8f8;
+        font-weight: bold;
+        text-align: center;
+      }
+      tr.section-header td {
+        background: #f2984a;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        font-size: 15px;
+      }
+      .summary-table td {
+        border: none;
+        padding: 4px 6px;
+      }
+      .observations {
+        border: 1px solid #f2984a;
+        padding: 10px;
+        background: #fff8f0;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+      .footer {
+        text-align: center;
+        font-size: 11px;
+        color: #888;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo en la parte superior -->
+    <div class="logo-container">
+      <img
+        src="https://dazzsoft.com/wp-content/uploads/2025/02/Logo-Factura.svg"
+        alt="Logo CIO"
+      />
+    </div>
+
+    <!-- Título principal -->
+    <h1 style="text-align: center; margin-bottom: 0">
+      Reporte de Acuerdo de Pago
+    </h1>
+    <p style="text-align: center; margin-top: 2px; color: #666">
+      Documento generado el {{paymentAgreement.createdAtFormatted}}
+    </p>
+
+    <!-- Introducción -->
+    <div class="observations">
+      <b>Introducción:</b> El presente reporte detalla el acuerdo de pago
+      celebrado entre <b>{{client.name}}</b> y el deudor
+      <b>{{accountsReceivable.debtor.fullname}}</b>, incluyendo información
+      relevante sobre la cuenta por cobrar, el detalle de cuotas pactadas y el
+      historial de pagos realizados. Este documento tiene validez informativa y
+      puede ser utilizado para fines de control y seguimiento financiero.
+    </div>
+
+    <!-- Resumen Ejecutivo -->
+    <div class="section-title">Resumen Ejecutivo</div>
+    <table class="summary-table">
+      <tr>
+        <td><b>Cliente:</b></td>
+        <td>{{client.name}}</td>
+        <td><b>Deudor:</b></td>
+        <td>{{accountsReceivable.debtor.fullname}}</td>
+      </tr>
+      <tr>
+        <td><b>Factura:</b></td>
+        <td>{{accountsReceivable.invoiceNumber}}</td>
+        <td><b>Estado:</b></td>
+        <td>{{accountsReceivable.receivableStatus}}</td>
+      </tr>
+      <tr>
+        <td><b>Monto Total:</b></td>
+        <td>{{accountsReceivable.totalAmountWithFeesFormatted}}</td>
+        <td><b>Saldo Pendiente:</b></td>
+        <td>{{accountsReceivable.totalRemainingBalanceFormatted}}</td>
+      </tr>
+    </table>
+
+    <!-- Cabecera del Reporte -->
+    <div class="section-title">Datos del Cliente</div>
+    <table>
+      <tr>
+        <td><b>Empresa (Cliente):</b></td>
+        <td>{{client.name}}</td>
+        <td><b>Fecha de Emisión:</b></td>
+        <td>{{paymentAgreement.createdAtFormatted}}</td>
+      </tr>
+      <tr>
+        <td><b>Dirección:</b></td>
+        <td>{{client.address}}</td>
+        <td><b>Email de Contacto:</b></td>
+        <td>{{client.contactEmail}}</td>
+      </tr>
+      <tr>
+        <td><b>País:</b></td>
+        <td>{{client.country}}</td>
+        <td><b>Teléfono:</b></td>
+        <td>{{client.kvk}}</td>
+      </tr>
+    </table>
+
+    <!-- Información del Deudor -->
+    <div class="section-title">Datos del Deudor</div>
+    <table>
+      <tr>
+        <td><b>Nombre:</b></td>
+        <td>{{accountsReceivable.debtor.fullname}}</td>
+        <td><b>Email:</b></td>
+        <td>{{accountsReceivable.debtor.email}}</td>
+      </tr>
+      <tr>
+        <td><b>Teléfono:</b></td>
+        <td>{{accountsReceivable.debtor.phone}}</td>
+        <td><b>Identificación:</b></td>
+        <td>{{accountsReceivable.debtor.identification}}</td>
+      </tr>
+      <tr>
+        <td><b>Dirección:</b></td>
+        <td colspan="3">{{accountsReceivable.debtor.address}}</td>
+      </tr>
+    </table>
+
+    <!-- Información de la Cuenta por Cobrar -->
+    <div class="section-title">Cuenta por Cobrar</div>
+    <table>
+      <tr>
+        <td><b>Número de Factura:</b></td>
+        <td>{{accountsReceivable.invoiceNumber}}</td>
+        <td><b>Estado:</b></td>
+        <td>{{accountsReceivable.receivableStatus}}</td>
+      </tr>
+      <tr>
+        <td><b>Fecha de Emisión:</b></td>
+        <td>{{accountsReceivable.issueDateFormatted}}</td>
+        <td><b>Fecha de Vencimiento:</b></td>
+        <td>{{accountsReceivable.dueDateFormatted}}</td>
+      </tr>
+    </table>
+
+    <!-- Resumen de Valores -->
+    <div class="section-title">Resumen de Valores</div>
+    <table>
+      <tr>
+        <td style="text-align: left"><b>Monto Factura:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.invoiceAmountFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Honorarios / Cargos:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalFeesFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Total con Honorarios:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalAmountWithFeesFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Monto Pagado:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalPaidFormatted}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><b>Saldo Pendiente:</b></td>
+        <td style="text-align: right">
+          {{accountsReceivable.totalRemainingBalanceFormatted}}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Tabla de Cuotas -->
+    <div class="section-title">Detalle de Cuotas</div>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Fecha de Vencimiento</th>
+        <th>Monto Original</th>
+        <th>Monto Pagado</th>
+        <th>Saldo</th>
+        <th>Estado</th>
+      </tr>
+      {{#each paymentAgreement.installments}}
+      <tr>
+        <td align="center">{{number}}</td>
+        <td align="center">{{dueDateFormatted}}</td>
+        <td align="right">{{originalAmountFormatted}}</td>
+        <td align="right">{{amountPaidFormatted}}</td>
+        <td align="right">{{remainingAmountFormatted}}</td>
+        <td align="center">{{status}}</td>
+      </tr>
+      {{/each}}
+    </table>
+
+    <!-- Historial de Pagos -->
+    <div class="section-title">Historial de Pagos</div>
+    <table>
+      <tr>
+        <th>Fecha de Pago</th>
+        <th>Monto</th>
+        <th>Método</th>
+        <th>Referencia</th>
+        <th>Notas</th>
+      </tr>
+      {{#each paymentAgreement.PaymentDetail}}
+      <tr>
+        <td align="center">{{paymentDateFormatted}}</td>
+        <td align="right">{{paymentAmountFormatted}}</td>
+        <td align="center">{{paymentMethod}}</td>
+        <td align="center">{{referenceNumber}}</td>
+        <td>{{notes}}</td>
+      </tr>
+      {{/each}}
+    </table>
+
+    <!-- Observaciones -->
+    <div class="section-title">Observaciones</div>
+    <div class="observations">
+      <ul style="margin: 0; padding-left: 18px">
+        <li>
+          Este reporte es generado automáticamente y refleja la información
+          registrada hasta la fecha de emisión.
+        </li>
+        <li>
+          Para cualquier consulta o aclaración, comuníquese con el área de
+          administración de <b>{{client.name}}</b>.
+        </li>
+        <li>
+          El cumplimiento oportuno de los pagos es fundamental para evitar
+          cargos adicionales.
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Reporte generado por el sistema CIO &copy; {{year}}
+    </div>
+  </body>
+</html>
