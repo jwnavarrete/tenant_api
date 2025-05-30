@@ -12,8 +12,9 @@ import {
   EmailTokenVerificationSchema,
   ResendVerificationEmailSchema,
   EmailVerificationResponseSchema,
-  MagicLoginSchema,
+  MagicLoginSchema
 } from "../schemas/auth.schemas";
+// import e from "@types/express";
 
 // Tipos inferidos
 export type iAuthUser = z.infer<typeof AuthUserSchema>;
@@ -58,6 +59,13 @@ export interface IAccountUrl {
   subdomain: string;
   link: string;
   company: string;
+}
+
+export interface IcompanyTokenInfos {
+  invitedEmail: string;
+  invitedCompany: string;
+  country: string;
+  type: string;
 }
 
 export type iAccountUrls = IAccountUrl[];

@@ -26,7 +26,7 @@ model Tenant {
 }
 
 model Client {
-  id                String   @id @default(uuid()) // Identificador único del cliente (empresa)
+  id                String              @id @default(uuid()) // Identificador único del cliente (empresa)
   type              String // Teléfono de la empresa
   name              String // Nombre de la empresa
   kvk               String // Teléfono de la empresa
@@ -35,9 +35,10 @@ model Client {
   country           String // Teléfono de la empresa
   address           String // Dirección de la empresa
   tenant            Tenant? // Relación uno a uno con Tenant
+  companyInvites    CompanyInvitation[] // Relación uno con muchas invitaciones de empresa
   termsAccepted     Boolean // Indica si el cliente ha aceptado los términos y condiciones
-  createdAt         DateTime @default(now()) // Fecha de creación
-  updatedAt         DateTime @updatedAt // Fecha de última actualización
+  createdAt         DateTime            @default(now()) // Fecha de creación
+  updatedAt         DateTime            @updatedAt // Fecha de última actualización
 
   @@map("client")
 }
@@ -99,6 +100,15 @@ model GlobalParameter {
   tenantConfigs                 TenantConfig[] // Relación uno a muchos con TenantConfig
   createdAt                     DateTime       @default(now()) // Fecha de creación
   updatedAt                     DateTime       @updatedAt // Fecha de última actualización
+  multaAanmaningEmpresa         Float          @default(0) // Multa para empresa
+  multaAanmaningNatural         Float          @default(0) // Multa para persona natural
+  multaSommatieEmpresa          Float          @default(0) // Multa para empresa
+  multaSommatieNatural          Float          @default(0) // Multa para persona natural
+  limiteDiasReaccionEmpresa     Int            @default(0) //limites de dias para reaccionar a empresa
+  multaNoReaccionEmpresa        Float          @default(0) // Multa para empresa
+  multaNoReaccionNatural        Float          @default(0) // Multa no reaccion natural
+  multaAcuerdoPagoEmpresa       Float          @default(0) // Multa acuerdo de pago
+  multaAcuerdoPagoNatural       Float          @default(0) // Multa para persona natural
 
   @@map("global_parameters")
 }
@@ -160,10 +170,10 @@ model Installment {
 }
 
 model AccountsReceivable {
-  id                         String               @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
+  id                         String                   @id @default(uuid()) // Identificador único del registro de cuentas por cobrar
   tenantId                   String // Clave foránea que referencia a la tabla Tenant
-  tenant                     Tenant               @relation(fields: [tenantId], references: [id]) // Relación con Tenant
-  invoiceNumber              String               @unique // Número único de la factura asociada
+  tenant                     Tenant                   @relation(fields: [tenantId], references: [id]) // Relación con Tenant
+  invoiceNumber              String                   @unique // Número único de la factura asociada
   issueDate                  DateTime // Fecha de emisión de la factura
   dueDate                    DateTime // Fecha de vencimiento de la factura
   // Información del cliente
@@ -173,22 +183,22 @@ model AccountsReceivable {
   customerPhone              String? // Teléfono del cliente
   // Detalles de la factura
   invoiceAmount              Float // Monto total de la factura
-  amountPaid                 Float                @default(0) // Monto pagado
-  remainingBalance           Float                @default(0) // Saldo pendiente
-  totalDueToday              Float                @default(0) // Total a pagar hoy
+  amountPaid                 Float                    @default(0) // Monto pagado
+  remainingBalance           Float                    @default(0) // Saldo pendiente
+  totalDueToday              Float                    @default(0) // Total a pagar hoy
   // Status de la cuenta por cobrar
   receivableStatus           String // Estado del registro (paid, pending, overdue)
   collectionStatus           String? // Estado de cobranza (initial, aanmaning, sommatie, ingebrekestelling)
   // Gastos de cobranza que el cliente le cobra al deudor
-  clientCollectionPercentage Float                @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
-  clientCollectionAmount     Float                @default(0) // Monto de cobranza que el cliente le cobra al deudor
-  clientAbbPercentage        Float                @default(0) // Porcentaje ABB que el cliente le cobra al deudor
-  clientAbbAmount            Float                @default(0) // Monto ABB que el cliente le cobra al deudor
+  clientCollectionPercentage Float                    @default(0) // Porcentaje de cobranza que el cliente le cobra al deudor
+  clientCollectionAmount     Float                    @default(0) // Monto de cobranza que el cliente le cobra al deudor
+  clientAbbPercentage        Float                    @default(0) // Porcentaje ABB que el cliente le cobra al deudor
+  clientAbbAmount            Float                    @default(0) // Monto ABB que el cliente le cobra al deudor
   // Gastos de cobranza que el administrador del sistema le cobra al cliente
-  adminCollectionPercentage  Float                @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
-  adminCollectionAmount      Float                @default(0) // Monto de cobranza que el administrador le cobra al cliente
-  adminAbbPercentage         Float                @default(0) // Porcentaje ABB que el administrador le cobra al cliente
-  adminAbbAmount             Float                @default(0) // Monto ABB que el administrador le cobra al cliente
+  adminCollectionPercentage  Float                    @default(0) // Porcentaje de cobranza que el administrador le cobra al cliente
+  adminCollectionAmount      Float                    @default(0) // Monto de cobranza que el administrador le cobra al cliente
+  adminAbbPercentage         Float                    @default(0) // Porcentaje ABB que el administrador le cobra al cliente
+  adminAbbAmount             Float                    @default(0) // Monto ABB que el administrador le cobra al cliente
   notifiedAt                 DateTime? // Fecha en la que se notificó al deudor
   // Intereses acumulados antes del acuerdo de pago o notificación enviado
   previousInterestAmount     Float? // Monto de interés acumulado antes de congelarlo
@@ -201,12 +211,12 @@ model AccountsReceivable {
   paymentDetail              PaymentDetail[] // Relación uno a muchos con PaymentDetail   
   // Relación con el deudor
   debtorId                   String? // Clave foránea que referencia a la tabla Debtor
-  debtor                     Debtor?              @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
+  debtor                     Debtor?                  @relation(fields: [debtorId], references: [id]) // Relación con Debtor 
   // Auditoría
-  createdAt                  DateTime             @default(now()) // Fecha de creación
-  updatedAt                  DateTime             @updatedAt // Fecha de última actualización
+  createdAt                  DateTime                 @default(now()) // Fecha de creación
+  updatedAt                  DateTime                 @updatedAt // Fecha de última actualización
   // Acuerdo de pago
-  hasPaymentAgreement        Boolean              @default(false) // Indica si tiene un acuerdo de pago
+  hasPaymentAgreement        Boolean                  @default(false) // Indica si tiene un acuerdo de pago
   paymentAgreementId         String? // Clave foránea que referencia a la tabla PaymentAgreement
   paymentAgreement           PaymentAgreement?
   // Relacion con la distribución de pagos
@@ -220,22 +230,21 @@ model AccountsReceivable {
 }
 
 model NotificationCollection {
-  id                 String   @id @default(uuid())
-  accountsReceivableId String  // Clave foránea a AccountsReceivable
-  accountsReceivable AccountsReceivable @relation(fields: [accountsReceivableId], references: [id])
-  type               NotificationType // Tipo de notificación (initial, reminder, final, etc.)
-  status             NotificationStatus // Estado del envío (sent, failed, pending)
-  sentAt             DateTime // Fecha en que se envió la notificación
-  channel            NotificationChannel // Medio: email, sms, whatsapp, etc.
-  responseStatus     String? // Estado de la respuesta si aplica (por ejemplo: opened, bounced, etc.)
-  message            String? // Mensaje enviado
-  error              String? // Detalles del error si falló
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                   String              @id @default(uuid())
+  accountsReceivableId String // Clave foránea a AccountsReceivable
+  accountsReceivable   AccountsReceivable  @relation(fields: [accountsReceivableId], references: [id])
+  type                 NotificationType // Tipo de notificación (initial, reminder, final, etc.)
+  status               NotificationStatus // Estado del envío (sent, failed, pending)
+  sentAt               DateTime // Fecha en que se envió la notificación
+  channel              NotificationChannel // Medio: email, sms, whatsapp, etc.
+  responseStatus       String? // Estado de la respuesta si aplica (por ejemplo: opened, bounced, etc.)
+  message              String? // Mensaje enviado
+  error                String? // Detalles del error si falló
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
 
   @@map("notification_collection")
 }
-
 
 model PaymentDetail {
   id                   String               @id @default(uuid()) // Identificador único del detalle de pago
@@ -298,7 +307,6 @@ enum NotificationChannel {
   WHATSAPP
 }
 
-
 model Debtor {
   id                 String               @id @default(uuid()) // Identificador único del deudor
   tenantId           String // Clave foránea que referencia a la tabla Tenant
@@ -337,4 +345,27 @@ model Employee {
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("employees")
+}
+
+model CompanyInvitation {
+  id                String           @id @default(uuid()) // Unique identifier for the invitation
+  invitedEmail      String // Email of the invited company
+  invitedCompany    String // Name of the invited company
+  country           String // Country of the invited company
+  invitingCompanyId String // Foreign key to the inviting company (can be Client.id)
+  invitingCompany   Client           @relation(fields: [invitingCompanyId], references: [id]) // Relación con Client
+  invitationToken   String           @unique @default(uuid()) // Token de invitación único (UUID)
+  status            InvitationStatus // Estado de la invitación: pendiente, aceptada, expirada, cancelada
+  sentAt            DateTime         @default(now()) // Fecha de envío
+  acceptedAt        DateTime? // Fecha de aceptación (nullable)
+  expiresAt         DateTime? // Fecha de expiración (opcional)
+
+  @@map("company_invitations")
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
 }

@@ -26,7 +26,7 @@ model Tenant {
 }
 
 model Client {
-  id                String   @id @default(uuid()) // Identificador único del cliente (empresa)
+  id                String              @id @default(uuid()) // Identificador único del cliente (empresa)
   type              String // Teléfono de la empresa
   name              String // Nombre de la empresa
   kvk               String // Teléfono de la empresa
@@ -35,9 +35,10 @@ model Client {
   country           String // Teléfono de la empresa
   address           String // Dirección de la empresa
   tenant            Tenant? // Relación uno a uno con Tenant
+  companyInvites    CompanyInvitation[] // Relación uno con muchas invitaciones de empresa
   termsAccepted     Boolean // Indica si el cliente ha aceptado los términos y condiciones
-  createdAt         DateTime @default(now()) // Fecha de creación
-  updatedAt         DateTime @updatedAt // Fecha de última actualización
+  createdAt         DateTime            @default(now()) // Fecha de creación
+  updatedAt         DateTime            @updatedAt // Fecha de última actualización
 
   @@map("client")
 }
@@ -99,6 +100,15 @@ model GlobalParameter {
   tenantConfigs                 TenantConfig[] // Relación uno a muchos con TenantConfig
   createdAt                     DateTime       @default(now()) // Fecha de creación
   updatedAt                     DateTime       @updatedAt // Fecha de última actualización
+  multaAanmaningEmpresa         Float          @default(0) // Multa para empresa
+  multaAanmaningNatural         Float          @default(0) // Multa para persona natural
+  multaSommatieEmpresa          Float          @default(0) // Multa para empresa
+  multaSommatieNatural          Float          @default(0) // Multa para persona natural
+  limiteDiasReaccionEmpresa     Int            @default(0) //limites de dias para reaccionar a empresa
+  multaNoReaccionEmpresa        Float          @default(0) // Multa para empresa
+  multaNoReaccionNatural        Float          @default(0) // Multa no reaccion natural
+  multaAcuerdoPagoEmpresa       Float          @default(0) // Multa acuerdo de pago
+  multaAcuerdoPagoNatural       Float          @default(0) // Multa para persona natural
 
   @@map("global_parameters")
 }
@@ -335,4 +345,27 @@ model Employee {
 
   @@unique([tenantId, email]) // Asegura que el email sea único solo para el mismo tenant
   @@map("employees")
+}
+
+model CompanyInvitation {
+  id                String           @id @default(uuid()) // Unique identifier for the invitation
+  invitedEmail      String // Email of the invited company
+  invitedCompany    String // Name of the invited company
+  country           String // Country of the invited company
+  invitingCompanyId String // Foreign key to the inviting company (can be Client.id)
+  invitingCompany   Client           @relation(fields: [invitingCompanyId], references: [id]) // Relación con Client
+  invitationToken   String           @unique @default(uuid()) // Token de invitación único (UUID)
+  status            InvitationStatus // Estado de la invitación: pendiente, aceptada, expirada, cancelada
+  sentAt            DateTime         @default(now()) // Fecha de envío
+  acceptedAt        DateTime? // Fecha de aceptación (nullable)
+  expiresAt         DateTime? // Fecha de expiración (opcional)
+
+  @@map("company_invitations")
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
 }

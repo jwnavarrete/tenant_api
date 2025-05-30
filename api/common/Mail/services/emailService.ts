@@ -1,4 +1,4 @@
-import transporter from "../config/nodemailer";
+import {createTransporter} from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
 
@@ -11,7 +11,7 @@ class EmailService {
       subject: "Bienvenido a nuestro servicio",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendResetPasswordEmail(to: string, link: string): Promise<void> {
@@ -22,7 +22,7 @@ class EmailService {
       subject: "Restablecer contraseña",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   // You can add more email services here for each module

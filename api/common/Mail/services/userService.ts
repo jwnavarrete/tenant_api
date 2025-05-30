@@ -1,4 +1,4 @@
-import transporter from "../config/nodemailer";
+import  {createTransporter} from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
 
@@ -17,7 +17,7 @@ class UserMailService {
       subject: `Invitation to join ${companyName} on ${process.env.APP_DOMAIN}`,
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 }
 

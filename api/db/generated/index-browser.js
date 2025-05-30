@@ -183,7 +183,16 @@ exports.Prisma.GlobalParameterScalarFieldEnum = {
   precioEmpresaGrande: 'precioEmpresaGrande',
   contribucionEmpresaGrandePfc: 'contribucionEmpresaGrandePfc',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  multaAanmaningEmpresa: 'multaAanmaningEmpresa',
+  multaAanmaningNatural: 'multaAanmaningNatural',
+  multaSommatieEmpresa: 'multaSommatieEmpresa',
+  multaSommatieNatural: 'multaSommatieNatural',
+  limiteDiasReaccionEmpresa: 'limiteDiasReaccionEmpresa',
+  multaNoReaccionEmpresa: 'multaNoReaccionEmpresa',
+  multaNoReaccionNatural: 'multaNoReaccionNatural',
+  multaAcuerdoPagoEmpresa: 'multaAcuerdoPagoEmpresa',
+  multaAcuerdoPagoNatural: 'multaAcuerdoPagoNatural'
 };
 
 exports.Prisma.TenantConfigScalarFieldEnum = {
@@ -331,6 +340,19 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CompanyInvitationScalarFieldEnum = {
+  id: 'id',
+  invitedEmail: 'invitedEmail',
+  invitedCompany: 'invitedCompany',
+  country: 'country',
+  invitingCompanyId: 'invitingCompanyId',
+  invitationToken: 'invitationToken',
+  status: 'status',
+  sentAt: 'sentAt',
+  acceptedAt: 'acceptedAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -374,6 +396,13 @@ exports.PaymentApplicationType = exports.$Enums.PaymentApplicationType = {
   ADMIN_ABB_FEE: 'ADMIN_ABB_FEE'
 };
 
+exports.InvitationStatus = exports.$Enums.InvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Client: 'Client',
@@ -388,7 +417,8 @@ exports.Prisma.ModelName = {
   PaymentDetail: 'PaymentDetail',
   PaymentApplication: 'PaymentApplication',
   Debtor: 'Debtor',
-  Employee: 'Employee'
+  Employee: 'Employee',
+  CompanyInvitation: 'CompanyInvitation'
 };
 
 /**

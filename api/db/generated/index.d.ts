@@ -83,6 +83,11 @@ export type Debtor = $Result.DefaultSelection<Prisma.$DebtorPayload>
  * 
  */
 export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
+/**
+ * Model CompanyInvitation
+ * 
+ */
+export type CompanyInvitation = $Result.DefaultSelection<Prisma.$CompanyInvitationPayload>
 
 /**
  * Enums
@@ -128,6 +133,16 @@ export const NotificationChannel: {
 
 export type NotificationChannel = (typeof NotificationChannel)[keyof typeof NotificationChannel]
 
+
+export const InvitationStatus: {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type InvitationStatus = (typeof InvitationStatus)[keyof typeof InvitationStatus]
+
 }
 
 export type PaymentApplicationType = $Enums.PaymentApplicationType
@@ -145,6 +160,10 @@ export const NotificationStatus: typeof $Enums.NotificationStatus
 export type NotificationChannel = $Enums.NotificationChannel
 
 export const NotificationChannel: typeof $Enums.NotificationChannel
+
+export type InvitationStatus = $Enums.InvitationStatus
+
+export const InvitationStatus: typeof $Enums.InvitationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -410,6 +429,16 @@ export class PrismaClient<
     * ```
     */
   get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.companyInvitation`: Exposes CRUD operations for the **CompanyInvitation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CompanyInvitations
+    * const companyInvitations = await prisma.companyInvitation.findMany()
+    * ```
+    */
+  get companyInvitation(): Prisma.CompanyInvitationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -863,7 +892,8 @@ export namespace Prisma {
     PaymentDetail: 'PaymentDetail',
     PaymentApplication: 'PaymentApplication',
     Debtor: 'Debtor',
-    Employee: 'Employee'
+    Employee: 'Employee',
+    CompanyInvitation: 'CompanyInvitation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -879,7 +909,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "tenant" | "client" | "role" | "user" | "globalParameter" | "tenantConfig" | "paymentAgreement" | "installment" | "accountsReceivable" | "notificationCollection" | "paymentDetail" | "paymentApplication" | "debtor" | "employee"
+      modelProps: "tenant" | "client" | "role" | "user" | "globalParameter" | "tenantConfig" | "paymentAgreement" | "installment" | "accountsReceivable" | "notificationCollection" | "paymentDetail" | "paymentApplication" | "debtor" | "employee" | "companyInvitation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1919,6 +1949,80 @@ export namespace Prisma {
           }
         }
       }
+      CompanyInvitation: {
+        payload: Prisma.$CompanyInvitationPayload<ExtArgs>
+        fields: Prisma.CompanyInvitationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CompanyInvitationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CompanyInvitationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          findFirst: {
+            args: Prisma.CompanyInvitationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CompanyInvitationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          findMany: {
+            args: Prisma.CompanyInvitationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>[]
+          }
+          create: {
+            args: Prisma.CompanyInvitationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          createMany: {
+            args: Prisma.CompanyInvitationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CompanyInvitationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>[]
+          }
+          delete: {
+            args: Prisma.CompanyInvitationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          update: {
+            args: Prisma.CompanyInvitationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          deleteMany: {
+            args: Prisma.CompanyInvitationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CompanyInvitationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CompanyInvitationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>[]
+          }
+          upsert: {
+            args: Prisma.CompanyInvitationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyInvitationPayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyInvitationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompanyInvitation>
+          }
+          groupBy: {
+            args: Prisma.CompanyInvitationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyInvitationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CompanyInvitationCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyInvitationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2017,6 +2121,7 @@ export namespace Prisma {
     paymentApplication?: PaymentApplicationOmit
     debtor?: DebtorOmit
     employee?: EmployeeOmit
+    companyInvitation?: CompanyInvitationOmit
   }
 
   /* Types for Logging */
@@ -2170,6 +2275,37 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmployeeWhereInput
+  }
+
+
+  /**
+   * Count Type ClientCountOutputType
+   */
+
+  export type ClientCountOutputType = {
+    companyInvites: number
+  }
+
+  export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    companyInvites?: boolean | ClientCountOutputTypeCountCompanyInvitesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientCountOutputType
+     */
+    select?: ClientCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountCompanyInvitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyInvitationWhereInput
   }
 
 
@@ -3874,6 +4010,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | Client$tenantArgs<ExtArgs>
+    companyInvites?: boolean | Client$companyInvitesArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
   export type ClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3921,6 +4059,8 @@ export namespace Prisma {
   export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "name" | "kvk" | "contactEmail" | "numberOfEmployees" | "country" | "address" | "termsAccepted" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | Client$tenantArgs<ExtArgs>
+    companyInvites?: boolean | Client$companyInvitesArgs<ExtArgs>
+    _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type ClientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3929,6 +4069,7 @@ export namespace Prisma {
     name: "Client"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs> | null
+      companyInvites: Prisma.$CompanyInvitationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4337,6 +4478,7 @@ export namespace Prisma {
   export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends Client$tenantArgs<ExtArgs> = {}>(args?: Subset<T, Client$tenantArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    companyInvites<T extends Client$companyInvitesArgs<ExtArgs> = {}>(args?: Subset<T, Client$companyInvitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4781,6 +4923,30 @@ export namespace Prisma {
      */
     include?: TenantInclude<ExtArgs> | null
     where?: TenantWhereInput
+  }
+
+  /**
+   * Client.companyInvites
+   */
+  export type Client$companyInvitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    where?: CompanyInvitationWhereInput
+    orderBy?: CompanyInvitationOrderByWithRelationInput | CompanyInvitationOrderByWithRelationInput[]
+    cursor?: CompanyInvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyInvitationScalarFieldEnum | CompanyInvitationScalarFieldEnum[]
   }
 
   /**
@@ -7241,6 +7407,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc: number | null
     precioEmpresaGrande: number | null
     contribucionEmpresaGrandePfc: number | null
+    multaAanmaningEmpresa: number | null
+    multaAanmaningNatural: number | null
+    multaSommatieEmpresa: number | null
+    multaSommatieNatural: number | null
+    limiteDiasReaccionEmpresa: number | null
+    multaNoReaccionEmpresa: number | null
+    multaNoReaccionNatural: number | null
+    multaAcuerdoPagoEmpresa: number | null
+    multaAcuerdoPagoNatural: number | null
   }
 
   export type GlobalParameterSumAggregateOutputType = {
@@ -7254,6 +7429,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc: number | null
     precioEmpresaGrande: number | null
     contribucionEmpresaGrandePfc: number | null
+    multaAanmaningEmpresa: number | null
+    multaAanmaningNatural: number | null
+    multaSommatieEmpresa: number | null
+    multaSommatieNatural: number | null
+    limiteDiasReaccionEmpresa: number | null
+    multaNoReaccionEmpresa: number | null
+    multaNoReaccionNatural: number | null
+    multaAcuerdoPagoEmpresa: number | null
+    multaAcuerdoPagoNatural: number | null
   }
 
   export type GlobalParameterMinAggregateOutputType = {
@@ -7270,6 +7454,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    multaAanmaningEmpresa: number | null
+    multaAanmaningNatural: number | null
+    multaSommatieEmpresa: number | null
+    multaSommatieNatural: number | null
+    limiteDiasReaccionEmpresa: number | null
+    multaNoReaccionEmpresa: number | null
+    multaNoReaccionNatural: number | null
+    multaAcuerdoPagoEmpresa: number | null
+    multaAcuerdoPagoNatural: number | null
   }
 
   export type GlobalParameterMaxAggregateOutputType = {
@@ -7286,6 +7479,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    multaAanmaningEmpresa: number | null
+    multaAanmaningNatural: number | null
+    multaSommatieEmpresa: number | null
+    multaSommatieNatural: number | null
+    limiteDiasReaccionEmpresa: number | null
+    multaNoReaccionEmpresa: number | null
+    multaNoReaccionNatural: number | null
+    multaAcuerdoPagoEmpresa: number | null
+    multaAcuerdoPagoNatural: number | null
   }
 
   export type GlobalParameterCountAggregateOutputType = {
@@ -7302,6 +7504,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc: number
     createdAt: number
     updatedAt: number
+    multaAanmaningEmpresa: number
+    multaAanmaningNatural: number
+    multaSommatieEmpresa: number
+    multaSommatieNatural: number
+    limiteDiasReaccionEmpresa: number
+    multaNoReaccionEmpresa: number
+    multaNoReaccionNatural: number
+    multaAcuerdoPagoEmpresa: number
+    multaAcuerdoPagoNatural: number
     _all: number
   }
 
@@ -7317,6 +7528,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc?: true
     precioEmpresaGrande?: true
     contribucionEmpresaGrandePfc?: true
+    multaAanmaningEmpresa?: true
+    multaAanmaningNatural?: true
+    multaSommatieEmpresa?: true
+    multaSommatieNatural?: true
+    limiteDiasReaccionEmpresa?: true
+    multaNoReaccionEmpresa?: true
+    multaNoReaccionNatural?: true
+    multaAcuerdoPagoEmpresa?: true
+    multaAcuerdoPagoNatural?: true
   }
 
   export type GlobalParameterSumAggregateInputType = {
@@ -7330,6 +7550,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc?: true
     precioEmpresaGrande?: true
     contribucionEmpresaGrandePfc?: true
+    multaAanmaningEmpresa?: true
+    multaAanmaningNatural?: true
+    multaSommatieEmpresa?: true
+    multaSommatieNatural?: true
+    limiteDiasReaccionEmpresa?: true
+    multaNoReaccionEmpresa?: true
+    multaNoReaccionNatural?: true
+    multaAcuerdoPagoEmpresa?: true
+    multaAcuerdoPagoNatural?: true
   }
 
   export type GlobalParameterMinAggregateInputType = {
@@ -7346,6 +7575,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: true
     createdAt?: true
     updatedAt?: true
+    multaAanmaningEmpresa?: true
+    multaAanmaningNatural?: true
+    multaSommatieEmpresa?: true
+    multaSommatieNatural?: true
+    limiteDiasReaccionEmpresa?: true
+    multaNoReaccionEmpresa?: true
+    multaNoReaccionNatural?: true
+    multaAcuerdoPagoEmpresa?: true
+    multaAcuerdoPagoNatural?: true
   }
 
   export type GlobalParameterMaxAggregateInputType = {
@@ -7362,6 +7600,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: true
     createdAt?: true
     updatedAt?: true
+    multaAanmaningEmpresa?: true
+    multaAanmaningNatural?: true
+    multaSommatieEmpresa?: true
+    multaSommatieNatural?: true
+    limiteDiasReaccionEmpresa?: true
+    multaNoReaccionEmpresa?: true
+    multaNoReaccionNatural?: true
+    multaAcuerdoPagoEmpresa?: true
+    multaAcuerdoPagoNatural?: true
   }
 
   export type GlobalParameterCountAggregateInputType = {
@@ -7378,6 +7625,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: true
     createdAt?: true
     updatedAt?: true
+    multaAanmaningEmpresa?: true
+    multaAanmaningNatural?: true
+    multaSommatieEmpresa?: true
+    multaSommatieNatural?: true
+    limiteDiasReaccionEmpresa?: true
+    multaNoReaccionEmpresa?: true
+    multaNoReaccionNatural?: true
+    multaAcuerdoPagoEmpresa?: true
+    multaAcuerdoPagoNatural?: true
     _all?: true
   }
 
@@ -7481,6 +7737,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc: number
     createdAt: Date
     updatedAt: Date
+    multaAanmaningEmpresa: number
+    multaAanmaningNatural: number
+    multaSommatieEmpresa: number
+    multaSommatieNatural: number
+    limiteDiasReaccionEmpresa: number
+    multaNoReaccionEmpresa: number
+    multaNoReaccionNatural: number
+    multaAcuerdoPagoEmpresa: number
+    multaAcuerdoPagoNatural: number
     _count: GlobalParameterCountAggregateOutputType | null
     _avg: GlobalParameterAvgAggregateOutputType | null
     _sum: GlobalParameterSumAggregateOutputType | null
@@ -7516,6 +7781,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    multaAanmaningEmpresa?: boolean
+    multaAanmaningNatural?: boolean
+    multaSommatieEmpresa?: boolean
+    multaSommatieNatural?: boolean
+    limiteDiasReaccionEmpresa?: boolean
+    multaNoReaccionEmpresa?: boolean
+    multaNoReaccionNatural?: boolean
+    multaAcuerdoPagoEmpresa?: boolean
+    multaAcuerdoPagoNatural?: boolean
     tenantConfigs?: boolean | GlobalParameter$tenantConfigsArgs<ExtArgs>
     _count?: boolean | GlobalParameterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["globalParameter"]>
@@ -7534,6 +7808,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    multaAanmaningEmpresa?: boolean
+    multaAanmaningNatural?: boolean
+    multaSommatieEmpresa?: boolean
+    multaSommatieNatural?: boolean
+    limiteDiasReaccionEmpresa?: boolean
+    multaNoReaccionEmpresa?: boolean
+    multaNoReaccionNatural?: boolean
+    multaAcuerdoPagoEmpresa?: boolean
+    multaAcuerdoPagoNatural?: boolean
   }, ExtArgs["result"]["globalParameter"]>
 
   export type GlobalParameterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7550,6 +7833,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    multaAanmaningEmpresa?: boolean
+    multaAanmaningNatural?: boolean
+    multaSommatieEmpresa?: boolean
+    multaSommatieNatural?: boolean
+    limiteDiasReaccionEmpresa?: boolean
+    multaNoReaccionEmpresa?: boolean
+    multaNoReaccionNatural?: boolean
+    multaAcuerdoPagoEmpresa?: boolean
+    multaAcuerdoPagoNatural?: boolean
   }, ExtArgs["result"]["globalParameter"]>
 
   export type GlobalParameterSelectScalar = {
@@ -7566,9 +7858,18 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    multaAanmaningEmpresa?: boolean
+    multaAanmaningNatural?: boolean
+    multaSommatieEmpresa?: boolean
+    multaSommatieNatural?: boolean
+    limiteDiasReaccionEmpresa?: boolean
+    multaNoReaccionEmpresa?: boolean
+    multaNoReaccionNatural?: boolean
+    multaAcuerdoPagoEmpresa?: boolean
+    multaAcuerdoPagoNatural?: boolean
   }
 
-  export type GlobalParameterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "porcCobranza" | "porcAbb" | "diasPlazoEmpresaAanmaning" | "diasPlazoConsumidorAanmaning" | "diasPlazoEmpresaSommatie" | "diasPlazoConsumidorSommatie" | "precioEmpresaPequena" | "contribucionEmpresaPequenaPfc" | "precioEmpresaGrande" | "contribucionEmpresaGrandePfc" | "createdAt" | "updatedAt", ExtArgs["result"]["globalParameter"]>
+  export type GlobalParameterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "porcCobranza" | "porcAbb" | "diasPlazoEmpresaAanmaning" | "diasPlazoConsumidorAanmaning" | "diasPlazoEmpresaSommatie" | "diasPlazoConsumidorSommatie" | "precioEmpresaPequena" | "contribucionEmpresaPequenaPfc" | "precioEmpresaGrande" | "contribucionEmpresaGrandePfc" | "createdAt" | "updatedAt" | "multaAanmaningEmpresa" | "multaAanmaningNatural" | "multaSommatieEmpresa" | "multaSommatieNatural" | "limiteDiasReaccionEmpresa" | "multaNoReaccionEmpresa" | "multaNoReaccionNatural" | "multaAcuerdoPagoEmpresa" | "multaAcuerdoPagoNatural", ExtArgs["result"]["globalParameter"]>
   export type GlobalParameterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenantConfigs?: boolean | GlobalParameter$tenantConfigsArgs<ExtArgs>
     _count?: boolean | GlobalParameterCountOutputTypeDefaultArgs<ExtArgs>
@@ -7595,6 +7896,15 @@ export namespace Prisma {
       contribucionEmpresaGrandePfc: number
       createdAt: Date
       updatedAt: Date
+      multaAanmaningEmpresa: number
+      multaAanmaningNatural: number
+      multaSommatieEmpresa: number
+      multaSommatieNatural: number
+      limiteDiasReaccionEmpresa: number
+      multaNoReaccionEmpresa: number
+      multaNoReaccionNatural: number
+      multaAcuerdoPagoEmpresa: number
+      multaAcuerdoPagoNatural: number
     }, ExtArgs["result"]["globalParameter"]>
     composites: {}
   }
@@ -8032,6 +8342,15 @@ export namespace Prisma {
     readonly contribucionEmpresaGrandePfc: FieldRef<"GlobalParameter", 'Float'>
     readonly createdAt: FieldRef<"GlobalParameter", 'DateTime'>
     readonly updatedAt: FieldRef<"GlobalParameter", 'DateTime'>
+    readonly multaAanmaningEmpresa: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaAanmaningNatural: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaSommatieEmpresa: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaSommatieNatural: FieldRef<"GlobalParameter", 'Float'>
+    readonly limiteDiasReaccionEmpresa: FieldRef<"GlobalParameter", 'Int'>
+    readonly multaNoReaccionEmpresa: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaNoReaccionNatural: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaAcuerdoPagoEmpresa: FieldRef<"GlobalParameter", 'Float'>
+    readonly multaAcuerdoPagoNatural: FieldRef<"GlobalParameter", 'Float'>
   }
     
 
@@ -19611,6 +19930,1129 @@ export namespace Prisma {
 
 
   /**
+   * Model CompanyInvitation
+   */
+
+  export type AggregateCompanyInvitation = {
+    _count: CompanyInvitationCountAggregateOutputType | null
+    _min: CompanyInvitationMinAggregateOutputType | null
+    _max: CompanyInvitationMaxAggregateOutputType | null
+  }
+
+  export type CompanyInvitationMinAggregateOutputType = {
+    id: string | null
+    invitedEmail: string | null
+    invitedCompany: string | null
+    country: string | null
+    invitingCompanyId: string | null
+    invitationToken: string | null
+    status: $Enums.InvitationStatus | null
+    sentAt: Date | null
+    acceptedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type CompanyInvitationMaxAggregateOutputType = {
+    id: string | null
+    invitedEmail: string | null
+    invitedCompany: string | null
+    country: string | null
+    invitingCompanyId: string | null
+    invitationToken: string | null
+    status: $Enums.InvitationStatus | null
+    sentAt: Date | null
+    acceptedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type CompanyInvitationCountAggregateOutputType = {
+    id: number
+    invitedEmail: number
+    invitedCompany: number
+    country: number
+    invitingCompanyId: number
+    invitationToken: number
+    status: number
+    sentAt: number
+    acceptedAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type CompanyInvitationMinAggregateInputType = {
+    id?: true
+    invitedEmail?: true
+    invitedCompany?: true
+    country?: true
+    invitingCompanyId?: true
+    invitationToken?: true
+    status?: true
+    sentAt?: true
+    acceptedAt?: true
+    expiresAt?: true
+  }
+
+  export type CompanyInvitationMaxAggregateInputType = {
+    id?: true
+    invitedEmail?: true
+    invitedCompany?: true
+    country?: true
+    invitingCompanyId?: true
+    invitationToken?: true
+    status?: true
+    sentAt?: true
+    acceptedAt?: true
+    expiresAt?: true
+  }
+
+  export type CompanyInvitationCountAggregateInputType = {
+    id?: true
+    invitedEmail?: true
+    invitedCompany?: true
+    country?: true
+    invitingCompanyId?: true
+    invitationToken?: true
+    status?: true
+    sentAt?: true
+    acceptedAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type CompanyInvitationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CompanyInvitation to aggregate.
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CompanyInvitations to fetch.
+     */
+    orderBy?: CompanyInvitationOrderByWithRelationInput | CompanyInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CompanyInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CompanyInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CompanyInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CompanyInvitations
+    **/
+    _count?: true | CompanyInvitationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyInvitationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyInvitationMaxAggregateInputType
+  }
+
+  export type GetCompanyInvitationAggregateType<T extends CompanyInvitationAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompanyInvitation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompanyInvitation[P]>
+      : GetScalarType<T[P], AggregateCompanyInvitation[P]>
+  }
+
+
+
+
+  export type CompanyInvitationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyInvitationWhereInput
+    orderBy?: CompanyInvitationOrderByWithAggregationInput | CompanyInvitationOrderByWithAggregationInput[]
+    by: CompanyInvitationScalarFieldEnum[] | CompanyInvitationScalarFieldEnum
+    having?: CompanyInvitationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyInvitationCountAggregateInputType | true
+    _min?: CompanyInvitationMinAggregateInputType
+    _max?: CompanyInvitationMaxAggregateInputType
+  }
+
+  export type CompanyInvitationGroupByOutputType = {
+    id: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitingCompanyId: string
+    invitationToken: string
+    status: $Enums.InvitationStatus
+    sentAt: Date
+    acceptedAt: Date | null
+    expiresAt: Date | null
+    _count: CompanyInvitationCountAggregateOutputType | null
+    _min: CompanyInvitationMinAggregateOutputType | null
+    _max: CompanyInvitationMaxAggregateOutputType | null
+  }
+
+  type GetCompanyInvitationGroupByPayload<T extends CompanyInvitationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyInvitationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyInvitationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyInvitationGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyInvitationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CompanyInvitationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invitedEmail?: boolean
+    invitedCompany?: boolean
+    country?: boolean
+    invitingCompanyId?: boolean
+    invitationToken?: boolean
+    status?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    expiresAt?: boolean
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyInvitation"]>
+
+  export type CompanyInvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invitedEmail?: boolean
+    invitedCompany?: boolean
+    country?: boolean
+    invitingCompanyId?: boolean
+    invitationToken?: boolean
+    status?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    expiresAt?: boolean
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyInvitation"]>
+
+  export type CompanyInvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invitedEmail?: boolean
+    invitedCompany?: boolean
+    country?: boolean
+    invitingCompanyId?: boolean
+    invitationToken?: boolean
+    status?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    expiresAt?: boolean
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyInvitation"]>
+
+  export type CompanyInvitationSelectScalar = {
+    id?: boolean
+    invitedEmail?: boolean
+    invitedCompany?: boolean
+    country?: boolean
+    invitingCompanyId?: boolean
+    invitationToken?: boolean
+    status?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type CompanyInvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invitedEmail" | "invitedCompany" | "country" | "invitingCompanyId" | "invitationToken" | "status" | "sentAt" | "acceptedAt" | "expiresAt", ExtArgs["result"]["companyInvitation"]>
+  export type CompanyInvitationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+  export type CompanyInvitationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+  export type CompanyInvitationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invitingCompany?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $CompanyInvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CompanyInvitation"
+    objects: {
+      invitingCompany: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invitedEmail: string
+      invitedCompany: string
+      country: string
+      invitingCompanyId: string
+      invitationToken: string
+      status: $Enums.InvitationStatus
+      sentAt: Date
+      acceptedAt: Date | null
+      expiresAt: Date | null
+    }, ExtArgs["result"]["companyInvitation"]>
+    composites: {}
+  }
+
+  type CompanyInvitationGetPayload<S extends boolean | null | undefined | CompanyInvitationDefaultArgs> = $Result.GetResult<Prisma.$CompanyInvitationPayload, S>
+
+  type CompanyInvitationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CompanyInvitationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyInvitationCountAggregateInputType | true
+    }
+
+  export interface CompanyInvitationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CompanyInvitation'], meta: { name: 'CompanyInvitation' } }
+    /**
+     * Find zero or one CompanyInvitation that matches the filter.
+     * @param {CompanyInvitationFindUniqueArgs} args - Arguments to find a CompanyInvitation
+     * @example
+     * // Get one CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CompanyInvitationFindUniqueArgs>(args: SelectSubset<T, CompanyInvitationFindUniqueArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one CompanyInvitation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CompanyInvitationFindUniqueOrThrowArgs} args - Arguments to find a CompanyInvitation
+     * @example
+     * // Get one CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CompanyInvitationFindUniqueOrThrowArgs>(args: SelectSubset<T, CompanyInvitationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CompanyInvitation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationFindFirstArgs} args - Arguments to find a CompanyInvitation
+     * @example
+     * // Get one CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CompanyInvitationFindFirstArgs>(args?: SelectSubset<T, CompanyInvitationFindFirstArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CompanyInvitation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationFindFirstOrThrowArgs} args - Arguments to find a CompanyInvitation
+     * @example
+     * // Get one CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CompanyInvitationFindFirstOrThrowArgs>(args?: SelectSubset<T, CompanyInvitationFindFirstOrThrowArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more CompanyInvitations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CompanyInvitations
+     * const companyInvitations = await prisma.companyInvitation.findMany()
+     * 
+     * // Get first 10 CompanyInvitations
+     * const companyInvitations = await prisma.companyInvitation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyInvitationWithIdOnly = await prisma.companyInvitation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CompanyInvitationFindManyArgs>(args?: SelectSubset<T, CompanyInvitationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a CompanyInvitation.
+     * @param {CompanyInvitationCreateArgs} args - Arguments to create a CompanyInvitation.
+     * @example
+     * // Create one CompanyInvitation
+     * const CompanyInvitation = await prisma.companyInvitation.create({
+     *   data: {
+     *     // ... data to create a CompanyInvitation
+     *   }
+     * })
+     * 
+     */
+    create<T extends CompanyInvitationCreateArgs>(args: SelectSubset<T, CompanyInvitationCreateArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many CompanyInvitations.
+     * @param {CompanyInvitationCreateManyArgs} args - Arguments to create many CompanyInvitations.
+     * @example
+     * // Create many CompanyInvitations
+     * const companyInvitation = await prisma.companyInvitation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CompanyInvitationCreateManyArgs>(args?: SelectSubset<T, CompanyInvitationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CompanyInvitations and returns the data saved in the database.
+     * @param {CompanyInvitationCreateManyAndReturnArgs} args - Arguments to create many CompanyInvitations.
+     * @example
+     * // Create many CompanyInvitations
+     * const companyInvitation = await prisma.companyInvitation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CompanyInvitations and only return the `id`
+     * const companyInvitationWithIdOnly = await prisma.companyInvitation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CompanyInvitationCreateManyAndReturnArgs>(args?: SelectSubset<T, CompanyInvitationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a CompanyInvitation.
+     * @param {CompanyInvitationDeleteArgs} args - Arguments to delete one CompanyInvitation.
+     * @example
+     * // Delete one CompanyInvitation
+     * const CompanyInvitation = await prisma.companyInvitation.delete({
+     *   where: {
+     *     // ... filter to delete one CompanyInvitation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CompanyInvitationDeleteArgs>(args: SelectSubset<T, CompanyInvitationDeleteArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one CompanyInvitation.
+     * @param {CompanyInvitationUpdateArgs} args - Arguments to update one CompanyInvitation.
+     * @example
+     * // Update one CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CompanyInvitationUpdateArgs>(args: SelectSubset<T, CompanyInvitationUpdateArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more CompanyInvitations.
+     * @param {CompanyInvitationDeleteManyArgs} args - Arguments to filter CompanyInvitations to delete.
+     * @example
+     * // Delete a few CompanyInvitations
+     * const { count } = await prisma.companyInvitation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CompanyInvitationDeleteManyArgs>(args?: SelectSubset<T, CompanyInvitationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyInvitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CompanyInvitations
+     * const companyInvitation = await prisma.companyInvitation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CompanyInvitationUpdateManyArgs>(args: SelectSubset<T, CompanyInvitationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyInvitations and returns the data updated in the database.
+     * @param {CompanyInvitationUpdateManyAndReturnArgs} args - Arguments to update many CompanyInvitations.
+     * @example
+     * // Update many CompanyInvitations
+     * const companyInvitation = await prisma.companyInvitation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CompanyInvitations and only return the `id`
+     * const companyInvitationWithIdOnly = await prisma.companyInvitation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CompanyInvitationUpdateManyAndReturnArgs>(args: SelectSubset<T, CompanyInvitationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one CompanyInvitation.
+     * @param {CompanyInvitationUpsertArgs} args - Arguments to update or create a CompanyInvitation.
+     * @example
+     * // Update or create a CompanyInvitation
+     * const companyInvitation = await prisma.companyInvitation.upsert({
+     *   create: {
+     *     // ... data to create a CompanyInvitation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CompanyInvitation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CompanyInvitationUpsertArgs>(args: SelectSubset<T, CompanyInvitationUpsertArgs<ExtArgs>>): Prisma__CompanyInvitationClient<$Result.GetResult<Prisma.$CompanyInvitationPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of CompanyInvitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationCountArgs} args - Arguments to filter CompanyInvitations to count.
+     * @example
+     * // Count the number of CompanyInvitations
+     * const count = await prisma.companyInvitation.count({
+     *   where: {
+     *     // ... the filter for the CompanyInvitations we want to count
+     *   }
+     * })
+    **/
+    count<T extends CompanyInvitationCountArgs>(
+      args?: Subset<T, CompanyInvitationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyInvitationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CompanyInvitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyInvitationAggregateArgs>(args: Subset<T, CompanyInvitationAggregateArgs>): Prisma.PrismaPromise<GetCompanyInvitationAggregateType<T>>
+
+    /**
+     * Group by CompanyInvitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyInvitationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CompanyInvitationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CompanyInvitationGroupByArgs['orderBy'] }
+        : { orderBy?: CompanyInvitationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CompanyInvitationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyInvitationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CompanyInvitation model
+   */
+  readonly fields: CompanyInvitationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CompanyInvitation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CompanyInvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    invitingCompany<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CompanyInvitation model
+   */ 
+  interface CompanyInvitationFieldRefs {
+    readonly id: FieldRef<"CompanyInvitation", 'String'>
+    readonly invitedEmail: FieldRef<"CompanyInvitation", 'String'>
+    readonly invitedCompany: FieldRef<"CompanyInvitation", 'String'>
+    readonly country: FieldRef<"CompanyInvitation", 'String'>
+    readonly invitingCompanyId: FieldRef<"CompanyInvitation", 'String'>
+    readonly invitationToken: FieldRef<"CompanyInvitation", 'String'>
+    readonly status: FieldRef<"CompanyInvitation", 'InvitationStatus'>
+    readonly sentAt: FieldRef<"CompanyInvitation", 'DateTime'>
+    readonly acceptedAt: FieldRef<"CompanyInvitation", 'DateTime'>
+    readonly expiresAt: FieldRef<"CompanyInvitation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CompanyInvitation findUnique
+   */
+  export type CompanyInvitationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which CompanyInvitation to fetch.
+     */
+    where: CompanyInvitationWhereUniqueInput
+  }
+
+  /**
+   * CompanyInvitation findUniqueOrThrow
+   */
+  export type CompanyInvitationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which CompanyInvitation to fetch.
+     */
+    where: CompanyInvitationWhereUniqueInput
+  }
+
+  /**
+   * CompanyInvitation findFirst
+   */
+  export type CompanyInvitationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which CompanyInvitation to fetch.
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CompanyInvitations to fetch.
+     */
+    orderBy?: CompanyInvitationOrderByWithRelationInput | CompanyInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CompanyInvitations.
+     */
+    cursor?: CompanyInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CompanyInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CompanyInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CompanyInvitations.
+     */
+    distinct?: CompanyInvitationScalarFieldEnum | CompanyInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * CompanyInvitation findFirstOrThrow
+   */
+  export type CompanyInvitationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which CompanyInvitation to fetch.
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CompanyInvitations to fetch.
+     */
+    orderBy?: CompanyInvitationOrderByWithRelationInput | CompanyInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CompanyInvitations.
+     */
+    cursor?: CompanyInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CompanyInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CompanyInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CompanyInvitations.
+     */
+    distinct?: CompanyInvitationScalarFieldEnum | CompanyInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * CompanyInvitation findMany
+   */
+  export type CompanyInvitationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which CompanyInvitations to fetch.
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CompanyInvitations to fetch.
+     */
+    orderBy?: CompanyInvitationOrderByWithRelationInput | CompanyInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CompanyInvitations.
+     */
+    cursor?: CompanyInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CompanyInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CompanyInvitations.
+     */
+    skip?: number
+    distinct?: CompanyInvitationScalarFieldEnum | CompanyInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * CompanyInvitation create
+   */
+  export type CompanyInvitationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CompanyInvitation.
+     */
+    data: XOR<CompanyInvitationCreateInput, CompanyInvitationUncheckedCreateInput>
+  }
+
+  /**
+   * CompanyInvitation createMany
+   */
+  export type CompanyInvitationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CompanyInvitations.
+     */
+    data: CompanyInvitationCreateManyInput | CompanyInvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CompanyInvitation createManyAndReturn
+   */
+  export type CompanyInvitationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * The data used to create many CompanyInvitations.
+     */
+    data: CompanyInvitationCreateManyInput | CompanyInvitationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CompanyInvitation update
+   */
+  export type CompanyInvitationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CompanyInvitation.
+     */
+    data: XOR<CompanyInvitationUpdateInput, CompanyInvitationUncheckedUpdateInput>
+    /**
+     * Choose, which CompanyInvitation to update.
+     */
+    where: CompanyInvitationWhereUniqueInput
+  }
+
+  /**
+   * CompanyInvitation updateMany
+   */
+  export type CompanyInvitationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CompanyInvitations.
+     */
+    data: XOR<CompanyInvitationUpdateManyMutationInput, CompanyInvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which CompanyInvitations to update
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * Limit how many CompanyInvitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CompanyInvitation updateManyAndReturn
+   */
+  export type CompanyInvitationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * The data used to update CompanyInvitations.
+     */
+    data: XOR<CompanyInvitationUpdateManyMutationInput, CompanyInvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which CompanyInvitations to update
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * Limit how many CompanyInvitations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CompanyInvitation upsert
+   */
+  export type CompanyInvitationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CompanyInvitation to update in case it exists.
+     */
+    where: CompanyInvitationWhereUniqueInput
+    /**
+     * In case the CompanyInvitation found by the `where` argument doesn't exist, create a new CompanyInvitation with this data.
+     */
+    create: XOR<CompanyInvitationCreateInput, CompanyInvitationUncheckedCreateInput>
+    /**
+     * In case the CompanyInvitation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CompanyInvitationUpdateInput, CompanyInvitationUncheckedUpdateInput>
+  }
+
+  /**
+   * CompanyInvitation delete
+   */
+  export type CompanyInvitationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+    /**
+     * Filter which CompanyInvitation to delete.
+     */
+    where: CompanyInvitationWhereUniqueInput
+  }
+
+  /**
+   * CompanyInvitation deleteMany
+   */
+  export type CompanyInvitationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CompanyInvitations to delete
+     */
+    where?: CompanyInvitationWhereInput
+    /**
+     * Limit how many CompanyInvitations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CompanyInvitation without action
+   */
+  export type CompanyInvitationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyInvitation
+     */
+    select?: CompanyInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CompanyInvitation
+     */
+    omit?: CompanyInvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInvitationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19702,7 +21144,16 @@ export namespace Prisma {
     precioEmpresaGrande: 'precioEmpresaGrande',
     contribucionEmpresaGrandePfc: 'contribucionEmpresaGrandePfc',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    multaAanmaningEmpresa: 'multaAanmaningEmpresa',
+    multaAanmaningNatural: 'multaAanmaningNatural',
+    multaSommatieEmpresa: 'multaSommatieEmpresa',
+    multaSommatieNatural: 'multaSommatieNatural',
+    limiteDiasReaccionEmpresa: 'limiteDiasReaccionEmpresa',
+    multaNoReaccionEmpresa: 'multaNoReaccionEmpresa',
+    multaNoReaccionNatural: 'multaNoReaccionNatural',
+    multaAcuerdoPagoEmpresa: 'multaAcuerdoPagoEmpresa',
+    multaAcuerdoPagoNatural: 'multaAcuerdoPagoNatural'
   };
 
   export type GlobalParameterScalarFieldEnum = (typeof GlobalParameterScalarFieldEnum)[keyof typeof GlobalParameterScalarFieldEnum]
@@ -19880,6 +21331,22 @@ export namespace Prisma {
   export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
 
 
+  export const CompanyInvitationScalarFieldEnum: {
+    id: 'id',
+    invitedEmail: 'invitedEmail',
+    invitedCompany: 'invitedCompany',
+    country: 'country',
+    invitingCompanyId: 'invitingCompanyId',
+    invitationToken: 'invitationToken',
+    status: 'status',
+    sentAt: 'sentAt',
+    acceptedAt: 'acceptedAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type CompanyInvitationScalarFieldEnum = (typeof CompanyInvitationScalarFieldEnum)[keyof typeof CompanyInvitationScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20026,6 +21493,20 @@ export namespace Prisma {
    */
   export type ListEnumPaymentApplicationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentApplicationType[]'>
     
+
+
+  /**
+   * Reference to a field of type 'InvitationStatus'
+   */
+  export type EnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InvitationStatus[]'
+   */
+  export type ListEnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus[]'>
+    
   /**
    * Deep Input Types
    */
@@ -20117,6 +21598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
+    companyInvites?: CompanyInvitationListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -20132,6 +21614,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
+    companyInvites?: CompanyInvitationOrderByRelationAggregateInput
   }
 
   export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -20150,6 +21633,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
+    companyInvites?: CompanyInvitationListRelationFilter
   }, "id">
 
   export type ClientOrderByWithAggregationInput = {
@@ -20401,6 +21885,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFilter<"GlobalParameter"> | number
     createdAt?: DateTimeFilter<"GlobalParameter"> | Date | string
     updatedAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    multaAanmaningEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaAanmaningNatural?: FloatFilter<"GlobalParameter"> | number
+    multaSommatieEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaSommatieNatural?: FloatFilter<"GlobalParameter"> | number
+    limiteDiasReaccionEmpresa?: IntFilter<"GlobalParameter"> | number
+    multaNoReaccionEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaNoReaccionNatural?: FloatFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoNatural?: FloatFilter<"GlobalParameter"> | number
     tenantConfigs?: TenantConfigListRelationFilter
   }
 
@@ -20418,6 +21911,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
     tenantConfigs?: TenantConfigOrderByRelationAggregateInput
   }
 
@@ -20438,6 +21940,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFilter<"GlobalParameter"> | number
     createdAt?: DateTimeFilter<"GlobalParameter"> | Date | string
     updatedAt?: DateTimeFilter<"GlobalParameter"> | Date | string
+    multaAanmaningEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaAanmaningNatural?: FloatFilter<"GlobalParameter"> | number
+    multaSommatieEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaSommatieNatural?: FloatFilter<"GlobalParameter"> | number
+    limiteDiasReaccionEmpresa?: IntFilter<"GlobalParameter"> | number
+    multaNoReaccionEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaNoReaccionNatural?: FloatFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoEmpresa?: FloatFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoNatural?: FloatFilter<"GlobalParameter"> | number
     tenantConfigs?: TenantConfigListRelationFilter
   }, "id">
 
@@ -20455,6 +21966,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
     _count?: GlobalParameterCountOrderByAggregateInput
     _avg?: GlobalParameterAvgOrderByAggregateInput
     _max?: GlobalParameterMaxOrderByAggregateInput
@@ -20479,6 +21999,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatWithAggregatesFilter<"GlobalParameter"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GlobalParameter"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"GlobalParameter"> | Date | string
+    multaAanmaningEmpresa?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaAanmaningNatural?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaSommatieEmpresa?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaSommatieNatural?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    limiteDiasReaccionEmpresa?: IntWithAggregatesFilter<"GlobalParameter"> | number
+    multaNoReaccionEmpresa?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaNoReaccionNatural?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoEmpresa?: FloatWithAggregatesFilter<"GlobalParameter"> | number
+    multaAcuerdoPagoNatural?: FloatWithAggregatesFilter<"GlobalParameter"> | number
   }
 
   export type TenantConfigWhereInput = {
@@ -21402,6 +22931,86 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
   }
 
+  export type CompanyInvitationWhereInput = {
+    AND?: CompanyInvitationWhereInput | CompanyInvitationWhereInput[]
+    OR?: CompanyInvitationWhereInput[]
+    NOT?: CompanyInvitationWhereInput | CompanyInvitationWhereInput[]
+    id?: StringFilter<"CompanyInvitation"> | string
+    invitedEmail?: StringFilter<"CompanyInvitation"> | string
+    invitedCompany?: StringFilter<"CompanyInvitation"> | string
+    country?: StringFilter<"CompanyInvitation"> | string
+    invitingCompanyId?: StringFilter<"CompanyInvitation"> | string
+    invitationToken?: StringFilter<"CompanyInvitation"> | string
+    status?: EnumInvitationStatusFilter<"CompanyInvitation"> | $Enums.InvitationStatus
+    sentAt?: DateTimeFilter<"CompanyInvitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
+    invitingCompany?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type CompanyInvitationOrderByWithRelationInput = {
+    id?: SortOrder
+    invitedEmail?: SortOrder
+    invitedCompany?: SortOrder
+    country?: SortOrder
+    invitingCompanyId?: SortOrder
+    invitationToken?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    invitingCompany?: ClientOrderByWithRelationInput
+  }
+
+  export type CompanyInvitationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    invitationToken?: string
+    AND?: CompanyInvitationWhereInput | CompanyInvitationWhereInput[]
+    OR?: CompanyInvitationWhereInput[]
+    NOT?: CompanyInvitationWhereInput | CompanyInvitationWhereInput[]
+    invitedEmail?: StringFilter<"CompanyInvitation"> | string
+    invitedCompany?: StringFilter<"CompanyInvitation"> | string
+    country?: StringFilter<"CompanyInvitation"> | string
+    invitingCompanyId?: StringFilter<"CompanyInvitation"> | string
+    status?: EnumInvitationStatusFilter<"CompanyInvitation"> | $Enums.InvitationStatus
+    sentAt?: DateTimeFilter<"CompanyInvitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
+    invitingCompany?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id" | "invitationToken">
+
+  export type CompanyInvitationOrderByWithAggregationInput = {
+    id?: SortOrder
+    invitedEmail?: SortOrder
+    invitedCompany?: SortOrder
+    country?: SortOrder
+    invitingCompanyId?: SortOrder
+    invitationToken?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    _count?: CompanyInvitationCountOrderByAggregateInput
+    _max?: CompanyInvitationMaxOrderByAggregateInput
+    _min?: CompanyInvitationMinOrderByAggregateInput
+  }
+
+  export type CompanyInvitationScalarWhereWithAggregatesInput = {
+    AND?: CompanyInvitationScalarWhereWithAggregatesInput | CompanyInvitationScalarWhereWithAggregatesInput[]
+    OR?: CompanyInvitationScalarWhereWithAggregatesInput[]
+    NOT?: CompanyInvitationScalarWhereWithAggregatesInput | CompanyInvitationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    invitedEmail?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    invitedCompany?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    country?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    invitingCompanyId?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    invitationToken?: StringWithAggregatesFilter<"CompanyInvitation"> | string
+    status?: EnumInvitationStatusWithAggregatesFilter<"CompanyInvitation"> | $Enums.InvitationStatus
+    sentAt?: DateTimeWithAggregatesFilter<"CompanyInvitation"> | Date | string
+    acceptedAt?: DateTimeNullableWithAggregatesFilter<"CompanyInvitation"> | Date | string | null
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"CompanyInvitation"> | Date | string | null
+  }
+
   export type TenantCreateInput = {
     id?: string
     subdomain: string
@@ -21490,6 +23099,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutClientInput
+    companyInvites?: CompanyInvitationCreateNestedManyWithoutInvitingCompanyInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -21505,6 +23115,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantUncheckedCreateNestedOneWithoutClientInput
+    companyInvites?: CompanyInvitationUncheckedCreateNestedManyWithoutInvitingCompanyInput
   }
 
   export type ClientUpdateInput = {
@@ -21520,6 +23131,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutClientNestedInput
+    companyInvites?: CompanyInvitationUpdateManyWithoutInvitingCompanyNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -21535,6 +23147,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUncheckedUpdateOneWithoutClientNestedInput
+    companyInvites?: CompanyInvitationUncheckedUpdateManyWithoutInvitingCompanyNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -21819,6 +23432,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    multaAanmaningEmpresa?: number
+    multaAanmaningNatural?: number
+    multaSommatieEmpresa?: number
+    multaSommatieNatural?: number
+    limiteDiasReaccionEmpresa?: number
+    multaNoReaccionEmpresa?: number
+    multaNoReaccionNatural?: number
+    multaAcuerdoPagoEmpresa?: number
+    multaAcuerdoPagoNatural?: number
     tenantConfigs?: TenantConfigCreateNestedManyWithoutParameterInput
   }
 
@@ -21836,6 +23458,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    multaAanmaningEmpresa?: number
+    multaAanmaningNatural?: number
+    multaSommatieEmpresa?: number
+    multaSommatieNatural?: number
+    limiteDiasReaccionEmpresa?: number
+    multaNoReaccionEmpresa?: number
+    multaNoReaccionNatural?: number
+    multaAcuerdoPagoEmpresa?: number
+    multaAcuerdoPagoNatural?: number
     tenantConfigs?: TenantConfigUncheckedCreateNestedManyWithoutParameterInput
   }
 
@@ -21853,6 +23484,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
     tenantConfigs?: TenantConfigUpdateManyWithoutParameterNestedInput
   }
 
@@ -21870,6 +23510,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
     tenantConfigs?: TenantConfigUncheckedUpdateManyWithoutParameterNestedInput
   }
 
@@ -21887,6 +23536,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    multaAanmaningEmpresa?: number
+    multaAanmaningNatural?: number
+    multaSommatieEmpresa?: number
+    multaSommatieNatural?: number
+    limiteDiasReaccionEmpresa?: number
+    multaNoReaccionEmpresa?: number
+    multaNoReaccionNatural?: number
+    multaAcuerdoPagoEmpresa?: number
+    multaAcuerdoPagoNatural?: number
   }
 
   export type GlobalParameterUpdateManyMutationInput = {
@@ -21903,6 +23561,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
   }
 
   export type GlobalParameterUncheckedUpdateManyInput = {
@@ -21919,6 +23586,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
   }
 
   export type TenantConfigCreateInput = {
@@ -22957,6 +24633,96 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CompanyInvitationCreateInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    invitingCompany: ClientCreateNestedOneWithoutCompanyInvitesInput
+  }
+
+  export type CompanyInvitationUncheckedCreateInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitingCompanyId: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+  }
+
+  export type CompanyInvitationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitingCompany?: ClientUpdateOneRequiredWithoutCompanyInvitesNestedInput
+  }
+
+  export type CompanyInvitationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitingCompanyId?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CompanyInvitationCreateManyInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitingCompanyId: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+  }
+
+  export type CompanyInvitationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CompanyInvitationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitingCompanyId?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -23102,6 +24868,16 @@ export namespace Prisma {
   export type TenantNullableScalarRelationFilter = {
     is?: TenantWhereInput | null
     isNot?: TenantWhereInput | null
+  }
+
+  export type CompanyInvitationListRelationFilter = {
+    every?: CompanyInvitationWhereInput
+    some?: CompanyInvitationWhereInput
+    none?: CompanyInvitationWhereInput
+  }
+
+  export type CompanyInvitationOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ClientCountOrderByAggregateInput = {
@@ -23366,6 +25142,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
   }
 
   export type GlobalParameterAvgOrderByAggregateInput = {
@@ -23379,6 +25164,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc?: SortOrder
     precioEmpresaGrande?: SortOrder
     contribucionEmpresaGrandePfc?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
   }
 
   export type GlobalParameterMaxOrderByAggregateInput = {
@@ -23395,6 +25189,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
   }
 
   export type GlobalParameterMinOrderByAggregateInput = {
@@ -23411,6 +25214,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
   }
 
   export type GlobalParameterSumOrderByAggregateInput = {
@@ -23424,6 +25236,15 @@ export namespace Prisma {
     contribucionEmpresaPequenaPfc?: SortOrder
     precioEmpresaGrande?: SortOrder
     contribucionEmpresaGrandePfc?: SortOrder
+    multaAanmaningEmpresa?: SortOrder
+    multaAanmaningNatural?: SortOrder
+    multaSommatieEmpresa?: SortOrder
+    multaSommatieNatural?: SortOrder
+    limiteDiasReaccionEmpresa?: SortOrder
+    multaNoReaccionEmpresa?: SortOrder
+    multaNoReaccionNatural?: SortOrder
+    multaAcuerdoPagoEmpresa?: SortOrder
+    multaAcuerdoPagoNatural?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -24177,6 +25998,62 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumInvitationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusFilter<$PrismaModel> | $Enums.InvitationStatus
+  }
+
+  export type CompanyInvitationCountOrderByAggregateInput = {
+    id?: SortOrder
+    invitedEmail?: SortOrder
+    invitedCompany?: SortOrder
+    country?: SortOrder
+    invitingCompanyId?: SortOrder
+    invitationToken?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type CompanyInvitationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invitedEmail?: SortOrder
+    invitedCompany?: SortOrder
+    country?: SortOrder
+    invitingCompanyId?: SortOrder
+    invitationToken?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type CompanyInvitationMinOrderByAggregateInput = {
+    id?: SortOrder
+    invitedEmail?: SortOrder
+    invitedCompany?: SortOrder
+    country?: SortOrder
+    invitingCompanyId?: SortOrder
+    invitationToken?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type EnumInvitationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvitationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvitationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvitationStatusFilter<$PrismaModel>
+  }
+
   export type ClientCreateNestedOneWithoutTenantInput = {
     create?: XOR<ClientCreateWithoutTenantInput, ClientUncheckedCreateWithoutTenantInput>
     connectOrCreate?: ClientCreateOrConnectWithoutTenantInput
@@ -24415,10 +26292,24 @@ export namespace Prisma {
     connect?: TenantWhereUniqueInput
   }
 
+  export type CompanyInvitationCreateNestedManyWithoutInvitingCompanyInput = {
+    create?: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput> | CompanyInvitationCreateWithoutInvitingCompanyInput[] | CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput[]
+    connectOrCreate?: CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput | CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput[]
+    createMany?: CompanyInvitationCreateManyInvitingCompanyInputEnvelope
+    connect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+  }
+
   export type TenantUncheckedCreateNestedOneWithoutClientInput = {
     create?: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
     connectOrCreate?: TenantCreateOrConnectWithoutClientInput
     connect?: TenantWhereUniqueInput
+  }
+
+  export type CompanyInvitationUncheckedCreateNestedManyWithoutInvitingCompanyInput = {
+    create?: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput> | CompanyInvitationCreateWithoutInvitingCompanyInput[] | CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput[]
+    connectOrCreate?: CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput | CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput[]
+    createMany?: CompanyInvitationCreateManyInvitingCompanyInputEnvelope
+    connect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -24435,6 +26326,20 @@ export namespace Prisma {
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutClientInput, TenantUpdateWithoutClientInput>, TenantUncheckedUpdateWithoutClientInput>
   }
 
+  export type CompanyInvitationUpdateManyWithoutInvitingCompanyNestedInput = {
+    create?: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput> | CompanyInvitationCreateWithoutInvitingCompanyInput[] | CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput[]
+    connectOrCreate?: CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput | CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput[]
+    upsert?: CompanyInvitationUpsertWithWhereUniqueWithoutInvitingCompanyInput | CompanyInvitationUpsertWithWhereUniqueWithoutInvitingCompanyInput[]
+    createMany?: CompanyInvitationCreateManyInvitingCompanyInputEnvelope
+    set?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    disconnect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    delete?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    connect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    update?: CompanyInvitationUpdateWithWhereUniqueWithoutInvitingCompanyInput | CompanyInvitationUpdateWithWhereUniqueWithoutInvitingCompanyInput[]
+    updateMany?: CompanyInvitationUpdateManyWithWhereWithoutInvitingCompanyInput | CompanyInvitationUpdateManyWithWhereWithoutInvitingCompanyInput[]
+    deleteMany?: CompanyInvitationScalarWhereInput | CompanyInvitationScalarWhereInput[]
+  }
+
   export type TenantUncheckedUpdateOneWithoutClientNestedInput = {
     create?: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
     connectOrCreate?: TenantCreateOrConnectWithoutClientInput
@@ -24443,6 +26348,20 @@ export namespace Prisma {
     delete?: TenantWhereInput | boolean
     connect?: TenantWhereUniqueInput
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutClientInput, TenantUpdateWithoutClientInput>, TenantUncheckedUpdateWithoutClientInput>
+  }
+
+  export type CompanyInvitationUncheckedUpdateManyWithoutInvitingCompanyNestedInput = {
+    create?: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput> | CompanyInvitationCreateWithoutInvitingCompanyInput[] | CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput[]
+    connectOrCreate?: CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput | CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput[]
+    upsert?: CompanyInvitationUpsertWithWhereUniqueWithoutInvitingCompanyInput | CompanyInvitationUpsertWithWhereUniqueWithoutInvitingCompanyInput[]
+    createMany?: CompanyInvitationCreateManyInvitingCompanyInputEnvelope
+    set?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    disconnect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    delete?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    connect?: CompanyInvitationWhereUniqueInput | CompanyInvitationWhereUniqueInput[]
+    update?: CompanyInvitationUpdateWithWhereUniqueWithoutInvitingCompanyInput | CompanyInvitationUpdateWithWhereUniqueWithoutInvitingCompanyInput[]
+    updateMany?: CompanyInvitationUpdateManyWithWhereWithoutInvitingCompanyInput | CompanyInvitationUpdateManyWithWhereWithoutInvitingCompanyInput[]
+    deleteMany?: CompanyInvitationScalarWhereInput | CompanyInvitationScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutRoleInput = {
@@ -25291,6 +27210,24 @@ export namespace Prisma {
     deleteMany?: DebtorScalarWhereInput | DebtorScalarWhereInput[]
   }
 
+  export type ClientCreateNestedOneWithoutCompanyInvitesInput = {
+    create?: XOR<ClientCreateWithoutCompanyInvitesInput, ClientUncheckedCreateWithoutCompanyInvitesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutCompanyInvitesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type EnumInvitationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InvitationStatus
+  }
+
+  export type ClientUpdateOneRequiredWithoutCompanyInvitesNestedInput = {
+    create?: XOR<ClientCreateWithoutCompanyInvitesInput, ClientUncheckedCreateWithoutCompanyInvitesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutCompanyInvitesInput
+    upsert?: ClientUpsertWithoutCompanyInvitesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutCompanyInvitesInput, ClientUpdateWithoutCompanyInvitesInput>, ClientUncheckedUpdateWithoutCompanyInvitesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25576,6 +27513,23 @@ export namespace Prisma {
     _max?: NestedEnumPaymentApplicationTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumInvitationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusFilter<$PrismaModel> | $Enums.InvitationStatus
+  }
+
+  export type NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvitationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvitationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvitationStatusFilter<$PrismaModel>
+  }
+
   export type ClientCreateWithoutTenantInput = {
     id?: string
     type: string
@@ -25588,6 +27542,7 @@ export namespace Prisma {
     termsAccepted: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    companyInvites?: CompanyInvitationCreateNestedManyWithoutInvitingCompanyInput
   }
 
   export type ClientUncheckedCreateWithoutTenantInput = {
@@ -25602,6 +27557,7 @@ export namespace Prisma {
     termsAccepted: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    companyInvites?: CompanyInvitationUncheckedCreateNestedManyWithoutInvitingCompanyInput
   }
 
   export type ClientCreateOrConnectWithoutTenantInput = {
@@ -25882,6 +27838,7 @@ export namespace Prisma {
     termsAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyInvites?: CompanyInvitationUpdateManyWithoutInvitingCompanyNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTenantInput = {
@@ -25896,6 +27853,7 @@ export namespace Prisma {
     termsAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyInvites?: CompanyInvitationUncheckedUpdateManyWithoutInvitingCompanyNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutTenantInput = {
@@ -26119,6 +28077,40 @@ export namespace Prisma {
     create: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
   }
 
+  export type CompanyInvitationCreateWithoutInvitingCompanyInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+  }
+
+  export type CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+  }
+
+  export type CompanyInvitationCreateOrConnectWithoutInvitingCompanyInput = {
+    where: CompanyInvitationWhereUniqueInput
+    create: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput>
+  }
+
+  export type CompanyInvitationCreateManyInvitingCompanyInputEnvelope = {
+    data: CompanyInvitationCreateManyInvitingCompanyInput | CompanyInvitationCreateManyInvitingCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantUpsertWithoutClientInput = {
     update: XOR<TenantUpdateWithoutClientInput, TenantUncheckedUpdateWithoutClientInput>
     create: XOR<TenantCreateWithoutClientInput, TenantUncheckedCreateWithoutClientInput>
@@ -26152,6 +28144,38 @@ export namespace Prisma {
     accountsReceivable?: AccountsReceivableUncheckedUpdateManyWithoutTenantNestedInput
     debtors?: DebtorUncheckedUpdateManyWithoutTenantNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type CompanyInvitationUpsertWithWhereUniqueWithoutInvitingCompanyInput = {
+    where: CompanyInvitationWhereUniqueInput
+    update: XOR<CompanyInvitationUpdateWithoutInvitingCompanyInput, CompanyInvitationUncheckedUpdateWithoutInvitingCompanyInput>
+    create: XOR<CompanyInvitationCreateWithoutInvitingCompanyInput, CompanyInvitationUncheckedCreateWithoutInvitingCompanyInput>
+  }
+
+  export type CompanyInvitationUpdateWithWhereUniqueWithoutInvitingCompanyInput = {
+    where: CompanyInvitationWhereUniqueInput
+    data: XOR<CompanyInvitationUpdateWithoutInvitingCompanyInput, CompanyInvitationUncheckedUpdateWithoutInvitingCompanyInput>
+  }
+
+  export type CompanyInvitationUpdateManyWithWhereWithoutInvitingCompanyInput = {
+    where: CompanyInvitationScalarWhereInput
+    data: XOR<CompanyInvitationUpdateManyMutationInput, CompanyInvitationUncheckedUpdateManyWithoutInvitingCompanyInput>
+  }
+
+  export type CompanyInvitationScalarWhereInput = {
+    AND?: CompanyInvitationScalarWhereInput | CompanyInvitationScalarWhereInput[]
+    OR?: CompanyInvitationScalarWhereInput[]
+    NOT?: CompanyInvitationScalarWhereInput | CompanyInvitationScalarWhereInput[]
+    id?: StringFilter<"CompanyInvitation"> | string
+    invitedEmail?: StringFilter<"CompanyInvitation"> | string
+    invitedCompany?: StringFilter<"CompanyInvitation"> | string
+    country?: StringFilter<"CompanyInvitation"> | string
+    invitingCompanyId?: StringFilter<"CompanyInvitation"> | string
+    invitationToken?: StringFilter<"CompanyInvitation"> | string
+    status?: EnumInvitationStatusFilter<"CompanyInvitation"> | $Enums.InvitationStatus
+    sentAt?: DateTimeFilter<"CompanyInvitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"CompanyInvitation"> | Date | string | null
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -26667,6 +28691,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    multaAanmaningEmpresa?: number
+    multaAanmaningNatural?: number
+    multaSommatieEmpresa?: number
+    multaSommatieNatural?: number
+    limiteDiasReaccionEmpresa?: number
+    multaNoReaccionEmpresa?: number
+    multaNoReaccionNatural?: number
+    multaAcuerdoPagoEmpresa?: number
+    multaAcuerdoPagoNatural?: number
   }
 
   export type GlobalParameterUncheckedCreateWithoutTenantConfigsInput = {
@@ -26683,6 +28716,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    multaAanmaningEmpresa?: number
+    multaAanmaningNatural?: number
+    multaSommatieEmpresa?: number
+    multaSommatieNatural?: number
+    limiteDiasReaccionEmpresa?: number
+    multaNoReaccionEmpresa?: number
+    multaNoReaccionNatural?: number
+    multaAcuerdoPagoEmpresa?: number
+    multaAcuerdoPagoNatural?: number
   }
 
   export type GlobalParameterCreateOrConnectWithoutTenantConfigsInput = {
@@ -26750,6 +28792,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
   }
 
   export type GlobalParameterUncheckedUpdateWithoutTenantConfigsInput = {
@@ -26766,6 +28817,15 @@ export namespace Prisma {
     contribucionEmpresaGrandePfc?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    multaAanmaningEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAanmaningNatural?: FloatFieldUpdateOperationsInput | number
+    multaSommatieEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaSommatieNatural?: FloatFieldUpdateOperationsInput | number
+    limiteDiasReaccionEmpresa?: IntFieldUpdateOperationsInput | number
+    multaNoReaccionEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaNoReaccionNatural?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoEmpresa?: FloatFieldUpdateOperationsInput | number
+    multaAcuerdoPagoNatural?: FloatFieldUpdateOperationsInput | number
   }
 
   export type AccountsReceivableCreateWithoutPaymentAgreementInput = {
@@ -28834,6 +30894,82 @@ export namespace Prisma {
     data: XOR<DebtorUpdateManyMutationInput, DebtorUncheckedUpdateManyWithoutEmployeeInput>
   }
 
+  export type ClientCreateWithoutCompanyInvitesInput = {
+    id?: string
+    type: string
+    name: string
+    kvk: string
+    contactEmail: string
+    numberOfEmployees: string
+    country: string
+    address: string
+    termsAccepted: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutCompanyInvitesInput = {
+    id?: string
+    type: string
+    name: string
+    kvk: string
+    contactEmail: string
+    numberOfEmployees: string
+    country: string
+    address: string
+    termsAccepted: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantUncheckedCreateNestedOneWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutCompanyInvitesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutCompanyInvitesInput, ClientUncheckedCreateWithoutCompanyInvitesInput>
+  }
+
+  export type ClientUpsertWithoutCompanyInvitesInput = {
+    update: XOR<ClientUpdateWithoutCompanyInvitesInput, ClientUncheckedUpdateWithoutCompanyInvitesInput>
+    create: XOR<ClientCreateWithoutCompanyInvitesInput, ClientUncheckedCreateWithoutCompanyInvitesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutCompanyInvitesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutCompanyInvitesInput, ClientUncheckedUpdateWithoutCompanyInvitesInput>
+  }
+
+  export type ClientUpdateWithoutCompanyInvitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    kvk?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    termsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutCompanyInvitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    kvk?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    termsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUncheckedUpdateOneWithoutClientNestedInput
+  }
+
   export type UserCreateManyTenantInput = {
     id?: string
     email: string
@@ -29216,6 +31352,54 @@ export namespace Prisma {
     position?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompanyInvitationCreateManyInvitingCompanyInput = {
+    id?: string
+    invitedEmail: string
+    invitedCompany: string
+    country: string
+    invitationToken?: string
+    status: $Enums.InvitationStatus
+    sentAt?: Date | string
+    acceptedAt?: Date | string | null
+    expiresAt?: Date | string | null
+  }
+
+  export type CompanyInvitationUpdateWithoutInvitingCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CompanyInvitationUncheckedUpdateWithoutInvitingCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CompanyInvitationUncheckedUpdateManyWithoutInvitingCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitedEmail?: StringFieldUpdateOperationsInput | string
+    invitedCompany?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    invitationToken?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserCreateManyRoleInput = {

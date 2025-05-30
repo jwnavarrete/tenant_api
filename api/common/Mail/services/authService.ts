@@ -1,7 +1,8 @@
-import transporter from "../config/nodemailer";
+import { createTransporter } from "../config/nodemailer";
 import renderTemplate from "../utils/templateRenderer";
 import { EmailOptions } from "../types/emailTypes";
 import { iAccountUrls } from "../../../app/interfaces/auth.intercace";
+
 class AuthMailService {
   static async sendWelcomeEmail(to: string, name: string): Promise<void> {
     const templateParam = {
@@ -16,7 +17,7 @@ class AuthMailService {
       subject: `Welcome to ${process.env.APP_DOMAIN} 🎉`,
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendVerificationEmail(to: string, link: string): Promise<void> {
@@ -32,7 +33,7 @@ class AuthMailService {
       subject: "[Confirm your email]",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendResetPasswordEmail(to: string, link: string): Promise<void> {
@@ -47,7 +48,7 @@ class AuthMailService {
       subject: "[Reset password]",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
   }
 
   static async sendRecoveryUrl(
@@ -65,7 +66,23 @@ class AuthMailService {
       subject: "Forgot your account URL?",
       html,
     };
-    await transporter.sendMail(mailOptions);
+    await createTransporter().sendMail(mailOptions);
+  }
+
+  static async sendInvitationCompanyEmail(to: string, name: string, subdomain: string, link: string): Promise<void> {
+    const templateParam = {
+      guestName: name,
+      companyName: subdomain || "",
+      url: link
+    };
+    const html = renderTemplate("company/invitacion-company", templateParam);
+    const mailOptions: EmailOptions = {
+      from: process.env.SMTP_USER as string,
+      to,
+      subject: `You've been invited to join the collaborative debt collection network! 🎉`,
+      html,
+    };
+    await createTransporter().sendMail(mailOptions);
   }
 }
 
