@@ -10,6 +10,8 @@ import { debtorRoutes } from "./debtor.routes";
 import { cronRoutes } from "./cron.routes";
 import { debtorContributionRoutes } from "./debtorContribution.routes";
 import { reportRoutes } from "./report.routes";
+import { companyRoutes } from "./company.routes";
+
 
 export {
   authRoutes,
@@ -23,5 +25,6 @@ export {
   paymentsRoutes,
   cronRoutes,
   debtorContributionRoutes,
-  reportRoutes
+  reportRoutes,
+  companyRoutes
 };

@@ -228,6 +228,7 @@ class AuthService {
   }
 
   public async signIn(param: iSignInTenant): Promise<iAuthResponse> {
+    console.log("param", param);
     const tenatn = await prisma.tenant.findUnique({
       where: { subdomain: param.subdomain },
     });

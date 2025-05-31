@@ -8,6 +8,7 @@ const TOKEN_TYPES = {
   INVITE_USER: "invite_user",
   RESET_PASSWORD: "reset_password",
   VERIFY_EMAIL: "verify_email",
+  INVITE_COMPANY: "invite_company",
 };
 
 const ROLES = {

@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import jwt, { sign } from "jsonwebtoken";
+import jwt, { sign, TokenExpiredError, JsonWebTokenError } from "jsonwebtoken";
 
 import {
   IuserTokenInfos,
   IUserToken,
   iAuthUserResponse,
   iIdToken,
+  IcompanyTokenInfos
 } from "../../app/interfaces/auth.intercace";
 
 import { TOKEN_TYPES } from "./constant";
@@ -13,6 +14,7 @@ import { TOKEN_TYPES } from "./constant";
 const ACCESS_TOKEN_SECRET = String(process.env.ACCESS_TOKEN_SECRET);
 const REFRESH_TOKEN_SECRET = String(process.env.REFRESH_TOKEN_SECRET);
 const APP_DOMAIN = process.env.APP_DOMAIN;
+
 
 export const decodeAccessToken = (token: string): IuserTokenInfos => {
   try {
@@ -153,6 +155,26 @@ export const generateInvitationToken = (user: {
   );
 };
 
+export const generateInvitationTokenCompany = (company: {
+  invitedEmail: string;
+  invitedCompany: string;
+  country: string;
+}): string => {
+  return sign(
+    {
+      invitedEmail: company.invitedEmail,
+      invitedCompany: company.invitedCompany,
+      country: company.country,
+      type: TOKEN_TYPES.INVITE_COMPANY
+    },
+    ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "7d",
+    }
+  );
+};
+
+
 export const verifyAccessToken = (token: string): IuserTokenInfos => {
   try {
     return jwt.verify(token, ACCESS_TOKEN_SECRET) as IuserTokenInfos;
@@ -199,3 +221,26 @@ export const createTokenSession = async (
 
   return res;
 };
+
+export const decodeCompanyToken = (token: string): IcompanyTokenInfos => {
+  try {
+    if (!token) {
+      throw new Error("Token is missing");
+    }
+
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET) as IcompanyTokenInfos;
+    return decoded;
+
+  } catch (error) {
+    if (error instanceof TokenExpiredError) {
+      throw new Error("Token has expired");
+    }
+
+    if (error instanceof JsonWebTokenError) {
+      throw new Error("Token is invalid");
+    }
+
+    throw new Error("Token verification failed");
+  }
+};
+

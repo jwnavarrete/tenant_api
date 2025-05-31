@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invitación a unirte a nuestra plataforma</title>
+  </head>
+  <body
+    style="background-color: #727275; font-family: 'Roboto', Arial, sans-serif"
+  >
+    <!-- Contenedor principal -->
+    <table
+      height="auto"
+      max-width="600px !important"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      align="center"
+    >
+      <tr>
+        <td align="center" width="550px" style="padding: 10px">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <!-- Sección del logo -->
+            <tr>
+              <td align="center">
+                <img
+                  src="https://dazzsoft.com/wp-content/uploads/2025/02/Logo-Factura.png"
+                  style="width: 150px; height: auto"
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- Contenido principal -->
+      <tr>
+        <td align="center" style="padding: 0 10px 20px 10px">
+          <!-- Tarjeta principal -->
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              background-color: #ffffff;
+              border-radius: 10px;
+              padding: 25px;
+            "
+          >
+            <!-- Sección de contenido -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <h2
+                  style="
+                    color: #191f27;
+                    font-size: 26px;
+                    font-weight: 700;
+                    margin: 0;
+                  "
+                >
+                  ¡Hola {{guestName}}!
+                </h2>
+                <p style="color: #555555; font-size: 15px; margin: 20px 0">
+                  {{companyName}} te ha invitado a formar parte de nuestra plataforma de gestión de cobranza colaborativa en Aruba, Bonaire y Curazao.
+                </p>
+                <p style="color: #555555; font-size: 15px; margin: 10px 0">
+                  👉 Haz clic en el siguiente botón para registrarte:
+                </p>
+              </td>
+            </tr>
+
+            <!-- Botón de registro -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <a
+                  href="{{url}}"
+                  style="
+                    background-color: #f26b1d;
+                    color: #ffffff;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: 700;
+                    display: inline-block;
+                  "
+                >
+                  Registrarme ahora
+                </a>
+              </td>
+            </tr>
+
+            <!-- Aviso de expiración -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <p style="color: #999999; font-size: 13px; margin: 0">
+                  Esta invitación expira en 7 días.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Firma -->
+            <tr>
+              <td align="center" style="padding-top: 20px">
+                <p style="color: #555555; font-size: 14px; margin: 0">
+                  Atentamente,<br />
+                  <strong>{{platformName}}</strong>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
