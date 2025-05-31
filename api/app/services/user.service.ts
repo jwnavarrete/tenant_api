@@ -23,10 +23,17 @@ class UserService {
   }> {
     const { page, limit, search } = params;
 
+    const allowedRoles = ["SUPER_ADMIN", "TENANT_ADMIN", "COLLECTIONS_EXECUTIVE"];
+
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where: {
           tenantId: tenantId,
+          role: {
+            name: {
+              in: allowedRoles,
+            },
+          },
           OR: [
             { fullname: { contains: search, mode: "insensitive" } },
             { email: { contains: search, mode: "insensitive" } },
@@ -41,12 +48,17 @@ class UserService {
             },
           },
           role: true,
-          invitedBy: true, // Incluir la información del usuario que invitó
+          invitedBy: true,
         },
       }),
       prisma.user.count({
         where: {
           tenantId: tenantId,
+          role: {
+            name: {
+              in: allowedRoles,
+            },
+          },
           OR: [
             { fullname: { contains: search, mode: "insensitive" } },
             { email: { contains: search, mode: "insensitive" } },
@@ -157,9 +169,8 @@ class UserService {
     console.log("Decrypted payload:", demo);
     console.log("Hashed payload:", hashedPayload);
 
-    return `https://${slug}.${
-      process.env.APP_DOMAIN
-    }/users/register?token=${encodeURIComponent(hashedPayload)}`;
+    return `https://${slug}.${process.env.APP_DOMAIN
+      }/users/register?token=${encodeURIComponent(hashedPayload)}`;
   }
 
   async resendInvitation(userId: string): Promise<boolean> {
